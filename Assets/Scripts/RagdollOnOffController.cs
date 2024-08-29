@@ -11,7 +11,6 @@ public class RagdollOnOffController : MonoBehaviour
     private Collider[] _ragdollColliders;
     private Rigidbody[] _ragdollRigidbodies;
     private BoxCollider _boxCollider;
-    private bool _isragdoll = false;
     
     void Start()
     {
@@ -49,7 +48,6 @@ public class RagdollOnOffController : MonoBehaviour
         {
             rigid.isKinematic = true;
         }
-        // transform.position = get.transform.position;
         _boxCollider.enabled = true;
         GetComponent<Rigidbody>().isKinematic = false;
         _npcAnimator.enabled = true;
