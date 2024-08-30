@@ -26,10 +26,12 @@ public class Mallet : Weapon
     private void Update()
     {
         _mousePos = Input.mousePosition;
+
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit))
         {
             return;
         }
+
         _target.transform.position = _hit.point;
 
         this.transform.position = _hit.point;
@@ -40,12 +42,12 @@ public class Mallet : Weapon
 
     private void DisableColliders()
     {
-        GetComponent<Collider>().enabled = false;
+        GetComponentInChildren<Collider>().enabled = false;
     }
 
     private void EnableColldiers()
     {
-        GetComponent<Collider>().enabled = true;
+        GetComponentInChildren<Collider>().enabled = true;
     }
 }
 
