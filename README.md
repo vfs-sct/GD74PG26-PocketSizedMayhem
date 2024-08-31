@@ -1,8 +1,9 @@
-# Game Title  
-[high concept goes here]
+# Pocket-Sized Mayhem  
+Pocket-Sized Mayhem is a 3D isometric reaction game where you play as an alien controlling an arcade machine in order to win the game to get the right to conquer the Earth. Use weapons such as a Mallet and Claw to kill or capture criminals causing chaos in the city. Capture 4 criminal bosses before the city is all ruined and you lose all civilians.
 
 ### Documentation  
-[link to google drive folder here](linkURL)
+[https://drive.google.com/drive/folders/1WkukesPNOk-1XYIqGuM_bfZ5vVf-b0Qa](linkURL)
+
 
 ### Gameplay Controls  
 Action               | Keyboard Control  | Gamepad Control
@@ -22,8 +23,6 @@ Cycle Checkpoints    | F4
 Respawn Enemies      | F5                
 
 ### Team  
-<Team Member 1 - Role>  
-<Team Member 2 - Role>  
-<Team Member 3 - Role>  
-<Team Member 4 - Role>  
-<Team Member 5 - Role>  
+Denizhan Yagci - PM / Programmer
+Melinn Chailom - Artist / Level Designer
+Tim De Jong - Level Designer / Artist
