@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay Scenes/GameScene-Characters.unity
     guid: 0a8cac46df0dd32488a2f38901ac8140
   - enabled: 1
-    path: Assets/Scenes/Gameplay Scenes/GameScene-Level.unity
+    path: Assets/Scenes/Gameplay Scenes/GameScene-NPC.unity
     guid: 84b019f1acf8d6a458d45fb8f2a7760b
   - enabled: 1
     path: Assets/Scenes/Gameplay Scenes/GameScene-Lighting.unity
