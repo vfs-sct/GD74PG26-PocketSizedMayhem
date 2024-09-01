@@ -6,6 +6,7 @@ using Unity.Services.Leaderboards;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class LeaderboardScoreDisplayer : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class LeaderboardScoreDisplayer : MonoBehaviour
             Score scoreLast = new Score(_leaderboardScores[_leaderboardScores.Length - 3], Convert.ToDouble(_leaderboardScores[_leaderboardScores.Length - 1]));
             _scoreList.Add(scoreLast);
         }
+        _scoreList.OrderBy(Score => Score.name);
         makeUITextList();
     }
     public void makeUITextList()
@@ -53,6 +55,11 @@ public class LeaderboardScoreDisplayer : MonoBehaviour
             scoreText.GetComponent<TextMeshProUGUI>().text = score.name + " - " + score.score;
             scoreText.transform.SetParent(this.transform);  
         }
+    }
+
+    public void addScoreToLeaderboard()
+    {
+
     }
 }
 
