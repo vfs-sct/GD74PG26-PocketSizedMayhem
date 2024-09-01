@@ -18,8 +18,7 @@ public class LeaderboardAuthenticator : MonoBehaviour
     [SerializeField] private string _playerName;
     [SerializeField] private double _playerScore;
     [SerializeField] private string[] _leaderboardScores;
-    [SerializeField] private string[] _leaderboardScoresParsed;
-    [SerializeField] private Dictionary<string, string> _leaderboardSeperated = new Dictionary<string, string>();
+    [SerializeField] private List<string> _leaderboardScoresParsed;
     async void Awake()
     {
         await UnityServices.InitializeAsync();
@@ -52,21 +51,19 @@ public class LeaderboardAuthenticator : MonoBehaviour
 
     public async void GetScores()
     {
-        var scoresResponse = await LeaderboardsService.Instance
-            .GetScoresAsync(LeaderboardId);
+        var scoresResponse = await LeaderboardsService.Instance.GetScoresAsync(LeaderboardId);
         string scoresText = JsonConvert.SerializeObject(scoresResponse);
-        string[] separatingStrings = {"playerName\":\""};
+        string[] separatingStrings = {"playerName\":\"", "score\":", "#","},{" };
         string[] separatingStrings2 = { "#", "score\":",".0},{\""};
         _leaderboardScores = scoresText.Split(separatingStrings, System.StringSplitOptions.RemoveEmptyEntries);
         Console.Clear();
-        foreach (string word in _leaderboardScores)
-        {  
-            _leaderboardScoresParsed = word.Split(separatingStrings, System.StringSplitOptions.RemoveEmptyEntries);
-            if(_leaderboardScoresParsed.Length>=2)
+        if (_leaderboardScores.Length > 1 )
+        {
+            for (int i = 1; i < _leaderboardScores.Length+1; i += 4)
             {
-                _leaderboardSeperated.Add(_leaderboardScoresParsed[0], _leaderboardScoresParsed[1]);
-                Debug.Log(_leaderboardSeperated);
+                _leaderboardScoresParsed.Add(_leaderboardScores[i]+": " +_leaderboardScores[i+2]);
             }
+            _leaderboardScoresParsed[_leaderboardScoresParsed.Count - 1] = _leaderboardScoresParsed[_leaderboardScoresParsed.Count - 1].Substring(0, _leaderboardScoresParsed[_leaderboardScoresParsed.Count - 1].Length-3);
         }
     }
 }
