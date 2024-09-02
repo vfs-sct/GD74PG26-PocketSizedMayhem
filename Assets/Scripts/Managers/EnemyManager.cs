@@ -5,6 +5,15 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _civilians;
+    [SerializeField] private CivilianBehaviour[] allObjects;
+    private void Awake()
+    {
+        allObjects = FindObjectsOfType<CivilianBehaviour>();
+        foreach (var obj in allObjects)
+        {
+            _civilians.Add(obj.gameObject);
+        }
+    }
 
     public GameObject ClosestCivilian(GameObject enemy)
     {
@@ -30,5 +39,10 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    public void EliminateCivilian(GameObject civilian)
+    {
+        _civilians.Remove(civilian);
     }
 }

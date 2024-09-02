@@ -116,6 +116,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2510059283249789891}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a0dd0a7884d2e34caf02e93f46ed9c8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8676348552806961091}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 3a0dd0a7884d2e34caf02e93f46ed9c8,
         type: 3}
       insertIndex: -1
@@ -1082,6 +1086,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8676348552806961091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446477173236079469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680054670b1241d4c98fa81f659769fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
+    type: 3}
 --- !u!1 &6535309755454814262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 3a0dd0a7884d2e34caf02e93f46ed9c8,

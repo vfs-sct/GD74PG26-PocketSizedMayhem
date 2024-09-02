@@ -9,13 +9,12 @@ public class RagdollOnOffController : MonoBehaviour
     [SerializeField] private GameObject _hips;
     [SerializeField] private int _bounceForce = 10;
     [SerializeField] private GameObject _bloodEffect;
+
     private Animator _npcAnimator;
     private Collider[] _ragdollColliders;
     private Rigidbody[] _ragdollRigidbodies;
     private BoxCollider _boxCollider;
 
-
-    
     void Start()
     {
         _npcAnimator = GetComponent<Animator>();
@@ -80,21 +79,12 @@ public class RagdollOnOffController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void DeathBounce()
     {
         foreach (Rigidbody rigid in _ragdollRigidbodies)
         {
             rigid.AddForce(Vector3.up * _bounceForce, ForceMode.Impulse);
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Mallet")
-        {  
-            RagdollModeOn();
-            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-            GameObject blood =  Instantiate(_bloodEffect,this.gameObject.transform.position, this.gameObject.transform.rotation);
-            blood.GetComponent<VisualEffect>().Play();
-        }
-    }
+    
 }

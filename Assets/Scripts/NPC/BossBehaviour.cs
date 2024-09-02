@@ -8,17 +8,21 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _hitForce;
+
     private NavMeshAgent _navMeshAgent;
 
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _target = _enemyManager.ClosestCivilian(this.gameObject);
+        _target = _enemyManager.ClosestCivilian(gameObject);
     }
 
     private void Update()
     {
-        _navMeshAgent.destination = _target.transform.position;
+        if(_target != null)
+        {
+            _navMeshAgent.destination = _target.transform.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,7 +31,10 @@ public class BossBehaviour : MonoBehaviour
         {
             Vector3 hitAngle = (collision.transform.position - this.gameObject.transform.position).normalized;
             ragdollOnOffController.RagdollModeOn();
+            ragdollOnOffController.DeathBounce();
             collision.gameObject.GetComponent<Rigidbody>().AddForce(hitAngle * _hitForce);
+            _enemyManager.EliminateCivilian(_target);
+            _target = _enemyManager.ClosestCivilian(gameObject);
         }
     }
 }
