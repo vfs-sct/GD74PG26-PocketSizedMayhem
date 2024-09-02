@@ -7,6 +7,7 @@ public class BossBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject _target;
     [SerializeField] private float _hitForce;
+    private EnemyManager _enemyManager;
 
     private NavMeshAgent _navMeshAgent;
 

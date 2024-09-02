@@ -6,11 +6,14 @@ using UnityEngine.AI;
 public class RagdollOnOffController : MonoBehaviour
 { 
     [SerializeField] private GameObject _hips;
+    [SerializeField] private int _bounceForce = 10;
 
     private Animator _npcAnimator;
     private Collider[] _ragdollColliders;
     private Rigidbody[] _ragdollRigidbodies;
     private BoxCollider _boxCollider;
+
+
     
     void Start()
     {
@@ -80,7 +83,15 @@ public class RagdollOnOffController : MonoBehaviour
     {
         foreach (Rigidbody rigid in _ragdollRigidbodies)
         {
-            rigid.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * _bounceForce, ForceMode.Impulse);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Mallet")
+        {  
+            RagdollModeOn();
+            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
         }
     }
 }
