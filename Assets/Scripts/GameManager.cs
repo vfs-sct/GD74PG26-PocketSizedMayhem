@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
             _timerText.text = "Remaining Time: " + 0;
             SceneManager.LoadScene("LoseScreen");
         }
+        PlayerStats.Points = _point;
+        _pointText.text = "" + PlayerStats.Points;
     }
 
     public void OnIncreaseTime()
@@ -48,5 +50,25 @@ public class GameManager : MonoBehaviour
     public void OnDecreaseTime()
     {
         _gameTime -= _decreaseAmount;
+    }
+    public void OnIncreasePoint()
+    {
+        _point += _increaseAmount;
+    }
+    public void OnDecreasePoint()
+    {
+        _point -= _decreaseAmount;
+    }
+    public void OnLoadWinScreen()
+    {
+        SceneManager.LoadScene("WinScreen");
+    }
+    public void OnLoadLoseScreen()
+    {
+        SceneManager.LoadScene("LoseScreen");
+    }
+    public void OnRestartScene()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
