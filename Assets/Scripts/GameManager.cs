@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UIComponents;
+using Unity.Services.Authentication;
+using Unity.Services.Leaderboards;
+using Unity.Services.Leaderboards.Exceptions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
+    const string LeaderboardId = "High_Score";
+
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _pointText;
     [SerializeField] private float _gameTime = 100;
@@ -61,14 +67,29 @@ public class GameManager : MonoBehaviour
     }
     public void OnLoadWinScreen()
     {
+        AddScore();
         SceneManager.LoadScene("WinScreen");
     }
     public void OnLoadLoseScreen()
     {
+        AddScore();
         SceneManager.LoadScene("LoseScreen");
     }
     public void OnRestartScene()
     {
         SceneManager.LoadScene("GameScene");
+    }
+    public async void AddScore()
+    {
+            try
+            {
+                var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(LeaderboardId, PlayerStats.Points);
+
+            }
+            catch (LeaderboardsException exception)
+            {
+                Debug.LogError($"[Unity Leaderboards] {exception.Reason}: {exception.Message}");
+            }
+        
     }
 }

@@ -26,7 +26,7 @@ public class LeaderboardAuthenticator : MonoBehaviour
         {
             AuthenticationService.Instance.ClearSessionToken();
             await SignInAnonymously();
-            AddScore();
+            DontDestroyOnLoad(this.transform.parent);
         }
     }
     async Task SignInAnonymously()
