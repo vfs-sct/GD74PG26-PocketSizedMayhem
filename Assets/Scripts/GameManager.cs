@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _pointText;
-    [SerializeField] private float gameTime = 100;
+    [SerializeField] private float _gameTime = 100;
+    [SerializeField] private float _increaseAmount = 10;
+    [SerializeField] private float _decreaseAmount = 10;
 
     private float _startTime;
     private float _elapsedTime;
     private float _point = 0;
+
 
     void Start()
     {
@@ -24,16 +27,26 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_elapsedTime > 0)
+        _elapsedTime = Time.time - _startTime;
+        if (_gameTime - _elapsedTime > 0)
         {
-            int minutes = (int)((gameTime - _elapsedTime) / 60) % 60;
-            int seconds = (int)((gameTime - _elapsedTime) % 60);
+            int minutes = (int)((_gameTime - _elapsedTime) / 60) % 60;
+            int seconds = (int)((_gameTime - _elapsedTime) % 60);
             _timerText.text = "Remaining Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
         }
         else
         {
+            _timerText.text = "Remaining Time: " + 0;
             SceneManager.LoadScene("LoseScreen");
         }
-        _elapsedTime = Time.time - _startTime;
+    }
+
+    public void OnIncreaseTime()
+    {
+        _gameTime += _increaseAmount;
+    }
+    public void OnDecreaseTime()
+    {
+        _gameTime -= _decreaseAmount;
     }
 }

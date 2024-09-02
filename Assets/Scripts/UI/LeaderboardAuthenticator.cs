@@ -22,9 +22,12 @@ public class LeaderboardAuthenticator : MonoBehaviour
     async void Awake()
     {
         await UnityServices.InitializeAsync();
-        AuthenticationService.Instance.ClearSessionToken();
-        await SignInAnonymously();
-        AddScore();
+        if(!AuthenticationService.Instance.IsSignedIn)
+        {
+            AuthenticationService.Instance.ClearSessionToken();
+            await SignInAnonymously();
+            AddScore();
+        }
     }
     async Task SignInAnonymously()
     {
