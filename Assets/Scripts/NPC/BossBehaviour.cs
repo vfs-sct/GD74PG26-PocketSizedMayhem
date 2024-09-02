@@ -5,15 +5,16 @@ using UnityEngine.AI;
 
 public class BossBehaviour : MonoBehaviour
 {
+    [SerializeField] private EnemyManager _enemyManager;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _hitForce;
-    private EnemyManager _enemyManager;
 
     private NavMeshAgent _navMeshAgent;
 
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _target = _enemyManager.ClosestCivilian(this.gameObject);
     }
 
     private void Update()

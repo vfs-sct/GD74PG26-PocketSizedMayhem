@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 public class RagdollOnOffController : MonoBehaviour
 { 
     [SerializeField] private GameObject _hips;
     [SerializeField] private int _bounceForce = 10;
-
+    [SerializeField] private GameObject _bloodEffect;
     private Animator _npcAnimator;
     private Collider[] _ragdollColliders;
     private Rigidbody[] _ragdollRigidbodies;
@@ -92,6 +93,8 @@ public class RagdollOnOffController : MonoBehaviour
         {  
             RagdollModeOn();
             this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+            GameObject blood =  Instantiate(_bloodEffect,this.gameObject.transform.position, this.gameObject.transform.rotation);
+            blood.GetComponent<VisualEffect>().Play();
         }
     }
 }
