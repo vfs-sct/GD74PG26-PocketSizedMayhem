@@ -14,11 +14,17 @@ public class GameManager : MonoBehaviour
 {
     const string LeaderboardId = "High_Score";
 
+    [SerializeField] private GameObject _civilian;
+
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _pointText;
     [SerializeField] private float _gameTime = 100;
     [SerializeField] private float _increaseAmount = 10;
     [SerializeField] private float _decreaseAmount = 10;
+
+    private Vector3 _mousePos;
+    private Vector3 hitpoint;
+    private RaycastHit _hit;
 
     private float _startTime;
     private float _elapsedTime;
@@ -90,6 +96,17 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"[Unity Leaderboards] {exception.Reason}: {exception.Message}");
             }
-        
+    }
+
+    public void OnSpawnCivilian()
+    {
+        _mousePos = Input.mousePosition;
+
+        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit))
+        {
+            return;
+        }
+
+        Instantiate(_civilian,_hit.point,Quaternion.Euler(0,0,0));
     }
 }

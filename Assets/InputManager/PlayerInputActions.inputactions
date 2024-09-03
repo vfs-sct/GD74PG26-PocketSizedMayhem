@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SpawnCivilian",
+                    "type": "Button",
+                    "id": "28ccc6ef-410d-4e4a-9c98-62bf62a688e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -411,6 +420,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RestartScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ff86d94-09c0-4909-befb-45157c621089",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpawnCivilian",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

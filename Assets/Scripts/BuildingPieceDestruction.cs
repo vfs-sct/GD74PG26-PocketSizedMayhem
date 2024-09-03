@@ -10,7 +10,7 @@ public class BuildingPieceDestruction : MonoBehaviour
         {
             this.GetComponent<Rigidbody>().useGravity = true;
             Vector3 direction = Random.insideUnitCircle.normalized;
-            this.GetComponent<Rigidbody>().AddForce(direction * 50, ForceMode.Impulse);
+            this.GetComponent<Rigidbody>().AddForce(direction * 100, ForceMode.Impulse);
         }
     }
 }
