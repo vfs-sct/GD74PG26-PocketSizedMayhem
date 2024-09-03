@@ -33,11 +33,13 @@ public class Claw : Weapon
             else
             {
                 Destroy(_grabbedObject.GetComponent<FixedJoint>());
-
-                _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
-                _grabbedObject.GetComponent<Animator>().enabled = true;
-                _grabbedObject.GetComponent<Rigidbody>().useGravity = true;
-                _grabbedObject.GetComponent<RagdollOnOffController>().enabled = true;
+                if(_grabbedObject.GetComponent<RagdollOnOffController>())
+                {
+                    _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
+                    _grabbedObject.GetComponent<Animator>().enabled = true;
+                    _grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+                    _grabbedObject.GetComponent<RagdollOnOffController>().enabled = true;
+                }
                 _grabbedObject = null;
 
                 _fired = false;
@@ -72,17 +74,25 @@ public class Claw : Weapon
     {
         _fired = false;
         _grabbed = true;
-
-        if (collision.gameObject.GetComponent<RagdollOnOffController>())
+        if (_grabbedObject == null)
         {
-            _grabbedObject = collision.gameObject;
-            //grabbedObject.GetComponent<NPCPathing>().enabled = false;
-            _grabbedObject.GetComponent<Rigidbody>().useGravity = false;
-            _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
-            _grabbedObject.GetComponent<Animator>().enabled = false;
-            _grabbedObject.AddComponent<FixedJoint>();
-            _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
-            _grabbedObject.GetComponent<RagdollOnOffController>().enabled = false;
+            if (collision.gameObject.GetComponent<RagdollOnOffController>())
+            {
+                _grabbedObject = collision.gameObject;
+                //grabbedObject.GetComponent<NPCPathing>().enabled = false;
+                _grabbedObject.GetComponent<Rigidbody>().useGravity = false;
+                _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
+                _grabbedObject.GetComponent<Animator>().enabled = false;
+                _grabbedObject.AddComponent<FixedJoint>();
+                _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
+                _grabbedObject.GetComponent<RagdollOnOffController>().enabled = false;
+            }
+            else if (collision.gameObject.GetComponent<BuildingPieceDestruction>())
+            {
+                _grabbedObject = collision.gameObject;
+                _grabbedObject.AddComponent<FixedJoint>();
+                _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
+            }
         }
     }
 }
