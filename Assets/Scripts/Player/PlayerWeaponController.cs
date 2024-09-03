@@ -9,6 +9,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Weapon _mallet;
 
     [SerializeField] private GameObject _target;
+    [SerializeField] private GameObject _minimapIcon;
 
     [SerializeField] private Material _clawTargetMaterial;
     [SerializeField] private Material _malletTargetMaterial;
@@ -23,6 +24,17 @@ public class PlayerWeaponController : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _activeWeapon = _mallet;
+    }
+
+    private void Update()
+    {
+        _mousePos = Input.mousePosition;
+
+        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit))
+        {
+            return;
+        }
+        _minimapIcon.transform.position = hit.point;
     }
 
     public void OnFire()
