@@ -12,6 +12,19 @@ public class CivilianBehaviour : MonoBehaviour
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.destination = _destination.transform.position;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(_navMeshAgent.isOnNavMesh);
+        if (_navMeshAgent.isOnNavMesh && _navMeshAgent.destination == null)
+        {
+            
+            _navMeshAgent.destination = _destination.transform.position;
+        }
+    }
+
+    public void SetDestionation(GameObject newDestination)
+    {
+        _destination = newDestination;
     }
 }
