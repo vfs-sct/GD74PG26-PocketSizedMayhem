@@ -13,12 +13,11 @@ public class CivilianBehaviour : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void Update()
     {
-        Debug.Log(_navMeshAgent.isOnNavMesh);
-        if (_navMeshAgent.isOnNavMesh && _navMeshAgent.destination == null)
+        //if (_navMeshAgent.isOnNavMesh && _navMeshAgent.destination != null)
         {
-            
             _navMeshAgent.destination = _destination.transform.position;
         }
     }
