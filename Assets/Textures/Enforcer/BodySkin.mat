@@ -49,15 +49,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b68b9bf91bb468e4a96d5718257f11ab, type: 3}
+        m_Texture: {fileID: 2800000, guid: 71eb28424e3040742b2a1f2a3a4d6fb4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: c4e61c1a869afee4d99aa1be04388537, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3bbe79a8757857246a6625e97ac9a998, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: a7d25a4ada09a7847b658dde62197bc5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38226095001b9e84984948b872d9b67b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -151,7 +151,7 @@ Material:
     - _EmissiveColor_1: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5052793733345254878
+--- !u!114 &8110800071576310833
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

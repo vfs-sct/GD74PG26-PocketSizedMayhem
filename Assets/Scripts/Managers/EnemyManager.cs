@@ -4,45 +4,49 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _civilians;
-    [SerializeField] private CivilianBehaviour[] allObjects;
+    [SerializeField] private List<CivilianBehaviour> _civilians;
+    [SerializeField] private List<RegularCriminalBehaviour> _regularEnemies;
+    [SerializeField] private CivilianBehaviour[] _civilianBehaviors;
+    [SerializeField] private RegularCriminalBehaviour[] _regularCriminalBehaviors;
     private void Awake()
     {
-        allObjects = FindObjectsOfType<CivilianBehaviour>();
-        foreach (var obj in allObjects)
+        _civilianBehaviors = FindObjectsOfType<CivilianBehaviour>();
+        _regularCriminalBehaviors = FindObjectsOfType<RegularCriminalBehaviour>();
+        foreach (CivilianBehaviour obj in _civilianBehaviors)
         {
-            _civilians.Add(obj.gameObject);
+            _civilians.Add(obj);
+        }
+        foreach (RegularCriminalBehaviour obj in _regularCriminalBehaviors)
+        {
+            _regularEnemies.Add(obj);
         }
     }
 
-    public GameObject ClosestCivilian(GameObject enemy)
+    private void Update()
     {
-        float distance;
+        foreach (RegularCriminalBehaviour gameObject in _regularEnemies)
+        {
+            if(!gameObject.HasTarget())
+            {
+                gameObject.SetTarget(ClosestCivilian(gameObject));
+            }
+        }
+    }
+
+    public GameObject ClosestCivilian(RegularCriminalBehaviour enemy)
+    {
+        float distance = enemy.GetDetectionRadius();
         GameObject closest = null;
-        if (_civilians.Count > 0)
-        {
-            distance  = Vector3.Distance(enemy.transform.position, _civilians[0].transform.position);
-            closest = _civilians[0];
-        }
-        else
-        {
-            return null;
-        }
-        foreach(GameObject civilian in _civilians)
+        foreach(CivilianBehaviour civilian in _civilians)
         {
             float compareDist;
-            compareDist = Vector3.Distance(enemy.transform.position, civilian.transform.position);
+            compareDist = Vector3.Distance(enemy.gameObject.transform.position, civilian.gameObject.transform.position);
             if(compareDist < distance)
             {
                 distance = compareDist;
-                closest = civilian;
+                closest = civilian.gameObject;
             }
         }
         return closest;
-    }
-
-    public void EliminateCivilian(GameObject civilian)
-    {
-        _civilians.Remove(civilian);
     }
 }

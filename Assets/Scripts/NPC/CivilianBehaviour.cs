@@ -16,10 +16,7 @@ public class CivilianBehaviour : MonoBehaviour
 
     private void Update()
     {
-        //if (_navMeshAgent.isOnNavMesh && _navMeshAgent.destination != null)
-        {
-            _navMeshAgent.destination = _destination.transform.position;
-        }
+        _navMeshAgent.destination = _destination.transform.position;
     }
 
     public void SetDestionation(GameObject newDestination)

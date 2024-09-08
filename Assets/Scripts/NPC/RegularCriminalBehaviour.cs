@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,10 +8,9 @@ public class RegularCriminalBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject _shelter;
     [SerializeField] private GameObject _targetCivilian;
-
+    [SerializeField] private float _detectionRadius;
     [SerializeField] private List<GameObject> _civilianList;
     
-
     private NavMeshAgent _navMeshAgent;
     private GameObject _primaryTarget;
 
@@ -23,6 +23,28 @@ public class RegularCriminalBehaviour : MonoBehaviour
     private void Update()
     {
         _navMeshAgent.destination = _primaryTarget.transform.position;
+    }
+
+    public void SetTarget(GameObject target)
+    {
+        if(target != null)
+        {
+            _primaryTarget = target;
+        }
+    }
+
+    public bool HasTarget()
+    {
+        if(_primaryTarget != _shelter)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public float GetDetectionRadius()
+    {
+        return _detectionRadius;
     }
 
     private void OnTriggerEnter(Collider other)
