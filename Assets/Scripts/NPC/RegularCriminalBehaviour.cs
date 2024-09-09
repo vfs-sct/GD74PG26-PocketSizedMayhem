@@ -6,14 +6,15 @@ using UnityEngine.AI;
 
 public class RegularCriminalBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject _shelter;
-    [SerializeField] private GameObject _targetCivilian;
-    [SerializeField] private float _detectionRadius;
-    [SerializeField] private List<GameObject> _civilianList;
-    
-    private NavMeshAgent _navMeshAgent;
-    private GameObject _primaryTarget;
+    [SerializeField] protected GameObject _shelter;
+    [SerializeField] protected GameObject _targetCivilian;
+    [SerializeField] protected GameObject _primaryTarget;
+    [SerializeField] protected List<GameObject> _civilianList;
 
+    [SerializeField] protected float _detectionRadius;
+   
+    protected NavMeshAgent _navMeshAgent;
+    
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -33,7 +34,7 @@ public class RegularCriminalBehaviour : MonoBehaviour
         }
     }
 
-    public bool HasTarget()
+    public virtual bool HasTarget()
     {
         if(_primaryTarget != _shelter)
         {
