@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay Scenes/GameScene-UI.unity
     guid: 73b57639f24344843bdf1a2b5d809be8
   - enabled: 1
-    path: Assets/Scenes/LevelBlockout.unity
+    path: Assets/Scenes/MetricsGym.unity
     guid: e5c3638c79d6da1419d58ce1a98f3797
   - enabled: 1
     path: Assets/Scenes/MenuScenes/WinScreen.unity
