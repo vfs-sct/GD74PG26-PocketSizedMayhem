@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<RegularCriminalBehaviour> _regularEnemies;
     [SerializeField] private CivilianBehaviour[] _civilianBehaviors;
     [SerializeField] private RegularCriminalBehaviour[] _regularCriminalBehaviors;
+
     private void Awake()
     {
         _civilianBehaviors = FindObjectsOfType<CivilianBehaviour>();
@@ -15,6 +17,7 @@ public class EnemyManager : MonoBehaviour
         foreach (CivilianBehaviour obj in _civilianBehaviors)
         {
             _civilians.Add(obj);
+            obj.gameObject.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
         }
         foreach (RegularCriminalBehaviour obj in _regularCriminalBehaviors)
         {
@@ -48,5 +51,15 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    private void RemoveCivilian(object sender, CivilianBehaviour civilianBehaviour)
+    {
+        if(!_civilians.Contains(civilianBehaviour))
+        {
+            return;
+        }
+        _civilians.Remove(civilianBehaviour);
+        civilianBehaviour.gameObject.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
     }
 }

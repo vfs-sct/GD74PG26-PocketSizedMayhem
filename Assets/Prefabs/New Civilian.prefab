@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.37
+      value: 42.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
@@ -26,7 +26,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.5730667
+      value: 14.67
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
@@ -1164,7 +1164,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1189,7 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hips: {fileID: 6893525141375332539}
-  _bounceForce: 10
+  _bounceForce: 20
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
 --- !u!114 &8319580715372640906
@@ -1206,6 +1206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
+  _animNo: 4
 --- !u!114 &4221005304262489085
 MonoBehaviour:
   m_ObjectHideFlags: 0

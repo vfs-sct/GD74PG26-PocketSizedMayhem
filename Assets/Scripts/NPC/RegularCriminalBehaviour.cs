@@ -9,7 +9,6 @@ public class RegularCriminalBehaviour : MonoBehaviour
     [SerializeField] protected GameObject _shelter;
     [SerializeField] protected GameObject _targetCivilian;
     [SerializeField] protected GameObject _primaryTarget;
-    [SerializeField] protected List<GameObject> _civilianList;
 
     [SerializeField] protected float _detectionRadius;
    
@@ -23,7 +22,10 @@ public class RegularCriminalBehaviour : MonoBehaviour
 
     private void Update()
     {
-        _navMeshAgent.destination = _primaryTarget.transform.position;
+        if (_primaryTarget != null)
+        {
+            _navMeshAgent.destination = _primaryTarget.transform.position;
+        }
     }
 
     public void SetTarget(GameObject target)
@@ -48,25 +50,9 @@ public class RegularCriminalBehaviour : MonoBehaviour
         return _detectionRadius;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer.Equals("Civilian"))
-        {
-            _civilianList.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer.Equals("Civilian") && other.gameObject != _targetCivilian)
-        {
-            _civilianList.Remove(other.gameObject);
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer.Equals("Civilian"))
+        if (collision.gameObject.layer.Equals(6))
         {
             _primaryTarget = _shelter;
         }
