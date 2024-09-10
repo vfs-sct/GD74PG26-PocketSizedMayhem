@@ -6,7 +6,10 @@ using UnityEngine;
 public class CivilianManager : MonoBehaviour
 {
     [SerializeField] public List<GameObject> _civilians;
-
+    private void Start()
+    {
+        _civilians = new List<GameObject>();
+    }
     public void RemoveCivilian(object sender, GameObject civilian)
     {
         if (!_civilians.Contains(civilian))
