@@ -13,7 +13,7 @@ public class CivilianDeath : MonoBehaviour
     private Rigidbody _rb;
     private NavMeshAgent _navMeshAgent;
 
-    public event EventHandler<CivilianBehaviour> OnKilled;
+    public event EventHandler<GameObject> OnKilled;
 
     private void Start()
     {
@@ -37,7 +37,7 @@ public class CivilianDeath : MonoBehaviour
         {
             DeathByCriminal();
         }
-        OnKilled?.Invoke(this,this.GetComponent<CivilianBehaviour>());
+        OnKilled?.Invoke(this,this.gameObject);
     }
 
     public void OnTriggerEnter(Collider other)

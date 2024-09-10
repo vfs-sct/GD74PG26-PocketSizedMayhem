@@ -5,18 +5,21 @@ using UnityEngine.AI;
 
 public class CivilianSpawner : Spawner
 {
-    [SerializeField] private GameObject _destination;
+    [SerializeField] private GameObject _shelter;
 
+    private CivilianManager _civilianManager;
     private NavMeshAgent _navAgent;
+
     private void Start()
     {
-        _navAgent = _spawnObject.GetComponent<NavMeshAgent>();
-        _spawnObject.GetComponent<CivilianBehaviour>().SetDestionation(_destination);
-        
+        _civilianManager = FindObjectOfType<CivilianManager>();
+        _navAgent = _prefab.GetComponent<NavMeshAgent>();
+        _prefab.GetComponent<CivilianBehaviour>().SetDestionation(_shelter);
     }
     public override void SpawnObject()
     {
         base.SpawnObject();
+        _civilianManager.AddToCivilianList(_spawnedObject);
     }
     
 }

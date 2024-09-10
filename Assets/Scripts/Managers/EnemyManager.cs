@@ -1,37 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private List<CivilianBehaviour> _civilians;
-    [SerializeField] private List<RegularCriminalBehaviour> _regularEnemies;
-    [SerializeField] private CivilianBehaviour[] _civilianBehaviors;
-    [SerializeField] private RegularCriminalBehaviour[] _regularCriminalBehaviors;
+    [SerializeField] private CivilianManager _civilianManager;
 
-    private void Awake()
-    {
-        _civilianBehaviors = FindObjectsOfType<CivilianBehaviour>();
-        _regularCriminalBehaviors = FindObjectsOfType<RegularCriminalBehaviour>();
-        foreach (CivilianBehaviour obj in _civilianBehaviors)
-        {
-            _civilians.Add(obj);
-            obj.gameObject.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
-        }
-        foreach (RegularCriminalBehaviour obj in _regularCriminalBehaviors)
-        {
-            _regularEnemies.Add(obj);
-        }
-    }
+    [SerializeField] private List<RegularCriminalBehaviour> _regularEnemies;
 
     private void Update()
     {
-        foreach (RegularCriminalBehaviour gameObject in _regularEnemies)
+        foreach (RegularCriminalBehaviour criminal in _regularEnemies)
         {
-            if(!gameObject.HasTarget())
+            if(!criminal.HasTarget())
             {
-                gameObject.SetTarget(ClosestCivilian(gameObject));
+                criminal.SetTarget(ClosestCivilian(criminal));
             }
         }
     }
@@ -40,7 +25,7 @@ public class EnemyManager : MonoBehaviour
     {
         float distance = enemy.GetDetectionRadius();
         GameObject closest = null;
-        foreach(CivilianBehaviour civilian in _civilians)
+        foreach(GameObject civilian in _civilianManager._civilians)
         {
             float compareDist;
             compareDist = Vector3.Distance(enemy.gameObject.transform.position, civilian.gameObject.transform.position);
@@ -51,15 +36,5 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return closest;
-    }
-
-    private void RemoveCivilian(object sender, CivilianBehaviour civilianBehaviour)
-    {
-        if(!_civilians.Contains(civilianBehaviour))
-        {
-            return;
-        }
-        _civilians.Remove(civilianBehaviour);
-        civilianBehaviour.gameObject.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
     }
 }
