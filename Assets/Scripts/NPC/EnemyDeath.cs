@@ -24,9 +24,10 @@ public class EnemyDeath : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Mallet")
+        if (other.gameObject.tag == "Mallet")
         {
             _ragdollController.RagdollModeOn();
             this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
@@ -37,14 +38,6 @@ public class EnemyDeath : MonoBehaviour
             Destroy(_rb);
             Destroy(_boxCollider);
             Destroy(_navMeshAgent);
-        }
-        
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Mallet")
-        {
             _ragdollController.DeathBounce();
         }
     }

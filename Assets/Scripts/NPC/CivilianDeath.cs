@@ -28,16 +28,7 @@ public class CivilianDeath : MonoBehaviour
     {
         if (collision.gameObject.tag == "Mallet")
         {
-            _ragdollController.RagdollModeOn();
-            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
-            blood.GetComponent<VisualEffect>().Play();
-            OnKilled?.Invoke(this, this.gameObject);
-        }
-        else if (collision.gameObject.layer.Equals(7))
-        {
-            DeathByCriminal();
-            OnKilled?.Invoke(this, this.gameObject);
+            
         }
     }
 
@@ -45,7 +36,16 @@ public class CivilianDeath : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet")
         {
+            _ragdollController.RagdollModeOn();
+            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            blood.GetComponent<VisualEffect>().Play();
+            OnKilled?.Invoke(this, this.gameObject);
             _ragdollController.DeathBounce();
+        }
+        else if (other.gameObject.layer.Equals(14))
+        {
+            DeathByCriminal();
         }
     }
 
@@ -59,5 +59,6 @@ public class CivilianDeath : MonoBehaviour
         Destroy(_rb);
         Destroy(_boxCollider);
         Destroy(_navMeshAgent);
+        OnKilled?.Invoke(this, this.gameObject);
     }
 }

@@ -13,10 +13,13 @@ public class RegularCriminalBehaviour : MonoBehaviour
     [SerializeField] protected float _detectionRadius;
    
     protected NavMeshAgent _navMeshAgent;
-    
+    protected Animator _enemyAnimator;
+
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _enemyAnimator = GetComponent<Animator>();
+        _shelter = _primaryTarget;
     }
 
     private void Update()
@@ -49,11 +52,16 @@ public class RegularCriminalBehaviour : MonoBehaviour
         return _detectionRadius;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.layer.Equals(6))
+        if (other.gameObject.layer.Equals(6))
+        {
+            _enemyAnimator.SetTrigger("Attack");
+        }
+        if (other.gameObject == _primaryTarget)
         {
             _primaryTarget = _shelter;
+            
         }
     }
 }
