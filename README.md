@@ -53,9 +53,12 @@ Debug Menu           | F1
 Invincibility        | F2               
 Unlimited Ammo       | F3                
 Cycle Checkpoints    | F4                
-Respawn Enemies      | F5                
+Respawn Enemies      | F5         
 
-## Documentation  
+## Know Issues
+Blah Blah Blah
+
+## Documentations 
 - [Milestone Report Document]
 - [PM Tracking App](https://app.clickup.com/9014453215/v/s/90142228794)
 - [Task List](https://docs.google.com/spreadsheets/d/1_lwV3zXumfBkZS7nxfvnz0Dh6t5UbfAMFYOEx76DJko/edit?usp=sharing)
@@ -69,7 +72,7 @@ Respawn Enemies      | F5
 - [Bug tracker]
 - [Script/Dialogue]
 
-## Team
+## Team Members and Roles
 Members               | Roles
 ---                   |---   
 Denizhan Yagci        | PM / Programmer
