@@ -15,6 +15,8 @@ public class EnemyDeath : MonoBehaviour
 
     public event EventHandler<GameObject> OnKilled;
 
+    private bool _pointGiven;
+
     private void Start()
     {
         _ragdollController = GetComponent<RagdollOnOffController>();
@@ -22,6 +24,7 @@ public class EnemyDeath : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider>();
         _rb = GetComponent<Rigidbody>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _pointGiven = false;
     }
 
 
@@ -39,6 +42,11 @@ public class EnemyDeath : MonoBehaviour
             Destroy(_boxCollider);
             Destroy(_navMeshAgent);
             _ragdollController.DeathBounce();
+            if(!_pointGiven)
+            {
+                GameManager.AddPoint();
+                _pointGiven = true;
+            }
         }
     }
 }
