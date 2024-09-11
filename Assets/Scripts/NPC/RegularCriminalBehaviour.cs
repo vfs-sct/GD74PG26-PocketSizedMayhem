@@ -58,10 +58,21 @@ public class RegularCriminalBehaviour : MonoBehaviour
         {
             _enemyAnimator.SetTrigger("Attack");
         }
+        else if(other.gameObject.layer.Equals(15))
+        {
+            GameManager.AddPoint();
+        }
         if (other.gameObject == _primaryTarget)
         {
             _primaryTarget = _shelter;
             
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer.Equals(15))
+        {
+            GameManager.LosePoint();
         }
     }
 }
