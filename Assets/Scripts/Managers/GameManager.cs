@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _pointText;
     [SerializeField] private float _gameTime = 100;
-    [SerializeField] private float _increaseAmount = 10;
-    [SerializeField] private float _decreaseAmount = 10;
+    [SerializeField] private static float _increaseAmount = 10;
+    [SerializeField] private static float _decreaseAmount = 10;
 
     private Vector3 _mousePos;
     private Vector3 hitpoint;
@@ -28,12 +28,13 @@ public class GameManager : MonoBehaviour
 
     private float _startTime;
     private float _elapsedTime;
-    private float _point = 0;
+    public static float _point;
 
 
     void Start()
     {
         _startTime = Time.time;
+        _point = 100;
         _pointText.text = "Point:" + _point;
     }
 
@@ -108,5 +109,13 @@ public class GameManager : MonoBehaviour
         }
 
         Instantiate(_civilian,_hit.point,Quaternion.Euler(0,0,0));
+    }
+    public static void AddPoint()
+    {
+        _point += _increaseAmount;
+    }
+    public static void LosePoint()
+    {
+        _point -= _increaseAmount;
     }
 }

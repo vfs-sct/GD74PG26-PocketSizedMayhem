@@ -15,6 +15,7 @@ public class CivilianDeath : MonoBehaviour
 
     public event EventHandler<GameObject> OnKilled;
 
+    private bool _pointGiven;
     private void Start()
     {
         _ragdollController = GetComponent<RagdollOnOffController>();
@@ -22,6 +23,7 @@ public class CivilianDeath : MonoBehaviour
         _boxCollider = GetComponent<BoxCollider>();
         _rb = GetComponent<Rigidbody>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _pointGiven = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,10 +44,20 @@ public class CivilianDeath : MonoBehaviour
             blood.GetComponent<VisualEffect>().Play();
             OnKilled?.Invoke(this, this.gameObject);
             _ragdollController.DeathBounce();
+            if (!_pointGiven)
+            {
+                GameManager.LosePoint();
+                _pointGiven= true;
+            }
         }
         else if (other.gameObject.layer.Equals(14))
         {
             DeathByCriminal();
+            if (!_pointGiven)
+            {
+                GameManager.LosePoint();
+                _pointGiven = true;
+            }
         }
     }
 
