@@ -17,7 +17,6 @@ public class RegularCriminalBehaviour : MonoBehaviour
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _primaryTarget = _shelter;
     }
 
     private void Update()

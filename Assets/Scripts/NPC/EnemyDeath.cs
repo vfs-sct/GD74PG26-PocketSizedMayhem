@@ -32,12 +32,13 @@ public class EnemyDeath : MonoBehaviour
             this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
-        }
-        OnKilled?.Invoke(this,this.gameObject);
+            OnKilled?.Invoke(this, this.gameObject);
 
-        Destroy(_rb);
-        Destroy(_boxCollider);
-        Destroy(_navMeshAgent);
+            Destroy(_rb);
+            Destroy(_boxCollider);
+            Destroy(_navMeshAgent);
+        }
+        
     }
 
     public void OnTriggerEnter(Collider other)

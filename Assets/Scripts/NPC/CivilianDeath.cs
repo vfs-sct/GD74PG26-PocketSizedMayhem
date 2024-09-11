@@ -32,12 +32,13 @@ public class CivilianDeath : MonoBehaviour
             this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
+            OnKilled?.Invoke(this, this.gameObject);
         }
         else if (collision.gameObject.layer.Equals(7))
         {
             DeathByCriminal();
+            OnKilled?.Invoke(this, this.gameObject);
         }
-        OnKilled?.Invoke(this,this.gameObject);
     }
 
     public void OnTriggerEnter(Collider other)

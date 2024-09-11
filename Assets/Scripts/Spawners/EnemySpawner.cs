@@ -17,7 +17,7 @@ public class EnemySpawner : Spawner
     public override void SpawnObject()
     {
         base.SpawnObject();
-        Debug.Log(_enemyManager);
+        _spawnedObject.GetComponent<RegularCriminalBehaviour>().SetTarget(_shelter);
         _enemyManager.AddToEnemyList(_spawnedObject);
     }
 }
