@@ -14,7 +14,6 @@ public class BossBehaviour : MonoBehaviour
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _target = _enemyManager.ClosestCivilian(gameObject);
     }
 
     private void Update()
@@ -33,8 +32,6 @@ public class BossBehaviour : MonoBehaviour
             ragdollOnOffController.RagdollModeOn();
             ragdollOnOffController.DeathBounce();
             collision.gameObject.GetComponent<Rigidbody>().AddForce(hitAngle * _hitForce);
-            _enemyManager.EliminateCivilian(_target);
-            _target = _enemyManager.ClosestCivilian(gameObject);
         }
     }
 }

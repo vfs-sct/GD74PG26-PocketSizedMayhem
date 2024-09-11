@@ -1,48 +1,58 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _civilians;
-    [SerializeField] private CivilianBehaviour[] allObjects;
-    private void Awake()
+    [SerializeField] private CivilianManager _civilianManager;
+
+    [SerializeField] public List<RegularCriminalBehaviour> _regularEnemiesList;
+    private void Start()
     {
-        allObjects = FindObjectsOfType<CivilianBehaviour>();
-        foreach (var obj in allObjects)
+        _regularEnemiesList = new List<RegularCriminalBehaviour>();
+    }
+    private void Update()
+    {
+        foreach (RegularCriminalBehaviour criminal in _regularEnemiesList)
         {
-            _civilians.Add(obj.gameObject);
+            if(!criminal.HasTarget())
+            {
+                criminal.SetTarget(ClosestCivilian(criminal));
+            }
         }
     }
 
-    public GameObject ClosestCivilian(GameObject enemy)
+    public GameObject ClosestCivilian(RegularCriminalBehaviour enemy)
     {
-        float distance;
+        float distance = enemy.GetDetectionRadius();
         GameObject closest = null;
-        if (_civilians.Count > 0)
-        {
-            distance  = Vector3.Distance(enemy.transform.position, _civilians[0].transform.position);
-            closest = _civilians[0];
-        }
-        else
-        {
-            return null;
-        }
-        foreach(GameObject civilian in _civilians)
+        foreach(GameObject civilian in _civilianManager._civilians)
         {
             float compareDist;
-            compareDist = Vector3.Distance(enemy.transform.position, civilian.transform.position);
+            compareDist = Vector3.Distance(enemy.gameObject.transform.position, civilian.gameObject.transform.position);
             if(compareDist < distance)
             {
                 distance = compareDist;
-                closest = civilian;
+                closest = civilian.gameObject;
             }
         }
         return closest;
     }
-
-    public void EliminateCivilian(GameObject civilian)
+    public void AddToEnemyList(GameObject enemy)
     {
-        _civilians.Remove(civilian);
+        enemy.GetComponent<EnemyDeath>().OnKilled += RemoveEnemy;
+        _regularEnemiesList.Add(enemy.GetComponent<RegularCriminalBehaviour>());
+    }
+
+    public void RemoveEnemy(object sender, GameObject enemy)
+    {
+        if (!_regularEnemiesList.Contains(enemy.GetComponent<RegularCriminalBehaviour>()))
+        {
+            return;
+        }
+        _regularEnemiesList.Remove(enemy.GetComponent<RegularCriminalBehaviour>());
+        enemy.GetComponent<EnemyDeath>().OnKilled -= RemoveEnemy;
     }
 }

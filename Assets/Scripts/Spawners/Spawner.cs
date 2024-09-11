@@ -8,7 +8,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] protected int _minSpawnInterval;
     [SerializeField] protected int _maxSpawnInterval;
 
-    [SerializeField] protected GameObject _spawnObject;
+    [SerializeField] protected GameObject _prefab;
+    [SerializeField] protected GameObject _spawnedObject;
 
     protected float targetTime;
     // Start is called before the first frame update
@@ -30,6 +31,6 @@ public class Spawner : MonoBehaviour
 
     public virtual void SpawnObject()
     {
-        Instantiate(_spawnObject, this.transform.position, Quaternion.Euler(0, 0, 0));
+        _spawnedObject = Instantiate(_prefab, this.transform.position, Quaternion.Euler(0, 0, 0));
     }
 }

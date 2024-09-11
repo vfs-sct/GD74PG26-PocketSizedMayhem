@@ -1,49 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RegularCriminalBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject _shelter;
-    [SerializeField] private GameObject _targetCivilian;
+    [SerializeField] protected GameObject _shelter;
+    [SerializeField] protected GameObject _targetCivilian;
+    [SerializeField] protected GameObject _primaryTarget;
 
-    [SerializeField] private List<GameObject> _civilianList;
+    [SerializeField] protected float _detectionRadius;
+   
+    protected NavMeshAgent _navMeshAgent;
     
-
-    private NavMeshAgent _navMeshAgent;
-    private GameObject _primaryTarget;
-
     private void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _primaryTarget = _shelter;
     }
 
     private void Update()
     {
-        _navMeshAgent.destination = _primaryTarget.transform.position;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer.Equals("Civilian"))
+        if (_primaryTarget != null)
         {
-            _civilianList.Add(other.gameObject);
+            _navMeshAgent.destination = _primaryTarget.transform.position;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void SetTarget(GameObject target)
     {
-        if (other.gameObject.layer.Equals("Civilian") && other.gameObject != _targetCivilian)
+        if(target != null)
         {
-            _civilianList.Remove(other.gameObject);
+            _primaryTarget = target;
         }
+    }
+
+    public virtual bool HasTarget()
+    {
+        if(_primaryTarget != _shelter)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public float GetDetectionRadius()
+    {
+        return _detectionRadius;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer.Equals("Civilian"))
+        if (collision.gameObject.layer.Equals(6))
         {
             _primaryTarget = _shelter;
         }
