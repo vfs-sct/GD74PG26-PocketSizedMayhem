@@ -15,8 +15,11 @@ public class RegularCriminalBehaviour : MonoBehaviour
     protected NavMeshAgent _navMeshAgent;
     protected Animator _enemyAnimator;
 
+    private bool _inPrison;
+
     private void Start()
     {
+        _inPrison = false;
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyAnimator = GetComponent<Animator>();
         _shelter = _primaryTarget;
@@ -24,9 +27,17 @@ public class RegularCriminalBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (_primaryTarget != null)
+        if (_primaryTarget != null && _navMeshAgent != null &&  _navMeshAgent.isOnNavMesh )
         {
             _navMeshAgent.destination = _primaryTarget.transform.position;
+        }
+        if(_inPrison && _navMeshAgent.isOnNavMesh)
+        {
+            _navMeshAgent.isStopped = true;
+        }
+        else if(_navMeshAgent.isOnNavMesh)
+        {
+            _navMeshAgent.isStopped = false;
         }
     }
 
@@ -61,11 +72,15 @@ public class RegularCriminalBehaviour : MonoBehaviour
         else if(other.gameObject.layer.Equals(15))
         {
             GameManager.AddPoint();
+            _inPrison = true;
+        }
+        else if (other.gameObject.layer.Equals(11))
+        {
+            _navMeshAgent.enabled = true;
         }
         if (other.gameObject == _primaryTarget)
         {
             _primaryTarget = _shelter;
-            
         }
     }
     private void OnTriggerExit(Collider other)
