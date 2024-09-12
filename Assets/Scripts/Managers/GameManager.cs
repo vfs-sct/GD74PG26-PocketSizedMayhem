@@ -18,9 +18,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _pointText;
+    [SerializeField] private TextMeshProUGUI _objectiveText1;
+    [SerializeField] private TextMeshProUGUI _objectiveText2;
+    [SerializeField] private TextMeshProUGUI _objectiveText3;
+
     [SerializeField] private float _gameTime = 100;
     [SerializeField] private static float _increaseAmount = 10;
     [SerializeField] private static float _decreaseAmount = 10;
+
+    [SerializeField] private int _civilianToSaved = 2;
+    [SerializeField] private int _criminalsKilled = 12;
+    [SerializeField] private int _criminalsCaptured = 2;
 
     private Vector3 _mousePos;
     private Vector3 hitpoint;
@@ -36,10 +44,15 @@ public class GameManager : MonoBehaviour
         _startTime = Time.time;
         _point = 100;
         _pointText.text = "Point:" + _point;
+
+        PlayerStats.CivilianSaved = 0;
+        PlayerStats.CriminalKilled = 0;
+        PlayerStats.CriminalCaptured = 0;
     }
 
     void Update()
     {
+        PlayerStats.Points = _point;
         _elapsedTime = Time.time - _startTime;
         if (_gameTime - _elapsedTime > 0)
         {
@@ -52,8 +65,22 @@ public class GameManager : MonoBehaviour
             _timerText.text = "Remaining Time: " + 0;
             SceneManager.LoadScene("LoseScreen");
         }
-        PlayerStats.Points = _point;
-        _pointText.text = "" + PlayerStats.Points;
+        // Lose condition
+        if (PlayerStats.Points <= 0)
+        {
+            SceneManager.LoadScene("LoseScreen");
+        }
+        if(PlayerStats.CriminalKilled >= _criminalsKilled && PlayerStats.CriminalCaptured >= _criminalsCaptured && PlayerStats.CivilianSaved >= _civilianToSaved)
+        {
+            SceneManager.LoadScene("WinScreen");
+        }
+
+        // Win condition
+        
+        _pointText.text = "Point:" + PlayerStats.Points;
+        _objectiveText1.text = "Civilians Saved - " + PlayerStats.CivilianSaved + "/" + _civilianToSaved;
+        _objectiveText2.text = "Criminals Killed - " + PlayerStats.CriminalKilled + "/" + _criminalsKilled;
+        _objectiveText3.text = "Criminals Captured - " + PlayerStats.CriminalCaptured + "/" + _criminalsCaptured;
     }
 
     public void OnIncreaseTime()

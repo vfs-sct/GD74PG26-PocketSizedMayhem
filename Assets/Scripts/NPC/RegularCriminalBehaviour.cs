@@ -73,6 +73,7 @@ public class RegularCriminalBehaviour : MonoBehaviour
         {
             GameManager.AddPoint();
             _inPrison = true;
+            PlayerStats.CriminalCaptured++;
         }
         else if (other.gameObject.layer.Equals(11))
         {

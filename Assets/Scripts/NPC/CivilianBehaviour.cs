@@ -41,6 +41,7 @@ public class CivilianBehaviour : MonoBehaviour
         if (other.gameObject.layer.Equals(16))
         {
             GameManager.AddPoint();
+            PlayerStats.CivilianSaved++;
         }
         else if (other.gameObject.layer.Equals(11))
         {

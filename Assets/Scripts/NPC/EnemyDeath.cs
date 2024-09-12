@@ -47,6 +47,7 @@ public class EnemyDeath : MonoBehaviour
                 GameManager.AddPoint();
                 _pointGiven = true;
             }
+            PlayerStats.CriminalKilled++;
         }
     }
 }
