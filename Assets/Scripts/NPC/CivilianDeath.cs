@@ -26,14 +26,6 @@ public class CivilianDeath : MonoBehaviour
         _pointGiven = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Mallet")
-        {
-            
-        }
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Mallet")

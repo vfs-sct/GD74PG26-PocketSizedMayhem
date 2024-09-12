@@ -24,7 +24,5 @@ public class ShelterHealthBar : MonoBehaviour
         }
 
         _fillBar.fillAmount = _health.Percentage;
-
-        transform.rotation = Camera.main.transform.rotation;
     }
 }

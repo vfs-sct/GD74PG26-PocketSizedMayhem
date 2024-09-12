@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private float _startTime;
     private float _elapsedTime;
     public static float _point;
-
+    public GameObject shelter;
 
     void Start()
     {
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("LoseScreen");
         }
         // Lose condition
-        if (PlayerStats.Points <= 0)
+        if (PlayerStats.Points <= 0 || shelter.GetComponent<ShelterHealth>()._currentHealth<=0)
         {
             SceneManager.LoadScene("LoseScreen");
         }

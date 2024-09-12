@@ -91,4 +91,21 @@ public class RegularCriminalBehaviour : MonoBehaviour
             GameManager.LosePoint();
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(16))
+        {
+            _enemyAnimator.SetTrigger("Attack");
+            _navMeshAgent.isStopped = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(16))
+        {
+            _enemyAnimator.SetTrigger("Attack");
+            _navMeshAgent.isStopped = false;
+        }
+    }
 }
