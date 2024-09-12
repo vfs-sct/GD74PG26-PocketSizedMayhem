@@ -95,11 +95,11 @@ public class GameManager : MonoBehaviour
     }
     public void OnIncreasePoint()
     {
-        _point += _increaseAmount;
+        PlayerStats.Points += _increaseAmount;
     }
     public void OnDecreasePoint()
     {
-        _point -= _decreaseAmount;
+        PlayerStats.Points -= _decreaseAmount;
     }
     public void OnLoadWinScreen()
     {
