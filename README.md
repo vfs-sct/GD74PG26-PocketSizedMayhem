@@ -72,7 +72,7 @@ Blah Blah Blah
 - [Playtest Feedback Form & Responses](https://docs.google.com/spreadsheets/d/1AgDIGsFBcr9veSp9G9d-iegiIbItY9zFiiAeAVIIxow/edit?usp=sharing)
 - [Media Design Document](https://miro.com/app/board/uXjVK1En68k=/)
 - [Build](\\\vfsstorage10\Dropbox\GDPGSD\Builds\Final Project\GD74PG26\PocketSizedMayhem\M1)
-- [Bug Tracker]([https://miro.com/app/board/uXjVK1En68k=/](https://app.clickup.com/9014453215/v/b/li/901405997066))
+- [Bug Tracker](https://miro.com/app/board/uXjVK1En68k=/](https://app.clickup.com/9014453215/v/b/li/901405997066))
 - [Script/Dialogue]
 
 ## Team Members and Roles
