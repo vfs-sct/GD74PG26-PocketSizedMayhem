@@ -48,11 +48,13 @@ public class GameManager : MonoBehaviour
         PlayerStats.CivilianSaved = 0;
         PlayerStats.CriminalKilled = 0;
         PlayerStats.CriminalCaptured = 0;
+        PlayerStats.CriminalCaptured = 0;
+        PlayerStats.Points = 100;
     }
 
     void Update()
     {
-        PlayerStats.Points = _point;
+        _point =  PlayerStats.Points;
         _elapsedTime = Time.time - _startTime;
         if (_gameTime - _elapsedTime > 0)
         {
@@ -139,10 +141,10 @@ public class GameManager : MonoBehaviour
     }
     public static void AddPoint()
     {
-        _point += _increaseAmount;
+        PlayerStats.Points += _increaseAmount;
     }
     public static void LosePoint()
     {
-        _point -= _increaseAmount;
+        PlayerStats.Points -= _increaseAmount;
     }
 }
