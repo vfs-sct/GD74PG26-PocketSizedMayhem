@@ -39,21 +39,23 @@ All buildings can be damaged but not completely destroyed, except for regular bu
 > 🚙 **Vehicles:** Non-damaged vehicles will explode if struck by a mallet or dropped from a height by the claw.
 
 ## Gameplay Controls  
-Action               | Keyboard Control  | Gamepad Control
----                  |---                |---
-Move                 | WASD              | Stick R
-Aim                  | Mouse Look        | Stick L
-Attack               | Mouse L           | Trigger R
-Block                | Mouse R           | Trigger L
-
+Action               | Keyboard Control  
+---                  |---                
+Move                 | WASD              
+Aim                  | Mouse Look        
+Attack               | Mouse L           
+Weapon Switch        | Q    
 ## Debug Controls  
 Action               | Keyboard Control
 ---                  |---          
-Debug Menu           | F1              
-Invincibility        | F2               
-Unlimited Ammo       | F3                
-Cycle Checkpoints    | F4                
-Respawn Enemies      | F5         
+Increase Time        | F1              
+Decrease Time        | F2               
+Increase point       | F3                
+Decrease point       | F4                
+Load Win Screen      | F5     
+Load Lose Screen     | F6    
+Restart Scene        | F7    
+Spawn Civilian       | 1    
 
 ## Know Issues
 Blah Blah Blah
