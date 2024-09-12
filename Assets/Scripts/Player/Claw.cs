@@ -98,7 +98,7 @@ public class Claw : Weapon
                 _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
                 _grabbedObject.GetComponent<RagdollOnOffController>().enabled = false;
             }
-            else if (other.gameObject.GetComponent<BuildingPieceDestruction>())
+            else if (other.gameObject.layer.Equals(17))
             {
                 _grabbedObject = other.gameObject;
                 _grabbedObject.AddComponent<FixedJoint>();

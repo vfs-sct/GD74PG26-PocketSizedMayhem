@@ -1306,6 +1306,13 @@ MonoBehaviour:
   _targetCivilian: {fileID: 0}
   _primaryTarget: {fileID: 0}
   _detectionRadius: 15
+  <AttackSFX>k__BackingField:
+    Guid:
+      Data1: -325181669
+      Data2: 1112644634
+      Data3: 675133061
+      Data4: 290209434
+    Path: event:/SFX/SFX_Laugh
 --- !u!114 &8771779228316472177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,6 +1328,13 @@ MonoBehaviour:
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
   _animNo: 0
+  <AttackSFX>k__BackingField:
+    Guid:
+      Data1: 851771094
+      Data2: 1195924567
+      Data3: 2134240645
+      Data4: 223605370
+    Path: event:/SFX/SFX_Die02
 --- !u!114 &7594592143292885018
 MonoBehaviour:
   m_ObjectHideFlags: 0

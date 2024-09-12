@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class Mallet : Weapon
 {
     [SerializeField] private GameObject _target;
     [SerializeField] private float _originalStartY;
+    [field:SerializeField] public EventReference AttackSFX {  get; set; } 
 
     private Animator _malletAnimator;
 
@@ -20,6 +22,10 @@ public class Mallet : Weapon
 
     public override void Fire()
     {
+        if(!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
         _malletAnimator.SetTrigger("Swing");
     }
 

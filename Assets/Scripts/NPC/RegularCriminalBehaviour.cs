@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
@@ -16,13 +17,17 @@ public class RegularCriminalBehaviour : MonoBehaviour
     protected Animator _enemyAnimator;
 
     private bool _inPrison;
-
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
     private void Start()
     {
         _inPrison = false;
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _enemyAnimator = GetComponent<Animator>();
         _shelter = _primaryTarget;
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
     }
 
     private void Update()

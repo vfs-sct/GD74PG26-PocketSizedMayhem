@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using FMODUnity;
 public class EnemyDeath : MonoBehaviour
 {
     [SerializeField] private GameObject _bloodEffect;
@@ -17,6 +18,8 @@ public class EnemyDeath : MonoBehaviour
 
     private bool _pointGiven;
 
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
+
     private void Start()
     {
         _ragdollController = GetComponent<RagdollOnOffController>();
@@ -30,7 +33,7 @@ public class EnemyDeath : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Mallet")
+        if (other.gameObject.tag == "Mallet" || other.gameObject.layer.Equals(17))
         {
             _ragdollController.RagdollModeOn();
             this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
@@ -42,12 +45,16 @@ public class EnemyDeath : MonoBehaviour
             Destroy(_boxCollider);
             Destroy(_navMeshAgent);
             _ragdollController.DeathBounce();
-            if(!_pointGiven)
+            if (!_pointGiven)
             {
                 GameManager.AddPoint();
                 _pointGiven = true;
             }
             PlayerStats.CriminalKilled++;
+            if (!AttackSFX.IsNull)
+            {
+                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,15 @@ public class CivilianBehaviour : MonoBehaviour
 
     private NavMeshAgent _navMeshAgent;
     private bool _inShelter;
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
     private void Start()
     {
         _inShelter = false;
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
     }
 
     private void Update()

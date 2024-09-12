@@ -1191,6 +1191,13 @@ MonoBehaviour:
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
   _animNo: 4
+  <AttackSFX>k__BackingField:
+    Guid:
+      Data1: 2053328739
+      Data2: 1290538230
+      Data3: -972561278
+      Data4: 1205326739
+    Path: event:/SFX/SFX_Die01
 --- !u!114 &4221005304262489085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,6 +1211,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destination: {fileID: 0}
+  <AttackSFX>k__BackingField:
+    Guid:
+      Data1: 2010292044
+      Data2: 1303679187
+      Data3: 972436876
+      Data4: -65873779
+    Path: event:/SFX/SFX_Scared03
 --- !u!136 &1895205762331987421
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using FMODUnity;
 public class CivilianDeath : MonoBehaviour
 {
     [SerializeField] private GameObject _bloodEffect;
@@ -14,6 +15,7 @@ public class CivilianDeath : MonoBehaviour
     private NavMeshAgent _navMeshAgent;
 
     public event EventHandler<GameObject> OnKilled;
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
 
     private bool _pointGiven;
     private void Start()
@@ -41,6 +43,10 @@ public class CivilianDeath : MonoBehaviour
                 GameManager.LosePoint();
                 _pointGiven= true;
             }
+            if (!AttackSFX.IsNull)
+            {
+                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            }
         }
         else if (other.gameObject.layer.Equals(14))
         {
@@ -50,6 +56,7 @@ public class CivilianDeath : MonoBehaviour
                 GameManager.LosePoint();
                 _pointGiven = true;
             }
+
         }
     }
 
@@ -64,5 +71,9 @@ public class CivilianDeath : MonoBehaviour
         Destroy(_boxCollider);
         Destroy(_navMeshAgent);
         OnKilled?.Invoke(this, this.gameObject);
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
     }
 }
