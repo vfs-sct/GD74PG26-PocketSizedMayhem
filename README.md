@@ -73,7 +73,7 @@ Blah Blah Blah
 - [Media Design Document](https://miro.com/app/board/uXjVK1En68k=/)
 - [Build](\\\vfsstorage10\Dropbox\GDPGSD\Builds\Final Project\GD74PG26\PocketSizedMayhem\M1)
 - [Bug Tracker](https://miro.com/app/board/uXjVK1En68k=/](https://app.clickup.com/9014453215/v/b/li/901405997066))
-- [Script/Dialogue]
+- [Script/Dialogue](https://docs.google.com/document/d/1qiqacDpp3MOJztnuwgu83G0bPAz-KJhiE3-YIOsDqrc/edit?usp=sharing)
 
 ## Team Members and Roles
 Members               | Roles
