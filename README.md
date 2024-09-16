@@ -58,7 +58,11 @@ Restart Scene        | F7
 Spawn Civilian       | 1    
 
 ## Know Issues
-Blah Blah Blah
+- Enemies Glide while attacking
+- Enemies does not pulled up correctly
+- Navmesh for buildings does not exist
+- Roads and sidewalks prevents navmesh to work correctly.
+
 
 ## Documentations 
 - [Milestone Report Document]
