@@ -9,7 +9,6 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Weapon _mallet;
 
     [SerializeField] private GameObject _target;
-    [SerializeField] private GameObject _minimapIcon;
 
     [SerializeField] private Material _clawTargetMaterial;
     [SerializeField] private Material _malletTargetMaterial;
@@ -34,7 +33,6 @@ public class PlayerWeaponController : MonoBehaviour
         {
             return;
         }
-        _minimapIcon.transform.position = hit.point;
     }
 
     public void OnFire()
@@ -58,5 +56,21 @@ public class PlayerWeaponController : MonoBehaviour
             _activeWeapon = _mallet;
             _target.GetComponent<MeshRenderer>().material = _malletTargetMaterial;
         }
+    }
+
+    public void OnSelectMallet()
+    {
+        _mallet.gameObject.SetActive(true);
+        _claw.gameObject.SetActive(false);
+        _activeWeapon = _mallet;
+        _target.GetComponent<MeshRenderer>().material = _malletTargetMaterial;
+    }
+
+    public void OnSelectClaw()
+    {
+        _mallet.gameObject.SetActive(false);
+        _claw.gameObject.SetActive(true);
+        _activeWeapon = _claw;
+        _target.GetComponent<MeshRenderer>().material = _clawTargetMaterial;
     }
 }
