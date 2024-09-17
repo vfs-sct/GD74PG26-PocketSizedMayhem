@@ -15,12 +15,16 @@ public class EnforcerBehaviour : RegularCriminalBehaviour
 
     private void Update()
     {
-        if (_primaryTarget.GetComponent<CivilianBehaviour>() == null)
+        if (_primaryTarget.GetComponent<CivilianDeath>() == null && Vector3.Distance(_targetCivilian.gameObject.transform.position,this.transform.position) > _detectionRadius)
         {
             if (Vector3.Distance(_primaryTarget.transform.position, _navMeshAgent.transform.position) <= _navMeshAgent.stoppingDistance)
             {
                 _primaryTarget = NextWaypoint();
             }
+        }
+        else
+        {
+            _primaryTarget = _targetCivilian;
         }
         _navMeshAgent.destination = _primaryTarget.transform.position;
     }

@@ -12,7 +12,7 @@ public class EnemySpawner : Spawner
 
     private void Start()
     {
-        _enemyManager = FindObjectOfType<EnemyManager>();
+        _enemyManager = FindFirstObjectByType<EnemyManager>();
     }
     public override void SpawnObject()
     {

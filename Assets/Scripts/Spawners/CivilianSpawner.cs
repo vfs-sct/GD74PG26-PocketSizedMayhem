@@ -12,7 +12,7 @@ public class CivilianSpawner : Spawner
 
     private void Start()
     {
-        _civilianManager = FindObjectOfType<CivilianManager>();
+        _civilianManager = FindFirstObjectByType<CivilianManager>();
         _navAgent = _prefab.GetComponent<NavMeshAgent>();
         _prefab.GetComponent<CivilianBehaviour>().SetDestionation(_shelter);
     }

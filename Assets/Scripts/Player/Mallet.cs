@@ -1,11 +1,15 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Mallet : Weapon
 {
+    [SerializeField] private GameObject _impact;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _originalStartY;
+    [field:SerializeField] public EventReference AttackSFX {  get; set; } 
 
     private Animator _malletAnimator;
 
@@ -20,7 +24,12 @@ public class Mallet : Weapon
 
     public override void Fire()
     {
+        if(!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
         _malletAnimator.SetTrigger("Swing");
+        
     }
 
     private void Update()
@@ -48,6 +57,13 @@ public class Mallet : Weapon
     private void EnableColldiers()
     {
         GetComponentInChildren<Collider>().enabled = true;
+    }
+    public void Smoke()
+    {
+        {
+            GameObject impact = Instantiate(_impact, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            impact.GetComponent<VisualEffect>().Play();
+        }
     }
 }
 

@@ -48,12 +48,14 @@ public class LeaderboardScoreDisplayer : MonoBehaviour
     }
     public void makeUITextList()
     {
+        int i = 1;
         foreach (Score score in _scoreList)
         {
             GameObject scoreText = Instantiate(_textExample);
             _textList.Add(scoreText);
-            scoreText.GetComponent<TextMeshProUGUI>().text = score.name + " - " + score.score;
-            scoreText.transform.SetParent(this.transform);  
+            scoreText.GetComponent<TextMeshProUGUI>().text = i + " - " + score.name + " | " + score.score;
+            scoreText.transform.SetParent(this.transform);
+            i++;
         }
     }
 

@@ -35,10 +35,11 @@ public class Claw : Weapon
                 Destroy(_grabbedObject.GetComponent<FixedJoint>());
                 if(_grabbedObject.GetComponent<RagdollOnOffController>())
                 {
-                    _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
+                    //_grabbedObject.GetComponent<NavMeshAgent>().enabled = true;
                     _grabbedObject.GetComponent<Animator>().enabled = true;
                     _grabbedObject.GetComponent<Rigidbody>().useGravity = true;
                     _grabbedObject.GetComponent<RagdollOnOffController>().enabled = true;
+                    _grabbedObject.GetComponent<CapsuleCollider>().enabled = true;
                 }
                 _grabbedObject = null;
 
@@ -76,10 +77,20 @@ public class Claw : Weapon
         _grabbed = true;
         if (_grabbedObject == null)
         {
-            if (collision.gameObject.GetComponent<RagdollOnOffController>())
+            _fired = false;
+            _grabbed = true;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        _fired = false;
+        _grabbed = true;
+        if (_grabbedObject == null)
+        {
+            if (other.gameObject.GetComponent<RagdollOnOffController>())
             {
-                _grabbedObject = collision.gameObject;
-                //grabbedObject.GetComponent<NPCPathing>().enabled = false;
+                _grabbedObject = other.gameObject;
+                _grabbedObject.GetComponent<CapsuleCollider>().enabled = false;
                 _grabbedObject.GetComponent<Rigidbody>().useGravity = false;
                 _grabbedObject.GetComponent<NavMeshAgent>().enabled = false;
                 _grabbedObject.GetComponent<Animator>().enabled = false;
@@ -87,9 +98,9 @@ public class Claw : Weapon
                 _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
                 _grabbedObject.GetComponent<RagdollOnOffController>().enabled = false;
             }
-            else if (collision.gameObject.GetComponent<BuildingPieceDestruction>())
+            else if (other.gameObject.layer.Equals(17))
             {
-                _grabbedObject = collision.gameObject;
+                _grabbedObject = other.gameObject;
                 _grabbedObject.AddComponent<FixedJoint>();
                 _grabbedObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
             }

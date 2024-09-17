@@ -18,7 +18,7 @@ public class RagdollOnOffController : MonoBehaviour
     void Start()
     {
         _npcAnimator = GetComponent<Animator>();
-        _boxCollider = GetComponent<BoxCollider>();
+       // _boxCollider = GetComponent<BoxCollider>();
         GetRagdollParts();
         RagdollModeOff();
     }
@@ -38,7 +38,7 @@ public class RagdollOnOffController : MonoBehaviour
         }
 
         GetComponent<Rigidbody>().isKinematic = true;
-        _boxCollider.isTrigger = true;
+        //_boxCollider.isTrigger = true;
     }
 
     public void RagdollModeOff()
@@ -51,7 +51,7 @@ public class RagdollOnOffController : MonoBehaviour
         {
             rigid.isKinematic = true;
         }
-        _boxCollider.enabled = true;
+        //_boxCollider.enabled = true;
         GetComponent<Rigidbody>().isKinematic = false;
         _npcAnimator.enabled = true;
         transform.position = _hips.transform.position;
