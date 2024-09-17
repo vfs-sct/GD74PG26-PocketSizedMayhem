@@ -5,26 +5,27 @@ using UnityEngine.VFX;
 using FMODUnity;
 public class CivilianDeath : MonoBehaviour
 {
+    [field: SerializeField] public EventReference DeathSFX { get; set; }
+
     [SerializeField] private GameObject _bloodEffect;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
     [SerializeField] private int _animNo;
 
     private RagdollOnOffController _ragdollController;
     private Animator _animator;
-    private BoxCollider _boxCollider;
     private Rigidbody _rb;
     private NavMeshAgent _navMeshAgent;
 
     public event EventHandler<GameObject> OnKilled;
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
 
     private bool _pointGiven;
     private void Start()
     {
         _ragdollController = GetComponent<RagdollOnOffController>();
         _animator = GetComponent<Animator>();
-        _boxCollider = GetComponent<BoxCollider>();
         _rb = GetComponent<Rigidbody>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+
         _pointGiven = false;
     }
 
@@ -33,47 +34,56 @@ public class CivilianDeath : MonoBehaviour
         if (other.gameObject.tag == "Mallet")
         {
             _ragdollController.RagdollModeOn();
-            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
+
+            _capsuleCollider.enabled = false;
+            _navMeshAgent.enabled = false;
+
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
+
             OnKilled?.Invoke(this, this.gameObject);
+
             _ragdollController.DeathBounce();
+
             if (!_pointGiven)
             {
                 GameManager.LosePoint();
                 _pointGiven= true;
             }
-            if (!AttackSFX.IsNull)
+            if (!DeathSFX.IsNull)
             {
-                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+                RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
         }
         else if (other.gameObject.layer.Equals(14))
         {
             DeathByCriminal();
+
             if (!_pointGiven)
             {
                 GameManager.LosePoint();
                 _pointGiven = true;
             }
-
         }
     }
 
     public void DeathByCriminal()
     {
-        int boredAnimation = UnityEngine.Random.Range(0, _animNo);
+        int animNo = UnityEngine.Random.Range(0, _animNo);
 
-        _animator.SetFloat("DeathNo",(float) boredAnimation);
+        _animator.SetFloat("DeathNo",(float) animNo);
         _animator.SetTrigger("Death");
 
         Destroy(_rb);
-        Destroy(_boxCollider);
-        Destroy(_navMeshAgent);
+
+        _capsuleCollider.enabled = false;
+        _navMeshAgent.enabled = false;
+
         OnKilled?.Invoke(this, this.gameObject);
-        if (!AttackSFX.IsNull)
+
+        if (!DeathSFX.IsNull)
         {
-            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
         }
     }
 }

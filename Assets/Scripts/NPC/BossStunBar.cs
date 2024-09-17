@@ -40,6 +40,8 @@ public class BossStunBar : MonoBehaviour
             _agent.isStopped = false;
         }
         _stunDuration -= Time.deltaTime;
+
+        transform.rotation = Camera.main.transform.rotation;
     }
     private void OnTriggerEnter(Collider other)
     {
