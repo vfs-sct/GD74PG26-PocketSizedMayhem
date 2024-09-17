@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingDestruction : MonoBehaviour
 {
+    [SerializeField] private int _force;
     [SerializeField] List<GameObject> _pieces;
     private bool _isDestoyed;
     // Start is called before the first frame update
@@ -15,21 +16,24 @@ public class BuildingDestruction : MonoBehaviour
         {
             GameObject piece = transform.GetChild(i).gameObject;
             _pieces.Add(piece);
-
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Mallet" && !_isDestoyed)
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
             foreach (GameObject piece in _pieces)
             {
                 piece.AddComponent<Rigidbody>();
                 Vector3 direction = Random.insideUnitCircle.normalized;
-                piece.GetComponent<Rigidbody>().AddForce(direction * 10, ForceMode.Impulse);
+                piece.GetComponent<Rigidbody>().AddForce(direction * _force, ForceMode.Impulse);
             }
-            _isDestoyed=true;
+            _isDestoyed = true;
         }
     }
 }

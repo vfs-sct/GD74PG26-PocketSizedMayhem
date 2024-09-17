@@ -13,14 +13,11 @@ public class BossStunBar : MonoBehaviour
     [SerializeField] private NavMeshAgent _agent;
     private float _elapsedTime;
     private float _startTime;
+
     private void Start()
     {
         _maxStun = 10;
         _stunDuration = 0;
-    }
-    private void OnValidate()
-    {
-
     }
 
     private void Update()

@@ -24,7 +24,10 @@ public class Spawner : MonoBehaviour
         targetTime -= Time.deltaTime;
         if (targetTime <= 0)
         {
-            SpawnObject();
+            for (int i = 0; i < _spawnCount; i++)
+            {
+                SpawnObject();
+            }
             targetTime = Random.Range(_minSpawnInterval, _maxSpawnInterval);
         }
     }
