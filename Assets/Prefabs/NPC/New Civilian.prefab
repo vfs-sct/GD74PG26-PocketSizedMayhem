@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destination: {fileID: 0}
-  <AttackSFX>k__BackingField:
+  <SpawnSFX>k__BackingField:
     Guid:
       Data1: 2010292044
       Data2: 1303679187
@@ -1267,8 +1267,8 @@ MonoBehaviour:
     Path: event:/SFX/SFX_Die01
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
-  _animNo: 4
   _capsuleCollider: {fileID: 9164219645081072116}
+  _animNo: 4
 --- !u!1 &6893525141375332539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,

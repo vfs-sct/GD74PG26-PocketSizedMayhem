@@ -10,14 +10,14 @@ public class CivilianBehaviour : MonoBehaviour
 
     private NavMeshAgent _navMeshAgent;
     private bool _inShelter;
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference SpawnSFX { get; set; }
     private void Start()
     {
         _inShelter = false;
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        if (!AttackSFX.IsNull)
+        if (!SpawnSFX.IsNull)
         {
-            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            RuntimeManager.PlayOneShot(SpawnSFX, this.gameObject.transform.position);
         }
     }
 
@@ -44,21 +44,9 @@ public class CivilianBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer.Equals(16))
-        {
-            GameManager.AddPoint();
-            PlayerStats.CivilianSaved++;
-        }
-        else if (other.gameObject.layer.Equals(11))
+        if (other.gameObject.layer.Equals(11))
         {
             _navMeshAgent.enabled = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer.Equals(16))
-        {
-            GameManager.LosePoint();
         }
     }
 }
