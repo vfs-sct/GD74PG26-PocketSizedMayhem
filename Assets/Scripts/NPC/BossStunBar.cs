@@ -6,31 +6,32 @@ using UnityEngine.UI;
 
 public class BossStunBar : MonoBehaviour
 {
-    [SerializeField] private float _maxStun;
+    [SerializeField] private float _maxStunDuration;
     [SerializeField] public float _stunDuration;
-    private float percentage;
+    [SerializeField] private float _stunIncrease;
     [SerializeField] private Image _fillBar;
     [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Animator _animator;
+
+    private float _percentage;
     private float _elapsedTime;
     private float _startTime;
-
+    private float _minStunDuration;
     private void Start()
     {
-        _maxStun = 10;
-        _stunDuration = 0;
+        _minStunDuration = 0;
+        _maxStunDuration = 10;
+        _stunDuration = _minStunDuration;
     }
 
     private void Update()
     {
-
-        percentage = _stunDuration/_maxStun;
-        _fillBar.fillAmount = percentage;
-        Debug.Log(_fillBar.fillAmount);
-        Debug.Log(percentage);
+        _stunDuration = Mathf.Clamp(_stunDuration, _minStunDuration, _maxStunDuration);
+        _percentage = _stunDuration/ _maxStunDuration;
+        _fillBar.fillAmount = _percentage;
         if(_stunDuration > 0 )
         {
             _agent.isStopped = true;
-
         }
         else
         {
@@ -40,12 +41,13 @@ public class BossStunBar : MonoBehaviour
 
         transform.rotation = Camera.main.transform.rotation;
     }
-    private void OnTriggerEnter(Collider other)
+
+    public void IncreaseStun()
     {
-        if (other.gameObject.tag == "Mallet")
-        {
-            _stunDuration += 3;
-        }
+        _stunDuration += _stunIncrease;
     }
-    
+    public float GetStunDuration()
+    {
+        return _stunDuration;
+    }
 }

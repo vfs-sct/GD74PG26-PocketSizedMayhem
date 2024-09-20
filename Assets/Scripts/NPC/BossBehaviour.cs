@@ -1,50 +1,126 @@
+using CharacterMovement;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BossBehaviour : MonoBehaviour
 {
-    [SerializeField] private EnemyManager _enemyManager;
-    [SerializeField] private GameObject _target;
-    [SerializeField] private float _hitForce;
-    [SerializeField] private GameObject _stunBar;
-    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private Animator _animator;
 
+    [SerializeField] private GameObject _shelter;
+    [SerializeField] private GameObject _shelterChargePoint;
+    [SerializeField] private GameObject _stunBar;
+
+    [SerializeField] private float _hitForce;
+    [SerializeField] private int _chargeCycle;
+
+    private IEnumerator _currentState;
+    private int _chargeAnimCycle;
     private void Start()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
+        ChangeState(GoTowardsShelterState());
     }
 
-    private void Update()
+    private void ChangeState(IEnumerator newState)
     {
-        if(_target != null)
-        {
-            _navMeshAgent.destination = _target.transform.position;
-        }
+        if (_currentState != null) StopCoroutine(_currentState);
+
+        _currentState = newState;
+        StartCoroutine(_currentState);
     }
 
+    private IEnumerator GoTowardsShelterState()
+    {
+        _navMeshAgent.SetDestination(_shelterChargePoint.transform.position);
+        float distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
+        while (distance > _navMeshAgent.stoppingDistance)
+        {
+            distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
+            yield return null;
+        }
+        ChangeState(ChargeState());
+    }
+
+    private IEnumerator ChargeState()
+    {
+        this.gameObject.transform.LookAt(_shelter.transform.position);
+        _chargeAnimCycle = 0;
+        _animator.SetTrigger("Charge");
+        while (_chargeAnimCycle < _chargeCycle)
+        {
+            yield return null;
+        }
+        ChangeState(ChargeRunState());
+    }
+
+    
+    private IEnumerator ChargeRunState()
+    {
+        _navMeshAgent.SetDestination(_shelter.transform.position);
+        _animator.SetTrigger("Attack");
+        yield return null;
+    }
+
+    private IEnumerator FallFromHitState()
+    {
+        CameraShake.Instance.Shake(10f, 1f);
+        _animator.SetTrigger("Fall");
+        _navMeshAgent.isStopped = true;
+        yield return null;
+    }
+    private IEnumerator StandUpState()
+    {
+        _animator.SetTrigger("Stand");
+        yield return null;
+    }
+    private IEnumerator WalkBackState()
+    {
+        _animator.SetTrigger("WalkBack");
+        _navMeshAgent.isStopped = false;
+        _navMeshAgent.SetDestination(_shelterChargePoint.transform.position);
+        float distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
+        while (distance > _navMeshAgent.stoppingDistance)
+        {
+            distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
+            yield return null;
+        }
+        ChangeState(ChargeState());
+    }
+    
+    private void IncraseChargeCycle()
+    {
+        _chargeAnimCycle++;
+    }
+    private void WalkBackTrigger()
+    {
+        ChangeState(WalkBackState());
+    }
+    private void StandTrigger()
+    {
+        ChangeState(StandUpState());
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<RagdollOnOffController>(out RagdollOnOffController ragdollOnOffController))
+        if (other.gameObject.tag == "Mallet")
         {
-            Vector3 hitAngle = (other.transform.position - this.gameObject.transform.position).normalized;
-            ragdollOnOffController.RagdollModeOn();
-            ragdollOnOffController.DeathBounce();
-            other.gameObject.GetComponent<Rigidbody>().AddForce(hitAngle * _hitForce);
+            if(_stunBar.GetComponent<BossStunBar>().GetStunDuration()<=0)
+            {
+                _animator.SetTrigger("Stun");
+            }
+            _stunBar.GetComponent<BossStunBar>().IncreaseStun();
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision);
-        if (collision.gameObject.tag == "Mallet")
-        {
-            Debug.Log("hehe");
-            _stunBar.GetComponent<BossStunBar>()._stunDuration += 3;
-        }
-        else if (collision.gameObject.layer.Equals(17))
+        else if (other.gameObject.layer.Equals(17))
         {
             this.GetComponent<Animator>().enabled = false;
         }
+        else if (other.gameObject.layer.Equals(16))
+        {
+            ChangeState(FallFromHitState());
+        }
     }
 }
+
+
