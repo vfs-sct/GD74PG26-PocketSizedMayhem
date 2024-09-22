@@ -68,7 +68,8 @@ public class BossBehaviour : MonoBehaviour
     {
         CameraShake.Instance.Shake(10f, 1f);
         _animator.SetTrigger("Fall");
-        _navMeshAgent.isStopped = true;
+        _navMeshAgent.enabled = false;
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         yield return null;
     }
     private IEnumerator StandUpState()
@@ -79,7 +80,7 @@ public class BossBehaviour : MonoBehaviour
     private IEnumerator WalkBackState()
     {
         _animator.SetTrigger("WalkBack");
-        _navMeshAgent.isStopped = false;
+        _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(_shelterChargePoint.transform.position);
         float distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
         while (distance > _navMeshAgent.stoppingDistance)

@@ -29,11 +29,11 @@ public class BossStunBar : MonoBehaviour
         _stunDuration = Mathf.Clamp(_stunDuration, _minStunDuration, _maxStunDuration);
         _percentage = _stunDuration/ _maxStunDuration;
         _fillBar.fillAmount = _percentage;
-        if(_stunDuration > 0 )
+        if(_stunDuration > 0 && _agent.enabled )
         {
             _agent.isStopped = true;
         }
-        else
+        else if(_agent.enabled)
         {
             _agent.isStopped = false;
         }
