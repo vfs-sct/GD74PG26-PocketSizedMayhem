@@ -17,10 +17,11 @@ public class Claw : Weapon
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit hit;
-
+    private LayerMask _layerMask;
     public override void Fire()
     {
         _fired = true;
+        _layerMask = LayerMask.GetMask("Floor");
     }
     private void Update()
     {
@@ -58,7 +59,7 @@ public class Claw : Weapon
         else
         {
             _mousePos = Input.mousePosition;
-            if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit))
+            if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit, Mathf.Infinity, _layerMask))
             {
                 return;
             }

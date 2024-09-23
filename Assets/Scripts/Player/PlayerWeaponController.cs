@@ -18,18 +18,20 @@ public class PlayerWeaponController : MonoBehaviour
 
     private Vector3 _mousePos;
     private RaycastHit hit;
+    private LayerMask _layerMask;
 
     void Start()
     {
         _mainCamera = Camera.main;
         _activeWeapon = _mallet;
+        _layerMask = LayerMask.GetMask("Floor");
     }
 
     private void Update()
     {
         _mousePos = Input.mousePosition;
 
-        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit))
+        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit, Mathf.Infinity, _layerMask))
         {
             return;
         }

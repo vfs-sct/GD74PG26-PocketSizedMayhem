@@ -45,6 +45,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.6971
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.6971
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.6971
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.5
       objectReference: {fileID: 0}
@@ -98,10 +113,25 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 6987650996909980059, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 7029453025644399412, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
       propertyPath: m_StoppingDistance
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533001667334445475, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 686980660472343179}
+    - target: {fileID: 7533001667334445475, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: _stunIncrease
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8173946750698557936, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
@@ -118,10 +148,19 @@ PrefabInstance:
       propertyPath: _navMeshAgent
       value: 
       objectReference: {fileID: 5625112780721705535}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3019642398780967483, guid: f8e87fa924d97e74b88bce3f156c16c0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6032454100473825608, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4810343161165483151}
+    - targetCorrespondingSourceObject: {fileID: 6032454100473825608, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4182139234887106515}
   m_SourcePrefab: {fileID: 100100000, guid: f8e87fa924d97e74b88bce3f156c16c0, type: 3}
 --- !u!95 &686980660472343179 stripped
 Animator:
@@ -135,3 +174,53 @@ NavMeshAgent:
     type: 3}
   m_PrefabInstance: {fileID: 3431118449868871947}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8947065890683113539 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6032454100473825608, guid: f8e87fa924d97e74b88bce3f156c16c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3431118449868871947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &4810343161165483151
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947065890683113539}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Height: 1.22
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!65 &4182139234887106515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947065890683113539}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7, y: 0.44, z: 0.7}
+  m_Center: {x: 0, y: 0.78, z: 0}
