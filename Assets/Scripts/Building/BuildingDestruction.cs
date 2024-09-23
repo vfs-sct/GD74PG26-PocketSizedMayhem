@@ -19,10 +19,6 @@ public class BuildingDestruction : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)

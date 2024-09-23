@@ -1118,7 +1118,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1895205762331987421
 CapsuleCollider:
@@ -1226,6 +1226,10 @@ MonoBehaviour:
   _bounceForce: 20
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
+  _npcAnimator: {fileID: 4437925280285957722}
+  _ragdollColliders: []
+  _ragdollRigidbodies: []
+  _boxCollider: {fileID: 0}
 --- !u!114 &4221005304262489085
 MonoBehaviour:
   m_ObjectHideFlags: 0
