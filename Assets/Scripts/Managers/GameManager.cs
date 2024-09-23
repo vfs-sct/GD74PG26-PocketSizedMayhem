@@ -36,20 +36,20 @@ public class GameManager : MonoBehaviour
 
     private float _startTime;
     private float _elapsedTime;
-    public static float _point;
+    [SerializeField]public  float _point;
     public GameObject shelter;
 
     void Start()
     {
         _startTime = Time.time;
-        _point = 100;
+        //_point = 100;
         _pointText.text = "Point:" + _point;
 
         PlayerStats.CivilianSaved = 0;
         PlayerStats.CriminalKilled = 0;
         PlayerStats.CriminalCaptured = 0;
         PlayerStats.CriminalCaptured = 0;
-        PlayerStats.Points = 100;
+        PlayerStats.Points = _point;
     }
 
     void Update()
