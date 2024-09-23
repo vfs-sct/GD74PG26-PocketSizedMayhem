@@ -6,15 +6,16 @@ using UnityEngine.AI;
 
 public class CivilianBehaviour : MonoBehaviour
 {
-    [SerializeField] private GameObject _destination;
-
-    private NavMeshAgent _navMeshAgent;
-    private bool _inShelter;
     [field: SerializeField] public EventReference SpawnSFX { get; set; }
+    
+    [SerializeField] private GameObject _destination;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    
+    private bool _inShelter;
+    
     private void Start()
     {
         _inShelter = false;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
         if (!SpawnSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(SpawnSFX, this.gameObject.transform.position);

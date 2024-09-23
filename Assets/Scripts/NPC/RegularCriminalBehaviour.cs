@@ -7,22 +7,22 @@ using UnityEngine.AI;
 
 public class RegularCriminalBehaviour : MonoBehaviour
 {
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    
     [SerializeField] protected GameObject _shelter;
     [SerializeField] protected GameObject _targetCivilian;
     [SerializeField] protected GameObject _primaryTarget;
 
     [SerializeField] protected float _detectionRadius;
    
-    protected NavMeshAgent _navMeshAgent;
-    protected Animator _enemyAnimator;
+    [SerializeField] protected NavMeshAgent _navMeshAgent;
+    [SerializeField] protected Animator _enemyAnimator;
 
     private bool _inPrison;
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    
     private void Start()
     {
         _inPrison = false;
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _enemyAnimator = GetComponent<Animator>();
         _shelter = _primaryTarget;
         if (!AttackSFX.IsNull)
         {

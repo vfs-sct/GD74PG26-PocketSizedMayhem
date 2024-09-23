@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.VFX;
-
 public class RagdollOnOffController : MonoBehaviour
 { 
     [SerializeField] private GameObject _bloodEffect;
@@ -27,7 +25,6 @@ public class RagdollOnOffController : MonoBehaviour
         {
             rigid.isKinematic = false;
         }
-
         GetComponent<Rigidbody>().isKinematic = true;
     }
 

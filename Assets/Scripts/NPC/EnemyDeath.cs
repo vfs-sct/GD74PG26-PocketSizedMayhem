@@ -10,10 +10,11 @@ public class EnemyDeath : MonoBehaviour
     [SerializeField] private GameObject _bloodEffect;
     [SerializeField] private CapsuleCollider _capsuleCollider;
 
-    private RagdollOnOffController _ragdollController;
-    private Animator _animator;
-    private Rigidbody _rb;
-    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private RagdollOnOffController _ragdollController;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private RegularCriminalBehaviour _regularCriminalBehaviour;
 
     public event EventHandler<GameObject> OnKilled;
 
@@ -21,11 +22,6 @@ public class EnemyDeath : MonoBehaviour
 
     private void Start()
     {
-        _ragdollController = GetComponent<RagdollOnOffController>();
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
         _pointGiven = false;
     }
 
@@ -33,19 +29,15 @@ public class EnemyDeath : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet" || other.gameObject.layer.Equals(17))
         {
-            
+            _capsuleCollider.enabled = false;
+            _navMeshAgent.enabled = false;
             _ragdollController.RagdollModeOn();
             
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
 
             OnKilled?.Invoke(this, this.gameObject);
-
-            Destroy(_rb);
-
-            _capsuleCollider.enabled = false;
-            _navMeshAgent.enabled = false;
-
+            
             _ragdollController.DeathBounce();
 
             if (!_pointGiven)
@@ -60,6 +52,7 @@ public class EnemyDeath : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
+            _regularCriminalBehaviour.enabled = false;
         }
     }
 }

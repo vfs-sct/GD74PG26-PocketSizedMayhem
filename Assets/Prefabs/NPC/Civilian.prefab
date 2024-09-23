@@ -165,7 +165,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       propertyPath: m_Name
-      value: New Civilian
+      value: Civilian
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
@@ -400,7 +400,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.052443553
   m_Height: 0.17481184
@@ -429,7 +429,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -502,7 +502,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.041175723
   m_Height: 0.16470289
@@ -531,7 +531,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -604,7 +604,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.04
   m_Height: 0.2
@@ -633,7 +633,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -706,7 +706,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Height: 0.27
@@ -735,7 +735,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -808,7 +808,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.39
   m_Center: {x: 0, y: 0.25, z: 0}
@@ -835,7 +835,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -908,7 +908,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.28725052, y: 0.2923378, z: 0.21096745}
   m_Center: {x: 0.00000025331974, y: 0.14616889, z: -0.0065926537}
@@ -935,7 +935,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1008,7 +1008,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.04
   m_Height: 0.2
@@ -1037,7 +1037,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1222,14 +1222,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f48f8379e1a4b44bc6a0f1ea4ba6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hips: {fileID: 6893525141375332539}
-  _bounceForce: 20
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
   _npcAnimator: {fileID: 4437925280285957722}
-  _ragdollColliders: []
-  _ragdollRigidbodies: []
-  _boxCollider: {fileID: 0}
+  _ragdollColliders:
+  - {fileID: 8284393336059718479}
+  - {fileID: 2971932033468539470}
+  - {fileID: 2381888751275971254}
+  - {fileID: 2751169372908759401}
+  - {fileID: 7249835617071292669}
+  - {fileID: 7729208764953827359}
+  - {fileID: 970578807553424982}
+  - {fileID: 4795026804430053028}
+  - {fileID: 863347890378751006}
+  - {fileID: 8216649563179384338}
+  - {fileID: 1921591497047246222}
+  _ragdollRigidbodies:
+  - {fileID: 2237299194148914767}
+  - {fileID: 675489064610434511}
+  - {fileID: 822346860388781231}
+  - {fileID: 5309098266771404912}
+  - {fileID: 2694527872812347355}
+  - {fileID: 6542962811465011937}
+  - {fileID: 1907355442583268777}
+  - {fileID: 9163764178762156568}
+  - {fileID: 4236669967902194993}
+  - {fileID: 5918556150836635467}
+  - {fileID: 1551616270373979497}
+  _bounceForce: 20
 --- !u!114 &4221005304262489085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1242,7 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e35573cb73a584da69b2ce6bf47104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destination: {fileID: 0}
   <SpawnSFX>k__BackingField:
     Guid:
       Data1: 2010292044
@@ -1250,6 +1269,8 @@ MonoBehaviour:
       Data3: 972436876
       Data4: -65873779
     Path: event:/SFX/SFX_Scared03
+  _destination: {fileID: 0}
+  _navMeshAgent: {fileID: 8283020866021530235}
 --- !u!114 &8319580715372640906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,6 +1294,10 @@ MonoBehaviour:
     type: 3}
   _capsuleCollider: {fileID: 9164219645081072116}
   _animNo: 4
+  _ragdollController: {fileID: 2468693262878311834}
+  _animator: {fileID: 4437925280285957722}
+  _rb: {fileID: 7146613815474092364}
+  _navMeshAgent: {fileID: 0}
 --- !u!1 &6893525141375332539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
@@ -1296,7 +1321,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.28725052, y: 0.12946557, z: 0.20973402}
   m_Center: {x: -0.000004798174, y: 0.018336065, z: -0.023307145}
@@ -1323,7 +1348,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1350,7 +1375,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Height: 0.27
@@ -1379,7 +1404,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1452,7 +1477,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.041125722
   m_Height: 0.16450289
@@ -1481,7 +1506,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1554,7 +1579,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05244298
   m_Height: 0.17480992
@@ -1583,7 +1608,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

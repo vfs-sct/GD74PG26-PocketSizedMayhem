@@ -363,7 +363,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       propertyPath: m_Name
-      value: New Regular Criminal
+      value: Regular Criminal
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
@@ -429,19 +429,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4437925280285957722}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8283020866021530235}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8528971956622343541}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 231050005498264642}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4437925280285957722}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8283020866021530235}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
         type: 3}
       insertIndex: -1
@@ -610,7 +610,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.052443553
   m_Height: 0.17481184
@@ -639,7 +639,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -712,7 +712,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.041175723
   m_Height: 0.16470289
@@ -741,7 +741,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -814,7 +814,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.04
   m_Height: 0.2
@@ -843,7 +843,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -916,7 +916,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Height: 0.27
@@ -945,7 +945,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1018,7 +1018,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.39
   m_Center: {x: 0, y: 0.25, z: 0}
@@ -1045,7 +1045,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1118,7 +1118,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.28725052, y: 0.2923378, z: 0.21096745}
   m_Center: {x: 0.00000025331974, y: 0.14616889, z: -0.0065926537}
@@ -1145,7 +1145,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1224,7 +1224,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.04
   m_Height: 0.2
@@ -1253,7 +1253,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1342,50 +1342,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!95 &4437925280285957722
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6660491637078578144}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e1f0c2e7f33e4d74fa9fffebcc44214f, type: 3}
-  m_Controller: {fileID: 9100000, guid: d4f80ed7145141a4aaf67d28da1259f4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!195 &8283020866021530235
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6660491637078578144}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 5
-  m_Acceleration: 12
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!136 &8528971956622343541
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1432,6 +1388,50 @@ CapsuleCollider:
   m_Height: 1.7848939
   m_Direction: 1
   m_Center: {x: 0, y: 0.99687916, z: 0}
+--- !u!95 &4437925280285957722
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6660491637078578144}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e1f0c2e7f33e4d74fa9fffebcc44214f, type: 3}
+  m_Controller: {fileID: 9100000, guid: d4f80ed7145141a4aaf67d28da1259f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &8283020866021530235
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6660491637078578144}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 5
+  m_Acceleration: 12
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &2468693262878311834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,10 +1444,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f48f8379e1a4b44bc6a0f1ea4ba6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hips: {fileID: 6893525141375332539}
-  _bounceForce: 20
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
+  _npcAnimator: {fileID: 4437925280285957722}
+  _ragdollColliders:
+  - {fileID: 2971932033468539470}
+  - {fileID: 7729208764953827359}
+  - {fileID: 7249835617071292669}
+  - {fileID: 8216649563179384338}
+  - {fileID: 863347890378751006}
+  - {fileID: 1921591497047246222}
+  - {fileID: 2381888751275971254}
+  - {fileID: 2751169372908759401}
+  - {fileID: 8284393336059718479}
+  - {fileID: 970578807553424982}
+  - {fileID: 4795026804430053028}
+  _ragdollRigidbodies:
+  - {fileID: 675489064610434511}
+  - {fileID: 6542962811465011937}
+  - {fileID: 2694527872812347355}
+  - {fileID: 5918556150836635467}
+  - {fileID: 9163764178762156568}
+  - {fileID: 1551616270373979497}
+  - {fileID: 822346860388781231}
+  - {fileID: 5309098266771404912}
+  - {fileID: 2237299194148914767}
+  - {fileID: 1907355442583268777}
+  - {fileID: 4236669967902194993}
+  _bounceForce: 20
 --- !u!114 &6438583032862339377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,10 +1484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035b8839570f14cb616b9696924997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shelter: {fileID: 0}
-  _targetCivilian: {fileID: 0}
-  _primaryTarget: {fileID: 0}
-  _detectionRadius: 15
   <AttackSFX>k__BackingField:
     Guid:
       Data1: -325181669
@@ -1471,6 +1491,12 @@ MonoBehaviour:
       Data3: 675133061
       Data4: 290209434
     Path: event:/SFX/SFX_Laugh
+  _shelter: {fileID: 0}
+  _targetCivilian: {fileID: 0}
+  _primaryTarget: {fileID: 0}
+  _detectionRadius: 15
+  _navMeshAgent: {fileID: 8283020866021530235}
+  _enemyAnimator: {fileID: 4437925280285957722}
 --- !u!114 &7594592143292885018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,6 +1533,11 @@ MonoBehaviour:
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
   _capsuleCollider: {fileID: 8528971956622343541}
+  _ragdollController: {fileID: 2468693262878311834}
+  _animator: {fileID: 4437925280285957722}
+  _rb: {fileID: 7146613815474092364}
+  _navMeshAgent: {fileID: 8283020866021530235}
+  _regularCriminalBehaviour: {fileID: 6438583032862339377}
 --- !u!1 &6893525141375332539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,
@@ -1530,7 +1561,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.28725052, y: 0.12946557, z: 0.20973402}
   m_Center: {x: -0.000004798174, y: 0.018336065, z: -0.023307145}
@@ -1557,7 +1588,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1584,7 +1615,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Height: 0.27
@@ -1613,7 +1644,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1686,7 +1717,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.041125722
   m_Height: 0.16450289
@@ -1715,7 +1746,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1788,7 +1819,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05244298
   m_Height: 0.17480992
@@ -1817,7 +1848,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

@@ -11,21 +11,16 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private CapsuleCollider _capsuleCollider;
     [SerializeField] private int _animNo;
 
-    private RagdollOnOffController _ragdollController;
-    private Animator _animator;
-    private Rigidbody _rb;
-    private NavMeshAgent _navMeshAgent;
+    [SerializeField] private RagdollOnOffController _ragdollController;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
 
     public event EventHandler<GameObject> OnKilled;
 
     private bool _pointGiven;
     private void Start()
     {
-        _ragdollController = GetComponent<RagdollOnOffController>();
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
         _pointGiven = false;
     }
 
