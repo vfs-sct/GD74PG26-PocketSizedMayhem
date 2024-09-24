@@ -111,14 +111,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959247359681999196}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.112760246, y: 5.438, z: -0.982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6808802380732998177}
   m_Father: {fileID: 1389607480175707572}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2513272891782048816
 Animator:
   serializedVersion: 7
@@ -153,9 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a080601fcd59cf43a3da62b4f01fcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impact: {fileID: 5429978078907932267, guid: 1cfb6f7351730f345bff7599789aa656, type: 3}
-  _target: {fileID: 5008042043829999468}
-  _originalStartY: 3
   <AttackSFX>k__BackingField:
     Guid:
       Data1: -525624831
@@ -163,6 +160,12 @@ MonoBehaviour:
       Data3: 664307378
       Data4: -1001833019
     Path: event:/SFX/SFX_Smashed
+  _impact: {fileID: 5429978078907932267, guid: 1cfb6f7351730f345bff7599789aa656, type: 3}
+  _target: {fileID: 5008042043829999468}
+  _originalStartY: 3
+  _targetOffset: 0
+  _malletAnimator: {fileID: 0}
+  _impactPos: {fileID: 0}
 --- !u!1 &5008042043829999468
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,32 +383,32 @@ PrefabInstance:
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91695356
+      value: -0.052781105
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.9915973
+      value: 1.3495493
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2185823508125176935, guid: 55d9f7507cde7c94e98495f63b7a5df9,
         type: 3}

@@ -17,18 +17,14 @@ public class Mallet : Weapon
     [SerializeField] private float _originalStartY;
     [SerializeField] private float _targetOffset;
 
-    private Animator _malletAnimator;
+    [SerializeField] private Animator _malletAnimator;
     [SerializeField] private GameObject _impactPos;
+    [SerializeField] private GameObject _malletHandle;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
     private LayerMask _layerMask;
     private Vector3 _hitTargetpos;
-    private void Start()
-    {
-        _malletAnimator = GetComponent<Animator>();
-    }
-
     public override void Fire()
     {
         if(!AttackSFX.IsNull)
@@ -48,21 +44,21 @@ public class Mallet : Weapon
             return;
         }
         _hitTargetpos = _hit.point;
-        _hitTargetpos.z += _targetOffset;
         _target.transform.position = _hitTargetpos;
 
-        this.transform.position = _hit.point;
+        this.gameObject.transform.position = _hit.point;
         hitpoint = _hit.point;
+        hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        transform.position = hitpoint;
+        _malletHandle.gameObject.transform.position = hitpoint;
     }
 
-    private void DisableColliders()
+    public void DisableColliders()
     {
         GetComponentInChildren<Collider>().enabled = false;
     }
 
-    private void EnableColldiers()
+    public void EnableColldiers()
     {
         GetComponentInChildren<Collider>().enabled = true;
     }
