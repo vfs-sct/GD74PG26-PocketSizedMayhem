@@ -1262,8 +1262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e35573cb73a584da69b2ce6bf47104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 10
-  <Acceleration>k__BackingField: 10
+  <Speed>k__BackingField: 15
+  <Acceleration>k__BackingField: 100
   <TurnSpeed>k__BackingField: 15
   <StoppingDistance>k__BackingField: 0.25
   <LookInMoveDirection>k__BackingField: 1
