@@ -1337,9 +1337,9 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &8528971956622343541
@@ -1361,10 +1361,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.44
-  m_Height: 1.96
+  m_Radius: 0.48
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1.03, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!136 &231050005498264642
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1419,16 +1419,16 @@ NavMeshAgent:
   m_GameObject: {fileID: 6660491637078578144}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 5
-  m_Acceleration: 12
+  m_Radius: 0.48
+  m_Speed: 1
+  m_Acceleration: 1
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 1
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.8
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1471,7 +1471,7 @@ MonoBehaviour:
   - {fileID: 2237299194148914767}
   - {fileID: 1907355442583268777}
   - {fileID: 4236669967902194993}
-  _bounceForce: 20
+  _bounceForce: 50
 --- !u!114 &6438583032862339377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1484,6 +1484,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff035b8839570f14cb616b9696924997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 3
+  <Acceleration>k__BackingField: 50
+  <TurnSpeed>k__BackingField: 50
+  <StoppingDistance>k__BackingField: 2
+  <LookInMoveDirection>k__BackingField: 1
+  <ControlRotation>k__BackingField: 1
+  <Fix3DSpriteRotation>k__BackingField: 0
+  <ParentToSurface>k__BackingField: 0
+  <Gravity>k__BackingField: -20
+  <JumpHeight>k__BackingField: 2.25
+  <AirControl>k__BackingField: 0.1
+  <AirTurning>k__BackingField: 1
+  <Height>k__BackingField: 1.8
+  <Radius>k__BackingField: 0.48
+  <GroundCheckOffset>k__BackingField: 0.1
+  <GroundCheckDistance>k__BackingField: 0.4
+  <MaxSlopeAngle>k__BackingField: 40
+  <CoyoteMaxJumpDistance>k__BackingField: 0.5
+  <GroundMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1
+  <MinGroundedVelocity>k__BackingField: 5
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFootstep:
+    m_PersistentCalls:
+      m_Calls: []
+  <StepHeight>k__BackingField: 0.3
+  <StepHeightAllowance>k__BackingField: 0.1
+  <StepHeightForwardOffset>k__BackingField: 0.05
+  <EnableAvoidance>k__BackingField: 0
+  <SpeedVariation>k__BackingField: 0.5
+  <NeighborDistance>k__BackingField: 3
+  <CornerNeighborDistance>k__BackingField: 1
+  <NeighborMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
+  <MaxNeighbors>k__BackingField: 8
+  <IsClampedToNavMesh>k__BackingField: 1
+  <ClampLookAheadTime>k__BackingField: 0.25
+  <ClampSearchRadius>k__BackingField: 1
+  <Rigidbody>k__BackingField: {fileID: 7146613815474092364}
+  <NavMeshAgent>k__BackingField: {fileID: 8283020866021530235}
+  <CapsuleCollider>k__BackingField: {fileID: 8528971956622343541}
   <AttackSFX>k__BackingField:
     Guid:
       Data1: -325181669
@@ -1510,7 +1555,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _knifeCollider: {fileID: 3899795706469610416}
-  _navmeshAgent: {fileID: 8283020866021530235}
 --- !u!114 &8771779228316472177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,6 +1577,7 @@ MonoBehaviour:
   _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
     type: 3}
   _capsuleCollider: {fileID: 8528971956622343541}
+  _triggerCollider: {fileID: 231050005498264642}
   _ragdollController: {fileID: 2468693262878311834}
   _animator: {fileID: 4437925280285957722}
   _rb: {fileID: 7146613815474092364}

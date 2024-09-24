@@ -9,7 +9,7 @@ public class EnemyDeath : MonoBehaviour
 
     [SerializeField] private GameObject _bloodEffect;
     [SerializeField] private CapsuleCollider _capsuleCollider;
-
+    [SerializeField] private CapsuleCollider _triggerCollider;
     [SerializeField] private RagdollOnOffController _ragdollController;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
@@ -30,16 +30,16 @@ public class EnemyDeath : MonoBehaviour
         if (other.gameObject.tag == "Mallet" || other.gameObject.layer.Equals(17))
         {
             _capsuleCollider.enabled = false;
-            _navMeshAgent.enabled = false;
+            _regularCriminalBehaviour.Stop();
+            
             _ragdollController.RagdollModeOn();
+            _ragdollController.DeathBounce();
             
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
 
             OnKilled?.Invoke(this, this.gameObject);
             
-            _ragdollController.DeathBounce();
-
             if (!_pointGiven)
             {
                 GameManager.AddPoint();
@@ -52,7 +52,7 @@ public class EnemyDeath : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
-            _regularCriminalBehaviour.enabled = false;
+            _triggerCollider.enabled = false;
         }
     }
 }

@@ -9,16 +9,18 @@ public class CivilianDeath : MonoBehaviour
 
     [SerializeField] private GameObject _bloodEffect;
     [SerializeField] private CapsuleCollider _capsuleCollider;
-    [SerializeField] private int _animNo;
-
+    [SerializeField] private CapsuleCollider _triggerCollider;
     [SerializeField] private RagdollOnOffController _ragdollController;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
-
+    [SerializeField] private CivilianBehaviour _civilianBehaviour;
+    [SerializeField] private int _animNo;
+    
     public event EventHandler<GameObject> OnKilled;
 
     private bool _pointGiven;
+    
     private void Start()
     {
         _pointGiven = false;
@@ -28,18 +30,16 @@ public class CivilianDeath : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet")
         {
-            _ragdollController.RagdollModeOn();
-
             _capsuleCollider.enabled = false;
-            _navMeshAgent.enabled = false;
-
+            _civilianBehaviour.Stop();
+            
+            _ragdollController.RagdollModeOn();
+            _ragdollController.DeathBounce();
+            
             GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
             blood.GetComponent<VisualEffect>().Play();
-
             OnKilled?.Invoke(this, this.gameObject);
-
-            _ragdollController.DeathBounce();
-
+            
             if (!_pointGiven)
             {
                 GameManager.LosePoint();
@@ -49,6 +49,8 @@ public class CivilianDeath : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
+            this.enabled = false;
+            _triggerCollider.enabled = false;
         }
         else if (other.gameObject.layer.Equals(14))
         {
@@ -68,11 +70,9 @@ public class CivilianDeath : MonoBehaviour
 
         _animator.SetFloat("DeathNo",(float) animNo);
         _animator.SetTrigger("Death");
-
-        Destroy(_rb);
-
+        _rb.isKinematic = true;
         _capsuleCollider.enabled = false;
-        _navMeshAgent.enabled = false;
+        _civilianBehaviour.Stop();
 
         OnKilled?.Invoke(this, this.gameObject);
 

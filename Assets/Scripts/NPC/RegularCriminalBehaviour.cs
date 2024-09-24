@@ -2,10 +2,11 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
+using CharacterMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RegularCriminalBehaviour : MonoBehaviour
+public class RegularCriminalBehaviour : CharacterMovement3D
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
     
@@ -17,12 +18,9 @@ public class RegularCriminalBehaviour : MonoBehaviour
    
     [SerializeField] protected NavMeshAgent _navMeshAgent;
     [SerializeField] protected Animator _enemyAnimator;
-
-    private bool _inPrison;
     
     private void Start()
     {
-        _inPrison = false;
         _shelter = _primaryTarget;
         if (!AttackSFX.IsNull)
         {
@@ -30,19 +28,18 @@ public class RegularCriminalBehaviour : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (_primaryTarget != null && _navMeshAgent != null &&  _navMeshAgent.isOnNavMesh )
+        base.Update();
+        if (Vector3.Distance(transform.position, _primaryTarget.transform.position) < 2f)
         {
-            _navMeshAgent.destination = _primaryTarget.transform.position;
+            _enemyAnimator.SetTrigger("Attack");
+            Stop();
+            SetLookPosition(_primaryTarget.transform.position);
         }
-        if(_inPrison && _navMeshAgent.isOnNavMesh)
+        else
         {
-            _navMeshAgent.isStopped = true;
-        }
-        else if(_navMeshAgent.isOnNavMesh)
-        {
-            _navMeshAgent.isStopped = false;
+            MoveTo(_primaryTarget.transform.position); 
         }
     }
 
@@ -70,23 +67,10 @@ public class RegularCriminalBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer.Equals(6))
-        {
-            _enemyAnimator.SetTrigger("Attack");
-        }
-        else if(other.gameObject.layer.Equals(15))
+        if(other.gameObject.layer.Equals(15))
         {
             GameManager.AddPoint();
-            _inPrison = true;
             PlayerStats.CriminalCaptured++;
-        }
-        else if (other.gameObject.layer.Equals(11))
-        {
-            _navMeshAgent.enabled = true;
-        }
-        if (other.gameObject == _primaryTarget)
-        {
-            _primaryTarget = _shelter;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -97,8 +81,9 @@ public class RegularCriminalBehaviour : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         if (collision.gameObject.layer.Equals(16))
         {
             _enemyAnimator.SetTrigger("Attack");

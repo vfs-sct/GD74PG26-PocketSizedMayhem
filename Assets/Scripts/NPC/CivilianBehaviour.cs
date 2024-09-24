@@ -1,53 +1,42 @@
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using CharacterMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CivilianBehaviour : MonoBehaviour
+public class CivilianBehaviour : CharacterMovement3D
 {
     [field: SerializeField] public EventReference SpawnSFX { get; set; }
     
     [SerializeField] private GameObject _destination;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
-    
-    private bool _inShelter;
+    [SerializeField] private Animator _animator;
     
     private void Start()
     {
-        _inShelter = false;
         if (!SpawnSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(SpawnSFX, this.gameObject.transform.position);
         }
     }
 
-    private void Update()
+    protected override void  Update()
     {
-        if (_navMeshAgent != null && _destination != null && _navMeshAgent.isOnNavMesh)
-        {
-            _navMeshAgent.destination = _destination.transform.position;
-        }
-        if (_inShelter && _navMeshAgent.isOnNavMesh)
-        {
-            _navMeshAgent.isStopped = true;
-        }
-        else if (_navMeshAgent.isOnNavMesh)
-        {
-            _navMeshAgent.isStopped = false;
-        }
+        base.Update();
+        MoveTo(_destination.transform.position);    
     }
-
+    
     public void SetDestionation(GameObject newDestination)
     {
         _destination = newDestination;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.layer.Equals(11))
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
         {
-            _navMeshAgent.enabled = true;
+            _animator.SetTrigger("DestinationReached");
         }
     }
 }
