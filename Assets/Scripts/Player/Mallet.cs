@@ -1,9 +1,12 @@
+using System;
 using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.VFX;
+using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : Weapon
 {
@@ -15,7 +18,7 @@ public class Mallet : Weapon
     [SerializeField] private float _targetOffset;
 
     private Animator _malletAnimator;
-
+    [SerializeField] private GameObject _impactPos;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
@@ -66,7 +69,7 @@ public class Mallet : Weapon
     public void ImpactEffects()
     {
         {
-            GameObject impact = Instantiate(_impact, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
             impact.GetComponent<VisualEffect>().Play();
         }
     }
