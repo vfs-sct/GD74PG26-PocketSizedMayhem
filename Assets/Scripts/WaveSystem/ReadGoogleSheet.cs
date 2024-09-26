@@ -46,8 +46,6 @@ public class ReadGoogleSheet : MonoBehaviour
                     spawnPoints[i-1].times = timeline;
                 }
             }
-            
-
         }
     }
 }

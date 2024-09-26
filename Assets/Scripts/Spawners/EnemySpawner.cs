@@ -28,20 +28,25 @@ public class EnemySpawner : Spawner
         {
             if((int)timer == times[iteration])
             {
-                for (int i = 0; i < spawncount[iteration]; i++)
-                {
-                    SpawnObject();
-                }
+                StartCoroutine(SpawnWave());
                 iteration++;
             }
         }
         timer += Time.deltaTime;
-        
     }
     public override void SpawnObject()
     {
-        base.SpawnObject();
-        _spawnedObject.GetComponent<RegularCriminalBehaviour>().SetTarget(_shelter);
-        _enemyManager.AddToEnemyList(_spawnedObject);
+        
+            base.SpawnObject();
+            _spawnedObject.GetComponent<RegularCriminalBehaviour>().SetTarget(_shelter);
+            _enemyManager.AddToEnemyList(_spawnedObject);   
+    }
+    IEnumerator SpawnWave()
+    {
+        for (int i = 0; i < spawncount[iteration]; i++)
+        {
+            SpawnObject();
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

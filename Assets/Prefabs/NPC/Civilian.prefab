@@ -1262,7 +1262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e35573cb73a584da69b2ce6bf47104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 15
+  <Speed>k__BackingField: 2
   <Acceleration>k__BackingField: 100
   <TurnSpeed>k__BackingField: 15
   <StoppingDistance>k__BackingField: 0.25
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   <CoyoteMaxJumpDistance>k__BackingField: 0.5
   <GroundMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   <MinGroundedVelocity>k__BackingField: 5
   OnGrounded:
     m_PersistentCalls:
