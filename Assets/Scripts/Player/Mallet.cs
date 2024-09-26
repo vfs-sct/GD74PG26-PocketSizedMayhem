@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.VFX;
+using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : Weapon
@@ -20,11 +22,13 @@ public class Mallet : Weapon
     [SerializeField] private Animator _malletAnimator;
     [SerializeField] private GameObject _impactPos;
     [SerializeField] private GameObject _malletHandle;
+    [SerializeField] private GameObject _floor;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
     private LayerMask _layerMask;
     private Vector3 _hitTargetpos;
+    [SerializeField] private float _impactRadius;
     public override void Fire()
     {
         if(!AttackSFX.IsNull)
@@ -64,10 +68,8 @@ public class Mallet : Weapon
     }
     public void ImpactEffects()
     {
-        {
-            GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
-            impact.GetComponent<VisualEffect>().Play();
-        }
+        GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
+        impact.GetComponent<VisualEffect>().Play();
     }
 }
 
