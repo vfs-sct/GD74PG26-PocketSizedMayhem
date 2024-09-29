@@ -27,7 +27,7 @@ public class RegularCriminalBehaviour : CharacterMovement3D
             RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
         }
 
-        GetComponent<NavMeshAgent>().agentTypeID = Random.Range(0, 2);
+       // GetComponent<NavMeshAgent>().agentTypeID = Random.Range(0, 2);
     }
 
     protected override void Update()
