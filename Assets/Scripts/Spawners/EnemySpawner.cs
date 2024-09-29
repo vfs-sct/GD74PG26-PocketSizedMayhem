@@ -13,7 +13,7 @@ public class EnemySpawner : Spawner
     public List<float> spawncount;
     public List<float> times;
     private float timer = 0;
-    int iteration = 0;
+    public int iteration = 0;
     private void Awake()
     {
         times = new List<float>();
@@ -26,10 +26,9 @@ public class EnemySpawner : Spawner
     {
         if (iteration<times.Count)
         {
-            if((int)timer == times[iteration])
+            if ((int)timer == times[iteration])
             {
                 StartCoroutine(SpawnWave());
-                iteration++;
             }
         }
         timer += Time.deltaTime;
@@ -43,10 +42,12 @@ public class EnemySpawner : Spawner
     }
     IEnumerator SpawnWave()
     {
+
         for (int i = 0; i < spawncount[iteration]; i++)
         {
             SpawnObject();
-            yield return new WaitForSeconds(0.1f);
         }
+        iteration++;
+        yield return null;
     }
 }
