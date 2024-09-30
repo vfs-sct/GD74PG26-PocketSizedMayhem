@@ -23,6 +23,7 @@ public class BuildingDestruction : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
+            this.GetComponent<Rigidbody>().isKinematic = false;
             foreach (GameObject piece in _pieces)
             {
                 piece.AddComponent<Rigidbody>();

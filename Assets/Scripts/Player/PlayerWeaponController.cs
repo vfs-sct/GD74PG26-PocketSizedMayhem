@@ -27,16 +27,6 @@ public class PlayerWeaponController : MonoBehaviour
         _layerMask = LayerMask.GetMask("Floor");
     }
 
-    private void Update()
-    {
-        _mousePos = Input.mousePosition;
-
-        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit, Mathf.Infinity, _layerMask))
-        {
-            return;
-        }
-    }
-
     public void OnFire()
     {
         _activeWeapon.Fire();

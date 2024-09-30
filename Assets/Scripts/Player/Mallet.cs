@@ -29,14 +29,19 @@ public class Mallet : Weapon
     private LayerMask _layerMask;
     private Vector3 _hitTargetpos;
     [SerializeField] private float _impactRadius;
+    [SerializeField] private float _malletMovementSpeed ;
+    private bool _isAttacking = false;
     public override void Fire()
     {
-        if(!AttackSFX.IsNull)
+        if(!_isAttacking)
         {
-            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            if (!AttackSFX.IsNull)
+            {
+                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            }
+            _malletAnimator.SetTrigger("Swing");
+            _layerMask = LayerMask.GetMask("Floor");
         }
-        _malletAnimator.SetTrigger("Swing");
-        _layerMask = LayerMask.GetMask("Floor");
     }
 
     private void Update()
@@ -54,17 +59,19 @@ public class Mallet : Weapon
         hitpoint = _hit.point;
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        _malletHandle.gameObject.transform.position = hitpoint;
+        _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
     }
 
     public void DisableColliders()
     {
         GetComponentInChildren<Collider>().enabled = false;
+        _isAttacking = false;
     }
 
     public void EnableColldiers()
     {
         GetComponentInChildren<Collider>().enabled = true;
+        _isAttacking = true;
     }
     public void ImpactEffects()
     {
