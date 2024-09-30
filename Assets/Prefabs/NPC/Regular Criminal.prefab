@@ -1583,6 +1583,8 @@ MonoBehaviour:
   _rb: {fileID: 7146613815474092364}
   _navMeshAgent: {fileID: 8283020866021530235}
   _regularCriminalBehaviour: {fileID: 6438583032862339377}
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
 --- !u!1 &6893525141375332539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: e1f0c2e7f33e4d74fa9fffebcc44214f,

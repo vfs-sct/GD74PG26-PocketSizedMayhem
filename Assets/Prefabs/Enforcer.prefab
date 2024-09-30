@@ -1502,6 +1502,7 @@ MonoBehaviour:
   _rb: {fileID: 0}
   _navMeshAgent: {fileID: 0}
   _regularCriminalBehaviour: {fileID: 0}
+  _pointPopUp: {fileID: 0}
 --- !u!136 &4341838555343413167
 CapsuleCollider:
   m_ObjectHideFlags: 0
