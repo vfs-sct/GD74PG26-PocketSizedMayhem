@@ -59,7 +59,7 @@ public class EnemyManager : MonoBehaviour
         }
         _regularEnemiesList.Remove(enemy.GetComponent<RegularCriminalBehaviour>());
         enemy.GetComponent<EnemyDeath>().OnKilled -= RemoveEnemy;
-        Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-5f, 5f));
+        Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(10f, 15f), UnityEngine.Random.Range(-5f, 5f));
         GameObject point = Instantiate(_pointPopUp, Camera.main.WorldToScreenPoint(enemy.transform.position+ randomVector), _pointPopUp.transform.rotation, canvas.transform);
         Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
         Tween.Position(point.transform, _pointEnd.transform.position ,  duration: 1, ease: Ease.OutSine);
