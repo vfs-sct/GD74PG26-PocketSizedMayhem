@@ -63,7 +63,5 @@ public class EnemyManager : MonoBehaviour
         GameObject point = Instantiate(_pointPopUp, Camera.main.WorldToScreenPoint(enemy.transform.position+ randomVector), _pointPopUp.transform.rotation, canvas.transform);
         Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
         Tween.Position(point.transform, _pointEnd.transform.position ,  duration: 1, ease: Ease.OutSine);
-
- 
     }
 }
