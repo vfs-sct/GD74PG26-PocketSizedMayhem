@@ -5,26 +5,27 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mallet
+  - MainFloor
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PlayerWeapon
   - Water
   - UI
   - Civilian
   - Enemy
   - Character
   - FPSForeground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Minimap
+  - Floor
+  - RedOverlay
+  - GreenOverlay
+  - Weapon
+  - Prison
+  - Shelter
+  - Bomb
+  - Debris
   - 
   - 
   - 

@@ -18,11 +18,13 @@ public class PlayerWeaponController : MonoBehaviour
 
     private Vector3 _mousePos;
     private RaycastHit hit;
+    private LayerMask _layerMask;
 
     void Start()
     {
         _mainCamera = Camera.main;
         _activeWeapon = _mallet;
+        _layerMask = LayerMask.GetMask("Floor");
     }
 
     public void OnFire()
@@ -46,5 +48,21 @@ public class PlayerWeaponController : MonoBehaviour
             _activeWeapon = _mallet;
             _target.GetComponent<MeshRenderer>().material = _malletTargetMaterial;
         }
+    }
+
+    public void OnSelectMallet()
+    {
+        _mallet.gameObject.SetActive(true);
+        _claw.gameObject.SetActive(false);
+        _activeWeapon = _mallet;
+        _target.GetComponent<MeshRenderer>().material = _malletTargetMaterial;
+    }
+
+    public void OnSelectClaw()
+    {
+        _mallet.gameObject.SetActive(false);
+        _claw.gameObject.SetActive(true);
+        _activeWeapon = _claw;
+        _target.GetComponent<MeshRenderer>().material = _clawTargetMaterial;
     }
 }
