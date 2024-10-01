@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetTime = 1;
+        targetTime = Random.Range(_minSpawnInterval, _maxSpawnInterval);
     }
 
     // Update is called once per frame
