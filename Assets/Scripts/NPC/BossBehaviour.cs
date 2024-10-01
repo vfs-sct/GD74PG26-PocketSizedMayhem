@@ -27,7 +27,20 @@ public class BossBehaviour : MonoBehaviour
         _canHit = true;
         ChangeState(GoTowardsShelterState());
     }
-
+    private void Update()
+    {
+        if (_stunBar.GetComponent<BossStunBar>().GetStunDuration() > 0)
+        {
+            {
+                _animator.SetBool("Stun",true);
+            }
+        }
+        else
+        {
+            _animator.SetBool("Stun", false);
+        }
+    }
+    
     private void ChangeState(IEnumerator newState)
     {
         if (_currentState != null) StopCoroutine(_currentState);
@@ -151,6 +164,7 @@ public class BossBehaviour : MonoBehaviour
             if(_canHit)
             {
                 ChangeState(FallFromHitState());
+                other.gameObject.GetComponent<ShelterHealth>().Damage(50);
                 _canHit = false;
             }
         }
