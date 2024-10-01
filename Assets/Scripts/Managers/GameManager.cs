@@ -76,13 +76,20 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("WinScreen");
         }
-
+        if(_elapsedTime==30)
+        {
+            PlayCinematic();
+        }
         // Win condition
         
         _pointText.text = "Point:" + PlayerStats.Points;
         _objectiveText1.text = "Civilians Saved - " + PlayerStats.CivilianSaved + "/" + _civilianToSaved;
         _objectiveText2.text = "Criminals Killed - " + PlayerStats.CriminalKilled + "/" + _criminalsKilled;
         _objectiveText3.text = "Criminals Captured - " + PlayerStats.CriminalCaptured + "/" + _criminalsCaptured;
+    }
+    public void PlayCinematic()
+    {
+
     }
 
     public void OnIncreaseTime()

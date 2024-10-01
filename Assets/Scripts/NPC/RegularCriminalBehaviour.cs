@@ -32,7 +32,7 @@ public class RegularCriminalBehaviour : CharacterMovement3D
     protected override void Update()
     {
         base.Update();
-        if (Vector3.Distance(transform.position, _primaryTarget.transform.position) < 2f)
+        if (Vector3.Distance(transform.position, _primaryTarget.transform.position) < 1f)
         {
             _enemyAnimator.SetTrigger("Attack");
             Stop();
@@ -73,30 +73,16 @@ public class RegularCriminalBehaviour : CharacterMovement3D
             GameManager.AddPoint();
             PlayerStats.CriminalCaptured++;
         }
+        if (other.gameObject == _primaryTarget)
+        {
+            _primaryTarget = _shelter;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.layer.Equals(15))
         {
             GameManager.LosePoint();
-        }
-    }
-
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        if (collision.gameObject.layer.Equals(16))
-        {
-            _enemyAnimator.SetTrigger("Attack");
-            _navMeshAgent.isStopped = true;
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.layer.Equals(16))
-        {
-            _enemyAnimator.SetTrigger("Attack");
-            _navMeshAgent.isStopped = false;
         }
     }
 }

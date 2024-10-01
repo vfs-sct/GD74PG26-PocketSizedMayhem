@@ -1513,7 +1513,7 @@ NavMeshAgent:
   m_Acceleration: 1
   avoidancePriority: 50
   m_AngularSpeed: 1
-  m_StoppingDistance: 1
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Acceleration>k__BackingField: 50
   <TurnSpeed>k__BackingField: 50
-  <StoppingDistance>k__BackingField: 2
+  <StoppingDistance>k__BackingField: 0
   <LookInMoveDirection>k__BackingField: 1
   <ControlRotation>k__BackingField: 1
   <Fix3DSpriteRotation>k__BackingField: 0
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   _shelter: {fileID: 0}
   _targetCivilian: {fileID: 0}
   _primaryTarget: {fileID: 0}
-  _detectionRadius: 15
+  _detectionRadius: 5
   _navMeshAgent: {fileID: 8283020866021530235}
   _enemyAnimator: {fileID: 4437925280285957722}
 --- !u!114 &7594592143292885018
