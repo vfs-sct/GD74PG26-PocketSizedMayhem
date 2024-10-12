@@ -1344,6 +1344,7 @@ MonoBehaviour:
   - {fileID: 4236669967902194993}
   - {fileID: 5918556150836635467}
   - {fileID: 1551616270373979497}
+  _characterMovement: {fileID: 4221005304262489085}
   _bounceForce: 50
 --- !u!114 &4221005304262489085
 MonoBehaviour:

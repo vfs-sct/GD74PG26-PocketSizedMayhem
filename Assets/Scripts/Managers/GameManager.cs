@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnDecreasePoint()
     {
+        Debug.Log("hehe");
         PlayerStats.Points -= _decreaseAmount;
     }
     public void OnLoadWinScreen()
