@@ -64,8 +64,13 @@ public class Mallet : Weapon
     private void OnMouseRelease(InputAction.CallbackContext context)
     {
         _malletAnimator.SetBool("VacuumReleased", true);
-        isVacuuming = false;
+        _vacuum.VacuumOff();
     }
+    public void OnRelease()
+    {
+        _vacuum.ReleaseAll();
+    }
+
     private void OnDisable()
     {
         // Unsubscribe from the events and disable the action
@@ -90,6 +95,7 @@ public class Mallet : Weapon
     {
         if(_attackMode==1)
         {
+            _vacuum.VacuumOn();
             isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
             _malletAnimator.SetBool("VacuumReleased", false);
@@ -112,7 +118,6 @@ public class Mallet : Weapon
         {
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
-            _vacuum.VacuumOn();
         }
     }
     private void OnDrawGizmosSelected()
