@@ -2,6 +2,8 @@
 using CharacterMovement;
 using FMODUnity;
 using PrimeTween;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,6 +26,7 @@ public class Mallet : Weapon
     [SerializeField] private GameObject _malletHandle;
     [SerializeField] private GameObject _floor;
     [SerializeField] InputActionAsset inputActions;
+    [SerializeField] private GameObject _mouth;
     private InputAction vacuumAction;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
@@ -37,6 +40,16 @@ public class Mallet : Weapon
     private int layerAsLayerMask;
     private int _attackMode;
     private bool isVacuuming = false;
+    [SerializeField]private int pullIntensity;
+    List<GameObject> enemies;
+    [SerializeField] private Vacuum _vacuum;
+    private void Start()
+    {
+        _attackMode = 0;
+        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
+        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
+        enemies = new List<GameObject>();
+    }
     private void OnEnable()
     {
         // Get the action map and the specific action for the mouse click
@@ -59,12 +72,7 @@ public class Mallet : Weapon
         vacuumAction.canceled -= OnMouseRelease;
         vacuumAction.Disable();
     }
-    private void Start()
-    {
-        _attackMode = 0;
-        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
-        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
-    }
+    
     public override void Fire()
     {
         if(!_isAttacking && _attackMode == 0)
@@ -94,6 +102,7 @@ public class Mallet : Weapon
         {
             _attackMode = 0;
             _malletAnimator.SetTrigger("SwitchMallet");
+            _vacuum.VacuumOff();
         }
     }
 
@@ -103,9 +112,13 @@ public class Mallet : Weapon
         {
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
+            _vacuum.VacuumOn();
         }
     }
-    
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(_mouth.transform.position, 15);
+    }
     private void Update()
     {
         _mousePos = Input.mousePosition;
@@ -122,19 +135,6 @@ public class Mallet : Weapon
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
         _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
-        if(isVacuuming)
-        {
-            Collider[] hitColliders = Physics.OverlapSphere(this.gameObject.transform.position, 15, _vacuumLayerMask);
-            foreach (Collider collider in hitColliders)
-            {
-                collider.gameObject.GetComponent<CharacterMovement3D>().enabled = false;
-                collider.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-                Vector3 direction = this.gameObject.transform.position - collider.gameObject.transform.position;
-
-                // apply gravitational force of attraction to attracted body
-                collider.gameObject.GetComponent<Rigidbody>().AddForce(direction.x * 15, direction.y * 15, direction.z * 15, ForceMode.Impulse);
-            }
-        }
     }
 
     public void DisableColliders()
@@ -153,21 +153,6 @@ public class Mallet : Weapon
     {
         GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
         impact.GetComponent<VisualEffect>().Play();
-        //layerAsLayerMask |= (1 << 6);   
-        //layerAsLayerMask |= (1 << 7);
-        //Collider[] hitColliders = new Collider[25];
-        //Physics.OverlapSphereNonAlloc(transform.position, 10, hitColliders, layerAsLayerMask);
-        //foreach (Collider collider in hitColliders)
-        //{
-        //    if(collider.enabled)
-        //    {
-        //        if (collider.gameObject.TryGetComponent<Animator>(out Animator component))
-        //        {
-        //            Tween.PunchLocalPosition(collider.gameObject.transform, strength: Vector3.up * 10, duration: 0.7f, frequency: 1);
-        //        }
-        //    }
-        //}
-        
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -176,6 +161,15 @@ public class Mallet : Weapon
             Instantiate(_debrisVFX, other.transform.position, _debrisVFX.transform.rotation);
             Destroy(other.gameObject);
         }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            
+            enemies.Add(other.gameObject);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        enemies.Remove(other.gameObject);
     }
 }
 
