@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class BossBehaviour : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class BossBehaviour : MonoBehaviour
     private IEnumerator _currentState;
     private bool _canHit;
     private bool _isfalling;
+    private bool _isPrisoned;
+    float prisonTime = 10;
+    float currentprisontime = 0;
     private void Start()
     {
         _isfalling= false;
@@ -44,6 +48,17 @@ public class BossBehaviour : MonoBehaviour
         else
         {
             _animator.SetBool("Awake",true);
+        }
+        if (_animator.GetBool("Prisoned"))
+        {
+            currentprisontime += Time.deltaTime;
+            if (currentprisontime >= prisonTime)
+            {
+                _animator.SetBool("Prisoned", false);
+                ChangeState(GoTowardsShelterState());
+                currentprisontime = 0;
+            }
+            
         }
     }
     
@@ -97,8 +112,12 @@ public class BossBehaviour : MonoBehaviour
     }
     private IEnumerator StandUpState()
     {
-        _animator.SetTrigger("Stand");
-        yield return null;
+        if(@_isPrisoned)
+        {
+            _animator.SetTrigger("Stand");
+            yield return null;
+        }
+        
     }
     private IEnumerator WalkBackState()
     {
@@ -115,8 +134,10 @@ public class BossBehaviour : MonoBehaviour
     }
     private IEnumerator PrisonedState()
     {
-        _animator.SetTrigger("Prisoned");
+        //_chargeAnimCycle = 0;
+        _animator.SetBool("Prisoned",true);
         yield return null;
+
     }
     private IEnumerator WorkoutState()
     {
@@ -131,8 +152,13 @@ public class BossBehaviour : MonoBehaviour
         {
             yield return null;
         }
-        _animator.SetTrigger("WalkShelter");
-        ChangeState(GoTowardsShelterState());
+        if(_chargeAnimCycle >= 5)
+        {
+            Debug.Log("xs");
+            _animator.SetTrigger("WalkShelter");
+           // ChangeState(GoTowardsShelterState());
+        }
+        
     }
     private void IncraseChargeCycle()
     {
@@ -174,8 +200,9 @@ public class BossBehaviour : MonoBehaviour
                 _canHit = false;
             }
         }
-        else if(other.gameObject.layer.Equals(15))
+        else if(other.gameObject.layer.Equals(15) && !_isPrisoned)
         {
+            _isPrisoned = true;
             _navMeshAgent.enabled = false;
             ChangeState(PrisonedState());
         }
