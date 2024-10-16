@@ -1,15 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Vacuum : MonoBehaviour
 {
     [SerializeField] List<GameObject> pulledObjects;
     [SerializeField] List<GameObject> capturedObjects;
+    private LayerMask _vacuumableObjects;
     private bool _vacuumOn = false;
+    [SerializeField]private CapsuleCollider _capsuleCollider;
+    [SerializeField]private CapsuleCollider _capsuleColliderb;
     private void Start()
     {
         pulledObjects = new List<GameObject>();
         capturedObjects = new List<GameObject>();
+        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Enemy"));
+        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Debris"));
+        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Civilian"));
     }
 
     private void FixedUpdate()
@@ -18,14 +25,14 @@ public class Vacuum : MonoBehaviour
         {
             foreach (GameObject enemy in pulledObjects)
             {
-                Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 300;
+                Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 100;
                 enemy.GetComponent<Rigidbody>().velocity  = (new Vector3(pullForce.x, pullForce.y, pullForce.z));
             }
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (_vacuumableObjects == (_vacuumableObjects | (1 << other.gameObject.layer)))
         {
             pulledObjects.Add(other.gameObject);
         }
@@ -38,7 +45,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && _vacuumOn)
+        if (_vacuumableObjects == (_vacuumableObjects | (1 << collision.gameObject.layer)) && _vacuumOn)
         {
             capturedObjects.Add(collision.gameObject);
             collision.rigidbody.velocity = Vector3.zero;
@@ -61,10 +68,14 @@ public class Vacuum : MonoBehaviour
     public void VacuumOn()
     {
         _vacuumOn = true;
+        _capsuleCollider.enabled = true;
+        _capsuleColliderb.enabled = true;
     }
 
     public void VacuumOff()
     {
         _vacuumOn = false;
+        _capsuleCollider.enabled = false;
+        _capsuleColliderb.enabled = false;
     }
 }

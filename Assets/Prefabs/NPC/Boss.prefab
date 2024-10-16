@@ -18,6 +18,16 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: cae8fc91304c9254a8f12bef0346814b, type: 3}
+    - target: {fileID: 2744219705999717248, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744219705999717248, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3019642398780967483, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
       propertyPath: m_IsTrigger
@@ -61,17 +71,17 @@ PrefabInstance:
     - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.5
+      value: -18.999998
       objectReference: {fileID: 0}
     - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.76441956
       objectReference: {fileID: 0}
     - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.35
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6412076555650405362, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
@@ -140,6 +150,16 @@ PrefabInstance:
       objectReference: {fileID: 686980660472343179}
     - target: {fileID: 8173946750698557936, guid: f8e87fa924d97e74b88bce3f156c16c0,
         type: 3}
+      propertyPath: _hitForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173946750698557936, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
+      propertyPath: workoutTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8173946750698557936, guid: f8e87fa924d97e74b88bce3f156c16c0,
+        type: 3}
       propertyPath: _chargeCycle
       value: 2
       objectReference: {fileID: 0}
@@ -199,10 +219,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4
-  m_Height: 1.22
+  m_Radius: 0.44
+  m_Height: 0.9758496
   m_Direction: 1
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Center: {x: 0, y: 0.46707508, z: 0}
 --- !u!65 &4182139234887106515
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -222,5 +242,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 0.44, z: 0.7}
-  m_Center: {x: 0, y: 0.78, z: 0}
+  m_Size: {x: 0.7, y: 0.9536827, z: 0.7}
+  m_Center: {x: 0, y: 0.52315897, z: -0}

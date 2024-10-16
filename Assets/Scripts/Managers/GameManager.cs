@@ -6,9 +6,10 @@ using UIComponents;
 using Unity.Services.Authentication;
 using Unity.Services.Leaderboards;
 using Unity.Services.Leaderboards.Exceptions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,16 +39,17 @@ public class GameManager : MonoBehaviour
     private float _elapsedTime;
     [SerializeField]public  float _point;
     public GameObject shelter;
-
+    [SerializeField] private float progress;
+    [SerializeField] private Image progressFill;
+    [SerializeField] private GameObject Bomb;
     void Start()
     {
         _startTime = Time.time;
         //_point = 100;
         _pointText.text = "Point:" + _point;
-
+        progress = 0;
         PlayerStats.CivilianSaved = 0;
         PlayerStats.CriminalKilled = 0;
-        PlayerStats.CriminalCaptured = 0;
         PlayerStats.CriminalCaptured = 0;
         PlayerStats.Points = _point;
     }
@@ -86,6 +88,13 @@ public class GameManager : MonoBehaviour
         _objectiveText1.text = "Civilians Saved - " + PlayerStats.CivilianSaved + "/" + _civilianToSaved;
         _objectiveText2.text = "Criminals Killed - " + PlayerStats.CriminalKilled + "/" + _criminalsKilled;
         _objectiveText3.text = "Criminals Captured - " + PlayerStats.CriminalCaptured + "/" + _criminalsCaptured;
+        progress += Time.deltaTime * PlayerStats.CriminalCaptured;
+        progress = Mathf.Clamp(progress, 0f, 100);
+        progressFill.fillAmount = progress / 100;
+        if(progress >= 100)
+        {
+            Bomb.active = true;
+        }
     }
     public void PlayCinematic()
     {
@@ -154,5 +163,9 @@ public class GameManager : MonoBehaviour
     public static void LosePoint()
     {
         PlayerStats.Points -= _increaseAmount;
+    }
+    public static void CaptureCriminal()
+    {
+        PlayerStats.CriminalCaptured++;
     }
 }

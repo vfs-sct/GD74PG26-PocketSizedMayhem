@@ -8,7 +8,10 @@ public class PrisonPoint : MonoBehaviour
     {
         if (other.gameObject.layer.Equals(7))
         {
-            GameManager.AddPoint();
+            if(other.isTrigger)
+            {
+                GameManager.CaptureCriminal();
+            }
         }
     }
 

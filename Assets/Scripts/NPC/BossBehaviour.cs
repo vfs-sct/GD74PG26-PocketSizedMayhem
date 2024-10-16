@@ -21,15 +21,16 @@ public class BossBehaviour : MonoBehaviour
     [SerializeField] private GameObject _prison;
     private IEnumerator _currentState;
     private bool _canHit;
-
+    private bool _isfalling;
     private void Start()
     {
+        _isfalling= false;
         _canHit = true;
         ChangeState(GoTowardsShelterState());
     }
     private void Update()
     {
-        if (_stunBar.GetComponent<BossStunBar>().GetStunDuration() > 0)
+        if (_stunBar.GetComponent<BossStunBar>().GetStunDuration() > 0 && !_isfalling)
         {
             {
                 _animator.SetBool("Stun",true);
@@ -172,6 +173,17 @@ public class BossBehaviour : MonoBehaviour
         {
             _navMeshAgent.enabled = false;
             ChangeState(PrisonedState());
+        }
+        if(other.gameObject.layer.Equals(20) && _animator.GetBool("Stun"))
+        {
+            _navMeshAgent.enabled = false;
+            _animator.SetTrigger("Dropped");
+            _isfalling = true;
+        }
+        else if (other.gameObject.layer.Equals(11) && _isfalling)
+        {
+            _isfalling = false;
+            ChangeState(StandUpState());
         }
     }
 }

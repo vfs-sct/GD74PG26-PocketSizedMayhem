@@ -78,11 +78,6 @@ public class RegularCriminalBehaviour : CharacterMovement3D
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer.Equals(15))
-        {
-            GameManager.AddPoint();
-            PlayerStats.CriminalCaptured++;
-        }
         if (other.gameObject == _primaryTarget)
         {
             _primaryTarget = _shelter;
