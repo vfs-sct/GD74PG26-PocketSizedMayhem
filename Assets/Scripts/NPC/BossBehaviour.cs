@@ -30,15 +30,20 @@ public class BossBehaviour : MonoBehaviour
     }
     private void Update()
     {
-        if (_stunBar.GetComponent<BossStunBar>().GetStunDuration() > 0 && !_isfalling)
+        if (_stunBar.GetComponent<BossStunBar>().GetStunDuration() > 0 && !_isfalling )
         {
             {
-                _animator.SetBool("Stun",true);
+                if(!_animator.GetBool("Awake"))
+                {
+                    _animator.SetTrigger("Stun");
+                }
+                
+                _animator.SetBool("Awake", false);
             }
         }
         else
         {
-            _animator.SetBool("Stun", false);
+            _animator.SetBool("Awake",true);
         }
     }
     
