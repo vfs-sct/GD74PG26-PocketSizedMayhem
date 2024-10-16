@@ -2,62 +2,87 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using FMODUnity;
 public class CivilianDeath : MonoBehaviour
 {
+    [field: SerializeField] public EventReference DeathSFX { get; set; }
+
     [SerializeField] private GameObject _bloodEffect;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
+    [SerializeField] private CapsuleCollider _triggerCollider;
+    [SerializeField] private RagdollOnOffController _ragdollController;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Rigidbody _rb;
+    [SerializeField] private NavMeshAgent _navMeshAgent;
+    [SerializeField] private CivilianBehaviour _civilianBehaviour;
     [SerializeField] private int _animNo;
-
-    private RagdollOnOffController _ragdollController;
-    private Animator _animator;
-    private BoxCollider _boxCollider;
-    private Rigidbody _rb;
-    private NavMeshAgent _navMeshAgent;
-
+    
     public event EventHandler<GameObject> OnKilled;
-
+    public event EventHandler<GameObject> OnCaptured;
+    private bool _pointGiven;
+    
     private void Start()
     {
-        _ragdollController = GetComponent<RagdollOnOffController>();
-        _animator = GetComponent<Animator>();
-        _boxCollider = GetComponent<BoxCollider>();
-        _rb = GetComponent<Rigidbody>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Mallet")
-        {
-            _ragdollController.RagdollModeOn();
-            this.gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
-            blood.GetComponent<VisualEffect>().Play();
-            OnKilled?.Invoke(this, this.gameObject);
-        }
-        else if (collision.gameObject.layer.Equals(7))
-        {
-            DeathByCriminal();
-            OnKilled?.Invoke(this, this.gameObject);
-        }
+        _pointGiven = false;
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Mallet")
         {
+            _capsuleCollider.enabled = false;
+            _civilianBehaviour.Stop();
+            
+            _ragdollController.RagdollModeOn();
             _ragdollController.DeathBounce();
+            
+            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            blood.GetComponent<VisualEffect>().Play();
+            OnKilled?.Invoke(this, this.gameObject);
+            
+            if (!_pointGiven)
+            {
+                GameManager.LosePoint();
+                _pointGiven= true;
+            }
+            if (!DeathSFX.IsNull)
+            {
+                RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
+            }
+            this.enabled = false;
+            _triggerCollider.enabled = false;
+        }
+        else if (other.gameObject.layer.Equals(14))
+        {
+            DeathByCriminal();
+
+            if (!_pointGiven)
+            {
+                GameManager.LosePoint();
+                _pointGiven = true;
+            }
+        }
+        else if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
+        {
+            OnCaptured?.Invoke(this, this.gameObject);
         }
     }
 
     public void DeathByCriminal()
     {
-        int boredAnimation = UnityEngine.Random.Range(0, _animNo);
+        int animNo = UnityEngine.Random.Range(0, _animNo);
 
-        _animator.SetFloat("DeathNo",(float) boredAnimation);
+        _animator.SetFloat("DeathNo",(float) animNo);
         _animator.SetTrigger("Death");
+        _rb.isKinematic = true;
+        _capsuleCollider.enabled = false;
+        _civilianBehaviour.Stop();
 
-        Destroy(_rb);
-        Destroy(_boxCollider);
-        Destroy(_navMeshAgent);
+        OnKilled?.Invoke(this, this.gameObject);
+
+        if (!DeathSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
+        }
     }
 }

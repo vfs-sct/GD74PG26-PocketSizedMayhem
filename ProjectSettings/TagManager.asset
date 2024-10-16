@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mallet
+  - MainFloor
   layers:
   - Default
   - TransparentFX
@@ -24,10 +25,10 @@ TagManager:
   - Prison
   - Shelter
   - Bomb
-  - 
-  - 
-  - 
-  - 
+  - Debris
+  - Claw
+  - Vacuum
+  - Car
   - 
   - 
   - 

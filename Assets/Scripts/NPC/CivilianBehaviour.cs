@@ -1,29 +1,42 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using CharacterMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CivilianBehaviour : MonoBehaviour
+public class CivilianBehaviour : CharacterMovement3D
 {
+    [field: SerializeField] public EventReference SpawnSFX { get; set; }
+    
     [SerializeField] private GameObject _destination;
-
-    private NavMeshAgent _navMeshAgent;
-
+    [SerializeField] private Animator _animator;
+    
     private void Start()
     {
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-    }
-
-    private void Update()
-    {
-        if (_navMeshAgent != null && _destination != null)
+        if (!SpawnSFX.IsNull)
         {
-            _navMeshAgent.destination = _destination.transform.position;
+            RuntimeManager.PlayOneShot(SpawnSFX, this.gameObject.transform.position);
         }
     }
 
+    protected override void  Update()
+    {
+        base.Update();
+        MoveTo(_destination.transform.position);    
+    }
+    
     public void SetDestionation(GameObject newDestination)
     {
         _destination = newDestination;
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
+        {
+            _animator.SetTrigger("DestinationReached");
+        }
     }
 }
