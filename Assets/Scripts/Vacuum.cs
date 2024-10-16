@@ -17,6 +17,7 @@ public class Vacuum : MonoBehaviour
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Debris"));
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Civilian"));
+        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Bomb"));
     }
 
     private void FixedUpdate()

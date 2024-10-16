@@ -72,6 +72,8 @@ public class BossBehaviour : MonoBehaviour
 
     private IEnumerator GoTowardsShelterState()
     {
+        _isPrisoned = false;
+        _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(_shelterChargePoint.transform.position);
         float distance = Vector3.Distance(transform.position, _shelterChargePoint.transform.position);
         while (distance > _navMeshAgent.stoppingDistance)
@@ -112,12 +114,16 @@ public class BossBehaviour : MonoBehaviour
     }
     private IEnumerator StandUpState()
     {
-        if(@_isPrisoned)
-        {
             _animator.SetTrigger("Stand");
-            yield return null;
+        if(_isPrisoned)
+        {
+            ChangeState(PrisonedState());
         }
-        
+        else
+        {
+            ChangeState(WalkBackState());
+        }
+        yield return null;     
     }
     private IEnumerator WalkBackState()
     {
@@ -218,6 +224,23 @@ public class BossBehaviour : MonoBehaviour
             ChangeState(StandUpState());
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(17))
+        {
+            _animator.enabled = true;
+            _navMeshAgent.isStopped= true;
+            _animator.SetTrigger("Death");
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer.Equals(20))
+        {
+            Tween.Rotation(this.gameObject.transform, endValue: Quaternion.Euler(0, this.transform.rotation.y, 0), duration: 1);
+        }
+    }
+
 }
 
 
