@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Vacuum : MonoBehaviour
@@ -10,8 +11,11 @@ public class Vacuum : MonoBehaviour
     private bool _vacuumOn = false;
     [SerializeField]private CapsuleCollider _capsuleCollider;
     [SerializeField]private CapsuleCollider _capsuleColliderb;
+    [SerializeField]private VisualEffect _ufoRay;
+    Vector3 endScale;
     private void Start()
     {
+        endScale = new Vector3(3,1,3);
         pulledObjects = new List<GameObject>();
         capturedObjects = new List<GameObject>();
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Enemy"));
@@ -24,6 +28,9 @@ public class Vacuum : MonoBehaviour
     {
         if (_vacuumOn)
         {
+            Debug.Log("xd");
+            Vector3.Lerp(_ufoRay.GetVector3("RayScale"), _ufoRay.GetVector3("RayScale") * 3, 3f);
+            _ufoRay.SetVector3("RayScale",Vector3.zero);
             foreach (GameObject enemy in pulledObjects)
             {
                 Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 100;
