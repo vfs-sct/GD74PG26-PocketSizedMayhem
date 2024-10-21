@@ -57,8 +57,8 @@ Material:
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
-    - _CullMode: 1
-    - _CullModeForward: 1
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
     - _DiffusionProfileHash: 0
     - _DoubleSidedEnable: 0
@@ -71,7 +71,7 @@ Material:
     - _ExcludeFromTUAndAA: 0
     - _MaterialID: 1
     - _MaterialTypeMask: 2
-    - _OpaqueCullMode: 1
+    - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -90,9 +90,16 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 15
     - _StencilWriteMaskMV: 41
-    - _SuckRange: 8
+    - _SuckRange: 3
     - _SupportDecals: 1
     - _SurfaceType: 0
+    - _TessellationBackFaceCullEpsilon: -0.25
+    - _TessellationFactorMaxDistance: 50
+    - _TessellationFactorMinDistance: 20
+    - _TessellationFactorTriangleSize: 100
+    - _TessellationMaxDisplacement: 0.01
+    - _TessellationMode: 0
+    - _TessellationShapeFactor: 0.75
     - _Threshold: 10
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
@@ -115,7 +122,7 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 0.21016884, g: 1, b: 0, a: 0}
+    - _GlowColor: {r: 0.3185564, g: 1.5157166, b: 0, a: 0}
     - _Target: {r: 0, g: 0, b: 0, a: 0}
     - _VariationX: {r: 0, g: 0, b: 0, a: 0}
     - _VariationY: {r: 0, g: 0, b: 0, a: 0}
