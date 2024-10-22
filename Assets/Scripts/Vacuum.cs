@@ -9,8 +9,8 @@ public class Vacuum : MonoBehaviour
     [SerializeField] List<GameObject> capturedObjects;
     private LayerMask _vacuumableObjects;
     private bool _vacuumOn = false;
-    [SerializeField]private CapsuleCollider _capsuleCollider;
-    [SerializeField]private CapsuleCollider _capsuleColliderb;
+    [SerializeField]private MeshCollider _rayCollider;
+    [SerializeField]private CapsuleCollider _storeCollider;
     [SerializeField]private GameObject _Ray;
     Vector3 endScale;
     Vector3 RayStartScale;
@@ -87,14 +87,14 @@ public class Vacuum : MonoBehaviour
     public void VacuumOn()
     {
         _vacuumOn = true;
-        _capsuleCollider.enabled = true;
-        _capsuleColliderb.enabled = true;
+        _storeCollider.enabled = true;
+        _rayCollider.enabled = true;
     }
 
     public void VacuumOff()
     {
         _vacuumOn = false;
-        _capsuleCollider.enabled = false;
-        _capsuleColliderb.enabled = false;
+        _storeCollider.enabled = false;
+        _rayCollider.enabled = false;
     }
 }

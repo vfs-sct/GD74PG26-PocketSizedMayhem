@@ -80,8 +80,8 @@ Material:
     m_Ints: []
     m_Floats:
     - Boolean_52C16ADA: 1
-    - Vector1_C436030E: 3
-    - Vector1_D9BD7578: 46.62
+    - Vector1_C436030E: 0
+    - Vector1_D9BD7578: 2.8
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 1
