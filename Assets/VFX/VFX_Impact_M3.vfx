@@ -15050,7 +15050,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 15
+      m_SerializableObject: 60
     m_Space: -1
   m_Property:
     name: Count
@@ -16223,7 +16223,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 1.5
     m_Space: -1
   m_Property:
     name: B
@@ -24143,7 +24143,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617374}
   m_ExposedName: GroundCrackRate
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -24231,7 +24231,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617376}
   m_ExposedName: ShockwaveRate
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 5
   m_Category: 
   m_Min:
     m_Type:
@@ -24499,7 +24499,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617383}
   m_ExposedName: ShockwaveSize
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 6
   m_Category: 
   m_Min:
     m_Type:
@@ -24863,7 +24863,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617393}
   m_ExposedName: ParticlesRate
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 7
   m_Category: 
   m_Min:
     m_Type:
@@ -24943,7 +24943,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617395}
   m_ExposedName: ParticlesSIze
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 10
   m_Category: 
   m_Min:
     m_Type:
@@ -25506,7 +25506,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617413}
   m_ExposedName: ParticlesVelocity
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 11
   m_Category: 
   m_Min:
     m_Type:
@@ -25814,7 +25814,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617422}
   m_ExposedName: ParticlesLoopDuration
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 9
   m_Category: 
   m_Min:
     m_Type:
@@ -25894,7 +25894,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617424}
   m_ExposedName: FlareStarSize
   m_Exposed: 1
-  m_Order: 10
+  m_Order: 12
   m_Category: 
   m_Min:
     m_Type:
@@ -26253,7 +26253,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617434}
   m_ExposedName: FlareSize
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 13
   m_Category: 
   m_Min:
     m_Type:
@@ -26333,7 +26333,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617436}
   m_ExposedName: FlashSize
   m_Exposed: 1
-  m_Order: 12
+  m_Order: 14
   m_Category: 
   m_Min:
     m_Type:
@@ -28122,7 +28122,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617498}
   m_ExposedName: HeatDistortionMask
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 15
   m_Category: 
   m_Min:
     m_Type:
@@ -28202,7 +28202,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617500}
   m_ExposedName: HeatBlurScale
   m_Exposed: 1
-  m_Order: 14
+  m_Order: 16
   m_Category: 
   m_Min:
     m_Type:
@@ -28282,7 +28282,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617502}
   m_ExposedName: HeatDistortionScale
   m_Exposed: 1
-  m_Order: 15
+  m_Order: 17
   m_Category: 
   m_Min:
     m_Type:
@@ -28362,7 +28362,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617504}
   m_ExposedName: HeatDistortionNormalMap
   m_Exposed: 1
-  m_Order: 16
+  m_Order: 18
   m_Category: 
   m_Min:
     m_Type:
@@ -28442,7 +28442,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617506}
   m_ExposedName: HeatDistortionSmoothnessMap
   m_Exposed: 1
-  m_Order: 17
+  m_Order: 19
   m_Category: 
   m_Min:
     m_Type:
@@ -28522,7 +28522,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617508}
   m_ExposedName: HeatDistortionSize
   m_Exposed: 1
-  m_Order: 18
+  m_Order: 20
   m_Category: 
   m_Min:
     m_Type:
@@ -28602,7 +28602,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617510}
   m_ExposedName: HeatDistortionCount
   m_Exposed: 1
-  m_Order: 19
+  m_Order: 21
   m_Category: 
   m_Min:
     m_Type:
@@ -36283,7 +36283,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":2.0,"outTangent":2.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.1548864245414734,"value":0.4955150783061981,"inTangent":1.6537675857543946,"outTangent":1.6537675857543946,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":1.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":2.0,"outTangent":2.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.29219627380371096,"value":0.6959911584854126,"inTangent":1.6537675857543946,"outTangent":1.6537675857543946,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":1.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: Size
@@ -36430,7 +36430,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.4082183837890625,"value":0.0,"inTangent":3.123213768005371,"outTangent":3.123213768005371,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":15.0,"inTangent":38.962276458740237,"outTangent":38.962276458740237,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.4082183837890625,"value":0.0,"inTangent":3.123213768005371,"outTangent":3.123213768005371,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.6947383284568787,"value":3.8261799812316896,"inTangent":27.19129753112793,"outTangent":27.19129753112793,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":15.0,"inTangent":38.962276458740237,"outTangent":38.962276458740237,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: curve
@@ -36966,7 +36966,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.28178301453590395,"value":0.9999907612800598,"inTangent":-1.3923239707946778,"outTangent":-1.3923239707946778,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":1.0,"value":0.0,"inTangent":-1.3923239707946778,"outTangent":-1.3923239707946778,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.28178301453590395,"value":0.9999907612800598,"inTangent":-1.8030164241790772,"outTangent":-1.8030164241790772,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.6040770411491394,"value":0.4188893735408783,"inTangent":-1.4305118322372437,"outTangent":-1.4305118322372437,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":1.0,"value":0.0,"inTangent":-1.0580072402954102,"outTangent":-1.0580072402954102,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: curve
@@ -37397,7 +37397,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617841}
   m_ExposedName: SmokeWingColor
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:
@@ -37613,7 +37613,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617847}
   m_ExposedName: SmokeWingSize
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 8
   m_Category: 
   m_Min:
     m_Type:
