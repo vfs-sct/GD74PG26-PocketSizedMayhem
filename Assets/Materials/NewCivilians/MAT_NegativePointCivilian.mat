@@ -36,7 +36,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SHADER_Goo
+  m_Name: MAT_NegativePointCivilian
   m_Shader: {fileID: -6465566751694194690, guid: 2b32add6369af5449b587c21d6c68bba,
     type: 3}
   m_Parent: {fileID: 0}
@@ -147,12 +147,12 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 0, b: 0.5152211, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _MainTexColor: {r: 0.9528302, g: 0.28315237, b: 0.28315237, a: 0}
     - _PulseColor: {r: 0.08962262, g: 1, b: 0.713103, a: 0}
-    - _RimColor: {r: 0.5471698, g: 0, b: 0.4606567, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

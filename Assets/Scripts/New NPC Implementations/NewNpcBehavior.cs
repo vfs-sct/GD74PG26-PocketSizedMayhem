@@ -9,7 +9,6 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class NewNpcBehavior : CharacterMovement3D
 {
     [Header("NPC Attributes")]
-    [SerializeField] private float speed;
     [SerializeField] private float point;
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float _fadeSpeed;
@@ -27,8 +26,6 @@ public class NewNpcBehavior : CharacterMovement3D
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _alpha = _objectMaterial.GetFloat("_Alpha");
-        Rigidbody.velocity *= speed;
-        
     }
 
     protected override void Update()
@@ -44,7 +41,6 @@ public class NewNpcBehavior : CharacterMovement3D
         {
             
             _fadeAmount = Mathf.Lerp(1, 0, _timer / fadeOutTime);
-            Debug.Log(_fadeAmount);
             _objectMaterial.SetFloat("_Alpha", _fadeAmount);
         }
         yield return null;
