@@ -38,6 +38,9 @@
         },
         {
             "m_Id": "18fd928cb4e8455fa99af36fed5a023a"
+        },
+        {
+            "m_Id": "3e2b3d790204468cbaa8a73af30a59dd"
         }
     ],
     "m_Keywords": [],
@@ -3240,6 +3243,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector3ShaderProperty",
+    "m_ObjectId": "3e2b3d790204468cbaa8a73af30a59dd",
+    "m_Guid": {
+        "m_GuidSerialized": "c5f86121-4071-4ed7-8f75-4cce02bf0f1a"
+    },
+    "m_Name": "DisplacementPosition",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "DisplacementPosition",
+    "m_DefaultReferenceName": "_DisplacementPosition",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 2,
+    "m_Hidden": false,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "3e71a06f073b4e62b8d4c85588ab1c34",
@@ -6074,6 +6105,9 @@
         },
         {
             "m_Id": "18fd928cb4e8455fa99af36fed5a023a"
+        },
+        {
+            "m_Id": "3e2b3d790204468cbaa8a73af30a59dd"
         }
     ]
 }
