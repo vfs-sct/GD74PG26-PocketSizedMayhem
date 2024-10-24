@@ -156,9 +156,9 @@ public class GameManager : MonoBehaviour
 
         Instantiate(_civilian,_hit.point,Quaternion.Euler(0,0,0));
     }
-    public static void AddPoint()
+    public static void AddPoint(float point)
     {
-        PlayerStats.Points += _increaseAmount;
+        PlayerStats.Points += point;
     }
     public static void LosePoint()
     {

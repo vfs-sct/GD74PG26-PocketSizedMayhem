@@ -34,13 +34,16 @@ public class NewNpcBehavior : CharacterMovement3D
     private float _cycleCount = 0;
     private bool _fadingOut;
 
+    private GameObject _target;
+
     private Vector3 _newDirectionVector;
     LayerMask _layerMask;
+    LayerMask _civilianTargetLayerMask;
     
     void Start()
     {
         _layerMask |= (1 << 22);
-
+        _civilianTargetLayerMask |= (1 << 6);
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
 
@@ -51,9 +54,18 @@ public class NewNpcBehavior : CharacterMovement3D
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
 
+        if(point<0)
+        {
+            _endTarget = EndTarget.CIVILIAN;
+        }
+
         if (_endTarget == EndTarget.TARGET)
         {
             SetEscapeDestination();
+        }
+        else if(_endTarget == EndTarget.CIVILIAN)
+        {
+            SetCivilianTarget();
         }
         else
         {
@@ -67,7 +79,14 @@ public class NewNpcBehavior : CharacterMovement3D
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
+        
         NavMeshAgent.SetDestination(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
+    }
+    private void SetCivilianTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
+        _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
+        // //NavMeshAgent.SetDestination(hitColliders[Random.Range(0, hitColliders.Length)].transform.position)
     }
 
     protected override void Update()
@@ -76,15 +95,14 @@ public class NewNpcBehavior : CharacterMovement3D
         angle += Time.deltaTime * _rotationSpeed;
         if (_endTarget == EndTarget.NO_TARGET)
         {
-            
             if (_pattern == Pattern.ZIGZAG)
             {
-                if(NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
                 {
-                    if(_newDirectionVector.x>0)
+                    if (_newDirectionVector.x > 0)
                     {
                         _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
-                        _newDirectionVector.z = Random.Range(3,_zigzagVerticalDistance);
+                        _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
                     }
                     else
                     {
@@ -96,10 +114,14 @@ public class NewNpcBehavior : CharacterMovement3D
             }
             else if (_pattern == Pattern.CIRCLE)
             {
-                    _newDirectionVector.x = Mathf.Cos(angle) * _radius;
-                    _newDirectionVector.z = Mathf.Sin(angle) * _radius;
-                    NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+                _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
             }
+        }
+        else if (_endTarget == EndTarget.CIVILIAN)
+        {
+            NavMeshAgent.SetDestination(_target.transform.position);
         }
     }
 
@@ -141,7 +163,8 @@ public class NewNpcBehavior : CharacterMovement3D
     public enum EndTarget
     {
         TARGET,
-        NO_TARGET
+        NO_TARGET,
+        CIVILIAN
     }
     public enum Pattern
     {
@@ -154,6 +177,12 @@ public class NewNpcBehavior : CharacterMovement3D
         PRECISE,
         FRENZY
     }
+
+    public float GetPoint()
+    {
+        return point;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, _escapeRangeFindRadius);

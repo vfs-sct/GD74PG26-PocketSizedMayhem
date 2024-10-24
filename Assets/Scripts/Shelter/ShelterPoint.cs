@@ -8,7 +8,7 @@ public class ShelterPoint : MonoBehaviour
     {
         if(other.gameObject.layer.Equals(6))
         {
-            GameManager.AddPoint();
+           // GameManager.AddPoint();
         }
     }
 

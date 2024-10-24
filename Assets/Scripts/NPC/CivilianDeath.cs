@@ -42,7 +42,8 @@ public class CivilianDeath : MonoBehaviour
             
             if (!_pointGiven)
             {
-                GameManager.LosePoint();
+                Debug.Log(_civilianBehaviour.GetPoint());
+                PlayerStats.Points += _civilianBehaviour.GetPoint();
                 _pointGiven= true;
             }
             if (!DeathSFX.IsNull)
