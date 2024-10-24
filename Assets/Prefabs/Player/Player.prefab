@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1389607480175707572}
   - component: {fileID: 4578364562250214051}
   - component: {fileID: 4409229517148093461}
+  - component: {fileID: 3984363516107390558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MonoBehaviour:
   _clawTargetMaterial: {fileID: 2100000, guid: 8d5069021062c3b45988c8b48fae662e, type: 2}
   _malletTargetMaterial: {fileID: 2100000, guid: d976915ad8d3d564d8bd1025ce209bb7,
     type: 2}
+--- !u!114 &3984363516107390558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632716322905265480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &912282623563414598
 GameObject:
   m_ObjectHideFlags: 0
