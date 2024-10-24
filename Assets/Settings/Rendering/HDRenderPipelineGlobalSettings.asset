@@ -179,6 +179,8 @@ MonoBehaviour:
       - 1cf71387ec5186141beffcdf44e14300
       - 845efb974a677a5469d40ae22c2af6ac
       - b44d55fb839749e4a92dfe14ccc655fd
+      - f9ad4ab2fe5a2c8489918d903d5dad89
+      - 1d126f586df0240428c49af34e012f3b
       - 0409e33768c2f1743be8d105b3cdb438
       m_Values:
       - {fileID: 11400000, guid: 69fb609998c16d94cb5e7faa05a2303a, type: 2}
@@ -191,6 +193,8 @@ MonoBehaviour:
       - {fileID: 11400000, guid: d5c00a546dfaf61448be6f96fe2dba29, type: 2}
       - {fileID: 11400000, guid: c28e424aa0979264da309bbc92ef4b3d, type: 2}
       - {fileID: 11400000, guid: 9205fb08613102d49aa3d008d5575d31, type: 2}
+      - {fileID: 11400000, guid: a85f628920c85514cadd396839bcfb1d, type: 2}
+      - {fileID: 11400000, guid: 439c867c42bf2b142a26b6a8077b7f52, type: 2}
       - {fileID: 11400000, guid: 3ad54706a6b8d41458814f954ef84b83, type: 2}
     bakingSets:
     - {fileID: 11400000, guid: 69fb609998c16d94cb5e7faa05a2303a, type: 2}
@@ -204,6 +208,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c28e424aa0979264da309bbc92ef4b3d, type: 2}
     - {fileID: 11400000, guid: 97b236090b73b2748a126bc6da41c680, type: 2}
     - {fileID: 11400000, guid: 9205fb08613102d49aa3d008d5575d31, type: 2}
+    - {fileID: 11400000, guid: a85f628920c85514cadd396839bcfb1d, type: 2}
+    - {fileID: 11400000, guid: 439c867c42bf2b142a26b6a8077b7f52, type: 2}
     - {fileID: 11400000, guid: 3ad54706a6b8d41458814f954ef84b83, type: 2}
     sceneBounds:
       m_Keys:
@@ -279,7 +285,9 @@ MonoBehaviour:
       - f947c1f53faf01d4a83705118f1903b8
       - b03ef9e9f111f624b8568478e87f72ee
       - 14d9f6f9aa31cae489b1bdcf3df6d237
-      m_Values: 010101010001010101010101010101010101
+      - f9ad4ab2fe5a2c8489918d903d5dad89
+      - 1d126f586df0240428c49af34e012f3b
+      m_Values: 0001010100010101010101010101010101010000
   m_Version: 10
   m_ShaderStrippingSetting:
     m_Version: 0
