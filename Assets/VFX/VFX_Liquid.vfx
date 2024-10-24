@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d4c867f6b72b714dbb5fd1780afe208, type: 3}
-  m_Name: vfxgraph_Liquid_v1
+  m_Name: VFX_Liquid
   m_EditorClassIdentifier: 
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 0}
@@ -958,7 +958,7 @@ VisualEffectResource:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vfxgraph_Liquid_v1
+  m_Name: VFX_Liquid
   m_Graph: {fileID: 114350483966674976}
   m_Infos:
     m_RendererSettings:
@@ -2011,7 +2011,8 @@ MonoBehaviour:
   raytracedScaleMode: 0
   needsOwnSort: 0
   needsOwnAabbBuffer: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86, type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86,
+    type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -3719,7 +3720,8 @@ MonoBehaviour:
   raytracedScaleMode: 0
   needsOwnSort: 0
   needsOwnAabbBuffer: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86, type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86,
+    type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -4979,7 +4981,8 @@ MonoBehaviour:
   raytracedScaleMode: 0
   needsOwnSort: 0
   needsOwnAabbBuffer: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86, type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86,
+    type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -12776,7 +12779,8 @@ MonoBehaviour:
   raytracedScaleMode: 0
   needsOwnSort: 0
   needsOwnAabbBuffer: 0
-  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86, type: 3}
+  shaderGraph: {fileID: -5475051401550479605, guid: cc3f4b2369dc10447b40a42f49c40b86,
+    type: 3}
   materialSettings:
     m_PropertyNames: []
     m_PropertyValues: []
@@ -14466,9 +14470,7 @@ MonoBehaviour:
   m_Tooltip: 
   m_Nodes:
   - m_Id: 0
-    linkedSlots:
-    - outputSlot: {fileID: 8926484042661615392}
-      inputSlot: {fileID: 0}
+    linkedSlots: []
     position: {x: 507, y: 916}
     expandedSlots: []
     expanded: 0
@@ -14983,9 +14985,7 @@ MonoBehaviour:
   m_Tooltip: 
   m_Nodes:
   - m_Id: 0
-    linkedSlots:
-    - outputSlot: {fileID: 8926484042661615411}
-      inputSlot: {fileID: 0}
+    linkedSlots: []
     position: {x: 531, y: 1018}
     expandedSlots: []
     expanded: 0
