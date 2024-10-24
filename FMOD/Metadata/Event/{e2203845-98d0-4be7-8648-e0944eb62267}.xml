@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{e2203845-98d0-4be7-8648-e0944eb62267}">
 		<property name="name">
-			<value>CFCK BODY FALL CONCRETE Backpacks Leatherjacket Hard</value>
+			<value>RAW_CFCK BODY FALL CONCRETE Backpacks Leatherjacket Hard</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>

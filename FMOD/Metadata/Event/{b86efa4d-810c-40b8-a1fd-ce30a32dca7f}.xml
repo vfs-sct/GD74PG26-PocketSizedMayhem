@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{b86efa4d-810c-40b8-a1fd-ce30a32dca7f}">
 		<property name="name">
-			<value>16 Explosion__ Echoey #7046</value>
+			<value>RAW_16 Explosion__ Echoey #7046</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
