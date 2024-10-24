@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{9b8e0992-404e-49ab-8a27-49501ae38894}">
 		<property name="name">
-			<value>Drone_SciFi_Alien_ST</value>
+			<value>RAW_Drone_SciFi_Alien_ST</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{c5e770dc-dee3-4ce6-a474-c59efa3a4193}</destination>
+			<destination>{a2885169-0f02-40fb-8604-9095146934a8}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{d952a817-3164-412f-970a-002be93e0506}</destination>
@@ -30,6 +30,9 @@
 		</relationship>
 		<relationship name="timeline">
 			<destination>{d1cada04-d379-4365-946c-5df6dfd43da1}</destination>
+		</relationship>
+		<relationship name="banks">
+			<destination>{ad961675-d090-4f8a-9c71-362465853906}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixer" id="{d952a817-3164-412f-970a-002be93e0506}">

@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{d36e0cb8-ad16-4aa6-82b5-c73b3e2d14a2}">
 		<property name="name">
-			<value>Pop_Synth_Mallet_Impact</value>
+			<value>RAW_Pop_Synth_Mallet_Impact</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{5f0e255a-8f4f-42ca-9226-c7d4dbd1b513}</destination>
+			<destination>{a2885169-0f02-40fb-8604-9095146934a8}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{a52f1458-4b0d-4168-b768-19af5ba212da}</destination>

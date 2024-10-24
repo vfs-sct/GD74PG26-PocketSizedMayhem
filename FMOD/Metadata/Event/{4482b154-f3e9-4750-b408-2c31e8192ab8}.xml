@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{4482b154-f3e9-4750-b408-2c31e8192ab8}">
 		<property name="name">
-			<value>Magnet_Attract_x3</value>
+			<value>RAW_Magnet_Attract_x3</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{c5e770dc-dee3-4ce6-a474-c59efa3a4193}</destination>
+			<destination>{a2885169-0f02-40fb-8604-9095146934a8}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{de06201e-3549-4526-aa8c-95f2a7303dc9}</destination>
