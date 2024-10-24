@@ -84,30 +84,30 @@ public class TestSpawner : MonoBehaviour
     private Transform SpawnCivilians(Transform point)
     {
         int selection = Random.Range(0, _spawnWeightTotal);
-
+        GameObject civilian;
         if (selection >= 0 && selection < _easyCivilianWeight && _easyCivilianWeight!=0)
         {
-            Instantiate(_civilians[0], point.position, _civilians[0].transform.rotation);
+            civilian = Instantiate(_civilians[0], point.position, _civilians[0].transform.rotation);
             _easyCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight && _mediumCivilianWeight != 0)
         {
-            Instantiate(_civilians[1], point.position, _civilians[1].transform.rotation);
+            civilian = Instantiate(_civilians[1], point.position, _civilians[1].transform.rotation);
             _mediumCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight && _hardCivilianWeight != 0)
         {
-            Instantiate(_civilians[2], point.position, _civilians[2].transform.rotation);
+            civilian = Instantiate(_civilians[2], point.position, _civilians[2].transform.rotation);
             _hardCivilianWeight--;
         }
-        else if (selection >= _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight && selection < _spawnWeightTotal && _negativeCivilianWeight != 0)
+        else
         {
-            Instantiate(_civilians[3], point.position, _civilians[3].transform.rotation);
+            civilian = Instantiate(_civilians[3], point.position, _civilians[3].transform.rotation);
             _negativeCivilianWeight--;
         }
 
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
-
+        //_escapePointGenerator.AddCivilian(civilian);
         return point;
     }
 }
