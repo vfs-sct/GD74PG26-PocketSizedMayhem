@@ -1423,9 +1423,11 @@ MonoBehaviour:
   _escapeRangeFindRadius: 100
   _endTarget: 1
   _state: 0
-  _pattern: 0
+  _pattern: 1
   _zigzagHorizontalDistance: 10
   _zigzagVerticalDistance: 10
+  _rotationSpeed: 2
+  _radius: 15
 --- !u!114 &1041028353720300704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1453,7 +1455,7 @@ MonoBehaviour:
   _animator: {fileID: 583236151604148576}
   _rb: {fileID: 2461877797427025339}
   _navMeshAgent: {fileID: 1826475401945314331}
-  _civilianBehaviour: {fileID: 0}
+  _civilianBehaviour: {fileID: 5646808012954638468}
   _animNo: 4
 --- !u!114 &940318795407769195
 MonoBehaviour:
@@ -1494,7 +1496,7 @@ MonoBehaviour:
   - {fileID: 5613392909065579699}
   - {fileID: 3714089535990793278}
   - {fileID: 3479897573386339620}
-  _characterMovement: {fileID: 0}
+  _characterMovement: {fileID: 5646808012954638468}
   _bounceForce: 50
 --- !u!1 &6032100472753130018
 GameObject:

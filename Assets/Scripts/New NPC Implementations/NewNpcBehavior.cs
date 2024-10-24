@@ -19,6 +19,8 @@ public class NewNpcBehavior : CharacterMovement3D
     [Header("Pattern Attributes")]
     [SerializeField] private float _zigzagHorizontalDistance;
     [SerializeField] private float _zigzagVerticalDistance;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _radius;
 
     [Header("Fading Attributes")]
     private Renderer _objectRenderer;
@@ -26,12 +28,15 @@ public class NewNpcBehavior : CharacterMovement3D
 
     private float _alpha;
     private float _fadeAmount = 1;
-    private bool _fadingOut;
-    private float _cycleCount = 0;
     private float _timer = 0;
     private float _timer2 = 0;
-    LayerMask _layerMask;
+    private float angle = 0;
+    private float _cycleCount = 0;
+    private bool _fadingOut;
+
     private Vector3 _newDirectionVector;
+    LayerMask _layerMask;
+    
     void Start()
     {
         _layerMask |= (1 << 22);
@@ -42,14 +47,20 @@ public class NewNpcBehavior : CharacterMovement3D
         _alpha = _objectMaterial.GetFloat("_Alpha");
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
+        _endTarget = (EndTarget) Random.Range(0, 2);
+        _state = (State) Random.Range(0, 2);
+        _pattern = (Pattern) Random.Range(0, 2);
+
         if (_endTarget == EndTarget.TARGET)
         {
             SetEscapeDestination();
         }
         else
         {
-            NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
-            Debug.Log(transform.position + _newDirectionVector);
+            if (_pattern == Pattern.ZIGZAG)
+            {
+                NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+            }  
         }
     }
 
@@ -62,8 +73,8 @@ public class NewNpcBehavior : CharacterMovement3D
     protected override void Update()
     {
         base.Update();
-
-        if(_endTarget == EndTarget.NO_TARGET)
+        angle += Time.deltaTime * _rotationSpeed;
+        if (_endTarget == EndTarget.NO_TARGET)
         {
             
             if (_pattern == Pattern.ZIGZAG)
@@ -85,7 +96,9 @@ public class NewNpcBehavior : CharacterMovement3D
             }
             else if (_pattern == Pattern.CIRCLE)
             {
-
+                    _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                    _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                    NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
             }
         }
     }

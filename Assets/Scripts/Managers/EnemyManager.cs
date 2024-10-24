@@ -14,10 +14,12 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private GameObject _pointPopUp;
     [SerializeField] private GameObject _pointEnd;
+
     private void Start()
     {
         _regularEnemiesList = new List<RegularCriminalBehaviour>();
     }
+
     private void Update()
     {
         foreach (RegularCriminalBehaviour criminal in _regularEnemiesList)

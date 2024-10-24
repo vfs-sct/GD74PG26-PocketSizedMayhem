@@ -31,11 +31,6 @@ public class TestSpawner : MonoBehaviour
     private int _spawnWeightTotal;
     private int _spawnPointWeightTotal;
 
-    private int _easyCivilianCount;
-    private int _mediumCivilianCount;
-    private int _hardCivilianCount;
-    private int _negativeCivilianCount;
-
     void Start()
     {
         _spawnCount = Random.Range(_minSpawn, _maxSpawn);
@@ -56,22 +51,22 @@ public class TestSpawner : MonoBehaviour
         {
             int selection = Random.Range(0, _spawnPointWeightTotal);
 
-            if (selection > 0 && selection < _topWeight)
+            if (selection >= 0 && selection < _topWeight && _topWeight!=0)
             {
                _topSpawnPoints.Remove(SpawnCivilians(_topSpawnPoints[Random.Range(0, _topSpawnPoints.Count)]));
                _topWeight = (_topWeight * (_topSpawnPoints.Count) / (_topSpawnPoints.Count + 1));
             }
-            else if (selection >= _topWeight && selection < _leftWeight + _topWeight) 
+            else if (selection >= _topWeight && selection < _leftWeight + _topWeight && _leftWeight != 0) 
             {
                 _leftSpawnPoints.Remove(SpawnCivilians(_leftSpawnPoints[Random.Range(0, _leftSpawnPoints.Count)]));
                 _leftWeight = ((_leftWeight * _leftSpawnPoints.Count) / (_leftSpawnPoints.Count + 1));
             }
-            else if (selection >= _leftWeight + _topWeight && selection < _leftWeight + _topWeight + _bottomWeight)
+            else if (selection >= _leftWeight + _topWeight && selection < _leftWeight + _topWeight + _bottomWeight && _bottomWeight != 0)
             {
                 _bottomSpawnPoints.Remove(SpawnCivilians(_bottomSpawnPoints[Random.Range(0, _bottomSpawnPoints.Count)]));
                 _bottomWeight = ((_bottomWeight  * _bottomSpawnPoints.Count ) / (_bottomSpawnPoints.Count + 1));
             }
-            else if (selection >= _leftWeight + _topWeight + _bottomWeight && selection < _spawnPointWeightTotal)
+            else if (selection >= _leftWeight + _topWeight + _bottomWeight && selection < _spawnPointWeightTotal && _rightWeight != 0)
             {
                 _rightSpawnPoints.Remove(SpawnCivilians(_rightSpawnPoints[Random.Range(0, _rightSpawnPoints.Count)]));
                 _rightWeight = (_rightWeight * (_rightSpawnPoints.Count) / (_rightSpawnPoints.Count + 1));
@@ -85,6 +80,7 @@ public class TestSpawner : MonoBehaviour
     {
         int selection = Random.Range(0, _spawnWeightTotal);
         GameObject civilian;
+
         if (selection >= 0 && selection < _easyCivilianWeight && _easyCivilianWeight!=0)
         {
             civilian = Instantiate(_civilians[0], point.position, _civilians[0].transform.rotation);
@@ -107,7 +103,6 @@ public class TestSpawner : MonoBehaviour
         }
 
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
-        //_escapePointGenerator.AddCivilian(civilian);
         return point;
     }
 }

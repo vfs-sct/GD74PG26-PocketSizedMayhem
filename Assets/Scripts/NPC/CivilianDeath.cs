@@ -14,7 +14,7 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private CivilianBehaviour _civilianBehaviour;
+    [SerializeField] private NewNpcBehavior _civilianBehaviour;
     [SerializeField] private int _animNo;
     
     public event EventHandler<GameObject> OnKilled;
@@ -31,8 +31,8 @@ public class CivilianDeath : MonoBehaviour
         if (other.gameObject.tag == "Mallet")
         {
             _capsuleCollider.enabled = false;
-            _civilianBehaviour.Stop();
-            
+            _civilianBehaviour.enabled = false;
+
             _ragdollController.RagdollModeOn();
             _ragdollController.DeathBounce();
             
@@ -49,22 +49,9 @@ public class CivilianDeath : MonoBehaviour
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
+
             this.enabled = false;
             _triggerCollider.enabled = false;
-        }
-        else if (other.gameObject.layer.Equals(14))
-        {
-            DeathByCriminal();
-
-            if (!_pointGiven)
-            {
-                GameManager.LosePoint();
-                _pointGiven = true;
-            }
-        }
-        else if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
-        {
-            OnCaptured?.Invoke(this, this.gameObject);
         }
     }
 
