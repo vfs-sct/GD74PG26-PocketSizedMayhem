@@ -1129,7 +1129,7 @@ GameObject:
   - component: {fileID: 5593049993886594456}
   - component: {fileID: 4532356619116532912}
   m_Layer: 6
-  m_Name: Rig:Hips
+  m_Name: mixamorig:Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1325,7 +1325,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5390339625992018888}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3a0dd0a7884d2e34caf02e93f46ed9c8, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 10c7254d9cabe394ab3c1849ee042652, type: 3}
   m_Controller: {fileID: 9100000, guid: 6dfc26b383e94e848abb8949ca5f23b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

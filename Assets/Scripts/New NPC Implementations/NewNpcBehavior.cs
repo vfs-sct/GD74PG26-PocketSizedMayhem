@@ -1,5 +1,6 @@
 using CharacterMovement;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,7 +39,7 @@ public class NewNpcBehavior : CharacterMovement3D
     private bool _fadingOut;
 
     private GameObject _target;
-
+    private bool isGrounded;
     private Vector3 _newDirectionVector;
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
@@ -80,6 +81,7 @@ public class NewNpcBehavior : CharacterMovement3D
         }
 
         this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
+        NavMeshAgent.enabled = false;
     }
 
     private void SetEscapeDestination()
@@ -99,7 +101,7 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         base.Update();
         angle += Time.deltaTime * _rotationSpeed;
-        if (_endTarget == EndTarget.NO_TARGET)
+        if (_endTarget == EndTarget.NO_TARGET && (IsGrounded))
         {
             if (_pattern == Pattern.ZIGZAG)
             {
@@ -125,7 +127,7 @@ public class NewNpcBehavior : CharacterMovement3D
                 NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
             }
         }
-        else if (_endTarget == EndTarget.CIVILIAN)
+        else if (_endTarget == EndTarget.CIVILIAN && (IsGrounded))
         {
             NavMeshAgent.SetDestination(_target.transform.position);
         }
@@ -192,5 +194,15 @@ public class NewNpcBehavior : CharacterMovement3D
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(transform.position, _escapeRangeFindRadius);
+    }
+
+    protected override void  OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Floor")) && !isGrounded)
+        {
+            isGrounded = true;
+            GetComponent<Animator>().SetTrigger("GetUp");
+        }
     }
 }
