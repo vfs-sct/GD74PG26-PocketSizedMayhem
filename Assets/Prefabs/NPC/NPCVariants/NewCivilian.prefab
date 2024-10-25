@@ -1417,6 +1417,8 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 2461877797427025339}
   <NavMeshAgent>k__BackingField: {fileID: 1826475401945314331}
   <CapsuleCollider>k__BackingField: {fileID: 2011792685782677946}
+  _upForce: 30
+  _forwardForce: 15
   point: 0
   fadeOutTime: 8
   _fadeSpeed: 1

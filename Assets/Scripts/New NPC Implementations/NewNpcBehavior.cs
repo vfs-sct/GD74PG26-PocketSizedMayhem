@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class NewNpcBehavior : CharacterMovement3D
 {
+    [Header("Throw Attributes")]
+    [SerializeField] private float _upForce;
+    [SerializeField] private float _forwardForce;
     [Header("NPC Attributes")]
     [SerializeField] private float point;
     [SerializeField] private float fadeOutTime;
@@ -40,6 +43,7 @@ public class NewNpcBehavior : CharacterMovement3D
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
     
+
     void Start()
     {
         _layerMask |= (1 << 22);
@@ -74,6 +78,8 @@ public class NewNpcBehavior : CharacterMovement3D
                 NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
             }  
         }
+
+        this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
     }
 
     private void SetEscapeDestination()

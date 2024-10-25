@@ -42,10 +42,9 @@ public class TestSpawner : MonoBehaviour
         _rightWeight *= _rightSpawnPoints.Count;
 
         _spawnPointWeightTotal = _topWeight + _leftWeight + _bottomWeight + _rightWeight;
-        SpawnAtPoint();
     }
 
-    private void SpawnAtPoint()
+    public void SpawnAtPoint()
     {
         for (int i = 0; i < _spawnCount; i++)
         {
@@ -83,26 +82,27 @@ public class TestSpawner : MonoBehaviour
 
         if (selection >= 0 && selection < _easyCivilianWeight && _easyCivilianWeight!=0)
         {
-            civilian = Instantiate(_civilians[0], point.position, _civilians[0].transform.rotation);
+            civilian = Instantiate(_civilians[0], point.position, point.rotation);
             _easyCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight && _mediumCivilianWeight != 0)
         {
-            civilian = Instantiate(_civilians[1], point.position, _civilians[1].transform.rotation);
+            civilian = Instantiate(_civilians[1], point.position, point.rotation);
             _mediumCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight && _hardCivilianWeight != 0)
         {
-            civilian = Instantiate(_civilians[2], point.position, _civilians[2].transform.rotation);
+            civilian = Instantiate(_civilians[2], point.position, point.rotation);
             _hardCivilianWeight--;
         }
         else
         {
-            civilian = Instantiate(_civilians[3], point.position, _civilians[3].transform.rotation);
+            civilian = Instantiate(_civilians[3], point.position, point.rotation);
             _negativeCivilianWeight--;
         }
 
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
         return point;
     }
+
 }
