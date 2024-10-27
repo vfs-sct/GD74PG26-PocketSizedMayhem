@@ -13,7 +13,7 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private RagdollOnOffController _ragdollController;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    //[SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private NewNpcBehavior _civilianBehaviour;
     [SerializeField] private int _animNo;
     

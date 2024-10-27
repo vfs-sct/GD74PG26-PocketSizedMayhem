@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class TestSpawner : MonoBehaviour
 {
@@ -30,10 +31,15 @@ public class TestSpawner : MonoBehaviour
     private int _spawnCount;
     private int _spawnWeightTotal;
     private int _spawnPointWeightTotal;
-
+    [SerializeField] private Material _material;
+    private float _fillAmount;
+    private float _fillEachCivilian;
+    private bool _isFilling;
     void Start()
     {
-        _spawnCount = Random.Range(_minSpawn, _maxSpawn);
+        _spawnCount = 0;
+        //_spawnCount = Random.Range(_minSpawn, _maxSpawn);
+        _fillEachCivilian = 1 / _material.GetFloat("_TileCount");
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
 
         _topWeight *= _topSpawnPoints.Count;
@@ -43,7 +49,24 @@ public class TestSpawner : MonoBehaviour
 
         _spawnPointWeightTotal = _topWeight + _leftWeight + _bottomWeight + _rightWeight;
     }
+    private void Update()
+    {
+        if( _isFilling )
+        {
+            Fill();
+        }
+        else
+        {
 
+        }
+    }
+    private void Fill()
+    {
+        _fillAmount = Mathf.PingPong(Time.time, 1f);
+        _fillAmount -= 0.5f;
+        _material.SetFloat("_Fill_Rate", _fillAmount);
+        _spawnCount = (int)((_fillAmount + 0.5f) / 0.2f);
+    }
     public void SpawnAtPoint()
     {
         for (int i = 0; i < _spawnCount; i++)

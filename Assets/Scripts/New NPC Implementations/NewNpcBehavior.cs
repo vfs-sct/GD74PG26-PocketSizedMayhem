@@ -1,6 +1,7 @@
 using CharacterMovement;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,7 +40,7 @@ public class NewNpcBehavior : CharacterMovement3D
     private bool _fadingOut;
 
     private GameObject _target;
-    private bool isGrounded;
+    private bool _targetAssigned = false;
     private Vector3 _newDirectionVector;
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
@@ -58,50 +59,26 @@ public class NewNpcBehavior : CharacterMovement3D
         _endTarget = (EndTarget) Random.Range(0, 2);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
-
-        if(point<0)
-        {
-            _endTarget = EndTarget.CIVILIAN;
-        }
-
-        if (_endTarget == EndTarget.TARGET)
-        {
-            SetEscapeDestination();
-        }
-        else if(_endTarget == EndTarget.CIVILIAN)
-        {
-            SetCivilianTarget();
-        }
-        else
-        {
-            if (_pattern == Pattern.ZIGZAG)
-            {
-                NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
-            }  
-        }
-
         this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
-        NavMeshAgent.enabled = false;
+        NavMeshAgent.isStopped = true;
     }
 
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
-        
-        NavMeshAgent.SetDestination(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
+        MoveTo(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
     }
     private void SetCivilianTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
         _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
-        // //NavMeshAgent.SetDestination(hitColliders[Random.Range(0, hitColliders.Length)].transform.position)
     }
 
     protected override void Update()
     {
         base.Update();
         angle += Time.deltaTime * _rotationSpeed;
-        if (_endTarget == EndTarget.NO_TARGET && (IsGrounded))
+        if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
         {
             if (_pattern == Pattern.ZIGZAG)
             {
@@ -117,19 +94,19 @@ public class NewNpcBehavior : CharacterMovement3D
                         _newDirectionVector.x *= -1;
                         _newDirectionVector.z = 0;
                     }
-                    NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+                    MoveTo(transform.position + _newDirectionVector);
                 }
             }
             else if (_pattern == Pattern.CIRCLE)
             {
                 _newDirectionVector.x = Mathf.Cos(angle) * _radius;
                 _newDirectionVector.z = Mathf.Sin(angle) * _radius;
-                NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+                MoveTo(transform.position + _newDirectionVector);
             }
         }
-        else if (_endTarget == EndTarget.CIVILIAN && (IsGrounded))
+        else if (_endTarget == EndTarget.CIVILIAN )
         {
-            NavMeshAgent.SetDestination(_target.transform.position);
+            MoveTo(_target.transform.position);
         }
     }
 
@@ -167,7 +144,30 @@ public class NewNpcBehavior : CharacterMovement3D
         }
         yield return StartCoroutine(ColorFadeOut());
     }
+    private void AssignTarget()
+    {
+        if (point < 0)
+        {
+            _endTarget = EndTarget.CIVILIAN;
+        }
 
+        if (_endTarget == EndTarget.TARGET)
+        {
+            SetEscapeDestination();
+        }
+        else if (_endTarget == EndTarget.CIVILIAN)
+        {
+            SetCivilianTarget();
+        }
+        else
+        {
+            if (_pattern == Pattern.ZIGZAG)
+            {
+                MoveTo(transform.position + _newDirectionVector);
+            }
+        }
+        
+    }
     public enum EndTarget
     {
         TARGET,
@@ -191,17 +191,12 @@ public class NewNpcBehavior : CharacterMovement3D
         return point;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position, _escapeRangeFindRadius);
-    }
-
     protected override void  OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Floor")) && !isGrounded)
+        if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Floor")) && NavMeshAgent.isOnNavMesh)
         {
-            isGrounded = true;
+            NavMeshAgent.isStopped = false;
             GetComponent<Animator>().SetTrigger("GetUp");
         }
     }
