@@ -43,6 +43,7 @@ public class Mallet : Weapon
     [SerializeField]private int pullIntensity;
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
+    [SerializeField] private float _hungerExpense;
     private void Start()
     {
         _attackMode = 0;
@@ -88,6 +89,7 @@ public class Mallet : Weapon
             }
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
+            PlayerStats.Hunger -= _hungerExpense;
         }
     }
 
@@ -106,6 +108,7 @@ public class Mallet : Weapon
     {
         if (_attackMode == 1)
         {
+            gameObject.tag = "Mallet";
             _attackMode = 0;
             _malletAnimator.SetTrigger("SwitchMallet");
             _vacuum.VacuumOff();
@@ -116,6 +119,7 @@ public class Mallet : Weapon
     {
         if (_attackMode == 0)
         {
+            gameObject.tag = "Vacuum";
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
         }

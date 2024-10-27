@@ -35,6 +35,10 @@ public class TestSpawner : MonoBehaviour
     private float _fillAmount;
     private float _fillEachCivilian;
     private bool _isFilling;
+    private bool _isDestroyed =false;
+
+    [SerializeField] GameObject _Vacuum;
+
     void Start()
     {
         _spawnCount = 0;
@@ -51,21 +55,14 @@ public class TestSpawner : MonoBehaviour
     }
     private void Update()
     {
-        if( _isFilling )
-        {
-            Fill();
-        }
-        else
-        {
-
-        }
+        Fill();
     }
     private void Fill()
     {
         _fillAmount = Mathf.PingPong(Time.time, 1f);
         _fillAmount -= 0.5f;
         _material.SetFloat("_Fill_Rate", _fillAmount);
-        _spawnCount = (int)((_fillAmount + 0.5f) / 0.2f);
+        _spawnCount = (int)(((_fillAmount + 0.5f) / 0.2f) +1);
     }
     public void SpawnAtPoint()
     {
@@ -125,7 +122,18 @@ public class TestSpawner : MonoBehaviour
         }
 
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
+        //civilian.GetComponent<NewNpcBehavior>().AssignVacuumBase(_Vacuum);
         return point;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Mallet" && !_isDestroyed)
+        {
+            _isDestroyed = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;
+            Debug.Log(_spawnCount);
+            SpawnAtPoint();
+        }
+    }
 }

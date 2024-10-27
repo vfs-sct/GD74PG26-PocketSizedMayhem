@@ -42,7 +42,6 @@ public class CivilianDeath : MonoBehaviour
             
             if (!_pointGiven)
             {
-                Debug.Log(_civilianBehaviour.GetPoint());
                 PlayerStats.Points += _civilianBehaviour.GetPoint();
                 _pointGiven= true;
             }
@@ -53,6 +52,11 @@ public class CivilianDeath : MonoBehaviour
 
             this.enabled = false;
             _triggerCollider.enabled = false;
+        }
+        else if(other.gameObject.tag == "Vacuum")
+        {
+            this.gameObject.SetActive(false);
+            PlayerStats.Hunger += 5;
         }
     }
 

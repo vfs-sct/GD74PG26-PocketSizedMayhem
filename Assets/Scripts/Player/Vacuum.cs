@@ -15,6 +15,7 @@ public class Vacuum : MonoBehaviour
     Vector3 endScale;
     Vector3 RayStartScale;
     [SerializeField] float raychangespeed;
+    [SerializeField] private GameObject _pukeVFX;
     private void Start()
     {
         RayStartScale = _Ray.transform.localScale;
@@ -29,8 +30,10 @@ public class Vacuum : MonoBehaviour
     }
     private void Update()
     {
+        
         if (_vacuumOn)
         {
+            
             _Ray.transform.localScale = Vector3.Lerp(_Ray.transform.localScale, RayStartScale, raychangespeed * Time.deltaTime);
         }
         else
@@ -45,7 +48,9 @@ public class Vacuum : MonoBehaviour
             foreach (GameObject enemy in pulledObjects)
             {
                 Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 50;
-                enemy.GetComponent<Rigidbody>().velocity  = (new Vector3(pullForce.x * 2, pullForce.y, pullForce.z * 2));
+                enemy.GetComponent<Rigidbody>().velocity  = (new Vector3(pullForce.x * 2, pullForce.y *4, pullForce.z * 2));
+                Debug.Log(gameObject.transform.position);
+                enemy.GetComponent<NewNpcBehavior>().AssignVacuumPos(this.gameObject);
             }
         }
     }
@@ -59,6 +64,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
         pulledObjects.Remove(other.gameObject);
     }
 
@@ -83,6 +89,10 @@ public class Vacuum : MonoBehaviour
             Destroy(enemy.GetComponent<FixedJoint>());
             enemy.transform.parent = null;
         }
+    }
+    public void Puke()
+    {
+        Instantiate(_pukeVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     public void VacuumOn()
     {

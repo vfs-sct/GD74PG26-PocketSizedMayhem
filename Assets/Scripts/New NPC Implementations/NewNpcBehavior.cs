@@ -44,16 +44,18 @@ public class NewNpcBehavior : CharacterMovement3D
     private Vector3 _newDirectionVector;
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
-    
 
+    [SerializeField] public GameObject _vacuum;
     void Start()
     {
-        _layerMask |= (1 << 22);
-        _civilianTargetLayerMask |= (1 << 6);
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
+        
+        _layerMask |= (1 << 22);
+        _civilianTargetLayerMask |= (1 << 6);
+        
 
-        _alpha = _objectMaterial.GetFloat("_Alpha");
+        //_alpha = _objectMaterial.GetFloat("_Alpha");
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
         _endTarget = (EndTarget) Random.Range(0, 2);
@@ -73,7 +75,14 @@ public class NewNpcBehavior : CharacterMovement3D
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
         _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
     }
-
+    public void AssignVacuumPos(GameObject vacuum)
+    {
+        if(vacuum != null)
+        {
+            _objectMaterial.SetVector("_Target", vacuum.transform.position);
+            Debug.Log(vacuum.transform.position);
+        }
+    }
     protected override void Update()
     {
         base.Update();
