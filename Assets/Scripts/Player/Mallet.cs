@@ -16,6 +16,7 @@ public class Mallet : Weapon
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
     [SerializeField] private GameObject _debrisVFX;
+    
     [SerializeField] private GameObject _impact;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _originalStartY;

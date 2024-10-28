@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
+using static UnityEngine.Rendering.HableCurve;
 
 public class TestSpawner : MonoBehaviour
 {
@@ -34,13 +35,15 @@ public class TestSpawner : MonoBehaviour
     [SerializeField] private Material _material;
     private float _fillAmount;
     private float _fillEachCivilian;
-    private bool _isFilling;
+    private bool _isFilling = false;
     private bool _isDestroyed =false;
 
     [SerializeField] GameObject _Vacuum;
-
+    private int segments;
+    private float fillTime;
     void Start()
     {
+        fillTime = Time.time;
         _spawnCount = 0;
         //_spawnCount = Random.Range(_minSpawn, _maxSpawn);
         _fillEachCivilian = 1 / _material.GetFloat("_TileCount");
@@ -55,14 +58,20 @@ public class TestSpawner : MonoBehaviour
     }
     private void Update()
     {
-        Fill();
+            StartCoroutine(Fill());
     }
-    private void Fill()
+    private IEnumerator Fill()
     {
-        _fillAmount = Mathf.PingPong(Time.time, 1f);
-        _fillAmount -= 0.5f;
-        _material.SetFloat("_Fill_Rate", _fillAmount);
-        _spawnCount = (int)(((_fillAmount + 0.5f) / 0.2f) +1);
+        if(_isFilling)
+        {
+            fillTime += Time.deltaTime;
+            _fillAmount = Mathf.PingPong(fillTime, 1.2f);
+            segments = (int)(_fillAmount * 5);
+            _material.SetFloat("_Fill_Rate", segments * 0.2f);
+            _spawnCount = (int)(segments);
+        }
+        yield return null;
+
     }
     public void SpawnAtPoint()
     {

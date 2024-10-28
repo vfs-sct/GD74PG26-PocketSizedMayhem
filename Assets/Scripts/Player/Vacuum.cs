@@ -40,6 +40,11 @@ public class Vacuum : MonoBehaviour
         {
             _Ray.transform.localScale = Vector3.Lerp(_Ray.transform.localScale, Vector3.zero, raychangespeed * Time.deltaTime);
         }
+        if(PlayerStats.Hunger >= 100)
+        {
+            PlayerStats.Hunger = 50;
+            Puke();
+        }
     }
     private void FixedUpdate()
     {
@@ -49,7 +54,6 @@ public class Vacuum : MonoBehaviour
             {
                 Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 50;
                 enemy.GetComponent<Rigidbody>().velocity  = (new Vector3(pullForce.x * 2, pullForce.y *4, pullForce.z * 2));
-                Debug.Log(gameObject.transform.position);
                 enemy.GetComponent<NewNpcBehavior>().AssignVacuumPos(this.gameObject);
             }
         }
@@ -92,6 +96,7 @@ public class Vacuum : MonoBehaviour
     }
     public void Puke()
     {
+        PlayerStats.Hunger -= 50;
         Instantiate(_pukeVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     public void VacuumOn()
