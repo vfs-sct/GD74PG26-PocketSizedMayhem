@@ -1473,6 +1473,7 @@ MonoBehaviour:
   _npcAnimator: {fileID: 0}
   _ragdollColliders: []
   _ragdollRigidbodies: []
+  _characterMovement: {fileID: 0}
   _bounceForce: 20
 --- !u!114 &2027294562923770415
 MonoBehaviour:

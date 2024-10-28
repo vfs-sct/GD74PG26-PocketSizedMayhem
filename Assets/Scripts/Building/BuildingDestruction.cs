@@ -5,10 +5,11 @@ using UnityEngine;
 public class BuildingDestruction : MonoBehaviour
 {
     [SerializeField] private int _force;
-    [SerializeField] List<GameObject> _pieces;
-    [SerializeField] GameObject _civilians;
+    [SerializeField] private List<GameObject> _pieces;
+    [SerializeField] private GameObject _civilians;
+    [SerializeField] private TestSpawner _spawner;
     private bool _isDestoyed;
-    // Start is called before the first frame update
+
     void Start()
     {
         _isDestoyed = false;
@@ -34,13 +35,7 @@ public class BuildingDestruction : MonoBehaviour
             }
             _isDestoyed = true;
             StartCoroutine(AssignDebri());
-            int random = Random.Range(0, 4);
-            for(int i =0;i< random;i++)
-            {
-                GameObject civilian = Instantiate(_civilians, this.gameObject.transform.position + Vector3.up*5,_civilians.transform.rotation);
-                civilian.GetComponent<RagdollOnOffController>().RagdollModeOn();
-                civilian.GetComponent<RagdollOnOffController>().DeathBounce();
-            }
+            _spawner.SpawnAtPoint();
         }
     }
 

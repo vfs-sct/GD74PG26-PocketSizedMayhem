@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CharacterMovement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class CivilianBehaviour : CharacterMovement3D
 {
@@ -12,18 +13,21 @@ public class CivilianBehaviour : CharacterMovement3D
     [SerializeField] private GameObject _destination;
     [SerializeField] private Animator _animator;
     
+    
     private void Start()
     {
         if (!SpawnSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(SpawnSFX, this.gameObject.transform.position);
         }
+        
     }
 
     protected override void  Update()
     {
         base.Update();
-        MoveTo(_destination.transform.position);    
+        MoveTo(_destination.transform.position);
+        
     }
     
     public void SetDestionation(GameObject newDestination)

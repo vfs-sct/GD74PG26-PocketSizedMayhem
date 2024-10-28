@@ -5,6 +5,7 @@ using System.Diagnostics.Eventing.Reader;
 using CharacterMovement;
 using UnityEngine;
 using UnityEngine.AI;
+using PrimeTween;
 
 public class RegularCriminalBehaviour : CharacterMovement3D
 {
@@ -18,6 +19,8 @@ public class RegularCriminalBehaviour : CharacterMovement3D
    
     [SerializeField] protected NavMeshAgent _navMeshAgent;
     [SerializeField] protected Animator _enemyAnimator;
+
+    private bool _isSpinning= false;
     
     private void Start()
     {
@@ -42,6 +45,13 @@ public class RegularCriminalBehaviour : CharacterMovement3D
         {
             MoveTo(_primaryTarget.transform.position); 
         }
+
+        if (_isSpinning)
+        {
+            transform.Rotate(180 * Time.deltaTime, 180 * Time.deltaTime, 180 * Time.deltaTime);
+
+        }
+        
     }
 
     public void SetTarget(GameObject target)
@@ -68,14 +78,14 @@ public class RegularCriminalBehaviour : CharacterMovement3D
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer.Equals(15))
-        {
-            GameManager.AddPoint();
-            PlayerStats.CriminalCaptured++;
-        }
         if (other.gameObject == _primaryTarget)
         {
             _primaryTarget = _shelter;
+        }
+        if(other.gameObject.layer == LayerMask.NameToLayer("Vacuum"))
+        {
+            _isSpinning = true;
+            _enemyAnimator.SetTrigger("Vacuum");
         }
     }
     private void OnTriggerExit(Collider other)

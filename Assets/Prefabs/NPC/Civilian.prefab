@@ -1197,7 +1197,7 @@ Rigidbody:
   m_GameObject: {fileID: 6660491637078578144}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 13.52
+  m_Drag: 1
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -1344,6 +1344,7 @@ MonoBehaviour:
   - {fileID: 4236669967902194993}
   - {fileID: 5918556150836635467}
   - {fileID: 1551616270373979497}
+  _characterMovement: {fileID: 4221005304262489085}
   _bounceForce: 50
 --- !u!114 &4221005304262489085
 MonoBehaviour:

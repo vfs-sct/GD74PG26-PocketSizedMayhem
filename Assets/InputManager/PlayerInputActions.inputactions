@@ -130,6 +130,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Release",
+                    "type": "Button",
+                    "id": "95b42ff1-d65f-4441-bce7-7d437fbccb22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Vacuum",
+                    "type": "Button",
+                    "id": "fd0bb740-f1bb-4d30-9c6d-9c74a68c8050",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -471,6 +489,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectClaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf1fc627-9b99-40e1-8161-65a134887e90",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Release",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d53065a-72d2-47a2-bdc4-c1ba3435e192",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=0.1,pressPoint=0.1)",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Vacuum",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
