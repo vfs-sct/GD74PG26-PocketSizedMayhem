@@ -13,7 +13,7 @@ using Vector3 = UnityEngine.Vector3;
 public class Mallet : Weapon
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
-
+    [SerializeField] private GameObject _debrisVFX;
     [SerializeField] private GameObject _impact;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _originalStartY;
@@ -31,6 +31,8 @@ public class Mallet : Weapon
     [SerializeField] private float _impactRadius;
     [SerializeField] private float _malletMovementSpeed ;
     private bool _isAttacking = false;
+    private int layerAsLayerMask;
+    
     public override void Fire()
     {
         if(!_isAttacking)
@@ -72,11 +74,35 @@ public class Mallet : Weapon
     {
         GetComponentInChildren<Collider>().enabled = true;
         _isAttacking = true;
+
     }
     public void ImpactEffects()
     {
         GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
         impact.GetComponent<VisualEffect>().Play();
+        //layerAsLayerMask |= (1 << 6);   
+        //layerAsLayerMask |= (1 << 7);
+        //Collider[] hitColliders = new Collider[25];
+        //Physics.OverlapSphereNonAlloc(transform.position, 10, hitColliders, layerAsLayerMask);
+        //foreach (Collider collider in hitColliders)
+        //{
+        //    if(collider.enabled)
+        //    {
+        //        if (collider.gameObject.TryGetComponent<Animator>(out Animator component))
+        //        {
+        //            Tween.PunchLocalPosition(collider.gameObject.transform, strength: Vector3.up * 10, duration: 0.7f, frequency: 1);
+        //        }
+        //    }
+        //}
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Debris"))
+        {
+            Instantiate(_debrisVFX, other.transform.position, _debrisVFX.transform.rotation);
+            Destroy(other.gameObject);
+        }
     }
 }
 

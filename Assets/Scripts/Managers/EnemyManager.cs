@@ -1,7 +1,7 @@
+using PrimeTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -9,6 +9,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private CivilianManager _civilianManager;
 
     [SerializeField] public List<RegularCriminalBehaviour> _regularEnemiesList;
+
+    [SerializeField] private Canvas canvas;
+
+    [SerializeField] private GameObject _pointPopUp;
+    [SerializeField] private GameObject _pointEnd;
     private void Start()
     {
         _regularEnemiesList = new List<RegularCriminalBehaviour>();
@@ -54,5 +59,9 @@ public class EnemyManager : MonoBehaviour
         }
         _regularEnemiesList.Remove(enemy.GetComponent<RegularCriminalBehaviour>());
         enemy.GetComponent<EnemyDeath>().OnKilled -= RemoveEnemy;
+        Vector3 randomVector = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(5f, 10f), UnityEngine.Random.Range(-5f, 5f));
+        GameObject point = Instantiate(_pointPopUp, Camera.main.WorldToScreenPoint(enemy.transform.position+ randomVector), _pointPopUp.transform.rotation, canvas.transform);
+        Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+        Tween.Position(point.transform, _pointEnd.transform.position ,  duration: 1, ease: Ease.OutSine);
     }
 }

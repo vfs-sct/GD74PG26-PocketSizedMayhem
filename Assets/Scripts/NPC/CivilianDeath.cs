@@ -18,7 +18,7 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private int _animNo;
     
     public event EventHandler<GameObject> OnKilled;
-
+    public event EventHandler<GameObject> OnCaptured;
     private bool _pointGiven;
     
     private void Start()
@@ -61,6 +61,10 @@ public class CivilianDeath : MonoBehaviour
                 GameManager.LosePoint();
                 _pointGiven = true;
             }
+        }
+        else if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
+        {
+            OnCaptured?.Invoke(this, this.gameObject);
         }
     }
 

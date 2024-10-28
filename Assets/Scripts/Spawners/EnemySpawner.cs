@@ -14,6 +14,7 @@ public class EnemySpawner : Spawner
     public List<float> times;
     private float timer = 0;
     public int iteration = 0;
+    public int waveIteration = 1;
     private void Awake()
     {
         times = new List<float>();
@@ -31,6 +32,12 @@ public class EnemySpawner : Spawner
                 StartCoroutine(SpawnWave());
             }
         }
+        else
+        {
+            iteration = 0;
+            timer = 0;
+            waveIteration++;
+        }
         timer += Time.deltaTime;
     }
     public override void SpawnObject()
@@ -43,7 +50,7 @@ public class EnemySpawner : Spawner
     IEnumerator SpawnWave()
     {
 
-        for (int i = 0; i < spawncount[iteration]; i++)
+        for (int i = 0; i < spawncount[iteration] * waveIteration; i++)
         {
             SpawnObject();
         }

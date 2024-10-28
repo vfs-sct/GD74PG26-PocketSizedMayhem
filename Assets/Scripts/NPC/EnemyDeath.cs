@@ -20,6 +20,7 @@ public class EnemyDeath : MonoBehaviour
 
     private bool _pointGiven;
 
+
     private void Start()
     {
         _pointGiven = false;
@@ -53,6 +54,8 @@ public class EnemyDeath : MonoBehaviour
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
             _triggerCollider.enabled = false;
+            
         }
+       
     }
 }

@@ -76,6 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _force: 0
   _pieces: []
+  _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
+    type: 3}
 --- !u!1 &4118782359946001190
 GameObject:
   m_ObjectHideFlags: 0

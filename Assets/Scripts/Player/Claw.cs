@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Claw : Weapon
 {
     [SerializeField] private GameObject _target;
+    [SerializeField] private GameObject _clawParent;
     [SerializeField] private GameObject _grabbedObject;
     [SerializeField] private FixedJoint _joint;
 
@@ -25,52 +26,53 @@ public class Claw : Weapon
     }
     private void Update()
     {
-        if (_fired)
-        {
-            if (_grabbedObject == null)
-            {
-                transform.Translate(Vector3.down * Time.deltaTime * _descendSpeed);
-            }
-            else
-            {
-                Destroy(_grabbedObject.GetComponent<FixedJoint>());
-                if(_grabbedObject.GetComponent<RagdollOnOffController>())
-                {
-                    //_grabbedObject.GetComponent<NavMeshAgent>().enabled = true;
-                    _grabbedObject.GetComponent<Animator>().enabled = true;
-                    _grabbedObject.GetComponent<Rigidbody>().useGravity = true;
-                    _grabbedObject.GetComponent<RagdollOnOffController>().enabled = true;
-                    _grabbedObject.GetComponent<CapsuleCollider>().enabled = true;
-                }
-                _grabbedObject = null;
+        //if (_fired)
+        //{
+        //    if (_grabbedObject == null)
+        //    {
+        //        transform.Translate(Vector3.down * Time.deltaTime * _descendSpeed);
+        //    }
+        //    else
+        //    {
+        //        Destroy(_grabbedObject.GetComponent<FixedJoint>());
+        //        if(_grabbedObject.GetComponent<RagdollOnOffController>())
+        //        {
+        //            //_grabbedObject.GetComponent<NavMeshAgent>().enabled = true;
+        //            _grabbedObject.GetComponent<Animator>().enabled = true;
+        //            _grabbedObject.GetComponent<Rigidbody>().useGravity = true;
+        //            _grabbedObject.GetComponent<RagdollOnOffController>().enabled = true;
+        //            _grabbedObject.GetComponent<CapsuleCollider>().enabled = true;
+        //        }
+        //        _grabbedObject = null;
 
-                _fired = false;
-            }
-        }
-        else if (_grabbed)
-        {
-            transform.Translate(-Vector3.down * Time.deltaTime * _descendSpeed);
+        //        _fired = false;
+        //    }
+        //}
+        //else if (_grabbed)
+        //{
+        //    transform.Translate(-Vector3.down * Time.deltaTime * _descendSpeed);
 
-            if (transform.position.y > _originalStartY)
-            {
-                _grabbed = false;
-            }    
-        }
-        else
-        {
+        //    if (transform.position.y > _originalStartY)
+        //    {
+        //        _grabbed = false;
+        //    }    
+        //}
+        //if
+        //{
+            
             _mousePos = Input.mousePosition;
             if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out hit, Mathf.Infinity, _layerMask))
             {
+                
                 return;
             }
 
             _target.transform.position = hit.point;
-
-            this.transform.position = hit.point;
+           
             hitpoint = hit.point;
             hitpoint.y = _originalStartY;
-            transform.position = hitpoint;
-        }
+            _clawParent.transform.position = Vector3.MoveTowards(_clawParent.gameObject.transform.position, hitpoint, 4);
+        //}
     }
     private void OnCollisionEnter(Collision collision)
     {
