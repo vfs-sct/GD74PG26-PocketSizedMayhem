@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/UI.meta
+guid: 6b424ac27f553fe45b716fc9fb3523ce
+========
 guid: 976663e9c1996ff4691f39cd3b786851
+>>>>>>>> Gameplay:Assets/Events.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
