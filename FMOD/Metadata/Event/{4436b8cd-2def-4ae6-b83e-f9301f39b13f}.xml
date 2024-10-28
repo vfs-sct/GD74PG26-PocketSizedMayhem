@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{4436b8cd-2def-4ae6-b83e-f9301f39b13f}">
 		<property name="name">
-			<value>70 Punch_Face6</value>
+			<value>SFX_HumanAttack</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{c5e770dc-dee3-4ce6-a474-c59efa3a4193}</destination>
+			<destination>{31c8523b-3da1-41fc-8f6f-e96133db4b91}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{49418a32-0740-4685-9506-a6afa032d0a8}</destination>
