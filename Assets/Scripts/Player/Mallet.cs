@@ -46,6 +46,7 @@ public class Mallet : Weapon
     [SerializeField] private Vacuum _vacuum;
     [SerializeField] private float _hungerExpense;
     [SerializeField] private ParticleSystem _particleSystem;
+    private bool puking = false;
     private void Start()
     {
         
@@ -76,13 +77,19 @@ public class Mallet : Weapon
     private void OnMouseReleasePuke(InputAction.CallbackContext context)
     {
         var emission = _particleSystem.emission;
+        puking = false;
         emission.rateOverTime = 0;
     }
     public void OnRelease()
     {
-        _particleSystem.Play();
-        var emission = _particleSystem.emission;
-        emission.rateOverTime = 100;
+        if(PlayerStats.Hunger >0)
+        {
+            _particleSystem.Play();
+            var emission = _particleSystem.emission;
+            emission.rateOverTime = 100;
+            puking = true;
+        }
+        
     }
 
     private void OnDisable()
@@ -96,7 +103,8 @@ public class Mallet : Weapon
     
     public override void Fire()
     {
-        if(!_isAttacking && _attackMode == 0)
+        _malletAnimator.SetFloat("Direction", 1);
+        if ( _attackMode == 0)
         {
             if (!AttackSFX.IsNull)
             {
@@ -104,7 +112,6 @@ public class Mallet : Weapon
             }
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
-            PlayerStats.Hunger -= _hungerExpense;
         }
     }
 
@@ -145,6 +152,16 @@ public class Mallet : Weapon
     }
     private void Update()
     {
+        if(puking)
+        {
+            PlayerStats.Hunger-=0.5f;
+        }
+        if (PlayerStats.Hunger<=0)
+        {
+            var emission = _particleSystem.emission;
+            emission.rateOverTime = 0;
+            puking = false;
+        }
         _mousePos = Input.mousePosition;
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit, Mathf.Infinity, _layerMask))
         {
@@ -164,13 +181,13 @@ public class Mallet : Weapon
     public void DisableColliders()
     {
         GetComponentInChildren<Collider>().enabled = false;
-        _isAttacking = false;
+        //_isAttacking = false;
     }
 
     public void EnableColldiers()
     {
         GetComponentInChildren<Collider>().enabled = true;
-        _isAttacking = true;
+        //_isAttacking = true;
 
     }
     public void ImpactEffects()
@@ -189,6 +206,10 @@ public class Mallet : Weapon
         {
             
             enemies.Add(other.gameObject);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            _malletAnimator.SetFloat("Direction", -1);
         }
     }
     private void OnTriggerExit(Collider other)
