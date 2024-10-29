@@ -54,7 +54,6 @@ public class NewNpcBehavior : CharacterMovement3D
         _layerMask |= (1 << 22);
         _civilianTargetLayerMask |= (1 << 6);
         
-
         //_alpha = _objectMaterial.GetFloat("_Alpha");
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
@@ -62,7 +61,7 @@ public class NewNpcBehavior : CharacterMovement3D
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
         this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
-        NavMeshAgent.isStopped = true;
+        //NavMeshAgent.isStopped = true;
     }
 
     private void SetEscapeDestination()
@@ -203,10 +202,6 @@ public class NewNpcBehavior : CharacterMovement3D
     protected override void  OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Floor")) && NavMeshAgent.isOnNavMesh)
-        {
-            NavMeshAgent.isStopped = false;
-            GetComponent<Animator>().SetTrigger("GetUp");
-        }
+        
     }
 }

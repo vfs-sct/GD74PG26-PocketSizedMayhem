@@ -24,17 +24,13 @@ public class Vacuum : MonoBehaviour
         endScale = new Vector3(3,1,3);
         pulledObjects = new List<GameObject>();
         capturedObjects = new List<GameObject>();
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Enemy"));
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Debris"));
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Civilian"));
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Bomb"));
     }
     private void Update()
     {
         
         if (_vacuumOn)
         {
-           
             _Ray.transform.localScale = Vector3.Lerp(_Ray.transform.localScale, RayStartScale, raychangespeed * Time.deltaTime);
         }
         else
@@ -43,8 +39,7 @@ public class Vacuum : MonoBehaviour
         }
         if(PlayerStats.Hunger >= 100)
         {
-            PlayerStats.Hunger = 50;
-            Puke();
+            PlayerStats.Hunger = 100;
         }
     }
     private void FixedUpdate()
@@ -97,7 +92,6 @@ public class Vacuum : MonoBehaviour
     }
     public void Puke()
     {
-        PlayerStats.Hunger -= 50;
         Instantiate(_pukeVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     public void VacuumOn()

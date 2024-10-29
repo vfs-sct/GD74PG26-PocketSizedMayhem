@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
@@ -57,6 +58,20 @@ public class Mallet : Weapon
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
         enemies = new List<GameObject>();
+    }
+    public void OnRestartScene()
+    {
+        SceneManager.LoadScene("GameScene - M3");
+    }
+
+    public void OnIncreasePoint()
+    {
+        PlayerStats.Points += 10;
+    }
+    public void OnDecreasePoint()
+    {
+        Debug.Log("hehe");
+        PlayerStats.Points -= 10;
     }
     private void OnEnable()
     {

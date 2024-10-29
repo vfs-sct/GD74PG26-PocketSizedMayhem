@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Leaderboards.Exceptions;
+using Unity.Services.Leaderboards;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class TestManager : MonoBehaviour
 {
@@ -33,7 +36,40 @@ public class TestManager : MonoBehaviour
         else
         {
             _timerText.text = "Remaining Time: " + 0;
-            SceneManager.LoadScene("LoseScreen");
+            SceneManager.LoadScene("WinScreen");
         }
+    }
+    public void OnIncreaseTime()
+    {
+        Debug.Log("xs");
+        _elapsedTime += 10;
+    }
+    public void OnDecreaseTime()
+    {
+        _elapsedTime -= 10;
+    }
+    public void OnIncreasePoint()
+    {
+        PlayerStats.Points += 10;
+    }
+    public void OnDecreasePoint()
+    {
+        Debug.Log("hehe");
+        PlayerStats.Points -= 10;
+    }
+
+    public void OnRestartScene()
+    {
+        SceneManager.LoadScene("GameScene - M3");
+    }
+
+
+    public static void AddPoint(float point)
+    {
+        PlayerStats.Points += point;
+    }
+    public static void LosePoint()
+    {
+        PlayerStats.Points -= 10;
     }
 }

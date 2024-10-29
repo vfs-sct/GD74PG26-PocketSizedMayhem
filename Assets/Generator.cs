@@ -36,5 +36,6 @@ public class Generator : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         health--;
+        health--;
     }
 }
