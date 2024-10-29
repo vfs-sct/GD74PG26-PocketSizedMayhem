@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
@@ -27,6 +28,7 @@ public class Mallet : Weapon
     [SerializeField] InputActionAsset inputActions;
     [SerializeField] private GameObject _mouth;
     private InputAction vacuumAction;
+    private InputAction pukeAction;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
@@ -43,8 +45,10 @@ public class Mallet : Weapon
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
     [SerializeField] private float _hungerExpense;
+    [SerializeField] private ParticleSystem _particleSystem;
     private void Start()
     {
+        
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
@@ -55,20 +59,30 @@ public class Mallet : Weapon
         // Get the action map and the specific action for the mouse click
         var playerActionMap = inputActions.FindActionMap("Player");
         vacuumAction = playerActionMap.FindAction("Vacuum");
-
+        pukeAction = playerActionMap.FindAction("Release");
+        
         vacuumAction.canceled += OnMouseRelease;
+        pukeAction.canceled += OnMouseReleasePuke;
 
         // Enable the action
         vacuumAction.Enable();
+        pukeAction.Enable();
     }
     private void OnMouseRelease(InputAction.CallbackContext context)
     {
         _malletAnimator.SetBool("VacuumReleased", true);
         _vacuum.VacuumOff();
     }
+    private void OnMouseReleasePuke(InputAction.CallbackContext context)
+    {
+        var emission = _particleSystem.emission;
+        emission.rateOverTime = 0;
+    }
     public void OnRelease()
     {
-        _vacuum.ReleaseAll();
+        _particleSystem.Play();
+        var emission = _particleSystem.emission;
+        emission.rateOverTime = 100;
     }
 
     private void OnDisable()
@@ -76,6 +90,8 @@ public class Mallet : Weapon
         // Unsubscribe from the events and disable the action
         vacuumAction.canceled -= OnMouseRelease;
         vacuumAction.Disable();
+        pukeAction.canceled -= OnMouseReleasePuke;
+        pukeAction.Disable();
     }
     
     public override void Fire()
