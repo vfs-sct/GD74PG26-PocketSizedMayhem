@@ -111,7 +111,7 @@ Material:
     - _Color_BarrierBackground: {r: 0.6597528, g: 0.01413753, b: 0.9000912, a: 1}
     - _Color_Crack: {r: 18.82576, g: 6.023519, b: 383.498, a: 1}
     - _Color_Fade: {r: 295.8488, g: 56.21958, b: 766.9961, a: 1}
-    - _Color_Fresnel: {r: 0, g: 3.4105752, b: 15.999997, a: 1}
+    - _Color_Fresnel: {r: 0, g: 1.4683981, b: 6.964404, a: 1}
     - _Color_HexPattern: {r: 16.90327, g: 1.50588, b: 95.87451, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
