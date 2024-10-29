@@ -595,6 +595,14 @@ MonoBehaviour:
   _pieces: []
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
+  _spawner: {fileID: 0}
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &2246393050588978198
 Rigidbody:
   m_ObjectHideFlags: 0

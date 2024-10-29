@@ -14,6 +14,8 @@ using Vector3 = UnityEngine.Vector3;
 public class Mallet : Weapon
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference PukeSFX { get; set; }
+    
     [SerializeField] private GameObject _debrisVFX;
     
     [SerializeField] private GameObject _impact;
@@ -45,6 +47,7 @@ public class Mallet : Weapon
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
     [SerializeField] private float _hungerExpense;
+    
     [SerializeField] private ParticleSystem _particleSystem;
     private bool puking = false;
     private void Start()
@@ -84,6 +87,8 @@ public class Mallet : Weapon
     {
         if(PlayerStats.Hunger >0)
         {
+
+            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
             _particleSystem.Play();
             var emission = _particleSystem.emission;
             emission.rateOverTime = 100;
@@ -106,10 +111,7 @@ public class Mallet : Weapon
         _malletAnimator.SetFloat("Direction", 1);
         if ( _attackMode == 0)
         {
-            if (!AttackSFX.IsNull)
-            {
-                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-            }
+            
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
         }
@@ -119,6 +121,7 @@ public class Mallet : Weapon
     {
         if(_attackMode==1)
         {
+             
             _vacuum.VacuumOn();
             isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
@@ -154,6 +157,7 @@ public class Mallet : Weapon
     {
         if(puking)
         {
+            
             PlayerStats.Hunger-=0.5f;
         }
         if (PlayerStats.Hunger<=0)
@@ -194,6 +198,10 @@ public class Mallet : Weapon
     {
         GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
         impact.GetComponent<VisualEffect>().Play();
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -26,22 +26,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -22.75
+      value: 60.321556
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.35975957
+      value: 0.6695193
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 32.04
+      value: 62.291958
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4550759
+      value: 0.99144495
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.8904527
+      value: 0.13052596
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 125.86
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -174,6 +174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81492e7a115d270469c21ae55e852a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <AttackSFX>k__BackingField:
+    Guid:
+      Data1: -1200686515
+      Data2: 1085833484
+      Data3: 818871713
+      Data4: 2143956387
+    Path: event:/SFX/Buildings/RAW_16 Explosion__ Echoey #7046
   _explosion: {fileID: 3860599804906413874}
   _wheelBounce: {fileID: 4274554063512300983}
   _meshRenderer: {fileID: 5598232963472076354}

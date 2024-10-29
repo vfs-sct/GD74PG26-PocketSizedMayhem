@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -15,6 +16,7 @@ public class Vacuum : MonoBehaviour
     Vector3 RayStartScale;
     [SerializeField] float raychangespeed;
     [SerializeField] private GameObject _pukeVFX;
+    [field: SerializeField] public EventReference VacuumSFX { get; set; }
     private void Start()
     {
         RayStartScale = _Ray.transform.localScale;
@@ -32,7 +34,7 @@ public class Vacuum : MonoBehaviour
         
         if (_vacuumOn)
         {
-            
+           
             _Ray.transform.localScale = Vector3.Lerp(_Ray.transform.localScale, RayStartScale, raychangespeed * Time.deltaTime);
         }
         else
@@ -100,6 +102,7 @@ public class Vacuum : MonoBehaviour
     }
     public void VacuumOn()
     {
+        RuntimeManager.PlayOneShot(VacuumSFX, this.gameObject.transform.position);
         _vacuumOn = true;
         _storeCollider.enabled = true;
         _rayCollider.enabled = true;
