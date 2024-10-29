@@ -3,8 +3,6 @@ using CharacterMovement;
 using FMODUnity;
 using PrimeTween;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
