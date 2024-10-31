@@ -1129,7 +1129,7 @@ GameObject:
   - component: {fileID: 5593049993886594456}
   - component: {fileID: 4532356619116532912}
   m_Layer: 6
-  m_Name: Rig:Hips
+  m_Name: mixamorig:Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1313,7 +1313,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.3
-  m_Height: 1.8
+  m_Height: 1.92
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!95 &583236151604148576
@@ -1325,7 +1325,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5390339625992018888}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 3a0dd0a7884d2e34caf02e93f46ed9c8, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 10c7254d9cabe394ab3c1849ee042652, type: 3}
   m_Controller: {fileID: 9100000, guid: 6dfc26b383e94e848abb8949ca5f23b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   <CoyoteMaxJumpDistance>k__BackingField: 0.5
   <GroundMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   <MinGroundedVelocity>k__BackingField: 5
   OnGrounded:
     m_PersistentCalls:
@@ -1417,6 +1417,8 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 2461877797427025339}
   <NavMeshAgent>k__BackingField: {fileID: 1826475401945314331}
   <CapsuleCollider>k__BackingField: {fileID: 2011792685782677946}
+  _upForce: 0
+  _forwardForce: 0
   point: 0
   fadeOutTime: 8
   _fadeSpeed: 1
@@ -1428,6 +1430,7 @@ MonoBehaviour:
   _zigzagVerticalDistance: 10
   _rotationSpeed: 2
   _radius: 15
+  _vacuum: {fileID: 0}
 --- !u!114 &1041028353720300704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1457,6 @@ MonoBehaviour:
   _ragdollController: {fileID: 940318795407769195}
   _animator: {fileID: 583236151604148576}
   _rb: {fileID: 2461877797427025339}
-  _navMeshAgent: {fileID: 1826475401945314331}
   _civilianBehaviour: {fileID: 5646808012954638468}
   _animNo: 4
 --- !u!114 &940318795407769195

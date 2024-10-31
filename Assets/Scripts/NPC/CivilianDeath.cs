@@ -13,7 +13,7 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private RagdollOnOffController _ragdollController;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
+    //[SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private NewNpcBehavior _civilianBehaviour;
     [SerializeField] private int _animNo;
     
@@ -28,8 +28,10 @@ public class CivilianDeath : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("xd");
         if (other.gameObject.tag == "Mallet")
         {
+            
             _capsuleCollider.enabled = false;
             _civilianBehaviour.enabled = false;
 
@@ -42,7 +44,7 @@ public class CivilianDeath : MonoBehaviour
             
             if (!_pointGiven)
             {
-                GameManager.LosePoint();
+                PlayerStats.Points += _civilianBehaviour.GetPoint();
                 _pointGiven= true;
             }
             if (!DeathSFX.IsNull)
@@ -52,6 +54,11 @@ public class CivilianDeath : MonoBehaviour
 
             this.enabled = false;
             _triggerCollider.enabled = false;
+        }
+        else if(other.gameObject.tag == "Vacuum")
+        {
+            this.gameObject.SetActive(false);
+            PlayerStats.Hunger += 5;
         }
     }
 

@@ -1438,8 +1438,7 @@ MonoBehaviour:
   _ragdollController: {fileID: 2468693262878311834}
   _animator: {fileID: 4437925280285957722}
   _rb: {fileID: 7146613815474092364}
-  _navMeshAgent: {fileID: 8283020866021530235}
-  _civilianBehaviour: {fileID: 4221005304262489085}
+  _civilianBehaviour: {fileID: 0}
   _animNo: 4
 --- !u!1 &6893525141375332539 stripped
 GameObject:

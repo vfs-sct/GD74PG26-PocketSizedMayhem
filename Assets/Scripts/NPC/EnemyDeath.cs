@@ -43,7 +43,7 @@ public class EnemyDeath : MonoBehaviour
             
             if (!_pointGiven)
             {
-                GameManager.AddPoint();
+               // GameManager.AddPoint();
                 _pointGiven = true;
             }
 

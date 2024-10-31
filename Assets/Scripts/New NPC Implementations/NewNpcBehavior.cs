@@ -1,10 +1,15 @@
 using CharacterMovement;
 using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NewNpcBehavior : CharacterMovement3D
 {
+    [Header("Throw Attributes")]
+    [SerializeField] private float _upForce;
+    [SerializeField] private float _forwardForce;
     [Header("NPC Attributes")]
     [SerializeField] private float point;
     [SerializeField] private float fadeOutTime;
@@ -34,72 +39,83 @@ public class NewNpcBehavior : CharacterMovement3D
     private float _cycleCount = 0;
     private bool _fadingOut;
 
+    private GameObject _target;
+    private bool _targetAssigned = false;
     private Vector3 _newDirectionVector;
     LayerMask _layerMask;
-    
+    LayerMask _civilianTargetLayerMask;
+
+    [SerializeField] public GameObject _vacuum;
     void Start()
     {
-        _layerMask |= (1 << 22);
-
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
+        
+        _layerMask |= (1 << 22);
+        _civilianTargetLayerMask |= (1 << 6);
+        
 
-        _alpha = _objectMaterial.GetFloat("_Alpha");
+        //_alpha = _objectMaterial.GetFloat("_Alpha");
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
         _endTarget = (EndTarget) Random.Range(0, 2);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
-
-        if (_endTarget == EndTarget.TARGET)
-        {
-            SetEscapeDestination();
-        }
-        else
-        {
-            if (_pattern == Pattern.ZIGZAG)
-            {
-                NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
-            }  
-        }
+        this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
+        NavMeshAgent.isStopped = true;
     }
 
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
-        NavMeshAgent.SetDestination(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
+        MoveTo(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
     }
-
+    private void SetCivilianTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
+        _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
+    }
+    public void AssignVacuumPos(GameObject vacuum)
+    {
+        if(vacuum != null)
+        {
+            _objectMaterial.SetVector("_Target", vacuum.transform.position);
+            Debug.Log(vacuum.transform.position);
+        }
+    }
     protected override void Update()
     {
         base.Update();
         angle += Time.deltaTime * _rotationSpeed;
-        if (_endTarget == EndTarget.NO_TARGET)
+        if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
         {
-            
             if (_pattern == Pattern.ZIGZAG)
             {
-                if(NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
                 {
-                    if(_newDirectionVector.x>0)
+                    if (_newDirectionVector.x > 0)
                     {
                         _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
-                        _newDirectionVector.z = Random.Range(3,_zigzagVerticalDistance);
+                        _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
                     }
                     else
                     {
                         _newDirectionVector.x *= -1;
                         _newDirectionVector.z = 0;
                     }
-                    NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+                    MoveTo(transform.position + _newDirectionVector);
                 }
             }
             else if (_pattern == Pattern.CIRCLE)
             {
-                    _newDirectionVector.x = Mathf.Cos(angle) * _radius;
-                    _newDirectionVector.z = Mathf.Sin(angle) * _radius;
-                    NavMeshAgent.SetDestination(transform.position + _newDirectionVector);
+                _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                MoveTo(transform.position + _newDirectionVector);
             }
+        }
+        else if (_endTarget == EndTarget.CIVILIAN )
+        {
+            MoveTo(_target.transform.position);
         }
     }
 
@@ -137,11 +153,35 @@ public class NewNpcBehavior : CharacterMovement3D
         }
         yield return StartCoroutine(ColorFadeOut());
     }
+    private void AssignTarget()
+    {
+        if (point < 0)
+        {
+            _endTarget = EndTarget.CIVILIAN;
+        }
 
+        if (_endTarget == EndTarget.TARGET)
+        {
+            SetEscapeDestination();
+        }
+        else if (_endTarget == EndTarget.CIVILIAN)
+        {
+            SetCivilianTarget();
+        }
+        else
+        {
+            if (_pattern == Pattern.ZIGZAG)
+            {
+                MoveTo(transform.position + _newDirectionVector);
+            }
+        }
+        
+    }
     public enum EndTarget
     {
         TARGET,
-        NO_TARGET
+        NO_TARGET,
+        CIVILIAN
     }
     public enum Pattern
     {
@@ -154,8 +194,19 @@ public class NewNpcBehavior : CharacterMovement3D
         PRECISE,
         FRENZY
     }
-    private void OnDrawGizmosSelected()
+
+    public float GetPoint()
     {
-        Gizmos.DrawWireSphere(transform.position, _escapeRangeFindRadius);
+        return point;
+    }
+
+    protected override void  OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        if(collision.gameObject.layer.Equals(LayerMask.NameToLayer("Floor")) && NavMeshAgent.isOnNavMesh)
+        {
+            NavMeshAgent.isStopped = false;
+            GetComponent<Animator>().SetTrigger("GetUp");
+        }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
+using static UnityEngine.Rendering.HableCurve;
 
 public class TestSpawner : MonoBehaviour
 {
@@ -30,10 +32,21 @@ public class TestSpawner : MonoBehaviour
     private int _spawnCount;
     private int _spawnWeightTotal;
     private int _spawnPointWeightTotal;
+    [SerializeField] private Material _material;
+    private float _fillAmount;
+    private float _fillEachCivilian;
+    private bool _isFilling = false;
+    private bool _isDestroyed =false;
 
+    [SerializeField] GameObject _Vacuum;
+    private int segments;
+    private float fillTime;
     void Start()
     {
-        _spawnCount = Random.Range(_minSpawn, _maxSpawn);
+        fillTime = Time.time;
+        _spawnCount = 0;
+        //_spawnCount = Random.Range(_minSpawn, _maxSpawn);
+        _fillEachCivilian = 1 / _material.GetFloat("_TileCount");
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
 
         _topWeight *= _topSpawnPoints.Count;
@@ -42,10 +55,25 @@ public class TestSpawner : MonoBehaviour
         _rightWeight *= _rightSpawnPoints.Count;
 
         _spawnPointWeightTotal = _topWeight + _leftWeight + _bottomWeight + _rightWeight;
-        SpawnAtPoint();
     }
+    private void Update()
+    {
+            StartCoroutine(Fill());
+    }
+    private IEnumerator Fill()
+    {
+        if(_isFilling)
+        {
+            fillTime += Time.deltaTime;
+            _fillAmount = Mathf.PingPong(fillTime, 1.2f);
+            segments = (int)(_fillAmount * 5);
+            _material.SetFloat("_Fill_Rate", segments * 0.2f);
+            _spawnCount = (int)(segments);
+        }
+        yield return null;
 
-    private void SpawnAtPoint()
+    }
+    public void SpawnAtPoint()
     {
         for (int i = 0; i < _spawnCount; i++)
         {
@@ -83,26 +111,38 @@ public class TestSpawner : MonoBehaviour
 
         if (selection >= 0 && selection < _easyCivilianWeight && _easyCivilianWeight!=0)
         {
-            civilian = Instantiate(_civilians[0], point.position, _civilians[0].transform.rotation);
+            civilian = Instantiate(_civilians[0], point.position, point.rotation);
             _easyCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight && _mediumCivilianWeight != 0)
         {
-            civilian = Instantiate(_civilians[1], point.position, _civilians[1].transform.rotation);
+            civilian = Instantiate(_civilians[1], point.position, point.rotation);
             _mediumCivilianWeight--;
         }
         else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight && _hardCivilianWeight != 0)
         {
-            civilian = Instantiate(_civilians[2], point.position, _civilians[2].transform.rotation);
+            civilian = Instantiate(_civilians[2], point.position, point.rotation);
             _hardCivilianWeight--;
         }
         else
         {
-            civilian = Instantiate(_civilians[3], point.position, _civilians[3].transform.rotation);
+            civilian = Instantiate(_civilians[3], point.position, point.rotation);
             _negativeCivilianWeight--;
         }
 
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
+        //civilian.GetComponent<NewNpcBehavior>().AssignVacuumBase(_Vacuum);
         return point;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Mallet" && !_isDestroyed)
+        {
+            _isDestroyed = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;
+            Debug.Log(_spawnCount);
+            SpawnAtPoint();
+        }
     }
 }
