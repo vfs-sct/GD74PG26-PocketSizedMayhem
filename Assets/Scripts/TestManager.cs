@@ -6,15 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class TestManager : MonoBehaviour
 {
+    [SerializeField] private float _gameTime = 300;
+    [SerializeField] private float _startHunger = 50;
+    [SerializeField] private float _startPoint = 0;
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private float _gameTime = 100;
 
     private float _startTime;
     private float _elapsedTime;
-
-    void Start()
+    void Awake()
     {
-        _startTime = Time.time;
+        PlayerStats.GameTime = _gameTime;
+        PlayerStats.Hunger = _startHunger;
+        PlayerStats.Points = _startPoint;
     }
 
     void Update()
@@ -32,6 +35,5 @@ public class TestManager : MonoBehaviour
             _timerText.text = "Remaining Time: " + 0;
             SceneManager.LoadScene("LoseScreen");
         }
-
     }
 }

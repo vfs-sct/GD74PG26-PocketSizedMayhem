@@ -496,9 +496,9 @@
                     "name": "",
                     "id": "cf1fc627-9b99-40e1-8161-65a134887e90",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.1,pressPoint=0.1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Release",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -76,7 +76,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Fill_Rate: 0.2509756
+    - _Fill_Rate: 0.8
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
     - _RenderQueueType: 1

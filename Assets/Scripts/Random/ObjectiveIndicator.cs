@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ObjectiveIndicator : MonoBehaviour
 {
-    [SerializeField] private Camera uiCamera;
     [SerializeField] private GameObject _targetObject;
     [SerializeField] private RectTransform _pointerRectTransform;
 
@@ -31,9 +30,12 @@ public class ObjectiveIndicator : MonoBehaviour
         Vector2 targetUIPos = _target.rectTransform.transform.position;
         Vector2 pointerUIpos = _pointerRectTransform.transform.position;
         Vector2 targ = new Vector2(_targetPosition.x, _targetPosition.y);
+
         targ.x = targetUIPos.x - pointerUIpos.x;
         targ.y = targetUIPos.y - pointerUIpos.y;
+
         float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg;
+
         _pointerRectTransform.localEulerAngles = new Vector3(0, 0, -angle -90);
 
         if (targetPositionScreenPoint.x <= borderSize || targetPositionScreenPoint.x >= Screen.width - borderSize || targetPositionScreenPoint.y <= borderSize || targetPositionScreenPoint.y >= Screen.height - borderSize)

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mallet
   - MainFloor
+  - Vacuum
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - Vacuum
   - Car
   - EscapePoint
-  - 
+  - Shield
   - 
   - 
   - 

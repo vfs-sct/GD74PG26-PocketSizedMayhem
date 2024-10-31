@@ -37,16 +37,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_MediumCivilian
-  m_Shader: {fileID: -6465566751694194690, guid: 2b32add6369af5449b587c21d6c68bba,
+  m_Shader: {fileID: -6465566751694194690, guid: 8b5e1fabbd30e764ea5431e843cc39a0,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ENABLE_FOG_ON_TRANSPARENT
-  - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
   - _ALPHATEST_ON
   - _DISABLE_SSR_TRANSPARENT
+  - _ENABLE_FOG_ON_TRANSPARENT
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -64,6 +64,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _ColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 5944e079593d57846b60556d570b9750, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -122,17 +126,26 @@ Material:
     - _Speed: 0.2
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 1
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 33
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 9
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 15
-    - _StencilWriteMaskMV: 43
+    - _StencilWriteMaskMV: 41
+    - _SuckRange: 2
     - _SupportDecals: 1
     - _SurfaceType: 1
+    - _TessellationBackFaceCullEpsilon: -0.25
+    - _TessellationFactorMaxDistance: 50
+    - _TessellationFactorMinDistance: 20
+    - _TessellationFactorTriangleSize: 100
+    - _TessellationMaxDisplacement: 0.01
+    - _TessellationMode: 0
+    - _TessellationShapeFactor: 0.75
+    - _Threshold: 2
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -142,6 +155,9 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
+    - _UseTextureColor: 0
+    - _VariationFrequency: 5
+    - _VariationOffset: 0
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
@@ -149,10 +165,16 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 0.97959185, b: 0, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
+    - _DisplacementPosition: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0.2684292, g: 1, b: 0, a: 0}
     - _MainTexColor: {r: 0.9528302, g: 0.28315237, b: 0.28315237, a: 0}
     - _PulseColor: {r: 0.08962262, g: 1, b: 0.713103, a: 0}
     - _RimColor: {r: 1, g: 0.8098252, b: 0, a: 1}
+    - _Target: {r: 100, g: 100, b: 100, a: 0}
+    - _VariationX: {r: 0, g: 0, b: 0, a: 0}
+    - _VariationY: {r: 0, g: 0, b: 0, a: 0}
+    - _VariationZ: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
