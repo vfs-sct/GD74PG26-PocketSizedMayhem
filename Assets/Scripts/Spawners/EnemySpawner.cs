@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemySpawner : Spawner
 {
     [Header("Civilian Type Weights")]
-    [SerializeField] private int _easyCivilianWeight;
-    [SerializeField] private int _mediumCivilianWeight;
-    [SerializeField] private int _hardCivilianWeight;
-    [SerializeField] private int _negativeCivilianWeight;
+    [SerializeField] private int _easyCivilianWeight = 1;
+    [SerializeField] private int _mediumCivilianWeight = 1;
+    [SerializeField] private int _hardCivilianWeight = 1;
+    [SerializeField] private int _negativeCivilianWeight = 1;
 
     public List<float> spawncount;
     public List<float> times;

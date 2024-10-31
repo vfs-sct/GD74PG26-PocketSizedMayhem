@@ -47,7 +47,7 @@ public class NewNpcBehavior : CharacterMovement3D
 
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
-
+    private bool Stoppep = false;
     [SerializeField] public GameObject _vacuum;
     void Start()
     {
@@ -95,39 +95,52 @@ public class NewNpcBehavior : CharacterMovement3D
     }
     protected override void Update()
     {
-        base.Update();
-       
-        angle += Time.deltaTime * _rotationSpeed;
-        if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
+        if(Stoppep)
         {
-            if (_pattern == Pattern.ZIGZAG)
+            Stop();
+            Debug.Log("stopped");
+        }
+        else
+        {
+            base.Update();
+
+            angle += Time.deltaTime * _rotationSpeed;
+            if (!Stoppep)
             {
-                if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
                 {
-                    if (_newDirectionVector.x > 0)
+                    if (_pattern == Pattern.ZIGZAG)
                     {
-                        _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
-                        _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
+                        if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                        {
+                            if (_newDirectionVector.x > 0)
+                            {
+                                _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
+                                _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
+                            }
+                            else
+                            {
+                                _newDirectionVector.x *= -1;
+                                _newDirectionVector.z = 0;
+                            }
+                            MoveTo(transform.position + _newDirectionVector);
+                        }
                     }
-                    else
+                    else if (_pattern == Pattern.CIRCLE)
                     {
-                        _newDirectionVector.x *= -1;
-                        _newDirectionVector.z = 0;
+                        _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                        _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                        MoveTo(transform.position + _newDirectionVector);
                     }
-                    MoveTo(transform.position + _newDirectionVector);
+                }
+                else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
+                {
+                    MoveTo(_target.transform.position);
                 }
             }
-            else if (_pattern == Pattern.CIRCLE)
-            {
-                _newDirectionVector.x = Mathf.Cos(angle) * _radius;
-                _newDirectionVector.z = Mathf.Sin(angle) * _radius;
-                MoveTo(transform.position + _newDirectionVector);
-            }
         }
-        else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
-        {
-            MoveTo(_target.transform.position);
-        }
+        
+        
     }
 
     private IEnumerator Fadeout()
@@ -214,6 +227,17 @@ public class NewNpcBehavior : CharacterMovement3D
     protected override void  OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
+        
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        Stop();
+        
+        Stoppep = true;
+    }
+    private void OnParticleTrigger()
+    {
+        Stoppep = true;
         
     }
 }
