@@ -53,13 +53,15 @@ public class CivilianDeath : MonoBehaviour
             this.enabled = false;
             _triggerCollider.enabled = false;
         }
-        else if(other.gameObject.tag == "Vacuum")
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    { if (collision.gameObject.tag == "Vacuum")
         {
             this.gameObject.SetActive(false);
             PlayerStats.Hunger += 5;
         }
     }
-
     public void DeathByCriminal()
     {
         int animNo = UnityEngine.Random.Range(0, _animNo);

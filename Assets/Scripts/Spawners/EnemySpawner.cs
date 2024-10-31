@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using UnityEngine.UIElements;
 public class EnemySpawner : Spawner
 {
     [SerializeField] private GameObject _shelter;
@@ -15,29 +16,25 @@ public class EnemySpawner : Spawner
     private float timer = 0;
     public int iteration = 0;
     public int waveIteration = 1;
+    private float _startTime;
     private void Awake()
     {
         times = new List<float>();
     }
     private void Start()
     {
+        _startTime = Time.time;
         _enemyManager = FindFirstObjectByType<EnemyManager>();
     }
     private void Update()
     {
-        if (iteration<times.Count)
+        _startTime += Time.deltaTime;
+        if ((int)_startTime %5 ==0)
         {
-            if ((int)timer == times[iteration])
-            {
-                StartCoroutine(SpawnWave());
-            }
+            Instantiate(_prefab, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            _startTime++;
         }
-        else
-        {
-            iteration = 0;
-            timer = 0;
-            waveIteration++;
-        }
+
         timer += Time.deltaTime;
     }
     public override void SpawnObject()
