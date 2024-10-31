@@ -1,57 +1,75 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using System.Linq;
-using UnityEngine.UIElements;
+
 public class EnemySpawner : Spawner
 {
-    [SerializeField] private GameObject _shelter;
+    [Header("Civilian Type Weights")]
+    [SerializeField] private int _easyCivilianWeight;
+    [SerializeField] private int _mediumCivilianWeight;
+    [SerializeField] private int _hardCivilianWeight;
+    [SerializeField] private int _negativeCivilianWeight;
 
-    private EnemyManager _enemyManager;
-    private NavMeshAgent _navAgent;
     public List<float> spawncount;
     public List<float> times;
-    private float timer = 0;
-    public int iteration = 0;
-    public int waveIteration = 1;
+
+    private int _iteration = 0;
     private float _startTime;
+    private int _iterationCount;
+
+    private int _spawnWeightTotal;
     private void Awake()
     {
         times = new List<float>();
     }
+
     private void Start()
     {
-        _startTime = Time.time;
-        _enemyManager = FindFirstObjectByType<EnemyManager>();
+        _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
+        _iterationCount = times.Count;
+        StartCoroutine(SpawnWave());
     }
-    private void Update()
-    {
-        _startTime += Time.deltaTime;
-        if ((int)_startTime %5 ==0)
-        {
-            Instantiate(_prefab, this.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
-            _startTime++;
-        }
 
-        timer += Time.deltaTime;
-    }
-    public override void SpawnObject()
-    {
-        
-            base.SpawnObject();
-            _spawnedObject.GetComponent<RegularCriminalBehaviour>().SetTarget(_shelter);
-            _enemyManager.AddToEnemyList(_spawnedObject);   
-    }
     IEnumerator SpawnWave()
     {
-
-        for (int i = 0; i < spawncount[iteration] * waveIteration; i++)
+        yield return new WaitForSeconds(times[_iteration] - Time.time);
+        for (int i = 0; i < spawncount[_iteration]; i++)
         {
-            SpawnObject();
+            SpawnCivilian();
         }
-        iteration++;
-        yield return null;
+        _iteration++;
+        if(_iteration < _iterationCount)
+        {
+            StartCoroutine(SpawnWave());
+        }
     }
+    private void SpawnCivilian()
+    {
+        Vector3 position = transform.position;
+        Vector3 offset = Vector3.ClampMagnitude(new Vector3(Random.Range(-_radius, _radius), 0f, Random.Range(-_radius, _radius)), _radius);
+        int selection = Random.Range(0, _spawnWeightTotal);
+        GameObject civilian;
+
+        if (selection >= 0 && selection < _easyCivilianWeight )
+        {
+            civilian = Instantiate(_civilians[0], position + offset, this.gameObject.transform.rotation);
+            //_easyCivilianWeight--;
+        }
+        else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight)
+        {
+            civilian = Instantiate(_civilians[1], position + offset, this.gameObject.transform.rotation);
+            //_mediumCivilianWeight--;
+        }
+        else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight )
+        {
+            civilian = Instantiate(_civilians[2], position + offset, this.gameObject.transform.rotation);
+            //_hardCivilianWeight--;
+        }
+        else
+        {
+            civilian = Instantiate(_civilians[3], position + offset, this.gameObject.transform.rotation);
+           // _negativeCivilianWeight--;
+        }
+    }
+
 }

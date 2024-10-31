@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4939150309781050163}
   - component: {fileID: 8929612405492209615}
   - component: {fileID: 2715083839027140544}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: polySurface404
   m_TagString: Untagged
   m_Icon: {fileID: 0}

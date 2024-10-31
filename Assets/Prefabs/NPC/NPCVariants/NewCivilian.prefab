@@ -1422,10 +1422,10 @@ MonoBehaviour:
   point: 0
   fadeOutTime: 8
   _fadeSpeed: 1
-  _escapeRangeFindRadius: 100
   _endTarget: 1
   _state: 0
   _pattern: 1
+  _escapeRangeFindRadius: 100
   _zigzagHorizontalDistance: 10
   _zigzagVerticalDistance: 10
   _rotationSpeed: 2

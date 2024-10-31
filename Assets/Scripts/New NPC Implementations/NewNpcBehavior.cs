@@ -10,16 +10,18 @@ public class NewNpcBehavior : CharacterMovement3D
     [Header("Throw Attributes")]
     [SerializeField] private float _upForce;
     [SerializeField] private float _forwardForce;
+
     [Header("NPC Attributes")]
     [SerializeField] private float point;
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float _fadeSpeed;
-    [SerializeField] private float _escapeRangeFindRadius;
+    
 
     [Header("Escape Attributes")]
     [SerializeField] private EndTarget _endTarget;
     [SerializeField] private State _state;
     [SerializeField] private Pattern _pattern;
+    [SerializeField] private float _escapeRangeFindRadius;
 
     [Header("Pattern Attributes")]
     [SerializeField] private float _zigzagHorizontalDistance;
@@ -39,9 +41,10 @@ public class NewNpcBehavior : CharacterMovement3D
     private float _cycleCount = 0;
     private bool _fadingOut;
 
-    private GameObject _target;
     private bool _targetAssigned = false;
+    private GameObject _target;
     private Vector3 _newDirectionVector;
+
     LayerMask _layerMask;
     LayerMask _civilianTargetLayerMask;
 
@@ -60,31 +63,40 @@ public class NewNpcBehavior : CharacterMovement3D
         _endTarget = (EndTarget) Random.Range(0, 2);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
-        this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
+        //this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
         //NavMeshAgent.isStopped = true;
+        SetEscapeDestination();
     }
 
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
-        MoveTo(hitColliders[Random.Range(0, hitColliders.Length)].transform.position);
+        _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
+        MoveTo(_target.transform.position);
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(transform.position,_escapeRangeFindRadius);
+    }
+
     private void SetCivilianTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
         _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
+        MoveTo(_target.transform.position);
     }
     public void AssignVacuumPos(GameObject vacuum)
     {
         if(vacuum != null)
         {
             _objectMaterial.SetVector("_Target", vacuum.transform.position);
-            Debug.Log(vacuum.transform.position);
         }
     }
     protected override void Update()
     {
         base.Update();
+       
         angle += Time.deltaTime * _rotationSpeed;
         if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
         {
@@ -112,7 +124,7 @@ public class NewNpcBehavior : CharacterMovement3D
                 MoveTo(transform.position + _newDirectionVector);
             }
         }
-        else if (_endTarget == EndTarget.CIVILIAN )
+        else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
         {
             MoveTo(_target.transform.position);
         }
