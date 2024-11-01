@@ -11,8 +11,9 @@ public class Generator : MonoBehaviour
 
     [SerializeField] List<GameObject> _shields;
 
-    private float health;
-
+    [SerializeField]private float health;
+    float fade = 0;
+    float timer = 0;
     void Start()
     {
         health = 100;
@@ -23,9 +24,12 @@ public class Generator : MonoBehaviour
         _fillBar.fillAmount = health/100;
         if (health <= 0)
         {
+            
             health = 0;
             _spark.SetActive(true);
-            _shields[0].SetActive(false);
+            fade = Mathf.Lerp(0,1,timer);
+            _shields[0].GetComponent<Renderer>().material.SetFloat("_Fade", fade );
+            timer += Time.deltaTime/2;
         }
         else
         {
@@ -38,4 +42,6 @@ public class Generator : MonoBehaviour
         health--;
         health--;
     }
+
+
 }
