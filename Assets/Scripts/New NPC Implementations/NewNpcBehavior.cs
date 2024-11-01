@@ -98,7 +98,6 @@ public class NewNpcBehavior : CharacterMovement3D
         if(Stoppep)
         {
             Stop();
-            Debug.Log("stopped");
         }
         else
         {
@@ -232,12 +231,7 @@ public class NewNpcBehavior : CharacterMovement3D
     private void OnParticleCollision(GameObject other)
     {
         Stop();
-        
-        Stoppep = true;
-    }
-    private void OnParticleTrigger()
-    {
-        Stoppep = true;
-        
+        Debug.Log(other);
+        Debug.Log("xd");
     }
 }
