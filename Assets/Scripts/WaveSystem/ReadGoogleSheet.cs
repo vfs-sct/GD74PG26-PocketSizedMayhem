@@ -20,7 +20,7 @@ public class ReadGoogleSheet : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1BlWVHx6zDaQH8JyUftqd8_McF2sZvZ3LgW8MH55LXNg/values/B1:Z?key=AIzaSyDzN9hCwGdDssrZMwovVEilpTuNH9ri7NA");
         yield return www.SendWebRequest();
-        if (www.isNetworkError || www.isHttpError)
+        if (www.result == UnityWebRequest.Result.ConnectionError ||www.result ==  UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log("Error: " + www.error);
         }

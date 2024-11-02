@@ -38,10 +38,10 @@ public class NewNpcBehavior : CharacterMovement3D
     private float _timer = 0;
     private float _timer2 = 0;
     private float angle = 0;
-    private float _cycleCount = 0;
+   // private float _cycleCount = 0;
     private bool _fadingOut;
 
-    private bool _targetAssigned = false;
+    //private bool _targetAssigned = false;
     private GameObject _target;
     private Vector3 _newDirectionVector;
 
@@ -57,14 +57,11 @@ public class NewNpcBehavior : CharacterMovement3D
         _layerMask |= (1 << 22);
         _civilianTargetLayerMask |= (1 << 6);
         
-        //_alpha = _objectMaterial.GetFloat("_Alpha");
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
         _endTarget = (EndTarget) Random.Range(0, 2);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
-        //this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * _upForce + transform.forward * _forwardForce, ForceMode.Impulse);
-        //NavMeshAgent.isStopped = true;
         SetEscapeDestination();
     }
 
@@ -75,17 +72,13 @@ public class NewNpcBehavior : CharacterMovement3D
         MoveTo(_target.transform.position);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(transform.position,_escapeRangeFindRadius);
-    }
-
     private void SetCivilianTarget()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
         _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
         MoveTo(_target.transform.position);
     }
+
     public void AssignVacuumPos(GameObject vacuum)
     {
         if(vacuum != null)
@@ -138,8 +131,6 @@ public class NewNpcBehavior : CharacterMovement3D
                 }
             }
         }
-        
-        
     }
 
     private IEnumerator Fadeout()
@@ -176,6 +167,7 @@ public class NewNpcBehavior : CharacterMovement3D
         }
         yield return StartCoroutine(ColorFadeOut());
     }
+
     private void AssignTarget()
     {
         if (point < 0)
@@ -200,6 +192,7 @@ public class NewNpcBehavior : CharacterMovement3D
         }
         
     }
+
     public enum EndTarget
     {
         TARGET,
@@ -223,15 +216,8 @@ public class NewNpcBehavior : CharacterMovement3D
         return point;
     }
 
-    protected override void  OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        
-    }
     private void OnParticleCollision(GameObject other)
     {
         Stop();
-        Debug.Log(other);
-        Debug.Log("xd");
     }
 }

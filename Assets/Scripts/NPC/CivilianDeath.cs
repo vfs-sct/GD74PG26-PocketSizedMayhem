@@ -18,7 +18,6 @@ public class CivilianDeath : MonoBehaviour
     [SerializeField] private int _animNo;
     
     public event EventHandler<GameObject> OnKilled;
-    public event EventHandler<GameObject> OnCaptured;
     private bool _pointGiven;
     
     private void Start()

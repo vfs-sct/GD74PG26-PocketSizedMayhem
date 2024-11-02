@@ -40,10 +40,10 @@ public class Mallet : Weapon
     private Vector3 _hitTargetpos;
     [SerializeField] private float _impactRadius;
     [SerializeField] private float _malletMovementSpeed ;
-    private bool _isAttacking = false;
+   // private bool _isAttacking = false;
     private int layerAsLayerMask;
     private int _attackMode;
-    private bool isVacuuming = false;
+    //private bool isVacuuming = false;
     [SerializeField]private int pullIntensity;
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
@@ -138,7 +138,7 @@ public class Mallet : Weapon
         {
              
             _vacuum.VacuumOn();
-            isVacuuming = true;
+            //isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
             _malletAnimator.SetBool("VacuumReleased", false);
         }

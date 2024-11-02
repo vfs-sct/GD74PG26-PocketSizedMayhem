@@ -91,10 +91,6 @@ public class GameManager : MonoBehaviour
         progress += Time.deltaTime * PlayerStats.CriminalCaptured;
         progress = Mathf.Clamp(progress, 0f, 100);
         progressFill.fillAmount = progress / 100;
-        if(progress >= 100)
-        {
-            Bomb.active = true;
-        }
     }
     public void PlayCinematic()
     {
