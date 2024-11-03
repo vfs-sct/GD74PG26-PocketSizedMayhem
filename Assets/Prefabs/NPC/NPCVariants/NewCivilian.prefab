@@ -1450,7 +1450,7 @@ MonoBehaviour:
       Data3: -972561278
       Data4: 1205326739
     Path: event:/SFX/SFX_Die01
-  _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
+  _bloodEffect: {fileID: 1008613358010677320, guid: da7c570f629860b4cb9803e52be42acb,
     type: 3}
   _capsuleCollider: {fileID: 2011792685782677946}
   _triggerCollider: {fileID: 2148797612866960583}
@@ -1471,8 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f48f8379e1a4b44bc6a0f1ea4ba6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodEffect: {fileID: 5429978078907932267, guid: 1479d3ede2679e64fbe18e8a81a46cba,
-    type: 3}
+  _bloodEffect: {fileID: 0}
   _npcAnimator: {fileID: 583236151604148576}
   _ragdollColliders:
   - {fileID: 1584970626848068677}
@@ -1499,7 +1498,7 @@ MonoBehaviour:
   - {fileID: 3714089535990793278}
   - {fileID: 3479897573386339620}
   _characterMovement: {fileID: 5646808012954638468}
-  _bounceForce: 50
+  _bounceForce: 120
 --- !u!1 &6032100472753130018
 GameObject:
   m_ObjectHideFlags: 0
