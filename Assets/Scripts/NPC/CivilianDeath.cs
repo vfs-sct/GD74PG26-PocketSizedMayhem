@@ -45,6 +45,13 @@ public class CivilianDeath : MonoBehaviour
             if(_fadeTime >= _fadeThresholdTime)
             {
                 this.gameObject.SetActive(false);
+                _ragdollController.RagdollModeOff();
+                _capsuleCollider.enabled = true;
+                _civilianBehaviour.enabled = true;
+                _triggerCollider.enabled = true;
+                _fadeTime = 0;
+                _isFading = false;
+                _objectMaterial.SetFloat("_Alpha", 1);
             }
             else
             {
