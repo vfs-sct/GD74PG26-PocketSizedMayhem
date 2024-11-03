@@ -126,7 +126,6 @@ public class Mallet : Weapon
         _malletAnimator.SetFloat("Direction", 1);
         if ( _attackMode == 0)
         {
-            
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
         }
@@ -210,9 +209,15 @@ public class Mallet : Weapon
 
     }
     public void ImpactEffects()
-    {
-        GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
-        impact.GetComponent<VisualEffect>().Play();
+    { 
+        GameObject impactVFX = ObjectPool.instance.GetPooledObject();
+
+        if (impactVFX != null)
+        {
+            impactVFX.transform.position = _impactPos.transform.position + Vector3.up;
+            impactVFX.GetComponent<VisualEffect>().Play();
+        }
+
         if (!AttackSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
