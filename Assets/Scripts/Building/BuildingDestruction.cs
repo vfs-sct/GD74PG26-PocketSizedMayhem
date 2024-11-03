@@ -14,12 +14,6 @@ public class BuildingDestruction : MonoBehaviour
     void Start()
     {
         _isDestoyed = false;
-        _pieces = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject piece = transform.GetChild(i).gameObject;
-            _pieces.Add(piece);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
