@@ -69,9 +69,15 @@ public class CivilianDeath : MonoBehaviour
             _civilianBehaviour.enabled = false;
             _ragdollController.RagdollModeOn();
             _ragdollController.DeathBounce();
-            
-            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
-            blood.GetComponent<VisualEffect>().Play();
+
+            GameObject impactVFX = BloodVFXPool.instance.GetPooledObject();
+
+            if (impactVFX != null)
+            {
+                impactVFX.transform.position = transform.position;
+                impactVFX.GetComponent<VisualEffect>().Play();
+            }
+
             OnKilled?.Invoke(this, this.gameObject);
             
             if (!_pointGiven)

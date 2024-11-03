@@ -1,12 +1,11 @@
-using Autodesk.Fbx;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ObjectPool : MonoBehaviour
+public class BloodVFXPool : MonoBehaviour
 {
-    public static ObjectPool instance;
+    public static BloodVFXPool instance;
 
     [SerializeField] private GameObject _pooledObject;
 
@@ -16,7 +15,7 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -24,10 +23,11 @@ public class ObjectPool : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < _poolAmount; i++)
+        for (int i = 0; i < _poolAmount; i++)
         {
             GameObject obj = Instantiate(_pooledObject);
             obj.transform.parent = gameObject.transform;
+            obj.SetActive(false);
             pooledObjects.Add(obj);
         }
     }
@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            if (pooledObjects[i].GetComponent<VisualEffect>().aliveParticleCount != 0)
+            if(pooledObjects[i].GetComponent<VisualEffect>().aliveParticleCount != 0)
             {
                 continue;
             }
