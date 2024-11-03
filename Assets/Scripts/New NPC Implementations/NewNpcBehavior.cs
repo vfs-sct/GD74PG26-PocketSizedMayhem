@@ -29,7 +29,6 @@ public class NewNpcBehavior : CharacterMovement3D
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _radius;
 
-    [Header("Fading Attributes")]
     private Renderer _objectRenderer;
     private Material _objectMaterial;
 
@@ -53,7 +52,6 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
-        
         _layerMask |= (1 << 22);
         _civilianTargetLayerMask |= (1 << 6);
         
@@ -139,7 +137,7 @@ public class NewNpcBehavior : CharacterMovement3D
         {
             
             _fadeAmount = Mathf.Lerp(1, 0, _timer / fadeOutTime);
-            _objectMaterial.SetFloat("_Alpha", _fadeAmount);
+            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
         }
         yield return null;
     }
@@ -150,7 +148,7 @@ public class NewNpcBehavior : CharacterMovement3D
         while (newTimer < _timer2)
         {
             _fadeAmount = Mathf.Lerp(1, 0, 1 - newTimer / _timer2);
-            _objectMaterial.SetFloat("_Alpha", _fadeAmount);
+            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
             newTimer += Time.deltaTime;
         }
         yield return StartCoroutine(ColorFadeIn());
@@ -162,7 +160,7 @@ public class NewNpcBehavior : CharacterMovement3D
         while (newTimer < _timer2)
         {
             _fadeAmount = Mathf.Lerp(0, 1,  newTimer / _timer2);
-            _objectMaterial.SetFloat("_Alpha", _fadeAmount);
+            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
             newTimer += Time.deltaTime;
         }
         yield return StartCoroutine(ColorFadeOut());

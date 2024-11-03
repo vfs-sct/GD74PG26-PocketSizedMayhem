@@ -64,8 +64,11 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
-        pulledObjects.Remove(other.gameObject);
+        if(other.gameObject.layer == _vacuumableObjects)
+        {
+            other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
+            pulledObjects.Remove(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

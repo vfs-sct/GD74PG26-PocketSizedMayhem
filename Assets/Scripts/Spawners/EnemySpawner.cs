@@ -14,10 +14,9 @@ public class EnemySpawner : Spawner
     public List<float> times;
 
     private int _iteration = 0;
-    private float _startTime;
     private int _iterationCount;
-
     private int _spawnWeightTotal;
+
     private void Awake()
     {
         times = new List<float>();
@@ -52,24 +51,33 @@ public class EnemySpawner : Spawner
 
         if (selection >= 0 && selection < _easyCivilianWeight )
         {
-            civilian = Instantiate(_civilians[0], position + offset, this.gameObject.transform.rotation);
-            //_easyCivilianWeight--;
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.EASY);
         }
         else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight)
         {
-            civilian = Instantiate(_civilians[1], position + offset, this.gameObject.transform.rotation);
-            //_mediumCivilianWeight--;
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.MEDIUM);
         }
         else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight )
         {
-            civilian = Instantiate(_civilians[2], position + offset, this.gameObject.transform.rotation);
-            //_hardCivilianWeight--;
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.HARD);
         }
         else
         {
-            civilian = Instantiate(_civilians[3], position + offset, this.gameObject.transform.rotation);
-           // _negativeCivilianWeight--;
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.NEGATIVE);
         }
+        if (civilian != null)
+        {
+            civilian.transform.position = position + offset;
+            civilian.SetActive(true);
+        }
+    }
+
+    public enum NPCType
+    {
+        EASY,
+        MEDIUM,
+        HARD,
+        NEGATIVE
     }
 
 }
