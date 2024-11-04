@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5300e21ad842240b4492a51cf1d7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 0
+  _force: 50
   _pieces:
   - {fileID: 7291615378008260324}
   - {fileID: 4842204033391371088}
@@ -117,7 +117,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0

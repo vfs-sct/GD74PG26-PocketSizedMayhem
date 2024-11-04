@@ -81,11 +81,11 @@ MonoBehaviour:
   _spawner: {fileID: 0}
   <DeathSFX>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!1 &4118782359946001190
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3590437051611179781}
   - component: {fileID: 7257409246440788789}
   - component: {fileID: 4955828027436707513}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Final Shatter House 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4707994061956626944
 Transform:
   m_ObjectHideFlags: 0

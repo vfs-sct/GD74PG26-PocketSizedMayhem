@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 5811238240877780689}
   - component: {fileID: 3988159656849944047}
   - component: {fileID: 8922640353394602655}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: House 2 Final Shatter (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -476,8 +476,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5300e21ad842240b4492a51cf1d7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 0
-  _pieces: []
+  _force: 50
+  _pieces:
+  - {fileID: 9050526555496923704}
+  - {fileID: 8906080179457117690}
+  - {fileID: 769936052513629510}
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
   _spawner: {fileID: 0}
