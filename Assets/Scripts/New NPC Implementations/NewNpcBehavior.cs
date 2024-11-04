@@ -44,7 +44,7 @@ public class NewNpcBehavior : CharacterMovement3D
     private GameObject _target;
     private Vector3 _newDirectionVector;
 
-    LayerMask _layerMask;
+    LayerMask _doorLayerMask;
     LayerMask _civilianTargetLayerMask;
     private bool Stoppep = false;
     [SerializeField] public GameObject _vacuum;
@@ -53,18 +53,18 @@ public class NewNpcBehavior : CharacterMovement3D
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
 
-        _layerMask |= (1 << 22);
+        _doorLayerMask |= (1 << 25);
         _civilianTargetLayerMask |= (1 << 6);
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
-        _endTarget = (EndTarget) Random.Range(0, 2);
+        _endTarget = (EndTarget) Random.Range(0, 1);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
     }
 
     private void SetEscapeDestination()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _doorLayerMask);
         if(hitColliders.Length !=0)
         {
             _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
@@ -95,41 +95,39 @@ public class NewNpcBehavior : CharacterMovement3D
         else
         {
             base.Update();
-
             angle += Time.deltaTime * _rotationSpeed;
-            if (!Stoppep)
+            if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
             {
-                if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
+                if (_pattern == Pattern.ZIGZAG)
                 {
-                    if (_pattern == Pattern.ZIGZAG)
+                    if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
                     {
-                        if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                        if (_newDirectionVector.x > 0)
                         {
-                            if (_newDirectionVector.x > 0)
-                            {
-                                _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
-                                _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
-                            }
-                            else
-                            {
-                                _newDirectionVector.x *= -1;
-                                _newDirectionVector.z = 0;
-                            }
-                            MoveTo(transform.position + _newDirectionVector);
+                            _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
+                            _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
                         }
-                    }
-                    else if (_pattern == Pattern.CIRCLE)
-                    {
-                        _newDirectionVector.x = Mathf.Cos(angle) * _radius;
-                        _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                        else
+                        {
+                            _newDirectionVector.x *= -1;
+                            _newDirectionVector.z = 0;
+                        }
                         MoveTo(transform.position + _newDirectionVector);
                     }
                 }
-                else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
+                else if (_pattern == Pattern.CIRCLE)
                 {
-                    MoveTo(_target.transform.position);
+                    _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                    _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                    MoveTo(transform.position + _newDirectionVector);
                 }
             }
+            else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN))
+            {
+                Debug.Log("xd");
+                MoveTo(_target.transform.position);
+            }
+
         }
     }
 

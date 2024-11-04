@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 8049282057347821347}
   - component: {fileID: 1002076155283849166}
   - component: {fileID: 8084819246788388887}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: polySurface101
   m_TagString: Untagged
   m_Icon: {fileID: 0}
