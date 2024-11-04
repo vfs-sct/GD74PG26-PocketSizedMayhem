@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -15,6 +16,7 @@ public class Vacuum : MonoBehaviour
     Vector3 RayStartScale;
     [SerializeField] float raychangespeed;
     [SerializeField] private GameObject _pukeVFX;
+    [field: SerializeField] public EventReference VacuumSFX { get; set; }
     private void Start()
     {
         RayStartScale = _Ray.transform.localScale;
@@ -22,17 +24,13 @@ public class Vacuum : MonoBehaviour
         endScale = new Vector3(3,1,3);
         pulledObjects = new List<GameObject>();
         capturedObjects = new List<GameObject>();
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Enemy"));
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Debris"));
         _vacuumableObjects |= (1 << LayerMask.NameToLayer("Civilian"));
-        _vacuumableObjects |= (1 << LayerMask.NameToLayer("Bomb"));
     }
     private void Update()
     {
         
         if (_vacuumOn)
         {
-            
             _Ray.transform.localScale = Vector3.Lerp(_Ray.transform.localScale, RayStartScale, raychangespeed * Time.deltaTime);
         }
         else
@@ -41,8 +39,7 @@ public class Vacuum : MonoBehaviour
         }
         if(PlayerStats.Hunger >= 100)
         {
-            PlayerStats.Hunger = 50;
-            Puke();
+            PlayerStats.Hunger = 100;
         }
     }
     private void FixedUpdate()
@@ -67,8 +64,11 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
-        pulledObjects.Remove(other.gameObject);
+        if(other.gameObject.layer == _vacuumableObjects)
+        {
+            other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
+            pulledObjects.Remove(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -95,11 +95,11 @@ public class Vacuum : MonoBehaviour
     }
     public void Puke()
     {
-        PlayerStats.Hunger -= 50;
         Instantiate(_pukeVFX, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     public void VacuumOn()
     {
+        RuntimeManager.PlayOneShot(VacuumSFX, this.gameObject.transform.position);
         _vacuumOn = true;
         _storeCollider.enabled = true;
         _rayCollider.enabled = true;
