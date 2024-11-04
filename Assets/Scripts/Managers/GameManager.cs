@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _startPoint = 0;
 
     [SerializeField] private TextMeshProUGUI _timerText;
+    [SerializeField] private TextMeshProUGUI _poinText;
 
     private float _elapsedTime;
     void Awake()
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
             _timerText.text = "Remaining Time: " + 0;
             SceneManager.LoadScene("WinScreen");
         }
+        _poinText.text = PlayerStats.Points.ToString();
     }
 
     public void OnIncreaseTime()

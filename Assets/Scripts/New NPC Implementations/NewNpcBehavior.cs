@@ -12,7 +12,7 @@ public class NewNpcBehavior : CharacterMovement3D
     [SerializeField] private float _forwardForce;
 
     [Header("NPC Attributes")]
-    [SerializeField] private float point;
+    [SerializeField] private int point;
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float _fadeSpeed;
     
@@ -52,22 +52,24 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
+
         _layerMask |= (1 << 22);
         _civilianTargetLayerMask |= (1 << 6);
-        
         _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
 
         _endTarget = (EndTarget) Random.Range(0, 2);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
-        SetEscapeDestination();
     }
 
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _layerMask);
-        _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
-        MoveTo(_target.transform.position);
+        if(hitColliders.Length !=0)
+        {
+            _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
+            MoveTo(_target.transform.position);
+        }
     }
 
     private void SetCivilianTarget()
@@ -131,55 +133,18 @@ public class NewNpcBehavior : CharacterMovement3D
         }
     }
 
-    private IEnumerator Fadeout()
-    {
-        if (_timer < fadeOutTime)
-        {
-            
-            _fadeAmount = Mathf.Lerp(1, 0, _timer / fadeOutTime);
-            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
-        }
-        yield return null;
-    }
-
-    private IEnumerator ColorFadeOut()
-    {
-        float newTimer = 0;
-        while (newTimer < _timer2)
-        {
-            _fadeAmount = Mathf.Lerp(1, 0, 1 - newTimer / _timer2);
-            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
-            newTimer += Time.deltaTime;
-        }
-        yield return StartCoroutine(ColorFadeIn());
-    }
-
-    private IEnumerator ColorFadeIn()
-    {
-        float newTimer = 0;
-        while (newTimer < _timer2)
-        {
-            _fadeAmount = Mathf.Lerp(0, 1,  newTimer / _timer2);
-            //bjectMaterial.SetFloat("_Alpha", _fadeAmount);
-            newTimer += Time.deltaTime;
-        }
-        yield return StartCoroutine(ColorFadeOut());
-    }
-
     private void AssignTarget()
     {
         if (point < 0)
         {
             _endTarget = EndTarget.CIVILIAN;
+            SetCivilianTarget();
+            return;
         }
 
         if (_endTarget == EndTarget.TARGET)
         {
             SetEscapeDestination();
-        }
-        else if (_endTarget == EndTarget.CIVILIAN)
-        {
-            SetCivilianTarget();
         }
         else
         {
@@ -191,6 +156,10 @@ public class NewNpcBehavior : CharacterMovement3D
         
     }
 
+    public int GetPoint()
+    {
+        return point;
+    }
     public enum EndTarget
     {
         TARGET,
@@ -207,11 +176,6 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         PRECISE,
         FRENZY
-    }
-
-    public float GetPoint()
-    {
-        return point;
     }
 
     private void OnParticleCollision(GameObject other)

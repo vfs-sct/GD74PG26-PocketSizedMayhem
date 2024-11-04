@@ -5,6 +5,8 @@ using UnityEngine.VFX;
 using FMODUnity;
 using System.Collections;
 using Unity.VisualScripting;
+using PrimeTween;
+using TMPro;
 public class CivilianDeath : MonoBehaviour
 {
     [field: SerializeField] public EventReference DeathSFX { get; set; }
@@ -25,12 +27,17 @@ public class CivilianDeath : MonoBehaviour
     private float _fadeTime;
     private float _fadeThresholdTime;
     private float _fadeAmount;
+    [SerializeField] private Canvas canvas;
 
+    [SerializeField] private GameObject _pointPopUp;
     private Renderer _objectRenderer;
     private Material _objectMaterial;
     private Color _objectColor;
+    private int pointValueOnDeath;
     private void Start()
     {
+        pointValueOnDeath = _civilianBehaviour.GetPoint();
+        canvas = GameObject.Find("Placeholder_HUD").GetComponent<Canvas>();
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _objectColor = _objectMaterial.color;
@@ -90,6 +97,14 @@ public class CivilianDeath : MonoBehaviour
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
             _triggerCollider.enabled = false;
+            Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+            pointPos.y += 100;
+            GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
+            PlayerStats.Points += pointValueOnDeath;
+            point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
+            Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+            pointPos.y += 200;
+            Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
         
