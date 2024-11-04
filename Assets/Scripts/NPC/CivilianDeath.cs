@@ -40,7 +40,6 @@ public class CivilianDeath : MonoBehaviour
         canvas = GameObject.Find("Placeholder_HUD").GetComponent<Canvas>();
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
-        _objectColor = _objectMaterial.color;
         _fadeTime = 0;
         _fadeThresholdTime = 8;
         _pointGiven = false;

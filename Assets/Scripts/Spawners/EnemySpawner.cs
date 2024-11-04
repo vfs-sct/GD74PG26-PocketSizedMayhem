@@ -19,7 +19,7 @@ public class EnemySpawner : Spawner
 
     private void Awake()
     {
-        times = new List<float>();
+        //times = new List<float>();
     }
 
     private void Start()
@@ -31,9 +31,12 @@ public class EnemySpawner : Spawner
 
     IEnumerator SpawnWave()
     {
+        yield return new WaitForSeconds(1);
+        _iterationCount = times.Count;
         yield return new WaitForSeconds(times[_iteration] - Time.time);
         for (int i = 0; i < spawncount[_iteration]; i++)
         {
+           
             SpawnCivilian();
         }
         _iteration++;
