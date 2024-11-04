@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3337534021993408920}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Final Destructible House 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,9 +81,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 0
-  _pieces: []
+  _pieces:
+  - {fileID: 7291615378008260324}
+  - {fileID: 4842204033391371088}
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
+  _spawner: {fileID: 0}
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &1910263360944738294
 Rigidbody:
   m_ObjectHideFlags: 0

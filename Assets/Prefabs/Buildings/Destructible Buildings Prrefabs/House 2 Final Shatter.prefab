@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4309962900399213860}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: House 2 Final Shatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,9 +656,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 0
-  _pieces: []
+  _pieces:
+  - {fileID: 3242927832980301289}
+  - {fileID: 6312911102252446371}
+  - {fileID: 3025734542539665141}
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
+  _spawner: {fileID: 0}
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &4062029216248129222
 Rigidbody:
   m_ObjectHideFlags: 0
