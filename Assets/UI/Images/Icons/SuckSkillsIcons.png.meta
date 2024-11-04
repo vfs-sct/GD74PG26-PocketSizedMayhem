@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c759df99136ced408e981c52cfe9b5f
+guid: b98ddd92217d39349a1dd5dce9cabda9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Placeholder_MalletSkills_1
+      name: SuckSkillsIcons_0
       rect:
         serializedVersion: 2
-        x: 286
-        y: 483
-        width: 553
-        height: 487
+        x: 0
+        y: 0
+        width: 2000
+        height: 2000
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,29 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5c4f8b2049b8774da5605267af5027c
-      internalID: 1653491777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Placeholder_MalletSkills_5
-      rect:
-        serializedVersion: 2
-        x: 1094
-        y: 564
-        width: 497
-        height: 406
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b4f2b499e6b24a64ab9b9002a77ac604
-      internalID: 584605521
+      spriteID: 73f6cc9d764aad94fbb332a6fefd5eda
+      internalID: 625264072
       vertices: []
       indices: 
       edges: []
@@ -167,7 +146,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a92a3293f9b93064f90b393166143ccb
+    spriteID: 1182067a0ac201c489005baf07cf317a
     internalID: 0
     vertices: []
     indices: 
@@ -175,13 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Placeholder_MalletSkills_0: 484485906
-      Placeholder_MalletSkills_1: 1653491777
-      Placeholder_MalletSkills_2: 758660570
-      Placeholder_MalletSkills_3: -643655691
-      Placeholder_MalletSkills_4: -1743637680
-      Placeholder_MalletSkills_5: 584605521
-      Placeholder_MalletSkills_6: 815016869
+      SuckSkillsIcons_0: 625264072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
