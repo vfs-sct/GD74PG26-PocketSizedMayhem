@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _poinText;
+    [SerializeField] Image _hungerFillBar;
 
     private float _elapsedTime;
     void Awake()
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("WinScreen");
         }
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
+        _hungerFillBar.fillAmount = PlayerStats.Hunger / 100;
     }
 
     public void OnIncreaseTime()
