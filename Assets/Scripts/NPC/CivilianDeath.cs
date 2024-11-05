@@ -27,7 +27,7 @@ public class CivilianDeath : MonoBehaviour
     private float _fadeTime;
     private float _fadeThresholdTime;
     private float _fadeAmount;
-    //[SerializeField] private Canvas canvas;
+    [SerializeField] private Canvas canvas;
 
     [SerializeField] private GameObject _pointPopUp;
     private Renderer _objectRenderer;
@@ -37,7 +37,7 @@ public class CivilianDeath : MonoBehaviour
     private void Start()
     {
         pointValueOnDeath = _civilianBehaviour.GetPoint();
-        //canvas = GameObject.Find("Placeholder_HUD").GetComponent<Canvas>();
+        canvas = GameObject.Find("HUD_Alpha").GetComponent<Canvas>();
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _fadeTime = 0;
@@ -98,12 +98,12 @@ public class CivilianDeath : MonoBehaviour
             _triggerCollider.enabled = false;
             Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
             pointPos.y += 100;
-            //GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
+            GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
             PlayerStats.Points += pointValueOnDeath;
-            //point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
-            //Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+            point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
+            Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
             pointPos.y += 200;
-           // Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
+            Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
         else if(other.gameObject.layer == LayerMask.NameToLayer("Door"))
