@@ -103,7 +103,6 @@ public class Mallet : Weapon
     {
         if(PlayerStats.Hunger >0)
         {
-
             RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
             _particleSystem.Play();
             var emission = _particleSystem.emission;
@@ -196,7 +195,7 @@ public class Mallet : Weapon
         hitpoint = _hit.point;
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
+        _malletHandle.gameObject.transform.position = hitpoint;
     }
 
     public void DisableColliders()
