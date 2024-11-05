@@ -122,9 +122,8 @@ public class NewNpcBehavior : CharacterMovement3D
                     MoveTo(transform.position + _newDirectionVector);
                 }
             }
-            else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN))
+            else if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
             {
-                Debug.Log("xd");
                 MoveTo(_target.transform.position);
             }
 

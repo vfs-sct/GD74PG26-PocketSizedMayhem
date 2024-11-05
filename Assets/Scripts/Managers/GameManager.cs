@@ -36,15 +36,15 @@ public class GameManager : MonoBehaviour
         {
             int minutes = (int)((_gameTime - _elapsedTime) / 60) % 60;
             int seconds = (int)((_gameTime - _elapsedTime) % 60);
-            _timerText.text = "Remaining Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+            _timerText.text = "Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
             _elapsedTime += Time.deltaTime;
         }
         else
         {
-            _timerText.text = "Remaining Time: " + 0;
+            _timerText.text = "Time: " + 0;
             SceneManager.LoadScene("WinScreen");
         }
-        _poinText.text = PlayerStats.Points.ToString();
+        _poinText.text = "Point: " + PlayerStats.Points.ToString();
     }
 
     public void OnIncreaseTime()
