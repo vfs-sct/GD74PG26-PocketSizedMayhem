@@ -50,6 +50,7 @@ public class Mallet : Weapon
     [SerializeField] private float _hungerExpense;
     
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private RotateIcon _rotateIcon;
     private bool puking = false;
     private void Start()
     {
@@ -151,6 +152,7 @@ public class Mallet : Weapon
             _attackMode = 0;
             _malletAnimator.SetTrigger("SwitchMallet");
             _vacuum.VacuumOff();
+            _rotateIcon.SwitchSides();
         }
     }
 
@@ -161,6 +163,7 @@ public class Mallet : Weapon
             gameObject.tag = "Vacuum";
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
+            _rotateIcon.SwitchSides();
         }
     }
     private void OnDrawGizmosSelected()
