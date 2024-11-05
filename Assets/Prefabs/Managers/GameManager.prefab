@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1994643613335675154}
-  - component: {fileID: 4475358855332342936}
   - component: {fileID: 3932542554135921199}
   m_Layer: 0
   m_Name: GameManager
@@ -33,30 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4475358855332342936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516912931145980001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8caee9ee4eb6db418b80495934a2cb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _civilian: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
-    type: 3}
-  _timerText: {fileID: 0}
-  _pointText: {fileID: 0}
-  _objectiveText1: {fileID: 0}
-  _objectiveText2: {fileID: 0}
-  _objectiveText3: {fileID: 0}
-  _gameTime: 100
-  _civilianToSaved: 1
-  _criminalsKilled: 5
-  _criminalsCaptured: 1
-  shelter: {fileID: 0}
 --- !u!114 &3932542554135921199
 MonoBehaviour:
   m_ObjectHideFlags: 0

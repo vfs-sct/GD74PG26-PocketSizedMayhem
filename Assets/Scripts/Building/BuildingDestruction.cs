@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,16 +10,10 @@ public class BuildingDestruction : MonoBehaviour
     [SerializeField] private GameObject _civilians;
     [SerializeField] private TestSpawner _spawner;
     private bool _isDestoyed;
-
+    [field: SerializeField] public EventReference DeathSFX { get; set; }
     void Start()
     {
         _isDestoyed = false;
-        _pieces = new List<GameObject>();
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject piece = transform.GetChild(i).gameObject;
-            _pieces.Add(piece);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +21,7 @@ public class BuildingDestruction : MonoBehaviour
         
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
+            RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             this.GetComponent<Rigidbody>().isKinematic = false;
             foreach (GameObject piece in _pieces)
             {
@@ -35,7 +31,6 @@ public class BuildingDestruction : MonoBehaviour
             }
             _isDestoyed = true;
             StartCoroutine(AssignDebri());
-            _spawner.SpawnAtPoint();
         }
     }
 

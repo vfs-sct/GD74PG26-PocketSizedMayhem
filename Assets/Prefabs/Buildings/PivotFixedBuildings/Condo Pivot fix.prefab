@@ -257,9 +257,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 0
-  _pieces: []
+  _pieces:
+  - {fileID: 7592582534475440125}
+  - {fileID: 2708613646747056246}
+  - {fileID: 1535676877718580418}
+  - {fileID: 3391846041011515910}
+  - {fileID: 3593020700035006596}
+  - {fileID: 7970722153044284677}
+  - {fileID: 4892699875112772461}
+  - {fileID: 8439926781960502180}
+  - {fileID: 7679570722477310156}
+  - {fileID: 920415358540135544}
+  - {fileID: 1109893322346257123}
+  - {fileID: 1202980572513618838}
+  - {fileID: 8528403365358859770}
+  - {fileID: 7707524961001365903}
+  - {fileID: 5523806443423702543}
+  - {fileID: 7865265112491496526}
   _civilians: {fileID: 0}
-  _spawner: {fileID: 353833573771549560}
+  _spawner: {fileID: 0}
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!54 &6777051000125229025
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2070,7 +2093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3632891640728808934}
-  - component: {fileID: 353833573771549560}
+  - component: {fileID: 4662731079954749074}
   m_Layer: 0
   m_Name: Condo Pivot fix
   m_TagString: Untagged
@@ -2096,49 +2119,22 @@ Transform:
   - {fileID: 6771907462214980222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &353833573771549560
-MonoBehaviour:
+--- !u!208 &4662731079954749074
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7132760789998971078}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3ec1110b399b948a84bd2978a3463e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _civilians:
-  - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
-  - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
-  - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
-  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
-  _topSpawnPoints:
-  - {fileID: 3745528541618630679}
-  - {fileID: 800194086679959156}
-  - {fileID: 3451631820744754596}
-  _leftSpawnPoints:
-  - {fileID: 7881558843885768824}
-  - {fileID: 1754907583435737541}
-  - {fileID: 4658293199235719307}
-  _bottomSpawnPoints:
-  - {fileID: 2107966675585157268}
-  - {fileID: 4248453720115166212}
-  - {fileID: 2673087454732089563}
-  _rightSpawnPoints:
-  - {fileID: 2518643431379046917}
-  - {fileID: 1872238790237492802}
-  - {fileID: 3305275687256376134}
-  _minSpawn: 6
-  _maxSpawn: 6
-  _easyCivilianWeight: 1
-  _mediumCivilianWeight: 1
-  _hardCivilianWeight: 1
-  _negativeCivilianWeight: 1
-  _topWeight: 1
-  _leftWeight: 1
-  _bottomWeight: 1
-  _rightWeight: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &7592582534475440125
 GameObject:
   m_ObjectHideFlags: 0

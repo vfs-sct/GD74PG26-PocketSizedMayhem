@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
 using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
@@ -14,6 +15,8 @@ using Vector3 = UnityEngine.Vector3;
 public class Mallet : Weapon
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference PukeSFX { get; set; }
+    
     [SerializeField] private GameObject _debrisVFX;
     
     [SerializeField] private GameObject _impact;
@@ -37,14 +40,15 @@ public class Mallet : Weapon
     private Vector3 _hitTargetpos;
     [SerializeField] private float _impactRadius;
     [SerializeField] private float _malletMovementSpeed ;
-    private bool _isAttacking = false;
+   // private bool _isAttacking = false;
     private int layerAsLayerMask;
     private int _attackMode;
-    private bool isVacuuming = false;
+    //private bool isVacuuming = false;
     [SerializeField]private int pullIntensity;
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
     [SerializeField] private float _hungerExpense;
+    
     [SerializeField] private ParticleSystem _particleSystem;
     private bool puking = false;
     private void Start()
@@ -54,6 +58,20 @@ public class Mallet : Weapon
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
         enemies = new List<GameObject>();
+    }
+    public void OnRestartScene()
+    {
+        SceneManager.LoadScene("GameScene - M3");
+    }
+
+    public void OnIncreasePoint()
+    {
+        PlayerStats.Points += 10;
+    }
+    public void OnDecreasePoint()
+    {
+        Debug.Log("hehe");
+        PlayerStats.Points -= 10;
     }
     private void OnEnable()
     {
@@ -84,6 +102,8 @@ public class Mallet : Weapon
     {
         if(PlayerStats.Hunger >0)
         {
+
+            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
             _particleSystem.Play();
             var emission = _particleSystem.emission;
             emission.rateOverTime = 100;
@@ -106,10 +126,6 @@ public class Mallet : Weapon
         _malletAnimator.SetFloat("Direction", 1);
         if ( _attackMode == 0)
         {
-            if (!AttackSFX.IsNull)
-            {
-                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-            }
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
         }
@@ -119,8 +135,9 @@ public class Mallet : Weapon
     {
         if(_attackMode==1)
         {
+             
             _vacuum.VacuumOn();
-            isVacuuming = true;
+            //isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
             _malletAnimator.SetBool("VacuumReleased", false);
         }
@@ -154,6 +171,7 @@ public class Mallet : Weapon
     {
         if(puking)
         {
+            
             PlayerStats.Hunger-=0.5f;
         }
         if (PlayerStats.Hunger<=0)
@@ -191,9 +209,19 @@ public class Mallet : Weapon
 
     }
     public void ImpactEffects()
-    {
-        GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
-        impact.GetComponent<VisualEffect>().Play();
+    { 
+        GameObject impactVFX = ObjectPool.instance.GetPooledObject();
+
+        if (impactVFX != null)
+        {
+            impactVFX.transform.position = _impactPos.transform.position + Vector3.up;
+            impactVFX.GetComponent<VisualEffect>().Play();
+        }
+
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
