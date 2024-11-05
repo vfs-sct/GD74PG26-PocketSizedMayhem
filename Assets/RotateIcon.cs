@@ -10,7 +10,6 @@ public class RotateIcon : MonoBehaviour
     [SerializeField] GameObject vacuumIcon;
     [SerializeField] GameObject IconHolder;
     // Start is called before the first frame update
-    private bool _isTurning = false;
     private int direction = 1;
     private int _multiplier = 0;
     [SerializeField] private float _rotateDuration;

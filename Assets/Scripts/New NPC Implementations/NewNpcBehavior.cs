@@ -33,15 +33,9 @@ public class NewNpcBehavior : CharacterMovement3D
     private Material _objectMaterial;
 
     private float _alpha;
-    private float _fadeAmount = 1;
-    private float _timer = 0;
-    private float _timer2 = 0;
-    private float angle = 0;
-   // private float _cycleCount = 0;
-    private bool _fadingOut;
 
-    //private bool _targetAssigned = false;
-    private GameObject _target;
+    private float angle = 0;
+    [SerializeField] private GameObject _target;
     private Vector3 _newDirectionVector;
 
     LayerMask _doorLayerMask;
@@ -60,6 +54,7 @@ public class NewNpcBehavior : CharacterMovement3D
         _endTarget = (EndTarget) Random.Range(0, 1);
         _state = (State) Random.Range(0, 2);
         _pattern = (Pattern) Random.Range(0, 2);
+        SetEscapeDestination();
     }
 
     private void SetEscapeDestination()

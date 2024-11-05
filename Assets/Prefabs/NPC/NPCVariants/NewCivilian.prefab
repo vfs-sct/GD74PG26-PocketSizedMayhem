@@ -1459,7 +1459,6 @@ MonoBehaviour:
   _rb: {fileID: 2461877797427025339}
   _civilianBehaviour: {fileID: 5646808012954638468}
   _animNo: 4
-  canvas: {fileID: 0}
   _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
     type: 3}
 --- !u!114 &940318795407769195

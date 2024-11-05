@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467816554462011196}
   - component: {fileID: 6107187292599195857}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Final Shatter House 5 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 1, z: 1}
+  m_Extents: {x: 0.69, y: 1, z: 0.53}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

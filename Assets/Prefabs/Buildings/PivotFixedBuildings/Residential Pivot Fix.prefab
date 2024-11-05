@@ -480,7 +480,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -322, z: 194}
-  m_LocalScale: {x: 171.22737, y: 305.93195, z: 171.22737}
+  m_LocalScale: {x: 171.22737, y: 305.93195, z: 291.4461}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8256936766897443176}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 677448581978750519}
   - component: {fileID: 5773256718994270982}
   - component: {fileID: 5466534425908343308}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Residential Pivot Fix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,11 +553,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 400, y: 400, z: 400}
+  m_Extents: {x: 288.6, y: 397.25, z: 282.7}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -101.1}
   m_TimeToStationary: 0.5
 --- !u!114 &5773256718994270982
 MonoBehaviour:

@@ -934,7 +934,7 @@ Transform:
   m_GameObject: {fileID: 2450909686684088203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89.9, y: -281, z: 146}
+  m_LocalPosition: {x: 89.9, y: -281, z: 173.6}
   m_LocalScale: {x: 50.1, y: 50.1, z: 50.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2184,7 +2184,7 @@ GameObject:
   - component: {fileID: 2686765851713300722}
   - component: {fileID: 2612960219180648631}
   - component: {fileID: 1253251229366913139}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Condo Pivot fix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2219,7 +2219,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 150, y: 250, z: 113.26}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
