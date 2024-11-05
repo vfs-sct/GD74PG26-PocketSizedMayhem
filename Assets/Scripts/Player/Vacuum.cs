@@ -75,14 +75,10 @@ public class Vacuum : MonoBehaviour
     {
         if (_vacuumableObjects == (_vacuumableObjects | (1 << collision.gameObject.layer)) && _vacuumOn)
         {
-            capturedObjects.Add(collision.gameObject);
-            collision.rigidbody.velocity = Vector3.zero;
-            if (!collision.gameObject.TryGetComponent<FixedJoint>(out FixedJoint joint))
-            {
-                collision.gameObject.AddComponent<FixedJoint>();
-                collision.gameObject.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
-                collision.gameObject.transform.parent = this.gameObject.transform;
-            }
+            collision.gameObject.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
+            pulledObjects.Remove(collision.gameObject);
+            collision.gameObject.gameObject.SetActive(false);
+            PlayerStats.Hunger += 5;
         }
     }
     public void ReleaseAll()

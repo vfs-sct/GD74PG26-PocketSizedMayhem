@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "SwitchWeapon",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4aafd15d-6994-48fa-823e-8e6ad96e8172",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "IncreaseTime",
@@ -99,15 +99,6 @@
                     "name": "RestartScene",
                     "type": "Button",
                     "id": "182fded0-f84d-4c89-85f1-6705f4b89f93",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SpawnCivilian",
-                    "type": "Button",
-                    "id": "28ccc6ef-410d-4e4a-9c98-62bf62a688e9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -373,17 +364,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5ed832a6-f089-4304-ae0f-30c228f3d846",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SwitchWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b80c178d-19a6-4b7c-b163-c794dddb7e83",
                     "path": "<Keyboard>/f1",
                     "interactions": "",
@@ -461,17 +441,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8ff86d94-09c0-4909-befb-45157c621089",
-                    "path": "<Keyboard>/f8",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SpawnCivilian",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5ca5ecbc-a70d-4d9b-8ff3-55a7ef0d1c4d",
                     "path": "<Keyboard>/1",
                     "interactions": "",
@@ -511,6 +480,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Vacuum",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ef49fa5-3c6b-4341-b9bb-37211534e05e",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

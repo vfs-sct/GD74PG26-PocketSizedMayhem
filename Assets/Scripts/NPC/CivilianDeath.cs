@@ -111,14 +111,6 @@ public class CivilianDeath : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    { 
-        if (collision.gameObject.tag == "Vacuum")
-        {
-            this.gameObject.SetActive(false);
-            PlayerStats.Hunger += 5;
-        }
-    }
 
     IEnumerator StartFading()
     {

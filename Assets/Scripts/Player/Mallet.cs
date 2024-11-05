@@ -12,7 +12,7 @@ using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-public class Mallet : Weapon
+public class Mallet : MonoBehaviour
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
     [field: SerializeField] public EventReference PukeSFX { get; set; }
@@ -109,7 +109,6 @@ public class Mallet : Weapon
             emission.rateOverTime = 100;
             puking = true;
         }
-        
     }
 
     private void OnDisable()
@@ -121,7 +120,7 @@ public class Mallet : Weapon
         pukeAction.Disable();
     }
     
-    public override void Fire()
+    public  void OnFire()
     {
         _malletAnimator.SetFloat("Direction", 1);
         if ( _attackMode == 0)
@@ -130,12 +129,28 @@ public class Mallet : Weapon
             _layerMask = LayerMask.GetMask("Floor");
         }
     }
-
+    public void OnSwitchWeapon()
+    {
+        //if (_attackMode == 0)
+        //{
+        //    gameObject.tag = "Vacuum";
+        //    _attackMode = 1;
+        //    _malletAnimator.SetTrigger("SwitchVacuum");
+        //    _rotateIcon.SwitchSides();
+        //}
+        //else if (_attackMode == 1)
+        //{
+        //    gameObject.tag = "Mallet";
+        //    _attackMode = 0;
+        //    _malletAnimator.SetTrigger("SwitchMallet");
+        //    _vacuum.VacuumOff();
+        //    _rotateIcon.SwitchSides();
+        //}
+    }
     public void OnVacuum()
     {
         if(_attackMode==1)
         {
-             
             _vacuum.VacuumOn();
             //isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");

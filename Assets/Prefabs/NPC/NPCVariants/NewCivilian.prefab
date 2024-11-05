@@ -1430,6 +1430,7 @@ MonoBehaviour:
   _zigzagVerticalDistance: 10
   _rotationSpeed: 2
   _radius: 15
+  _target: {fileID: 0}
   _vacuum: {fileID: 0}
 --- !u!114 &1041028353720300704
 MonoBehaviour:
