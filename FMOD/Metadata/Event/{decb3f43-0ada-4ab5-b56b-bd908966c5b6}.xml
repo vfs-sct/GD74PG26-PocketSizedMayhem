@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{decb3f43-0ada-4ab5-b56b-bd908966c5b6}">
 		<property name="name">
-			<value>SFX_MalletWhack</value>
+			<value>SFX_MalletSmash</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>

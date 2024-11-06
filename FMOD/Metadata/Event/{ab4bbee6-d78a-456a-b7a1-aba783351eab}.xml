@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{ab4bbee6-d78a-456a-b7a1-aba783351eab}">
 		<property name="name">
-			<value>RAW_Borax,Impact,Slime,Gore,Various30</value>
+			<value>SFX_MalletPuke</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -60,7 +60,7 @@
 	<object class="MarkerTrack" id="{c4946e35-07d2-4cad-9307-c9289eb32388}" />
 	<object class="GroupTrack" id="{5e881fd6-dfcb-41fa-8848-6d3dd3e736ff}">
 		<relationship name="modules">
-			<destination>{18833cf0-9d5a-4182-9e91-11abd053d169}</destination>
+			<destination>{a66d3f1c-b36c-4f67-b68e-fa28f6832e2f}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{c8381d24-90ae-4dc7-b65e-c5e355a659e5}</destination>
@@ -68,7 +68,7 @@
 	</object>
 	<object class="Timeline" id="{a7226db3-2773-4494-a7ad-25d5e4053038}">
 		<relationship name="modules">
-			<destination>{18833cf0-9d5a-4182-9e91-11abd053d169}</destination>
+			<destination>{a66d3f1c-b36c-4f67-b68e-fa28f6832e2f}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{106f47f2-9128-42d6-8b0e-d441c01aae83}">
@@ -88,9 +88,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8ebf8c21-d512-455b-b7ae-607e3b61a23a}" />
-	<object class="SingleSound" id="{18833cf0-9d5a-4182-9e91-11abd053d169}">
+	<object class="SingleSound" id="{a66d3f1c-b36c-4f67-b68e-fa28f6832e2f}">
 		<property name="length">
-			<value>2.464</value>
+			<value>0.60000000000000009</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>1.4865931034482758</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{f0a6a0ce-039e-4942-86f9-66b1f43fe4ae}</destination>
