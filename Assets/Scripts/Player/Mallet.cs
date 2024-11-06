@@ -12,7 +12,7 @@ using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-public class Mallet : Weapon
+public class Mallet : MonoBehaviour
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
     [field: SerializeField] public EventReference PukeSFX { get; set; }
@@ -50,6 +50,7 @@ public class Mallet : Weapon
     [SerializeField] private float _hungerExpense;
     
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private RotateIcon _rotateIcon;
     private bool puking = false;
     private void Start()
     {
@@ -102,14 +103,12 @@ public class Mallet : Weapon
     {
         if(PlayerStats.Hunger >0)
         {
-
             RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
             _particleSystem.Play();
             var emission = _particleSystem.emission;
             emission.rateOverTime = 100;
             puking = true;
         }
-        
     }
 
     private void OnDisable()
@@ -121,7 +120,7 @@ public class Mallet : Weapon
         pukeAction.Disable();
     }
     
-    public override void Fire()
+    public  void OnFire()
     {
         _malletAnimator.SetFloat("Direction", 1);
         if ( _attackMode == 0)
@@ -130,12 +129,28 @@ public class Mallet : Weapon
             _layerMask = LayerMask.GetMask("Floor");
         }
     }
-
+    public void OnSwitchWeapon()
+    {
+        //if (_attackMode == 0)
+        //{
+        //    gameObject.tag = "Vacuum";
+        //    _attackMode = 1;
+        //    _malletAnimator.SetTrigger("SwitchVacuum");
+        //    _rotateIcon.SwitchSides();
+        //}
+        //else if (_attackMode == 1)
+        //{
+        //    gameObject.tag = "Mallet";
+        //    _attackMode = 0;
+        //    _malletAnimator.SetTrigger("SwitchMallet");
+        //    _vacuum.VacuumOff();
+        //    _rotateIcon.SwitchSides();
+        //}
+    }
     public void OnVacuum()
     {
         if(_attackMode==1)
         {
-             
             _vacuum.VacuumOn();
             //isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
@@ -151,6 +166,7 @@ public class Mallet : Weapon
             _attackMode = 0;
             _malletAnimator.SetTrigger("SwitchMallet");
             _vacuum.VacuumOff();
+            _rotateIcon.SwitchSides();
         }
     }
 
@@ -161,6 +177,7 @@ public class Mallet : Weapon
             gameObject.tag = "Vacuum";
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
+            _rotateIcon.SwitchSides();
         }
     }
     private void OnDrawGizmosSelected()
@@ -193,7 +210,7 @@ public class Mallet : Weapon
         hitpoint = _hit.point;
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
+        _malletHandle.gameObject.transform.position = hitpoint;
     }
 
     public void DisableColliders()

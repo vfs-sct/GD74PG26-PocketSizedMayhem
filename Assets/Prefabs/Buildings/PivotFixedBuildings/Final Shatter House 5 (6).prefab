@@ -144,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467816554462011196}
   - component: {fileID: 6107187292599195857}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Final Shatter House 5 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 1, y: 1, z: 1}
+  m_Extents: {x: 0.69, y: 1, z: 0.53}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -258,8 +258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5300e21ad842240b4492a51cf1d7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 0
-  _pieces: []
+  _force: 50
+  _pieces:
+  - {fileID: 3852833914296491031}
+  - {fileID: 363805979023186463}
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
   _spawner: {fileID: 0}
@@ -450,7 +452,7 @@ GameObject:
   - component: {fileID: 8049282057347821347}
   - component: {fileID: 1002076155283849166}
   - component: {fileID: 8084819246788388887}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: polySurface101
   m_TagString: Untagged
   m_Icon: {fileID: 0}

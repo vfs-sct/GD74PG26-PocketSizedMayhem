@@ -37,7 +37,7 @@ public class CivilianDeath : MonoBehaviour
     private void Start()
     {
         pointValueOnDeath = _civilianBehaviour.GetPoint();
-        canvas = GameObject.Find("Placeholder_HUD").GetComponent<Canvas>();
+        canvas = GameObject.Find("HUD_Alpha").GetComponent<Canvas>();
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _fadeTime = 0;
@@ -106,14 +106,9 @@ public class CivilianDeath : MonoBehaviour
             Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    { 
-        if (collision.gameObject.tag == "Vacuum")
+        else if(other.gameObject.layer == LayerMask.NameToLayer("Door"))
         {
             this.gameObject.SetActive(false);
-            PlayerStats.Hunger += 5;
         }
     }
 

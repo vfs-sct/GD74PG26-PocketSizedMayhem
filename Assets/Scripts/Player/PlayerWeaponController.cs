@@ -12,18 +12,6 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Material _clawTargetMaterial;
     [SerializeField] private Material _malletTargetMaterial;
 
-    private Weapon _activeWeapon;
 
-    private LayerMask _layerMask;
-
-    void Start()
-    {
-        _activeWeapon = _mallet.GetComponent<Weapon>();
-    }
-
-    public void OnFire()
-    {
-        _activeWeapon.Fire();
-    }
     
 }
