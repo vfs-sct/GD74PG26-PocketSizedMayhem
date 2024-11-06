@@ -86,6 +86,10 @@
 		</relationship>
 	</object>
 	<object class="GroupTrack" id="{b1bc1042-0b54-48ed-ab56-35b9f21de880}">
+		<relationship name="modules">
+			<destination>{ad8f2bec-c217-4f1f-891b-21cc95479ca1}</destination>
+			<destination>{68148436-4c87-4df6-8b09-64fa732d0ef2}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{5ef73052-66c6-4991-a6d5-f322c9a2e1a5}</destination>
 		</relationship>
@@ -95,6 +99,8 @@
 			<destination>{e2ee581b-cbb5-4030-9d4a-1a7d7c19a5a0}</destination>
 			<destination>{ba67497c-a642-4c75-ac2c-2ff677c04a4c}</destination>
 			<destination>{3d5c60ee-1c35-4649-8b92-4bcc5bfd6a30}</destination>
+			<destination>{ad8f2bec-c217-4f1f-891b-21cc95479ca1}</destination>
+			<destination>{68148436-4c87-4df6-8b09-64fa732d0ef2}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{91e904d3-514c-46bc-849d-d3f44274523d}">
@@ -169,13 +175,21 @@
 	</object>
 	<object class="MultiSound" id="{3d5c60ee-1c35-4649-8b92-4bcc5bfd6a30}">
 		<property name="length">
-			<value>1.3</value>
+			<value>1.6000000000000001</value>
 		</property>
 		<relationship name="sounds">
 			<destination>{dc6e267e-b60e-4dfa-9789-f20ae9907b5c}</destination>
+			<destination>{bbb73a63-e205-4cac-ae0e-f7d7a444d2c5}</destination>
+			<destination>{4d20776b-a3de-4134-a578-a15ef4fa4769}</destination>
+			<destination>{540cf676-5d39-4116-aed5-1985bfd0ad67}</destination>
+			<destination>{12fe4069-2ac4-4285-bb6c-13be571a257a}</destination>
+			<destination>{08cb100e-37dc-410d-b0f2-7592445e2f1f}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{d60cee7f-723a-41d0-8a99-d8b6678dfdda}">
+		<property name="volume">
+			<value>-8</value>
+		</property>
 		<property name="name">
 			<value>Audio 3</value>
 		</property>
@@ -187,6 +201,28 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{91e904d3-514c-46bc-849d-d3f44274523d}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{ad8f2bec-c217-4f1f-891b-21cc95479ca1}">
+		<property name="start">
+			<value>0.12</value>
+		</property>
+		<property name="length">
+			<value>1.28</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{04df08d1-fa7e-48f7-b876-69dfb9110df6}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{68148436-4c87-4df6-8b09-64fa732d0ef2}">
+		<property name="start">
+			<value>1.54</value>
+		</property>
+		<property name="length">
+			<value>3.2533333333333334</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{73c1994c-86e5-456c-a649-4f5e4b7e6ac5}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{5ef73052-66c6-4991-a6d5-f322c9a2e1a5}">
@@ -225,6 +261,31 @@
 	<object class="SingleSound" id="{dc6e267e-b60e-4dfa-9789-f20ae9907b5c}">
 		<relationship name="audioFile">
 			<destination>{ec7b5747-cccd-449f-b557-a9d5b915f01f}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{bbb73a63-e205-4cac-ae0e-f7d7a444d2c5}">
+		<relationship name="audioFile">
+			<destination>{b317476c-97a9-4809-8cca-d554562275f7}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{4d20776b-a3de-4134-a578-a15ef4fa4769}">
+		<relationship name="audioFile">
+			<destination>{9773a573-bd51-408a-b876-86a0f22e38ad}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{540cf676-5d39-4116-aed5-1985bfd0ad67}">
+		<relationship name="audioFile">
+			<destination>{a3fadefa-71c8-452e-9362-8beb273f0aaa}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{12fe4069-2ac4-4285-bb6c-13be571a257a}">
+		<relationship name="audioFile">
+			<destination>{561569bd-57c7-475e-bde0-c5bf82a19096}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{08cb100e-37dc-410d-b0f2-7592445e2f1f}">
+		<relationship name="audioFile">
+			<destination>{7a87282d-e857-43fa-9111-e424bd109f62}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{0342ae12-8e39-464b-a74c-7e94f0b88d2c}">
