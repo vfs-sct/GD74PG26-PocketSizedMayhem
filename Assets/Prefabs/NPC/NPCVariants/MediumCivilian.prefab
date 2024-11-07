@@ -8,15 +8,55 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/SFX/NPCs/MediumCivilianScreams
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1765047078
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1206509695
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -1834659199
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -466705721
+      objectReference: {fileID: 0}
     - target: {fileID: 4116257588003734323, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 559728994dedec34ab7c3a0b426f45da, type: 2}
+      objectReference: {fileID: 2100000, guid: f901e400b1f5bfa4baacb7424f680851, type: 2}
+    - target: {fileID: 4301326626716042024, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4721327085560725874, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.83
       objectReference: {fileID: 0}
     - target: {fileID: 4721327085560725874, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
@@ -26,7 +66,7 @@ PrefabInstance:
     - target: {fileID: 4721327085560725874, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -7.7281094
       objectReference: {fileID: 0}
     - target: {fileID: 4721327085560725874, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
@@ -71,12 +111,17 @@ PrefabInstance:
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: point
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: _state
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: <Speed>k__BackingField
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
