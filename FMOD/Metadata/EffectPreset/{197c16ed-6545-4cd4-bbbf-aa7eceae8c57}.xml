@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EffectPreset" id="{197c16ed-6545-4cd4-bbbf-aa7eceae8c57}">
+		<property name="name">
+			<value>CivilianScreams</value>
+		</property>
+		<relationship name="folder">
+			<destination>{26e48c43-c8a8-46e3-854b-647d022e8d7b}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{dd6abd84-85c0-4944-932e-afe001e7a36e}</destination>
+		</relationship>
+	</object>
+	<object class="SpatialiserEffect" id="{dd6abd84-85c0-4944-932e-afe001e7a36e}" />
+</objects>

@@ -8,6 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/SFX/NPCs/EasyCivilianScreams
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1921806650
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1143747606
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -2032820810
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -1159286871
+      objectReference: {fileID: 0}
     - target: {fileID: 4721327085560725874, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -83,7 +118,13 @@ PrefabInstance:
       propertyPath: <Acceleration>k__BackingField
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OnFootstep.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3066262090882757193, guid: a37dd37d1e405c54188183deb12ea62b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

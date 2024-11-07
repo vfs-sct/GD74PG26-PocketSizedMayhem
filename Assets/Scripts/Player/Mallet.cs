@@ -14,7 +14,8 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : MonoBehaviour
 {
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference MalletSwingFMODEvent { get; set; }
+    [field: SerializeField] public EventReference MalletImpactFMODEvent { get; set; }
     [field: SerializeField] public EventReference PukeSFX { get; set; }
     
     [SerializeField] private GameObject _debrisVFX;
@@ -127,6 +128,10 @@ public class Mallet : MonoBehaviour
         {
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
+            if (!MalletSwingFMODEvent.IsNull)
+            {
+                RuntimeManager.PlayOneShot(MalletSwingFMODEvent, this.gameObject.transform.position);
+            }
         }
     }
     public void OnSwitchWeapon()
@@ -235,9 +240,9 @@ public class Mallet : MonoBehaviour
             impactVFX.GetComponent<VisualEffect>().Play();
         }
 
-        if (!AttackSFX.IsNull)
+        if (!MalletImpactFMODEvent.IsNull)
         {
-            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            RuntimeManager.PlayOneShot(MalletImpactFMODEvent, this.gameObject.transform.position);
         }
     }
     private void OnTriggerEnter(Collider other)

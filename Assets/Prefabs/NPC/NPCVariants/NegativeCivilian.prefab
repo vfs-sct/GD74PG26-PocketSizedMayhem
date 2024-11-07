@@ -8,6 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/SFX/NPCs/NegativeCivilianScreams
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 857093750
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1203965320
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 874070964
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 878105871
+      objectReference: {fileID: 0}
     - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: _pointPopUp

@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1534876065731578062}
+  - component: {fileID: 3265707415740544689}
   m_Layer: 3
   m_Name: MalletHandle
   m_TagString: Mallet
@@ -115,6 +116,19 @@ Transform:
   - {fileID: 8235161794466022244}
   m_Father: {fileID: 1389607480175707572}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3265707415740544689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959247359681999196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &5008042043829999468
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +422,13 @@ MonoBehaviour:
   raychangespeed: 5
   _pukeVFX: {fileID: 5518292822052877330, guid: 4ad11cec744b6664d804a1839c3c5e92,
     type: 3}
+  <VacuumSFX>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &8485790466828756111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -972,13 +993,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a080601fcd59cf43a3da62b4f01fcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AttackSFX>k__BackingField:
+  <MalletSwingFMODEvent>k__BackingField:
     Guid:
-      Data1: -525624831
-      Data2: 1268952464
-      Data3: 664307378
-      Data4: -1001833019
-    Path: event:/SFX/SFX_Smashed
+      Data1: -1242043718
+      Data2: 1202386195
+      Data3: 645625003
+      Data4: -1364332920
+    Path: event:/SFX/Weapons/SFX_MalletSwing
+  <MalletImpactFMODEvent>k__BackingField:
+    Guid:
+      Data1: -557105341
+      Data2: 1253378778
+      Data3: -1866634315
+      Data4: -1228577143
+    Path: event:/SFX/Weapons/SFX_MalletSmash
+  <PukeSFX>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _debrisVFX: {fileID: 6143589838103128491, guid: 3e1fa5b16b98eed4294cdf03634cf655,
     type: 3}
   _impact: {fileID: 7501298646409857549, guid: 9afbb90880443c345b4f0e9b977369db, type: 3}
@@ -998,6 +1033,7 @@ MonoBehaviour:
   _vacuum: {fileID: 816947630728480045}
   _hungerExpense: 10
   _particleSystem: {fileID: 4852783912871410763}
+  _rotateIcon: {fileID: 0}
 --- !u!136 &4358332704078819972
 CapsuleCollider:
   m_ObjectHideFlags: 0

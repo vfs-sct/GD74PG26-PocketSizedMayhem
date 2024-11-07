@@ -8,6 +8,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/SFX/NPCs/HardCivilianScreams
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: OverrideMinDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 725716249
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1245852019
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -1124574792
+      objectReference: {fileID: 0}
+    - target: {fileID: 695617129705345620, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 1498476755
+      objectReference: {fileID: 0}
     - target: {fileID: 4116257588003734323, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

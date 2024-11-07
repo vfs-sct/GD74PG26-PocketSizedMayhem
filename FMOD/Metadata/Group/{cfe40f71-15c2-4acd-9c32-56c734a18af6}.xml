@@ -4,6 +4,9 @@
 		<property name="name">
 			<value>Voice</value>
 		</property>
+		<property name="instanceStealing">
+			<value>4</value>
+		</property>
 		<relationship name="automators">
 			<destination>{66952da0-a72c-45c0-9d16-61e0416d6e8d}</destination>
 		</relationship>
@@ -54,7 +57,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-39</value>
 		</property>
 	</object>
 </objects>

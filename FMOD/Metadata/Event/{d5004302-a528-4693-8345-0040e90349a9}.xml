@@ -5,7 +5,7 @@
 			<value>SFX_Destruction</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{03e3d13c-6ad9-44fc-ac9a-83ccedc090e7}</destination>
@@ -59,7 +59,17 @@
 			<destination>{fd354eed-d229-4a55-a0ab-8ed4aa1f6b44}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{1eb29b33-d1ef-4abe-9586-94706b2a9298}" />
+	<object class="EventAutomatableProperties" id="{1eb29b33-d1ef-4abe-9586-94706b2a9298}">
+		<property name="maxVoices">
+			<value>4</value>
+		</property>
+		<property name="minimumDistance">
+			<value>55</value>
+		</property>
+		<property name="maximumDistance">
+			<value>550</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{79d272c3-7db4-4f68-8299-64471cf8c6e4}" />
 	<object class="GroupTrack" id="{7ce88397-64f8-47b8-a2d9-6de57fa1876a}">
 		<relationship name="modules">
@@ -242,6 +252,7 @@
 	<object class="MixerBusEffectChain" id="{e8fb2844-d2ec-4c62-ade9-798cc58fbe89}">
 		<relationship name="effects">
 			<destination>{777e0d33-d096-4b8d-af0c-a015f39c6a9d}</destination>
+			<destination>{7fb1eb59-c383-4c86-8219-da1b2b40e7f2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6ef2f586-e5b2-4be7-a3c8-d8414e98f9c9}" />
@@ -301,6 +312,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{53d1fd02-375b-44de-afdf-c0ab3ee0bac0}" />
 	<object class="MixerBusFader" id="{777e0d33-d096-4b8d-af0c-a015f39c6a9d}" />
+	<object class="SpatialiserEffect" id="{7fb1eb59-c383-4c86-8219-da1b2b40e7f2}">
+		<property name="distanceRolloffType">
+			<value>2</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{eb62bbf4-be94-4023-9981-1a362e28b3cf}" />
 	<object class="MixerBusFader" id="{78f0ba3f-62b2-41bd-8057-02447fc112ed}" />
 	<object class="MixerBusFader" id="{946ef15d-2d15-48b6-affd-faaaf87b6143}" />
