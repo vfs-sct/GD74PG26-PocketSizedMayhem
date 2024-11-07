@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8338216658795971807}
   m_Layer: 0
-  m_Name: Final Regular car (2)
+  m_Name: RegularCar_Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
