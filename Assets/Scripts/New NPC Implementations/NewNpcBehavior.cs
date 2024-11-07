@@ -36,6 +36,7 @@ public class NewNpcBehavior : CharacterMovement3D
 
     private float angle = 0;
     [SerializeField] private GameObject _target;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
     private Vector3 _newDirectionVector;
 
     LayerMask _doorLayerMask;
@@ -45,34 +46,42 @@ public class NewNpcBehavior : CharacterMovement3D
     private float _originalSpeed;
     float t = 0;
     float acceleration = 1;
+    SpawnState _spawnState = SpawnState.REGULAR;
     void Start()
     {
         _originalSpeed = Speed;
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
-
         _doorLayerMask |= (1 << 25);
-        _civilianTargetLayerMask |= (1 << 6);
-        _newDirectionVector = new Vector3(_zigzagHorizontalDistance,0, _zigzagVerticalDistance);
-        _endTarget = (EndTarget) Random.Range(0, 2);
-        if(point<0)
+        if (_spawnState == SpawnState.REGULAR)
         {
-            _endTarget = EndTarget.CIVILIAN;
-        }
-        if(_endTarget ==EndTarget.NO_TARGET )
-        {
-            _pattern = (Pattern)Random.Range(0, 2);
-        }
-        else if(_endTarget == EndTarget.CIVILIAN)
-        {
-            SetCivilianTarget();
+            _civilianTargetLayerMask |= (1 << 6);
+            _newDirectionVector = new Vector3(_zigzagHorizontalDistance, 0, _zigzagVerticalDistance);
+            _endTarget = (EndTarget)Random.Range(0, 2);
+            if (point < 0)
+            {
+                _endTarget = EndTarget.CIVILIAN;
+            }
+            if (_endTarget == EndTarget.NO_TARGET)
+            {
+                _pattern = (Pattern)Random.Range(0, 2);
+            }
+            else if (_endTarget == EndTarget.CIVILIAN)
+            {
+                SetCivilianTarget();
+            }
+            else
+            {
+                SetEscapeDestination();
+            }
         }
         else
         {
-            SetEscapeDestination();
+            _endTarget = EndTarget.TARGET;
+            GetComponent<Animator>().SetTrigger("Scatter");
+            Speed = 20;
+            
         }
-        //_state = (State) Random.Range(0, 2);
-        //SetEscapeDestination();
     }
     protected override void FixedUpdate()
     {
@@ -89,10 +98,14 @@ public class NewNpcBehavior : CharacterMovement3D
             }
             t += Time.fixedDeltaTime * acceleration;
             Speed = Mathf.Lerp(_originalSpeed/2,_originalSpeed,t/4);
-            
-        }
-        
+        }  
     }
+
+    public void BuildingSpawn()
+    {
+        _spawnState = SpawnState.BUILDING;
+    }
+
     private void SetEscapeDestination()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _doorLayerMask);
@@ -120,43 +133,36 @@ public class NewNpcBehavior : CharacterMovement3D
 
     protected override void Update()
     {
-        if(Stoppep)
+        base.Update();
+        angle += Time.deltaTime * _rotationSpeed;
+        if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && _target!=null)
         {
-            Stop();
+            MoveTo(_target.transform.position);
         }
-        else
+        else if (_endTarget == EndTarget.NO_TARGET)
         {
-            base.Update();
-            angle += Time.deltaTime * _rotationSpeed;
-            if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && NavMeshAgent.hasPath)
+            if (_pattern == Pattern.ZIGZAG)
             {
-                MoveTo(_target.transform.position);
-            }
-            else if (_endTarget == EndTarget.NO_TARGET)
-            {
-                if (_pattern == Pattern.ZIGZAG)
+                if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
                 {
-                    if (NavMeshAgent.remainingDistance <= NavMeshAgent.stoppingDistance)
+                    if (_newDirectionVector.x > 0)
                     {
-                        if (_newDirectionVector.x > 0)
-                        {
-                            _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
-                            _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
-                        }
-                        else
-                        {
-                            _newDirectionVector.x *= -1;
-                            _newDirectionVector.z = 0;
-                        }
-                        MoveTo(transform.position + _newDirectionVector);
+                        _newDirectionVector.x = -1 * Random.Range(3, _zigzagHorizontalDistance);
+                        _newDirectionVector.z = Random.Range(3, _zigzagVerticalDistance);
                     }
-                }
-                else if (_pattern == Pattern.CIRCLE)
-                {
-                    _newDirectionVector.x = Mathf.Cos(angle) * _radius;
-                    _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                    else
+                    {
+                        _newDirectionVector.x *= -1;
+                        _newDirectionVector.z = 0;
+                    }
                     MoveTo(transform.position + _newDirectionVector);
                 }
+            }
+            else if (_pattern == Pattern.CIRCLE)
+            {
+                _newDirectionVector.x = Mathf.Cos(angle) * _radius;
+                _newDirectionVector.z = Mathf.Sin(angle) * _radius;
+                MoveTo(transform.position + _newDirectionVector);
             }
         }
     }
@@ -204,9 +210,9 @@ public class NewNpcBehavior : CharacterMovement3D
         PRECISE,
         FRENZY
     }
-
-    private void OnParticleCollision(GameObject other)
+    public enum SpawnState
     {
-        Stop();
+        BUILDING,
+        REGULAR
     }
 }

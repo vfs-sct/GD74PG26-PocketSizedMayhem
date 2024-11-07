@@ -110,8 +110,17 @@ public class CivilianDeath : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+        
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
+        {
+            _animator.SetTrigger("GroundHit");
+            this.GetComponent<NavMeshAgent>().enabled = true;
+            _triggerCollider.enabled = true;
+        }
+    }
     IEnumerator StartFading()
     {
         yield return new WaitForSeconds(2);

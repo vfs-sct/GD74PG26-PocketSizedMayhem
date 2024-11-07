@@ -13,4 +13,9 @@ public class CivilianFill : MonoBehaviour
             _civilianInside++;
         }
     }
+
+    public int GetCivilianCount()
+    {
+        return _civilianInside;
+    }
 }
