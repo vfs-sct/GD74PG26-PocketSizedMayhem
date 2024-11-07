@@ -121,7 +121,7 @@ public class Mallet : MonoBehaviour
     
     public  void OnFire()
     {
-        if(PlayerStats.Hunger>=0)
+        if(PlayerStats.Hunger>=_hungerExpense)
         {
             _malletAnimator.SetFloat("Direction", 1);
             if (_attackMode == 0)
