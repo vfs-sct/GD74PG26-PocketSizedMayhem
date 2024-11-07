@@ -76,7 +76,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Fill_Rate: 0.8
+    - _Fill_Rate: 0.71
     - _OpaqueCullMode: 2
     - _PerPixelSorting: 0
     - _RenderQueueType: 1
@@ -90,7 +90,7 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskMV: 43
     - _SurfaceType: 0
-    - _TileCount: 5
+    - _TileCount: 8.51
     - _TileScale: 0.9
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2

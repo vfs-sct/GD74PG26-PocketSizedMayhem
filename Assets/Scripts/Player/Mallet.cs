@@ -54,7 +54,6 @@ public class Mallet : MonoBehaviour
     private bool puking = false;
     private void Start()
     {
-        
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
@@ -122,12 +121,18 @@ public class Mallet : MonoBehaviour
     
     public  void OnFire()
     {
-        _malletAnimator.SetFloat("Direction", 1);
-        if ( _attackMode == 0)
+        if(PlayerStats.Hunger>=0)
         {
-            _malletAnimator.SetTrigger("Swing");
-            _layerMask = LayerMask.GetMask("Floor");
+            _malletAnimator.SetFloat("Direction", 1);
+            if (_attackMode == 0)
+            {
+                _malletAnimator.SetTrigger("Swing");
+                _layerMask = LayerMask.GetMask("Floor");
+            }
+            PlayerStats.Hunger -= _hungerExpense;
+            Mathf.Clamp(PlayerStats.Hunger,0,100);
         }
+        
     }
     public void OnSwitchWeapon()
     {
