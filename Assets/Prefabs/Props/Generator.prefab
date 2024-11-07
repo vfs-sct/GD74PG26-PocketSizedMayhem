@@ -750,8 +750,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 76
 --- !u!1 &7770501761818706529
 GameObject:
   m_ObjectHideFlags: 0
