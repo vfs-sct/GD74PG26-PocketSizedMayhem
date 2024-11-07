@@ -17,7 +17,7 @@ public class BuildingDestruction : MonoBehaviour
     [SerializeField ]private float yOffset;
 
     [field: SerializeField] public EventReference DeathSFX { get; set; }
-    void Start()
+    void Awake()
     {
         _piecePosition = new List<Vector3>();
         _pieceRotation = new List<Quaternion>();
@@ -49,7 +49,6 @@ public class BuildingDestruction : MonoBehaviour
 
     IEnumerator RespawmPieces()
     {
-        Debug.Log("sdd");
         yield return new WaitForSeconds(_respawnTimer);
         for (int i = 0; i < _pieces.Count; i++)
         {
@@ -57,11 +56,10 @@ public class BuildingDestruction : MonoBehaviour
             _pieces[i].transform.rotation = _pieceRotation[i];
             _pieces[i].transform.position = _piecePosition[i] + Vector3.up * yOffset;
         }
-        yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < _pieces.Count; i++)
         {
-            Tween.PositionY(_pieces[i].transform, endValue: _piecePosition[i].y, duration: 2, ease: Ease.InExpo);
-            yield return new WaitForSeconds(0.5f);
+            Tween.PositionY(_pieces[i].transform, endValue: _piecePosition[i].y, duration: 3, ease: Ease.OutExpo);
+            yield return new WaitForSeconds(0.3f);
         }
         _isDestoyed = false;
     }
