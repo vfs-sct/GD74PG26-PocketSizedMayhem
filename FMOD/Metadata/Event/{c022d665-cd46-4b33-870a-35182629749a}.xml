@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{c022d665-cd46-4b33-870a-35182629749a}">
 		<property name="name">
-			<value>SFX_Magnet</value>
+			<value>SFX_MalletVacumn</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -99,6 +99,9 @@
 	</object>
 	<object class="MixerBusPanner" id="{653e53d3-a0ad-48fe-80a7-844634a53e24}" />
 	<object class="SingleSound" id="{ebb1d083-76b5-49f6-a96f-1e96318f6858}">
+		<property name="start">
+			<value>0.10000000000000001</value>
+		</property>
 		<property name="length">
 			<value>2.0756250000000001</value>
 		</property>
