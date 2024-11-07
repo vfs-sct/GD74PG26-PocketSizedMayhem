@@ -46750,7 +46750,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.6666666
-    functionName: AssignTarget
+    functionName: SetEscapeDestination
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -1311,12 +1311,12 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.3
-  m_Height: 1.92
+  m_Height: 1.8289888
   m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_Center: {x: 0, y: 0.9455055, z: 0}
 --- !u!95 &583236151604148576
 Animator:
   serializedVersion: 7
@@ -1346,7 +1346,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5390339625992018888}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 1
@@ -1444,6 +1444,7 @@ MonoBehaviour:
   _rotationSpeed: 2
   _radius: 15
   _target: {fileID: 0}
+  _capsuleCollider: {fileID: 0}
   _vacuum: {fileID: 0}
 --- !u!114 &1041028353720300704
 MonoBehaviour:

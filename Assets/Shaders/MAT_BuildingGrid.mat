@@ -65,8 +65,8 @@ Material:
     - _AlphaSrcBlend: 1
     - _BlendMode: 0
     - _ConservativeDepthOffsetEnable: 0
-    - _CullMode: 2
-    - _CullModeForward: 2
+    - _CullMode: 1
+    - _CullModeForward: 1
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -76,8 +76,8 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Fill_Rate: 0.8
-    - _OpaqueCullMode: 2
+    - _Fill_Rate: 0.95
+    - _OpaqueCullMode: 1
     - _PerPixelSorting: 0
     - _RenderQueueType: 1
     - _SrcBlend: 1
@@ -90,7 +90,7 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskMV: 43
     - _SurfaceType: 0
-    - _TileCount: 5
+    - _TileCount: 6
     - _TileScale: 0.9
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
