@@ -59,20 +59,6 @@ public class Mallet : MonoBehaviour
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
         enemies = new List<GameObject>();
     }
-    public void OnRestartScene()
-    {
-        SceneManager.LoadScene("GameScene - M3");
-    }
-
-    public void OnIncreasePoint()
-    {
-        PlayerStats.Points += 10;
-    }
-    public void OnDecreasePoint()
-    {
-        Debug.Log("hehe");
-        PlayerStats.Points -= 10;
-    }
     private void OnEnable()
     {
         // Get the action map and the specific action for the mouse click
@@ -98,17 +84,7 @@ public class Mallet : MonoBehaviour
         puking = false;
         emission.rateOverTime = 0;
     }
-    public void OnRelease()
-    {
-        //if(PlayerStats.Hunger >0)
-        //{
-        //    RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
-        //    _particleSystem.Play();
-        //    var emission = _particleSystem.emission;
-        //    emission.rateOverTime = 100;
-        //    puking = true;
-        //}
-    }
+
 
     private void OnDisable()
     {
