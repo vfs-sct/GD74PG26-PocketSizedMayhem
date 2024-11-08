@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 0, z: 0, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.5}
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -69,7 +69,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 50
   meanFreePath:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 250
   enableVolumetricFog:
     m_OverrideState: 1
@@ -161,13 +161,13 @@ MonoBehaviour:
     m_Value: 580.02
   upperHemisphereLuxValue:
     m_OverrideState: 1
-    m_Value: 4.3271575
+    m_Value: 4.3278093
   upperHemisphereLuxColor:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.4471253, z: 0.31438386}
+    m_Value: {x: 0.5, y: 0.4472608, z: 0.31442374}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 5000
+    m_Value: 100
   updateMode:
     m_OverrideState: 0
     m_Value: 0
@@ -378,7 +378,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   meteringMode:
     m_OverrideState: 1
     m_Value: 2
@@ -387,13 +387,13 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 12.173409
+    m_Value: 5.5
   compensation:
     m_OverrideState: 0
     m_Value: 0
   limitMin:
     m_OverrideState: 1
-    m_Value: -1
+    m_Value: -2.564417
   limitMax:
     m_OverrideState: 1
     m_Value: 9
