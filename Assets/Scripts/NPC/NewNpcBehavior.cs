@@ -41,7 +41,6 @@ public class NewNpcBehavior : CharacterMovement3D
 
     LayerMask _doorLayerMask;
     LayerMask _civilianTargetLayerMask;
-    private bool Stoppep = false;
     [SerializeField] public GameObject _vacuum;
     private float _originalSpeed;
     float t = 0;
