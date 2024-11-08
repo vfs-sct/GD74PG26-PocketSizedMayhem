@@ -8,6 +8,10 @@ public static class PlayerStats
 
     public static float Points { get; set; }
 
+    public static float Hunger { get; set; }
+
+    public static float GameTime { get; set; }
+
     public static int CriminalCaptured { get; set; }
 
     public static int CriminalKilled { get; set; }

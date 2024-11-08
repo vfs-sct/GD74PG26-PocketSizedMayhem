@@ -534,6 +534,59 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4732937762076777578, guid: 3661b699f40bc5d49858a11f0df4a7d0, type: 3}
+--- !u!1 &3193519084933499887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2210704874439630745}
+  - component: {fileID: 8721211915789823995}
+  m_Layer: 25
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2210704874439630745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193519084933499887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.37, y: 0, z: 11.61}
+  m_LocalScale: {x: 3.2079, y: 1, z: 1.5858}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9193513544814002408}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8721211915789823995
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193519084933499887}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3340303660286758920
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +806,14 @@ MonoBehaviour:
   _pieces: []
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
+  _spawner: {fileID: 0}
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &1189341414160365467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -923,7 +984,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9193513544814002408}
-  m_Layer: 0
+  - component: {fileID: 5055587040623470228}
+  m_Layer: 22
   m_Name: Final Office Shatter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,13 +1002,30 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592908944180284483}
   - {fileID: 3334324568059824133}
+  - {fileID: 2210704874439630745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &5055587040623470228
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8421233707847899730}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.675, y: 3.5, z: 3.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.63, y: 0, z: 7.88}
+  m_TimeToStationary: 0.5
 --- !u!1 &8865093483475483735
 GameObject:
   m_ObjectHideFlags: 0
