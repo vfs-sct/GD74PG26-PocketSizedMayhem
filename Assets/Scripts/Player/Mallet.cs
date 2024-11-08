@@ -14,7 +14,8 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : MonoBehaviour
 {
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference MalletSwingFMODEvent { get; set; }
+    [field: SerializeField] public EventReference MalletImpactFMODEvent { get; set; }
     [field: SerializeField] public EventReference PukeSFX { get; set; }
     
     [SerializeField] private GameObject _debrisVFX;
@@ -54,6 +55,7 @@ public class Mallet : MonoBehaviour
     private bool puking = false;
     private void Start()
     {
+        
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
@@ -121,18 +123,16 @@ public class Mallet : MonoBehaviour
     
     public  void OnFire()
     {
-        if(PlayerStats.Hunger>=_hungerExpense)
+        _malletAnimator.SetFloat("Direction", 1);
+        if ( _attackMode == 0)
         {
-            _malletAnimator.SetFloat("Direction", 1);
-            if (_attackMode == 0)
+            _malletAnimator.SetTrigger("Swing");
+            _layerMask = LayerMask.GetMask("Floor");
+            if (!MalletSwingFMODEvent.IsNull)
             {
-                _malletAnimator.SetTrigger("Swing");
-                _layerMask = LayerMask.GetMask("Floor");
+                RuntimeManager.PlayOneShot(MalletSwingFMODEvent, this.gameObject.transform.position);
             }
-            PlayerStats.Hunger -= _hungerExpense;
-            Mathf.Clamp(PlayerStats.Hunger,0,100);
         }
-        
     }
     public void OnSwitchWeapon()
     {
@@ -240,9 +240,9 @@ public class Mallet : MonoBehaviour
             impactVFX.GetComponent<VisualEffect>().Play();
         }
 
-        if (!AttackSFX.IsNull)
+        if (!MalletImpactFMODEvent.IsNull)
         {
-            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
+            RuntimeManager.PlayOneShot(MalletImpactFMODEvent, this.gameObject.transform.position);
         }
     }
     private void OnTriggerEnter(Collider other)

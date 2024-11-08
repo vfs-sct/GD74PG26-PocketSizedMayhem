@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float _gameTime = 300;
     [SerializeField] private float _startHunger = 50;
     [SerializeField] private float _startPoint = 0;
-    [SerializeField] private float _regenSpeed;
 
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _poinText;
@@ -45,10 +44,6 @@ public class GameManager : MonoBehaviour
         {
             _timerText.text = "Time: " + 0;
             SceneManager.LoadScene("WinScreen");
-        }
-        if(PlayerStats.Hunger<20)
-        {
-            PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
         }
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
         _hungerFillBar.fillAmount = PlayerStats.Hunger / 100;

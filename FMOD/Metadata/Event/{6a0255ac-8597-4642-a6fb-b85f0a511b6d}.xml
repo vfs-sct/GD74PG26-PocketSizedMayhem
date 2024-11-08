@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{6a0255ac-8597-4642-a6fb-b85f0a511b6d}">
 		<property name="name">
-			<value>SFX_ButtonHover01</value>
+			<value>SFX_ButtonClick</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -92,8 +92,11 @@
 		<property name="length">
 			<value>0.34365625</value>
 		</property>
+		<property name="volume">
+			<value>-3</value>
+		</property>
 		<relationship name="audioFile">
-			<destination>{63c82c0d-ad10-4cb9-aeb3-7aafc13bd77f}</destination>
+			<destination>{a3317251-b0cd-4c91-bd80-a21a837428f7}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{052d07c6-d321-4209-bdc9-c42cbbc65196}">
