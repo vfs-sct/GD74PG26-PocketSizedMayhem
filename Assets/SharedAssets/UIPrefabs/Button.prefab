@@ -51,11 +51,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 1778537900
-      Data2: 1178764695
-      Data3: 1605958566
-      Data4: 1830506762
-    Path: event:/UI/SFX_ButtonClick
+      Data1: -1266004944
+      Data2: 1254061679
+      Data3: 1755870598
+      Data4: -1278648222
+    Path: event:/UI/ButtonPress
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -118,11 +118,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 2107027783
-      Data2: 1100827071
-      Data3: -584656503
-      Data4: -1823303349
-    Path: event:/UI/SFX_ButtonHover
+      Data1: -1700971073
+      Data2: 1272171615
+      Data3: 1290829216
+      Data4: -1271868112
+    Path: event:/UI/ButtonMouseOver
   Event: 
   PlayEvent: 0
   StopEvent: 0

@@ -469,7 +469,7 @@ MonoBehaviour:
   _pieceRotation: []
   _piecePosition:
   - {x: 0, y: 0, z: 0}
-  yOffset: 15
+  yOffset: 50
   <DeathSFX>k__BackingField:
     Guid:
       Data1: 0

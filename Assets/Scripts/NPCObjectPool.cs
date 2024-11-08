@@ -19,10 +19,10 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _hardPooledObjects = new List<GameObject>();
     private List<GameObject> _negativePooledObjects = new List<GameObject>();
 
-    private int _easyPoolAmount = 30;
-    private int _mediumPoolAmount = 30;
-    private int _hardPoolAmount = 30;
-    private int _negativePoolAmount = 30;
+    [SerializeField]private int _easyPoolAmount ;
+    [SerializeField]private int _mediumPoolAmount ;
+    [SerializeField]private int _hardPoolAmount ;
+    [SerializeField]private int _negativePoolAmount;
 
 
     private void Awake()

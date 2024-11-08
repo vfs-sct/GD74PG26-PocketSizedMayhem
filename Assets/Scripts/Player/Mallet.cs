@@ -14,8 +14,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : MonoBehaviour
 {
-    [field: SerializeField] public EventReference MalletSwingFMODEvent { get; set; }
-    [field: SerializeField] public EventReference MalletImpactFMODEvent { get; set; }
+    [field: SerializeField] public EventReference AttackSFX { get; set; }
     [field: SerializeField] public EventReference PukeSFX { get; set; }
     
     [SerializeField] private GameObject _debrisVFX;
@@ -55,25 +54,10 @@ public class Mallet : MonoBehaviour
     private bool puking = false;
     private void Start()
     {
-        
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
         enemies = new List<GameObject>();
-    }
-    public void OnRestartScene()
-    {
-        SceneManager.LoadScene("GameScene - M3");
-    }
-
-    public void OnIncreasePoint()
-    {
-        PlayerStats.Points += 10;
-    }
-    public void OnDecreasePoint()
-    {
-        Debug.Log("hehe");
-        PlayerStats.Points -= 10;
     }
     private void OnEnable()
     {
@@ -100,17 +84,7 @@ public class Mallet : MonoBehaviour
         puking = false;
         emission.rateOverTime = 0;
     }
-    public void OnRelease()
-    {
-        if(PlayerStats.Hunger >0)
-        {
-            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
-            _particleSystem.Play();
-            var emission = _particleSystem.emission;
-            emission.rateOverTime = 100;
-            puking = true;
-        }
-    }
+
 
     private void OnDisable()
     {
@@ -123,16 +97,18 @@ public class Mallet : MonoBehaviour
     
     public  void OnFire()
     {
-        _malletAnimator.SetFloat("Direction", 1);
-        if ( _attackMode == 0)
+        if(PlayerStats.Hunger>=_hungerExpense)
         {
-            _malletAnimator.SetTrigger("Swing");
-            _layerMask = LayerMask.GetMask("Floor");
-            if (!MalletSwingFMODEvent.IsNull)
+            _malletAnimator.SetFloat("Direction", 1);
+            if (_attackMode == 0)
             {
-                RuntimeManager.PlayOneShot(MalletSwingFMODEvent, this.gameObject.transform.position);
+                _malletAnimator.SetTrigger("Swing");
+                _layerMask = LayerMask.GetMask("Floor");
             }
+            PlayerStats.Hunger -= _hungerExpense;
+            Mathf.Clamp(PlayerStats.Hunger,0,100);
         }
+        
     }
     public void OnSwitchWeapon()
     {
@@ -240,9 +216,9 @@ public class Mallet : MonoBehaviour
             impactVFX.GetComponent<VisualEffect>().Play();
         }
 
-        if (!MalletImpactFMODEvent.IsNull)
+        if (!AttackSFX.IsNull)
         {
-            RuntimeManager.PlayOneShot(MalletImpactFMODEvent, this.gameObject.transform.position);
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
         }
     }
     private void OnTriggerEnter(Collider other)
