@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Shaders/M_Vomit.mat.meta
+guid: 9832c2c1348521045b75fb41d7b80535
+========
+guid: 2ddd9484b34a06246b46b4cc404e916c
+>>>>>>>> UI:Assets/Materials/New Material.mat.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

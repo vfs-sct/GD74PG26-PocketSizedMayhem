@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="UiMixerView" id="{a24226f1-808d-41b8-a44c-141004cccfa8}">
+		<property name="name">
+			<value>Civilians</value>
+		</property>
+		<relationship name="assignedStrips">
+			<destination>{8277f526-7740-4a6f-80ae-33058829604b}</destination>
+			<destination>{24c2b3e8-ca4f-4d97-9cf2-c4b72a4ac97d}</destination>
+			<destination>{a23996c6-0da5-4e1e-a25a-9bb14b143171}</destination>
+			<destination>{20629ecf-f45b-49d2-bd63-a77ef647100d}</destination>
+			<destination>{cfe40f71-15c2-4acd-9c32-56c734a18af6}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{a411aa95-e250-4143-8c2e-069c398563d5}</destination>
+		</relationship>
+	</object>
+</objects>

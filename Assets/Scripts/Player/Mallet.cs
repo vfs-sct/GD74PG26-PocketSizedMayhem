@@ -3,19 +3,23 @@ using CharacterMovement;
 using FMODUnity;
 using PrimeTween;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-public class Mallet : Weapon
+public class Mallet : MonoBehaviour
 {
-    [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference MalletSwingFMODEvent { get; set; }
+    [field: SerializeField] public EventReference MalletImpactFMODEvent { get; set; }
+    [field: SerializeField] public EventReference PukeSFX { get; set; }
+    
     [SerializeField] private GameObject _debrisVFX;
+    
     [SerializeField] private GameObject _impact;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _originalStartY;
@@ -28,6 +32,7 @@ public class Mallet : Weapon
     [SerializeField] InputActionAsset inputActions;
     [SerializeField] private GameObject _mouth;
     private InputAction vacuumAction;
+    private InputAction pukeAction;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
@@ -36,39 +41,75 @@ public class Mallet : Weapon
     private Vector3 _hitTargetpos;
     [SerializeField] private float _impactRadius;
     [SerializeField] private float _malletMovementSpeed ;
-    private bool _isAttacking = false;
+   // private bool _isAttacking = false;
     private int layerAsLayerMask;
     private int _attackMode;
-    private bool isVacuuming = false;
+    //private bool isVacuuming = false;
     [SerializeField]private int pullIntensity;
     List<GameObject> enemies;
     [SerializeField] private Vacuum _vacuum;
+    [SerializeField] private float _hungerExpense;
+    
+    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private RotateIcon _rotateIcon;
+    private bool puking = false;
     private void Start()
     {
+        
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
         enemies = new List<GameObject>();
+    }
+    public void OnRestartScene()
+    {
+        SceneManager.LoadScene("GameScene - M3");
+    }
+
+    public void OnIncreasePoint()
+    {
+        PlayerStats.Points += 10;
+    }
+    public void OnDecreasePoint()
+    {
+        Debug.Log("hehe");
+        PlayerStats.Points -= 10;
     }
     private void OnEnable()
     {
         // Get the action map and the specific action for the mouse click
         var playerActionMap = inputActions.FindActionMap("Player");
         vacuumAction = playerActionMap.FindAction("Vacuum");
-
+        pukeAction = playerActionMap.FindAction("Release");
+        
         vacuumAction.canceled += OnMouseRelease;
+        pukeAction.canceled += OnMouseReleasePuke;
 
         // Enable the action
         vacuumAction.Enable();
+        pukeAction.Enable();
     }
     private void OnMouseRelease(InputAction.CallbackContext context)
     {
         _malletAnimator.SetBool("VacuumReleased", true);
         _vacuum.VacuumOff();
     }
+    private void OnMouseReleasePuke(InputAction.CallbackContext context)
+    {
+        var emission = _particleSystem.emission;
+        puking = false;
+        emission.rateOverTime = 0;
+    }
     public void OnRelease()
     {
-        _vacuum.ReleaseAll();
+        if(PlayerStats.Hunger >0)
+        {
+            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
+            _particleSystem.Play();
+            var emission = _particleSystem.emission;
+            emission.rateOverTime = 100;
+            puking = true;
+        }
     }
 
     private void OnDisable()
@@ -76,27 +117,47 @@ public class Mallet : Weapon
         // Unsubscribe from the events and disable the action
         vacuumAction.canceled -= OnMouseRelease;
         vacuumAction.Disable();
+        pukeAction.canceled -= OnMouseReleasePuke;
+        pukeAction.Disable();
     }
     
-    public override void Fire()
+    public  void OnFire()
     {
-        if(!_isAttacking && _attackMode == 0)
+        _malletAnimator.SetFloat("Direction", 1);
+        if ( _attackMode == 0)
         {
-            if (!AttackSFX.IsNull)
-            {
-                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-            }
             _malletAnimator.SetTrigger("Swing");
             _layerMask = LayerMask.GetMask("Floor");
+            if (!MalletSwingFMODEvent.IsNull)
+            {
+                RuntimeManager.PlayOneShot(MalletSwingFMODEvent, this.gameObject.transform.position);
+            }
         }
     }
-
+    public void OnSwitchWeapon()
+    {
+        //if (_attackMode == 0)
+        //{
+        //    gameObject.tag = "Vacuum";
+        //    _attackMode = 1;
+        //    _malletAnimator.SetTrigger("SwitchVacuum");
+        //    _rotateIcon.SwitchSides();
+        //}
+        //else if (_attackMode == 1)
+        //{
+        //    gameObject.tag = "Mallet";
+        //    _attackMode = 0;
+        //    _malletAnimator.SetTrigger("SwitchMallet");
+        //    _vacuum.VacuumOff();
+        //    _rotateIcon.SwitchSides();
+        //}
+    }
     public void OnVacuum()
     {
         if(_attackMode==1)
         {
             _vacuum.VacuumOn();
-            isVacuuming = true;
+            //isVacuuming = true;
             _malletAnimator.SetTrigger("Vacuum");
             _malletAnimator.SetBool("VacuumReleased", false);
         }
@@ -106,9 +167,11 @@ public class Mallet : Weapon
     {
         if (_attackMode == 1)
         {
+            gameObject.tag = "Mallet";
             _attackMode = 0;
             _malletAnimator.SetTrigger("SwitchMallet");
             _vacuum.VacuumOff();
+            _rotateIcon.SwitchSides();
         }
     }
 
@@ -116,8 +179,10 @@ public class Mallet : Weapon
     {
         if (_attackMode == 0)
         {
+            gameObject.tag = "Vacuum";
             _attackMode = 1;
             _malletAnimator.SetTrigger("SwitchVacuum");
+            _rotateIcon.SwitchSides();
         }
     }
     private void OnDrawGizmosSelected()
@@ -126,6 +191,17 @@ public class Mallet : Weapon
     }
     private void Update()
     {
+        if(puking)
+        {
+            
+            PlayerStats.Hunger-=0.5f;
+        }
+        if (PlayerStats.Hunger<=0)
+        {
+            var emission = _particleSystem.emission;
+            emission.rateOverTime = 0;
+            puking = false;
+        }
         _mousePos = Input.mousePosition;
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit, Mathf.Infinity, _layerMask))
         {
@@ -139,25 +215,35 @@ public class Mallet : Weapon
         hitpoint = _hit.point;
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
+        _malletHandle.gameObject.transform.position = hitpoint;
     }
 
     public void DisableColliders()
     {
         GetComponentInChildren<Collider>().enabled = false;
-        _isAttacking = false;
+        //_isAttacking = false;
     }
 
     public void EnableColldiers()
     {
         GetComponentInChildren<Collider>().enabled = true;
-        _isAttacking = true;
+        //_isAttacking = true;
 
     }
     public void ImpactEffects()
-    {
-        GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
-        impact.GetComponent<VisualEffect>().Play();
+    { 
+        GameObject impactVFX = ObjectPool.instance.GetPooledObject();
+
+        if (impactVFX != null)
+        {
+            impactVFX.transform.position = _impactPos.transform.position + Vector3.up;
+            impactVFX.GetComponent<VisualEffect>().Play();
+        }
+
+        if (!MalletImpactFMODEvent.IsNull)
+        {
+            RuntimeManager.PlayOneShot(MalletImpactFMODEvent, this.gameObject.transform.position);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -170,6 +256,10 @@ public class Mallet : Weapon
         {
             
             enemies.Add(other.gameObject);
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            _malletAnimator.SetFloat("Direction", -1);
         }
     }
     private void OnTriggerExit(Collider other)

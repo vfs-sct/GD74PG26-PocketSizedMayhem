@@ -1,6 +1,7 @@
 using CharacterMovement;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 public class RagdollOnOffController : MonoBehaviour
@@ -29,6 +30,22 @@ public class RagdollOnOffController : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
         _characterMovement.enabled = false;
     }
+    public void RagdollModeOff()
+    {
+        _npcAnimator.enabled = true;
+
+        foreach (Collider collider in _ragdollColliders)
+        {
+            collider.enabled = false;
+        }
+
+        foreach (Rigidbody rigid in _ragdollRigidbodies)
+        {
+            rigid.isKinematic = true;
+        }
+        GetComponent<Rigidbody>().isKinematic = false;
+        _characterMovement.enabled = true;
+    }
 
     public void DeathBounce()
     {
@@ -37,4 +54,5 @@ public class RagdollOnOffController : MonoBehaviour
             rigid.AddForce(Vector3.up * _bounceForce, ForceMode.Impulse);
         }
     }
+
 }
