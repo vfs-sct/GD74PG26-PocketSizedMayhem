@@ -100,14 +100,14 @@ public class Mallet : MonoBehaviour
     }
     public void OnRelease()
     {
-        if(PlayerStats.Hunger >0)
-        {
-            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
-            _particleSystem.Play();
-            var emission = _particleSystem.emission;
-            emission.rateOverTime = 100;
-            puking = true;
-        }
+        //if(PlayerStats.Hunger >0)
+        //{
+        //    RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
+        //    _particleSystem.Play();
+        //    var emission = _particleSystem.emission;
+        //    emission.rateOverTime = 100;
+        //    puking = true;
+        //}
     }
 
     private void OnDisable()

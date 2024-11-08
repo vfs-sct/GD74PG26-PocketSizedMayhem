@@ -38,6 +38,7 @@ public class SwitchBuilding : MonoBehaviour
             _unShattered.SetActive(false);
             _shattered.SetActive(true);
             _spawnCount = _civilianFillTracker.GetCivilianCount();
+            _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight) * _spawnCount;
             SpawnAtPoint();
         }
     }
@@ -78,28 +79,28 @@ public class SwitchBuilding : MonoBehaviour
         int selection = Random.Range(0, _spawnWeightTotal);
         GameObject civilian;
 
-        if (selection >= 0 && selection < _easyCivilianWeight && _easyCivilianWeight != 0)
+        if (selection >= 0 && selection < _easyCivilianWeight * _spawnCount && _easyCivilianWeight != 0)
         {
             civilian = Instantiate(_civilians[0], point.position, point.rotation);
-            _easyCivilianWeight--;
+            _easyCivilianWeight-=((_spawnWeightTotal) / _spawnCount);
         }
-        else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight && _mediumCivilianWeight != 0)
+        else if (selection >= _easyCivilianWeight * _spawnCount && selection < (_easyCivilianWeight + _mediumCivilianWeight) * _spawnCount && _mediumCivilianWeight != 0)
         {
             civilian = Instantiate(_civilians[1], point.position, point.rotation);
-            _mediumCivilianWeight--;
+            _mediumCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
         }
-        else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight && _hardCivilianWeight != 0)
+        else if (selection >= (_easyCivilianWeight + _mediumCivilianWeight) * _spawnCount && selection < (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight) * _spawnCount && _hardCivilianWeight != 0)
         {
             civilian = Instantiate(_civilians[2], point.position, point.rotation);
-            _hardCivilianWeight--;
+            _hardCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
         }
         else
         {
             civilian = Instantiate(_civilians[3], point.position, point.rotation);
-            _negativeCivilianWeight--;
+            _negativeCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
         }
         civilian.GetComponent<NewNpcBehavior>().BuildingSpawn();
-        _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
+        _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight) * _spawnCount;
         civilian.GetComponent<Rigidbody>().AddForce(civilian.transform.forward*1000+Vector3.up*1000);
         return point;
     }
