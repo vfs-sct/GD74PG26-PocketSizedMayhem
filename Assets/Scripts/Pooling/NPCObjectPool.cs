@@ -9,21 +9,22 @@ public class NPCObjectPool : MonoBehaviour
 {
     public static NPCObjectPool instance;
 
+    [Header("Civilian Prefab Referances")]
     [SerializeField] private GameObject _easyCivilian;
     [SerializeField] private GameObject _mediumCivilian;
     [SerializeField] private GameObject _hardCivilian;
     [SerializeField] private GameObject _negativeCivilian;
 
-    private List<GameObject> _easyPooledObjects = new List<GameObject>();
-    private List<GameObject> _mediumPooledObjects = new List<GameObject>();
-    private List<GameObject> _hardPooledObjects = new List<GameObject>();
-    private List<GameObject> _negativePooledObjects = new List<GameObject>();
-
+    [Header("Civilian Pool Amounts")]
     [SerializeField]private int _easyPoolAmount ;
     [SerializeField]private int _mediumPoolAmount ;
     [SerializeField]private int _hardPoolAmount ;
     [SerializeField]private int _negativePoolAmount;
 
+    private List<GameObject> _easyPooledObjects;
+    private List<GameObject> _mediumPooledObjects;
+    private List<GameObject> _hardPooledObjects;
+    private List<GameObject> _negativePooledObjects;
 
     private void Awake()
     {
@@ -35,6 +36,11 @@ public class NPCObjectPool : MonoBehaviour
 
     void Start()
     {
+        _easyPooledObjects = new List<GameObject>();
+        _mediumPooledObjects = new List<GameObject>();
+        _hardPooledObjects = new List<GameObject>();
+        _negativePooledObjects = new List<GameObject>();
+
         for (int i = 0; i < _easyPoolAmount; i++)
         {
             GameObject obj = Instantiate(_easyCivilian);
@@ -66,9 +72,7 @@ public class NPCObjectPool : MonoBehaviour
             _negativePooledObjects.Add(obj);
             obj.SetActive(false);
         }
-
     }
-
     public GameObject GetPooledObject(NPCType npcType)
     {
         switch (npcType)
@@ -81,7 +85,6 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             return _easyPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -93,7 +96,6 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             return _mediumPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -105,7 +107,6 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             return _hardPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -117,12 +118,10 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             return _negativePooledObjects[i];
                         }
-
                     }
                     break;
                 }
         }
-
         return null;
     }
 }

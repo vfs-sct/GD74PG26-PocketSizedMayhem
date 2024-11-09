@@ -16,7 +16,6 @@ public class NewNpcBehavior : CharacterMovement3D
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float _fadeSpeed;
     
-
     [Header("Escape Attributes")]
     [SerializeField] private EndTarget _endTarget;
     [SerializeField] private State _state;

@@ -1,15 +1,8 @@
-
-using CharacterMovement;
 using FMODUnity;
-using PrimeTween;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
-using static UnityEngine.Timeline.DirectorControlPlayable;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : MonoBehaviour
@@ -54,6 +47,7 @@ public class Mallet : MonoBehaviour
     private bool puking = false;
     private void Start()
     {
+        _layerMask = LayerMask.GetMask("Floor");
         _attackMode = 0;
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
         _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
@@ -103,12 +97,11 @@ public class Mallet : MonoBehaviour
             if (_attackMode == 0)
             {
                 _malletAnimator.SetTrigger("Swing");
-                _layerMask = LayerMask.GetMask("Floor");
+                
             }
             PlayerStats.Hunger -= _hungerExpense;
             Mathf.Clamp(PlayerStats.Hunger,0,100);
         }
-        
     }
     public void OnSwitchWeapon()
     {
@@ -167,18 +160,8 @@ public class Mallet : MonoBehaviour
     }
     private void Update()
     {
-        if(puking)
-        {
-            
-            PlayerStats.Hunger-=0.5f;
-        }
-        if (PlayerStats.Hunger<=0)
-        {
-            var emission = _particleSystem.emission;
-            emission.rateOverTime = 0;
-            puking = false;
-        }
         _mousePos = Input.mousePosition;
+
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit, Mathf.Infinity, _layerMask))
         {
             return;
