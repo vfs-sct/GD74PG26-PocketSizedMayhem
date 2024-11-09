@@ -24,7 +24,6 @@ public class Vacuum : MonoBehaviour
         _rayStartScale = gameObject.transform.localScale;
         gameObject.transform.localScale = Vector3.zero;
         _pulledObjects = new List<GameObject>();
-        Debug.Log(_rayStartScale);
     }
 
     private void Update()
@@ -52,6 +51,19 @@ public class Vacuum : MonoBehaviour
         }
     }
 
+    public void VacuumOn()
+    {
+        RuntimeManager.PlayOneShot(VacuumSFX, this.gameObject.transform.position);
+        _vacuumOn = true;
+        _rayCollider.enabled = true;
+    }
+
+    public void VacuumOff()
+    {
+        _vacuumOn = false;
+        _rayCollider.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Civilian"))
@@ -62,7 +74,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.layer == LayerMask.NameToLayer("Civilian"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Civilian"))
         {
             other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
             _pulledObjects.Remove(other.gameObject);
@@ -81,16 +93,4 @@ public class Vacuum : MonoBehaviour
         }
     }
 
-    public void VacuumOn()
-    {
-        RuntimeManager.PlayOneShot(VacuumSFX, this.gameObject.transform.position);
-        _vacuumOn = true;
-        _rayCollider.enabled = true;
-    }
-
-    public void VacuumOff()
-    {
-        _vacuumOn = false;
-        _rayCollider.enabled = false;
-    }
 }

@@ -57,8 +57,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959247359681999196}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 47.059486, y: -33.4, z: 26.817482}
   m_LocalScale: {x: 1.7867, y: 1.7867, z: 1.7867}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -166,27 +166,32 @@ PrefabInstance:
     - target: {fileID: 1417526685737891460, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
       propertyPath: m_Name
-      value: UfoRay
+      value: Vacuum
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417526685737891460, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
+        type: 3}
+      propertyPath: m_TagString
+      value: Vacuum
       objectReference: {fileID: 0}
     - target: {fileID: 1794615930567486526, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 499.99988
+      value: 1295.732
       objectReference: {fileID: 0}
     - target: {fileID: 1794615930567486526, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 499.99985
+      value: 2622.141
       objectReference: {fileID: 0}
     - target: {fileID: 1794615930567486526, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 499.9998
+      value: 1295.7318
       objectReference: {fileID: 0}
     - target: {fileID: 1794615930567486526, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -362
+      value: -588
       objectReference: {fileID: 0}
     - target: {fileID: 1794615930567486526, guid: 444cfa2f6e0f3354abecd24bb5b52b11,
         type: 3}
@@ -307,10 +312,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 0.2
+  m_Radius: 0.15182245
+  m_Height: 0.57
   m_Direction: 2
-  m_Center: {x: 0.0000000018681705, y: 0, z: 0}
+  m_Center: {x: 0.00000000429951, y: 0.048177525, z: 0.000000011622391}
 --- !u!54 &578555078215975550
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -350,21 +355,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a507522841e0844a21a72151674a85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulledObjects: []
-  capturedObjects: []
-  _rayCollider: {fileID: 996326860585350106}
-  _storeCollider: {fileID: 2980355788680481407}
-  _Ray: {fileID: 5527851808868892951}
-  raychangespeed: 5
-  _pukeVFX: {fileID: 5518292822052877330, guid: 4ad11cec744b6664d804a1839c3c5e92,
-    type: 3}
   <VacuumSFX>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1071458715
+      Data2: 1261686086
+      Data3: 406129287
+      Data4: -1703663322
+    Path: event:/SFX/Weapons/SFX_Magnet
+  _rayCollider: {fileID: 996326860585350106}
+  _storeCollider: {fileID: 2980355788680481407}
+  _rayChangeSpeed: 3
 --- !u!1001 &8485790466828756111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 13.23
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
@@ -406,22 +406,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7470456
+      value: 0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.09229599
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.66477287
+      value: -0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.09229599
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
@@ -431,12 +431,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -83.33
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: -2336823007941467613, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
@@ -616,12 +616,17 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_Name
-      value: Final Mallet
+      value: Mallet
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 572afa9409b041a49a73841b8ec258ff,
+        type: 3}
+      propertyPath: m_TagString
+      value: Mallet
       objectReference: {fileID: 0}
     - target: {fileID: 1690462290236260180, guid: 572afa9409b041a49a73841b8ec258ff,
         type: 3}
@@ -927,37 +932,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AttackSFX>k__BackingField:
     Guid:
-      Data1: -525624831
-      Data2: 1268952464
-      Data3: 664307378
-      Data4: -1001833019
-    Path: event:/SFX/SFX_Smashed
-  <PukeSFX>k__BackingField:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -557105341
+      Data2: 1253378778
+      Data3: -1866634315
+      Data4: -1228577143
+    Path: event:/SFX/Weapons/SFX_MalletWhack
   _debrisVFX: {fileID: 6143589838103128491, guid: 3e1fa5b16b98eed4294cdf03634cf655,
     type: 3}
-  _impact: {fileID: 7501298646409857549, guid: 9afbb90880443c345b4f0e9b977369db, type: 3}
   _target: {fileID: 5008042043829999468}
-  _originalStartY: -10
   _targetOffset: 2
-  _malletAnimator: {fileID: 1273844738780863604}
-  _impactPos: {fileID: 5008042043829999468}
-  _malletHandle: {fileID: 959247359681999196}
-  _floor: {fileID: 0}
   inputActions: {fileID: -944628639613478452, guid: c08d92422017a1549812c10a10399de1,
     type: 3}
-  _mouth: {fileID: 5527851808868892951}
-  _impactRadius: 5
-  _malletMovementSpeed: 4
-  pullIntensity: 150
+  _malletAnimator: {fileID: 1273844738780863604}
+  _malletHandle: {fileID: 959247359681999196}
+  _originalStartY: 0
+  _hungerExpense: 5
   _vacuum: {fileID: 816947630728480045}
-  _hungerExpense: 10
-  _particleSystem: {fileID: 0}
   _rotateIcon: {fileID: 0}
 --- !u!136 &4358332704078819972
 CapsuleCollider:
