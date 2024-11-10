@@ -22,6 +22,7 @@ public class Mallet : MonoBehaviour
     [SerializeField] private GameObject _malletHandle;
     [SerializeField] private float _originalStartY;
     [SerializeField] private float _hungerExpense;
+    [SerializeField] private float _switchCooldown;
 
     [Header("Vacuum References")]
     [SerializeField] private Vacuum _vacuum;
@@ -29,6 +30,7 @@ public class Mallet : MonoBehaviour
     [Header("Rotate Icon References")]
     [SerializeField] private RotateIcon _rotateIcon;
 
+    private float _cooldown;
     private int _attackMode;
     private InputAction vacuumAction;
     private Vector3 _mousePos;
@@ -36,65 +38,11 @@ public class Mallet : MonoBehaviour
     private RaycastHit _hit;
     private LayerMask _layerMask;
     private Vector3 _hitTargetpos;
+
     private void Start()
     {
         _layerMask = LayerMask.GetMask("Floor");
         _attackMode = 0;
-    }
-
-    private void OnEnable()
-    {
-        var playerActionMap = inputActions.FindActionMap("Player");
-        vacuumAction = playerActionMap.FindAction("Vacuum");
-        
-        vacuumAction.canceled += OnMouseRelease;
-        vacuumAction.Enable();
-    }
-
-    private void OnMouseRelease(InputAction.CallbackContext context)
-    {
-        _malletAnimator.SetBool("VacuumReleased", true);
-        _vacuum.VacuumOff();
-    }
-
-    private void OnDisable()
-    {
-        vacuumAction.canceled -= OnMouseRelease;
-        vacuumAction.Disable();
-    }
-    
-    public  void OnFire()
-    {
-        if(PlayerStats.Hunger>=_hungerExpense)
-        {
-            _malletAnimator.SetFloat("Direction", 1);
-            if (_attackMode == 0)
-            {
-                _malletAnimator.SetTrigger("Swing");
-                
-            }
-            PlayerStats.Hunger -= _hungerExpense;
-            Mathf.Clamp(PlayerStats.Hunger,0,100);
-        }
-    }
-
-    public void OnSwitchWeapon()
-    {
-        if (_attackMode == 0)
-        {
-            gameObject.tag = "Vacuum";
-            _attackMode = 1;
-            _malletAnimator.SetTrigger("SwitchVacuum");
-            _rotateIcon.SwitchSides();
-        }
-        else if (_attackMode == 1)
-        {
-            gameObject.tag = "Mallet";
-            _attackMode = 0;
-            _malletAnimator.SetTrigger("SwitchMallet");
-            _vacuum.VacuumOff();
-            _rotateIcon.SwitchSides();
-        }
     }
 
     private void Update()
@@ -115,6 +63,68 @@ public class Mallet : MonoBehaviour
         hitpoint.y = _originalStartY;
         _malletHandle.gameObject.transform.position = hitpoint;
     }
+    private void OnEnable()
+    {
+        var playerActionMap = inputActions.FindActionMap("Player");
+        vacuumAction = playerActionMap.FindAction("Vacuum");
+
+        vacuumAction.canceled += OnMouseRelease;
+        vacuumAction.Enable();
+    }
+
+    private void OnMouseRelease(InputAction.CallbackContext context)
+    {
+        _malletAnimator.SetBool("VacuumReleased", true);
+        _vacuum.VacuumOff();
+    }
+
+    private void OnDisable()
+    {
+        vacuumAction.canceled -= OnMouseRelease;
+        vacuumAction.Disable();
+    }
+    public void OnVacuum()
+    {
+        if (_attackMode == 1)
+        {
+            _vacuum.VacuumOn();
+            _malletAnimator.SetTrigger("Vacuum");
+            _malletAnimator.SetBool("VacuumReleased", false);
+        }
+    }
+
+    public void OnFire()
+    {
+        if (PlayerStats.Hunger >= _hungerExpense && _attackMode == 0)
+        {
+            _malletAnimator.SetTrigger("Swing");
+            PlayerStats.Hunger -= _hungerExpense;
+            Mathf.Clamp(PlayerStats.Hunger, 0, 100);
+        }
+    }
+
+    public void OnSwitchWeapon()
+    {
+        if (Time.time > _cooldown)
+        {
+            if (_attackMode == 0)
+            {
+                gameObject.tag = "Vacuum";
+                _attackMode = 1;
+                _malletAnimator.SetTrigger("SwitchVacuum");
+                _rotateIcon.SwitchSides();
+            }
+            else if (_attackMode == 1)
+            {
+                gameObject.tag = "Mallet";
+                _attackMode = 0;
+                _malletAnimator.SetTrigger("SwitchMallet");
+                _vacuum.VacuumOff();
+                _rotateIcon.SwitchSides();
+            }
+            _cooldown = Time.time + _switchCooldown;
+        }
+    }
 
     public void ImpactEffects()
     { 
@@ -129,15 +139,6 @@ public class Mallet : MonoBehaviour
         if (!AttackSFX.IsNull)
         {
             RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Debris"))
-        {
-            Instantiate(_debrisVFX, other.transform.position, _debrisVFX.transform.rotation);
-            Destroy(other.gameObject);
         }
     }
 }
