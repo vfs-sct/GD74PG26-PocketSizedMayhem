@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.VFX;
+using static UnityEditorInternal.ReorderableList;
 
 public class Vacuum : MonoBehaviour
 {
@@ -18,9 +19,15 @@ public class Vacuum : MonoBehaviour
     private bool _vacuumOn = false;
     private Vector3 _rayStartScale;
     private List<GameObject> _pulledObjects;
+    LayerMask _layerMask;
    
     private void Start()
     {
+        _layerMask |= (1 << LayerMask.NameToLayer("EasyCivilian"));
+        _layerMask |= (1 << LayerMask.NameToLayer("MediumCivilian"));
+        _layerMask |= (1 << LayerMask.NameToLayer("HardCivilian"));
+        _layerMask |= (1 << LayerMask.NameToLayer("NegativeCivilian"));
+        
         _rayStartScale = gameObject.transform.localScale;
         gameObject.transform.localScale = Vector3.zero;
         _pulledObjects = new List<GameObject>();
@@ -66,7 +73,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Civilian"))
+        if ((_layerMask.value & (1 << other.transform.gameObject.layer)) != 0)
         {
             _pulledObjects.Add(other.gameObject);
         }
@@ -74,7 +81,8 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Civilian"))
+       
+        if ((_layerMask.value & (1 << other.transform.gameObject.layer)) !=0)
         {
             other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
             _pulledObjects.Remove(other.gameObject);
@@ -83,7 +91,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Civilian") && _vacuumOn)
+        if ((_layerMask.value & (1 << collision.transform.gameObject.layer)) != 0)
         {
             collision.gameObject.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
             _pulledObjects.Remove(collision.gameObject);
