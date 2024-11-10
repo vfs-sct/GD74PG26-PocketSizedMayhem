@@ -9,6 +9,7 @@ public class EnemySpawner : Spawner
     [SerializeField] private int _mediumCivilianWeight = 1;
     [SerializeField] private int _hardCivilianWeight = 1;
     [SerializeField] private int _negativeCivilianWeight = 1;
+    [SerializeField] private NPCObjectPool _npcPool;
 
     public List<float> spawncount;
     public List<float> times;
@@ -36,7 +37,6 @@ public class EnemySpawner : Spawner
         yield return new WaitForSeconds(times[_iteration] - Time.time);
         for (int i = 0; i < spawncount[_iteration]; i++)
         {
-           
             SpawnCivilian();
         }
         _iteration++;
@@ -72,6 +72,7 @@ public class EnemySpawner : Spawner
         {
             civilian.transform.position = position + offset;
             civilian.SetActive(true);
+            _npcPool.AddToCivilianList(civilian);
         }
     }
 

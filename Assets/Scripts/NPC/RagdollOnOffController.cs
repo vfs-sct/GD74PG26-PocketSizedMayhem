@@ -6,12 +6,11 @@ using UnityEngine;
 using UnityEngine.AI;
 public class RagdollOnOffController : MonoBehaviour
 { 
-    [SerializeField] private GameObject _bloodEffect;
-
     [SerializeField] private Animator _npcAnimator;
     [SerializeField] private Collider[] _ragdollColliders;
     [SerializeField] private Rigidbody[] _ragdollRigidbodies;
     [SerializeField] private CharacterMovement3D _characterMovement;
+
     [SerializeField] private int _bounceForce = 10;
 
     public void RagdollModeOn()
@@ -30,6 +29,7 @@ public class RagdollOnOffController : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
         _characterMovement.enabled = false;
     }
+
     public void RagdollModeOff()
     {
         _npcAnimator.enabled = true;
@@ -54,5 +54,4 @@ public class RagdollOnOffController : MonoBehaviour
             rigid.AddForce(Vector3.up * _bounceForce, ForceMode.Impulse);
         }
     }
-
 }

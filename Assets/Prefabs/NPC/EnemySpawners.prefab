@@ -44,9 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb3d45465c1ef8458306c1d2a04a45a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnCount: 0
-  _minSpawnInterval: 0
-  _maxSpawnInterval: 0
-  _prefab: {fileID: 0}
-  _spawnedObject: {fileID: 0}
-  _shelter: {fileID: 0}
+  _radius: 2
+  _civilians:
+  - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
+  - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
+  - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
+  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
+  _easyCivilianWeight: 1
+  _mediumCivilianWeight: 1
+  _hardCivilianWeight: 1
+  _negativeCivilianWeight: 1
+  _npcPool: {fileID: 0}
+  spawncount: []
+  times: []

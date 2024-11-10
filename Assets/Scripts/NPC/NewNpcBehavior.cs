@@ -4,6 +4,11 @@ using UnityEngine.AI;
 
 public class NewNpcBehavior : CharacterMovement3D
 {
+    [Header("Mallet Attributes")]
+    [SerializeField] private GameObject _target;
+    [SerializeField] private CapsuleCollider _capsuleCollider;
+    [SerializeField] public GameObject _vacuum;
+
     [Header("Throw Attributes")]
     [SerializeField] private float _upForce;
     [SerializeField] private float _forwardForce;
@@ -28,21 +33,19 @@ public class NewNpcBehavior : CharacterMovement3D
 
     private Renderer _objectRenderer;
     private Material _objectMaterial;
-
-    private float _alpha;
-
-    private float angle = 0;
-    [SerializeField] private GameObject _target;
-    [SerializeField] private CapsuleCollider _capsuleCollider;
+    
     private Vector3 _newDirectionVector;
+
+    private float _originalSpeed;
+    private float t = 0;
+    private float acceleration = 1;
+    private float angle = 0;
 
     LayerMask _doorLayerMask;
     LayerMask _civilianTargetLayerMask;
-    [SerializeField] public GameObject _vacuum;
-    private float _originalSpeed;
-    float t = 0;
-    float acceleration = 1;
+
     SpawnState _spawnState = SpawnState.REGULAR;
+
     void Start()
     {
         _originalSpeed = Speed;
@@ -64,7 +67,7 @@ public class NewNpcBehavior : CharacterMovement3D
             }
             else if (_endTarget == EndTarget.CIVILIAN)
             {
-                SetCivilianTarget();
+                
             }
             else
             {
@@ -76,25 +79,7 @@ public class NewNpcBehavior : CharacterMovement3D
             _endTarget = EndTarget.TARGET;
             GetComponent<Animator>().SetTrigger("Scatter");
             Speed = 20;
-            
         }
-    }
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        if (_endTarget == EndTarget.CIVILIAN)
-        {
-            if(Speed>=_originalSpeed)
-            {
-                acceleration = -1;
-            }
-            else if(Speed <= _originalSpeed/2)
-            {
-                acceleration =1;
-            }
-            t += Time.fixedDeltaTime * acceleration;
-            Speed = Mathf.Lerp(_originalSpeed/2,_originalSpeed,t/4);
-        }  
     }
 
     public void BuildingSpawn()
@@ -110,13 +95,6 @@ public class NewNpcBehavior : CharacterMovement3D
             _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
             MoveTo(_target.transform.position);
         }
-    }
-
-    private void SetCivilianTarget()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _civilianTargetLayerMask);
-        _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
-        MoveTo(_target.transform.position);
     }
 
     public void AssignVacuumPos(GameObject vacuum)
@@ -163,12 +141,25 @@ public class NewNpcBehavior : CharacterMovement3D
         }
     }
 
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+    }
+
+    public  bool HasTarget()
+    {
+        if (_target != null && _target.activeInHierarchy != false)
+        {
+            return true;
+        }
+        return false;
+    }
+
     private void AssignTarget()
     {
         if (point < 0)
         {
             _endTarget = EndTarget.CIVILIAN;
-            SetCivilianTarget();
             return;
         }
 
