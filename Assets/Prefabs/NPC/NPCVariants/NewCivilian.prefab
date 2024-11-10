@@ -1420,6 +1420,7 @@ MonoBehaviour:
   _upForce: 0
   _forwardForce: 0
   point: 0
+  _type: 0
   fadeOutTime: 8
   _fadeSpeed: 1
   _endTarget: 1

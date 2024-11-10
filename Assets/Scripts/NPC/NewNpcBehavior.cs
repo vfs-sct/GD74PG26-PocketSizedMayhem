@@ -1,7 +1,4 @@
 using CharacterMovement;
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,6 +10,7 @@ public class NewNpcBehavior : CharacterMovement3D
 
     [Header("NPC Attributes")]
     [SerializeField] private int point;
+    [SerializeField] private TypeDifficulty _type;
     [SerializeField] private float fadeOutTime;
     [SerializeField] private float _fadeSpeed;
     
@@ -191,6 +189,10 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         return point;
     }
+    public TypeDifficulty GetDifficultyType()
+    {
+        return _type;
+    }
     public enum EndTarget
     {
         TARGET,
@@ -212,5 +214,13 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         BUILDING,
         REGULAR
+    }
+
+    public enum TypeDifficulty
+    {
+        EASY,
+        NORMAL,
+        HARD,
+        NEGATIVE
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine.AI;
 using UnityEngine.VFX;
 using FMODUnity;
 using System.Collections;
-using Unity.VisualScripting;
 using PrimeTween;
 using TMPro;
+using static NewNpcBehavior;
 public class CivilianDeath : MonoBehaviour
 {
     [field: SerializeField] public EventReference DeathSFX { get; set; }
@@ -103,6 +103,21 @@ public class CivilianDeath : MonoBehaviour
             point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
             Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
             pointPos.y += 200;
+            switch (_civilianBehaviour.GetDifficultyType())
+            {
+                case TypeDifficulty.EASY:
+                    PlayerStats.EasyCivilianKilled++;
+                    break;
+                case TypeDifficulty.NORMAL:
+                    PlayerStats.MediumCivilianKilled++;
+                    break;
+                case TypeDifficulty.HARD:
+                    PlayerStats.HardCivilianKilled++;
+                    break;
+                case TypeDifficulty.NEGATIVE:
+                    PlayerStats.NegativeCivilianKilled++;
+                    break;
+            }
             Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
