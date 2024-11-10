@@ -35,10 +35,10 @@ TagManager:
   - Generator
   - Door
   - Trees
-  - 
-  - 
-  - 
-  - 
+  - EasyCivilian
+  - MediumCivilian
+  - HardCivilian
+  - NegativeCivilian
   - 
   m_SortingLayers:
   - name: Default
