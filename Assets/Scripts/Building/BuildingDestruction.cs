@@ -43,7 +43,6 @@ public class BuildingDestruction : MonoBehaviour
             }
             _isDestoyed = true;
             StartCoroutine(RespawmPieces());
-            //StartCoroutine(AssignDebri());
         }
     }
 

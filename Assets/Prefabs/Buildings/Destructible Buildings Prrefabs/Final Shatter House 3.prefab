@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 3311177473756413438}
   - component: {fileID: 1108531369046987284}
   - component: {fileID: 5625296515739513070}
+  - component: {fileID: 2644891480784634199}
   m_Layer: 0
   m_Name: polySurface114
   m_TagString: Untagged
@@ -271,6 +272,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3581362909276782703, guid: a466c60139a5ad24caa6985a4539fec5, type: 3}
+--- !u!54 &2644891480784634199
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3221706110419128075}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4326431761630346971
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +312,7 @@ GameObject:
   - component: {fileID: 7186647475261110968}
   - component: {fileID: 3756930280483448542}
   - component: {fileID: 170923629180633928}
+  - component: {fileID: 8941214526902799665}
   m_Layer: 0
   m_Name: polySurface72
   m_TagString: Untagged
@@ -407,6 +436,33 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6178932083768876681, guid: a466c60139a5ad24caa6985a4539fec5, type: 3}
+--- !u!54 &8941214526902799665
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326431761630346971}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4614713203513453429
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,7 +472,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5422634779068150223}
-  m_Layer: 0
+  - component: {fileID: 5160564892851378568}
+  m_Layer: 22
   m_Name: Final Shatter House 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,8 +495,78 @@ Transform:
   m_Children:
   - {fileID: 6782320736559048526}
   - {fileID: 3988687507873615699}
+  - {fileID: 7771189634922419277}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &5160564892851378568
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4614713203513453429}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.69, y: 0.5, z: 0.59}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!1 &4989210760945951670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7771189634922419277}
+  - component: {fileID: 849042080830854490}
+  m_Layer: 25
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7771189634922419277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989210760945951670}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.494, y: -0.287, z: 1.1039963}
+  m_LocalScale: {x: 1, y: 1, z: 0.18932}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5422634779068150223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &849042080830854490
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989210760945951670}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7196851145674624758
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +610,7 @@ GameObject:
   - component: {fileID: 6782320736559048526}
   - component: {fileID: 5366956044887093046}
   - component: {fileID: 1100249060217487857}
+  - component: {fileID: 3495383737620223383}
   m_Layer: 0
   m_Name: Final_Shatter_House_3
   m_TagString: Untagged
@@ -519,10 +647,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5300e21ad842240b4492a51cf1d7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _force: 0
-  _pieces: []
+  _force: 50
+  _pieces:
+  - {fileID: 4326431761630346971}
+  - {fileID: 3221706110419128075}
   _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
     type: 3}
+  _respawnTimer: 3
+  _pieceRotation: []
+  _piecePosition: []
+  yOffset: 50
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &1100249060217487857
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -545,8 +686,29 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3495383737620223383
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911904027553849790}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4430714, y: 1.4087893, z: 1.5293007}
+  m_Center: {x: 0.22153568, y: 0.20439464, z: 0.26465034}
