@@ -12,12 +12,11 @@ public static class PlayerStats
 
     public static float GameTime { get; set; }
 
-    public static int CriminalCaptured { get; set; }
+    public static int EasyCivilianKilled { get; set; }
 
-    public static int CriminalKilled { get; set; }
+    public static int MediumCivilianKilled { get; set; }
 
-    public static int CivilianSaved { get; set; }
+    public static int HardCivilianKilled { get; set; }
 
-    public static int CivilianDied { get; set; }
-
+    public static int NegativeCivilianKilled { get; set; }
 }

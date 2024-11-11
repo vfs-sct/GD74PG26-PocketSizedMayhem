@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using static EnemySpawner;
 
@@ -9,21 +7,23 @@ public class NPCObjectPool : MonoBehaviour
 {
     public static NPCObjectPool instance;
 
+    [Header("Civilian Prefab Referances")]
     [SerializeField] private GameObject _easyCivilian;
     [SerializeField] private GameObject _mediumCivilian;
     [SerializeField] private GameObject _hardCivilian;
     [SerializeField] private GameObject _negativeCivilian;
 
-    private List<GameObject> _easyPooledObjects = new List<GameObject>();
-    private List<GameObject> _mediumPooledObjects = new List<GameObject>();
-    private List<GameObject> _hardPooledObjects = new List<GameObject>();
-    private List<GameObject> _negativePooledObjects = new List<GameObject>();
-
+    [Header("Civilian Pool Amounts")]
     [SerializeField]private int _easyPoolAmount ;
     [SerializeField]private int _mediumPoolAmount ;
     [SerializeField]private int _hardPoolAmount ;
     [SerializeField]private int _negativePoolAmount;
 
+    private List<GameObject> _easyPooledObjects;
+    private List<GameObject> _mediumPooledObjects;
+    private List<GameObject> _hardPooledObjects;
+    private List<NewNpcBehavior> _negativePooledObjects;
+    [SerializeField]private List<GameObject> _activeNPC;
 
     private void Awake()
     {
@@ -35,6 +35,12 @@ public class NPCObjectPool : MonoBehaviour
 
     void Start()
     {
+        _easyPooledObjects = new List<GameObject>();
+        _mediumPooledObjects = new List<GameObject>();
+        _hardPooledObjects = new List<GameObject>();
+        _negativePooledObjects = new List<NewNpcBehavior>();
+        _activeNPC = new List<GameObject>();
+
         for (int i = 0; i < _easyPoolAmount; i++)
         {
             GameObject obj = Instantiate(_easyCivilian);
@@ -63,10 +69,20 @@ public class NPCObjectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(_negativeCivilian);
             obj.transform.parent = gameObject.transform;
-            _negativePooledObjects.Add(obj);
+            _negativePooledObjects.Add(obj.GetComponent<NewNpcBehavior>());
             obj.SetActive(false);
         }
+    }
 
+    private void Update()
+    {
+        foreach (NewNpcBehavior negativeCivilian in _negativePooledObjects)
+        {
+            if (!negativeCivilian.HasTarget() && _activeNPC.Count!=0)
+            {
+                negativeCivilian.SetTarget(_activeNPC[UnityEngine.Random.Range(0, _activeNPC.Count)]);
+            }
+        }
     }
 
     public GameObject GetPooledObject(NPCType npcType)
@@ -79,9 +95,9 @@ public class NPCObjectPool : MonoBehaviour
                     {
                         if (!_easyPooledObjects[i].activeInHierarchy)
                         {
+                            AddToCivilianList(_easyPooledObjects[i]);
                             return _easyPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -91,9 +107,9 @@ public class NPCObjectPool : MonoBehaviour
                     {
                         if (!_mediumPooledObjects[i].activeInHierarchy)
                         {
+                            AddToCivilianList(_mediumPooledObjects[i]);
                             return _mediumPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -103,9 +119,9 @@ public class NPCObjectPool : MonoBehaviour
                     {
                         if (!_hardPooledObjects[i].activeInHierarchy)
                         {
+                            AddToCivilianList(_hardPooledObjects[i]);
                             return _hardPooledObjects[i];
                         }
-
                     }
                     break;
                 }
@@ -113,16 +129,30 @@ public class NPCObjectPool : MonoBehaviour
                 {
                     for (int i = 0; i < _negativePooledObjects.Count; i++)
                     {
-                        if (!_negativePooledObjects[i].activeInHierarchy)
+                        if (!_negativePooledObjects[i].gameObject.activeInHierarchy)
                         {
-                            return _negativePooledObjects[i];
+                            return _negativePooledObjects[i].gameObject;
                         }
-
                     }
                     break;
                 }
         }
-
         return null;
+    }
+
+    public void RemoveCivilian(object sender, GameObject civilian)
+    {
+        if (!_activeNPC.Contains(civilian))
+        {
+            return;
+        }
+        _activeNPC.Remove(civilian);
+        civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
+    }
+
+    public void AddToCivilianList(GameObject civilian)
+    {
+        civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
+        _activeNPC.Add(civilian);
     }
 }

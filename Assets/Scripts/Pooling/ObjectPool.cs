@@ -9,11 +9,10 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool instance;
 
     [SerializeField] private GameObject _pooledObject;
-
-    private List<GameObject> pooledObjects = new List<GameObject>();
     [SerializeField] private int _poolAmount;
 
-
+    private List<GameObject> pooledObjects;
+    
     private void Awake()
     {
         if(instance == null)
@@ -24,6 +23,7 @@ public class ObjectPool : MonoBehaviour
 
     void Start()
     {
+        pooledObjects = new List<GameObject>();
         for(int i = 0; i < _poolAmount; i++)
         {
             GameObject obj = Instantiate(_pooledObject);

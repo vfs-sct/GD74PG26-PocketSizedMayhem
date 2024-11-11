@@ -7,11 +7,10 @@ public class BloodVFXPool : MonoBehaviour
 {
     public static BloodVFXPool instance;
 
-    [SerializeField] private GameObject _pooledObject;
-
-    private List<GameObject> pooledObjects = new List<GameObject>();
+    [SerializeField] private GameObject _bloodVFXPrefab;
     [SerializeField] private int _poolAmount;
 
+    private List<GameObject> pooledObjects;
 
     private void Awake()
     {
@@ -23,9 +22,10 @@ public class BloodVFXPool : MonoBehaviour
 
     void Start()
     {
+        pooledObjects = new List<GameObject>();
         for (int i = 0; i < _poolAmount; i++)
         {
-            GameObject obj = Instantiate(_pooledObject);
+            GameObject obj = Instantiate(_bloodVFXPrefab);
             obj.transform.parent = gameObject.transform;
             obj.SetActive(false);
             pooledObjects.Add(obj);
