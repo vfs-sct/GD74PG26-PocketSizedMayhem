@@ -12,6 +12,8 @@ public class BuildingDestruction : MonoBehaviour
     [SerializeField] private float _respawnTimer;
     [SerializeField] private List<Quaternion> _pieceRotation;
     [SerializeField] private List<Vector3> _piecePosition;
+    [SerializeField] private GameObject _shattered;
+    [SerializeField] private GameObject _unShattered;
     private bool _isDestoyed;
     [SerializeField ]private float yOffset;
 
@@ -59,7 +61,10 @@ public class BuildingDestruction : MonoBehaviour
             Tween.PositionY(_pieces[i].transform, endValue: _piecePosition[i].y, duration: 3, ease: Ease.OutExpo);
             yield return new WaitForSeconds(0.3f);
         }
+        yield return new WaitForSeconds(2f);
         _isDestoyed = false;
+        _unShattered.SetActive(true);
+        _shattered.SetActive(false);
     }
 
     IEnumerator AssignDebri()
