@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{489ee724-6ea3-4c2d-9551-b45029457c58}">
+	<object class="AudioFile" id="{755e782c-42dd-468d-9b52-e742424ba4fc}">
 		<property name="assetPath">
-			<value>SFX_ButtonHover00.wav</value>
+			<value>Shield,Bash,Metal.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>96</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.26068750000000002</value>
+			<value>5.3643333333333336</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{0007398a-8526-4222-84a0-9fc057cc09e5}</destination>
