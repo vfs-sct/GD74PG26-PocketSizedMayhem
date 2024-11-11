@@ -67,6 +67,7 @@ public class Vacuum : MonoBehaviour
 
     public void VacuumOff()
     {
+        _pulledObjects.Clear();
         _vacuumOn = false;
         _rayCollider.enabled = false;
     }
