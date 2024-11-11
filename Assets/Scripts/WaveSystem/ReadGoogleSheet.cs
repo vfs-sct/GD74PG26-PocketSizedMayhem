@@ -12,6 +12,7 @@ public class ReadGoogleSheet : MonoBehaviour
     public List<float> timeline;
     void Awake()
     {
+        Debug.developerConsoleVisible = true;
         timeline = new List<float>();
         StartCoroutine(ObtainSheetData());
     }
@@ -20,7 +21,7 @@ public class ReadGoogleSheet : MonoBehaviour
     {
         UnityWebRequest www = UnityWebRequest.Get("https://sheets.googleapis.com/v4/spreadsheets/1BlWVHx6zDaQH8JyUftqd8_McF2sZvZ3LgW8MH55LXNg/values/B1:Z?key=AIzaSyDzN9hCwGdDssrZMwovVEilpTuNH9ri7NA");
         yield return www.SendWebRequest();
-        if (www.isNetworkError || www.isHttpError)
+        if (www.result == UnityWebRequest.Result.ConnectionError ||www.result ==  UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log("Error: " + www.error);
         }
@@ -33,17 +34,20 @@ public class ReadGoogleSheet : MonoBehaviour
             {
                 timeline.Add(float.Parse(s));
             }
-            for (int i = 1; i < tableData.Values.Length; i++)
+            if (tableData.Values.Length > 0)
             {
-                if (spawnPoints[i-1] != null)
+                for (int i = 1; i <= spawnPoints.Count; i++)
                 {
-                    spawnPoints[i-1].times = new List<float>();
-                    spawnPoints[i-1].spawncount = new List<float>();
-                    foreach (string s in tableData.Values[i])
+                    if (spawnPoints[i - 1] != null)
                     {
-                        spawnPoints[i - 1].spawncount.Add(float.Parse(s));
+                        spawnPoints[i - 1].times = new List<float>();
+                        spawnPoints[i - 1].spawncount = new List<float>();
+                        foreach (string s in tableData.Values[i])
+                        {
+                            spawnPoints[i - 1].spawncount.Add(float.Parse(s));
+                        }
+                        spawnPoints[i - 1].times = timeline;
                     }
-                    spawnPoints[i-1].times = timeline;
                 }
             }
         }

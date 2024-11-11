@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mallet
   - MainFloor
+  - Vacuum
   layers:
   - Default
   - TransparentFX
@@ -26,18 +27,18 @@ TagManager:
   - Shelter
   - Bomb
   - Debris
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Claw
+  - Vacuum
+  - Car
+  - EscapePoint
+  - Shield
+  - Generator
+  - Door
+  - Trees
+  - EasyCivilian
+  - MediumCivilian
+  - HardCivilian
+  - NegativeCivilian
   - 
   m_SortingLayers:
   - name: Default

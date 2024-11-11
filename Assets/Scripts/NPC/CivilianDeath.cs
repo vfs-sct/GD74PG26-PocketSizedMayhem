@@ -3,86 +3,138 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 using FMODUnity;
+using System.Collections;
+using PrimeTween;
+using TMPro;
+
+using static NewNpcBehavior;
 public class CivilianDeath : MonoBehaviour
 {
     [field: SerializeField] public EventReference DeathSFX { get; set; }
 
-    [SerializeField] private GameObject _bloodEffect;
     [SerializeField] private CapsuleCollider _capsuleCollider;
-    [SerializeField] private CapsuleCollider _triggerCollider;
     [SerializeField] private RagdollOnOffController _ragdollController;
+    [SerializeField] private GameObject _ragdollBody;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private CivilianBehaviour _civilianBehaviour;
-    [SerializeField] private int _animNo;
+    [SerializeField] private NewNpcBehavior _civilianBehaviour;
+    [SerializeField] private GameObject _pointPopUp;
     
     public event EventHandler<GameObject> OnKilled;
-    public event EventHandler<GameObject> OnCaptured;
     private bool _pointGiven;
+    private bool _isFading = false;
+    private float _fadeTime;
+    private float _fadeThresholdTime;
+    private float _fadeAmount;
     
+    private Renderer _objectRenderer;
+    private Material _objectMaterial;
+    private Color _objectColor;
+    private int pointValueOnDeath;
+    private TypeDifficulty _typeDifficulty;
     private void Start()
     {
+        _typeDifficulty = _civilianBehaviour.GetDifficultyType();
+        pointValueOnDeath = _civilianBehaviour.GetPoint();
+        _objectRenderer = GetComponentInChildren<Renderer>();
+        _objectMaterial = _objectRenderer.material;
+        _fadeTime = 0;
+        _fadeThresholdTime = 8;
         _pointGiven = false;
     }
-
-    public void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.gameObject.tag == "Mallet")
+        if(_isFading)
+        {
+            if(_fadeTime >= _fadeThresholdTime)
+            {
+                this.gameObject.SetActive(false);
+                _ragdollController.RagdollModeOff();
+                _capsuleCollider.enabled = true;
+                _ragdollBody.SetActive(false);
+                _civilianBehaviour.enabled = true;
+                _fadeTime = 0;
+                _isFading = false;
+                _objectMaterial.SetFloat("_Alpha", 1);
+            }
+            else
+            {
+                _fadeTime += Time.deltaTime;
+                _fadeAmount = Mathf.Lerp(1, 0, _fadeTime / _fadeThresholdTime);
+                _objectMaterial.SetFloat("_Alpha", _fadeAmount);
+            }
+        }
+    }
+
+    IEnumerator StartFading()
+    {
+        yield return new WaitForSeconds(2);
+        _isFading = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Mallet")
         {
             _capsuleCollider.enabled = false;
-            _civilianBehaviour.Stop();
-            
+            _civilianBehaviour.enabled = false;
+            _ragdollBody.SetActive(true);
             _ragdollController.RagdollModeOn();
             _ragdollController.DeathBounce();
-            
-            GameObject blood = Instantiate(_bloodEffect, this.gameObject.transform.position, this.gameObject.transform.rotation);
-            blood.GetComponent<VisualEffect>().Play();
+
+            GameObject impactVFX = BloodVFXPool.instance.GetPooledObject();
+
+            if (impactVFX != null)
+            {
+                impactVFX.transform.position = transform.position;
+                impactVFX.GetComponent<VisualEffect>().Play();
+            }
+
             OnKilled?.Invoke(this, this.gameObject);
-            
+
             if (!_pointGiven)
             {
-                GameManager.LosePoint();
-                _pointGiven= true;
+                PlayerStats.Points += _civilianBehaviour.GetPoint();
+                _pointGiven = true;
             }
             if (!DeathSFX.IsNull)
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
-            this.enabled = false;
-            _triggerCollider.enabled = false;
-        }
-        else if (other.gameObject.layer.Equals(14))
-        {
-            DeathByCriminal();
-
-            if (!_pointGiven)
+            //Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+            //pointPos.y += 100;
+            //// GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
+            //PlayerStats.Points += pointValueOnDeath;
+            //point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
+            //Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+            //pointPos.y += 200;
+            switch (_civilianBehaviour.GetDifficultyType())
             {
-                GameManager.LosePoint();
-                _pointGiven = true;
+                case TypeDifficulty.EASY:
+                    PlayerStats.EasyCivilianKilled++;
+                    break;
+                case TypeDifficulty.NORMAL:
+                    PlayerStats.MediumCivilianKilled++;
+                    break;
+                case TypeDifficulty.HARD:
+                    PlayerStats.HardCivilianKilled++;
+                    break;
+                case TypeDifficulty.NEGATIVE:
+                    PlayerStats.NegativeCivilianKilled++;
+                    break;
             }
+            //Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
+            StartCoroutine(StartFading());
         }
-        else if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Shelter")))
+        else if (_typeDifficulty != TypeDifficulty.NEGATIVE && collision.gameObject.layer == LayerMask.NameToLayer("Door"))
         {
-            OnCaptured?.Invoke(this, this.gameObject);
+            OnKilled?.Invoke(this, this.gameObject);
+            this.gameObject.SetActive(false);
         }
-    }
-
-    public void DeathByCriminal()
-    {
-        int animNo = UnityEngine.Random.Range(0, _animNo);
-
-        _animator.SetFloat("DeathNo",(float) animNo);
-        _animator.SetTrigger("Death");
-        _rb.isKinematic = true;
-        _capsuleCollider.enabled = false;
-        _civilianBehaviour.Stop();
-
-        OnKilled?.Invoke(this, this.gameObject);
-
-        if (!DeathSFX.IsNull)
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
-            RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
+            _animator.SetTrigger("GroundHit");
+            this.GetComponent<NavMeshAgent>().enabled = true;
         }
     }
 }

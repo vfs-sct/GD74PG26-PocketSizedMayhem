@@ -1,49 +1,48 @@
-using System;
 using FMODUnity;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Numerics;
-using PrimeTween;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.VFX;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
-public class Mallet : Weapon
+public class Mallet : MonoBehaviour
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
+
+    [Header("VFX Prefab References")]
     [SerializeField] private GameObject _debrisVFX;
-    [SerializeField] private GameObject _impact;
+
+    [Header("Target Attributes")]
     [SerializeField] private GameObject _target;
-    [SerializeField] private float _originalStartY;
     [SerializeField] private float _targetOffset;
 
+    [Header("Mallet References")]
+    [SerializeField] InputActionAsset inputActions;
     [SerializeField] private Animator _malletAnimator;
-    [SerializeField] private GameObject _impactPos;
     [SerializeField] private GameObject _malletHandle;
-    [SerializeField] private GameObject _floor;
+    [SerializeField] private float _originalStartY;
+    [SerializeField] private float _hungerExpense;
+    [SerializeField] private float _switchCooldown;
+
+    [Header("Vacuum References")]
+    [SerializeField] private Vacuum _vacuum;
+
+    [Header("Rotate Icon References")]
+    [SerializeField] private RotateIcon _rotateIcon;
+
+    private float _cooldown;
+    private int _attackMode;
+    private InputAction vacuumAction;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
     private LayerMask _layerMask;
     private Vector3 _hitTargetpos;
-    [SerializeField] private float _impactRadius;
-    [SerializeField] private float _malletMovementSpeed ;
-    private bool _isAttacking = false;
-    private int layerAsLayerMask;
-    
-    public override void Fire()
+
+    private void Start()
     {
-        if(!_isAttacking)
-        {
-            if (!AttackSFX.IsNull)
-            {
-                RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-            }
-            _malletAnimator.SetTrigger("Swing");
-            _layerMask = LayerMask.GetMask("Floor");
-        }
+        _layerMask = LayerMask.GetMask("Floor");
+        _attackMode = 0;
     }
 
     private void Update()
@@ -54,6 +53,7 @@ public class Mallet : Weapon
         {
             return;
         }
+        
         _hitTargetpos = _hit.point;
         _target.transform.position = _hitTargetpos;
 
@@ -61,47 +61,84 @@ public class Mallet : Weapon
         hitpoint = _hit.point;
         hitpoint.z -= _targetOffset;
         hitpoint.y = _originalStartY;
-        _malletHandle.gameObject.transform.position = Vector3.MoveTowards(_malletHandle.gameObject.transform.position, hitpoint, _malletMovementSpeed);
+        _malletHandle.gameObject.transform.position = hitpoint;
+    }
+    private void OnEnable()
+    {
+        var playerActionMap = inputActions.FindActionMap("Player");
+        vacuumAction = playerActionMap.FindAction("Vacuum");
+
+        vacuumAction.canceled += OnMouseRelease;
+        vacuumAction.Enable();
     }
 
-    public void DisableColliders()
+    private void OnMouseRelease(InputAction.CallbackContext context)
     {
-        GetComponentInChildren<Collider>().enabled = false;
-        _isAttacking = false;
+        _malletAnimator.SetBool("VacuumReleased", true);
+        _vacuum.VacuumOff();
     }
 
-    public void EnableColldiers()
+    private void OnDisable()
     {
-        GetComponentInChildren<Collider>().enabled = true;
-        _isAttacking = true;
-
+        vacuumAction.canceled -= OnMouseRelease;
+        vacuumAction.Disable();
     }
-    public void ImpactEffects()
+    public void OnVacuum()
     {
-        GameObject impact = Instantiate(_impact, _impactPos.transform.position+Vector3.up, _impact.transform.rotation);
-        impact.GetComponent<VisualEffect>().Play();
-        //layerAsLayerMask |= (1 << 6);   
-        //layerAsLayerMask |= (1 << 7);
-        //Collider[] hitColliders = new Collider[25];
-        //Physics.OverlapSphereNonAlloc(transform.position, 10, hitColliders, layerAsLayerMask);
-        //foreach (Collider collider in hitColliders)
-        //{
-        //    if(collider.enabled)
-        //    {
-        //        if (collider.gameObject.TryGetComponent<Animator>(out Animator component))
-        //        {
-        //            Tween.PunchLocalPosition(collider.gameObject.transform, strength: Vector3.up * 10, duration: 0.7f, frequency: 1);
-        //        }
-        //    }
-        //}
-        
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Debris"))
+        if (_attackMode == 1)
         {
-            Instantiate(_debrisVFX, other.transform.position, _debrisVFX.transform.rotation);
-            Destroy(other.gameObject);
+            _vacuum.VacuumOn();
+            _malletAnimator.SetTrigger("Vacuum");
+            _malletAnimator.SetBool("VacuumReleased", false);
+        }
+    }
+
+    public void OnFire()
+    {
+        if (PlayerStats.Hunger >= _hungerExpense && _attackMode == 0)
+        {
+            _malletAnimator.SetTrigger("Swing");
+            PlayerStats.Hunger -= _hungerExpense;
+            Mathf.Clamp(PlayerStats.Hunger, 0, 100);
+        }
+    }
+
+    public void OnSwitchWeapon()
+    {
+        if (Time.time > _cooldown)
+        {
+            if (_attackMode == 0)
+            {
+                gameObject.tag = "Vacuum";
+                _attackMode = 1;
+                _malletAnimator.SetTrigger("SwitchVacuum");
+                _rotateIcon.SwitchSides();
+            }
+            else if (_attackMode == 1)
+            {
+                gameObject.tag = "Mallet";
+                _attackMode = 0;
+                _malletAnimator.SetTrigger("SwitchMallet");
+                _vacuum.VacuumOff();
+                _rotateIcon.SwitchSides();
+            }
+            _cooldown = Time.time + _switchCooldown;
+        }
+    }
+
+    public void ImpactEffects()
+    { 
+        GameObject impactVFX = ObjectPool.instance.GetPooledObject();
+
+        if (impactVFX != null)
+        {
+            impactVFX.transform.position = _target.transform.position + Vector3.up;
+            impactVFX.GetComponent<VisualEffect>().Play();
+        }
+
+        if (!AttackSFX.IsNull)
+        {
+            RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
         }
     }
 }

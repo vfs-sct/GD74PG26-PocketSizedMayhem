@@ -1,157 +1,83 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UIComponents;
-using Unity.Services.Authentication;
-using Unity.Services.Leaderboards;
-using Unity.Services.Leaderboards.Exceptions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    const string LeaderboardId = "High_Score";
+    [Header("Game Variables")]
+    [SerializeField] private float _gameTime = 300;
+    [SerializeField] private float _startHunger = 50;
+    [SerializeField] private float _startPoint = 0;
+    [SerializeField] private float _regenSpeed;
+    [SerializeField] private float _hungerRegenThreshold;
 
-    [SerializeField] private GameObject _civilian;
-
+    [Header("UI References")]
     [SerializeField] private TextMeshProUGUI _timerText;
-    [SerializeField] private TextMeshProUGUI _pointText;
-    [SerializeField] private TextMeshProUGUI _objectiveText1;
-    [SerializeField] private TextMeshProUGUI _objectiveText2;
-    [SerializeField] private TextMeshProUGUI _objectiveText3;
+    [SerializeField] private TextMeshProUGUI _poinText;
+    [SerializeField] Image _hungerFillBar;
 
-    [SerializeField] private float _gameTime = 100;
-    [SerializeField] private static float _increaseAmount = 10;
-    [SerializeField] private static float _decreaseAmount = 10;
+    [Header("Debug Control Amounts")]
+    [SerializeField] private float _timeChange;
+    [SerializeField] private float _pointChange;
 
-    [SerializeField] private int _civilianToSaved = 2;
-    [SerializeField] private int _criminalsKilled = 12;
-    [SerializeField] private int _criminalsCaptured = 2;
-
-    private Vector3 _mousePos;
-    private Vector3 hitpoint;
-    private RaycastHit _hit;
-
-    private float _startTime;
     private float _elapsedTime;
-    [SerializeField]public  float _point;
-    public GameObject shelter;
-
-    void Start()
+    void Awake()
     {
-        _startTime = Time.time;
-        //_point = 100;
-        _pointText.text = "Point:" + _point;
+        _elapsedTime = 0;
 
-        PlayerStats.CivilianSaved = 0;
-        PlayerStats.CriminalKilled = 0;
-        PlayerStats.CriminalCaptured = 0;
-        PlayerStats.CriminalCaptured = 0;
-        PlayerStats.Points = _point;
+        PlayerStats.GameTime = _gameTime;
+        PlayerStats.Hunger = _startHunger;
+        PlayerStats.Points = _startPoint;
     }
 
     void Update()
     {
-        _point =  PlayerStats.Points;
-        _elapsedTime = Time.time - _startTime;
+        // Convert time minutes and seconds
         if (_gameTime - _elapsedTime > 0)
         {
             int minutes = (int)((_gameTime - _elapsedTime) / 60) % 60;
             int seconds = (int)((_gameTime - _elapsedTime) % 60);
-            _timerText.text = "Remaining Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+
+            _timerText.text = "Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
+            _elapsedTime += Time.deltaTime;
         }
         else
         {
-            _timerText.text = "Remaining Time: " + 0;
-            SceneManager.LoadScene("LoseScreen");
-        }
-        // Lose condition
-        if (PlayerStats.Points <= 0 || shelter.GetComponent<ShelterHealth>()._currentHealth<=0)
-        {
-            SceneManager.LoadScene("LoseScreen");
-        }
-        if(PlayerStats.CriminalKilled >= _criminalsKilled && PlayerStats.CriminalCaptured >= _criminalsCaptured && PlayerStats.CivilianSaved >= _civilianToSaved)
-        {
             SceneManager.LoadScene("WinScreen");
         }
-        if(_elapsedTime==30)
+        // Hunger regen below certain hunger threshold
+        if(PlayerStats.Hunger < _hungerRegenThreshold)
         {
-            PlayCinematic();
+            PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
         }
-        // Win condition
-        
-        _pointText.text = "Point:" + PlayerStats.Points;
-        _objectiveText1.text = "Civilians Saved - " + PlayerStats.CivilianSaved + "/" + _civilianToSaved;
-        _objectiveText2.text = "Criminals Killed - " + PlayerStats.CriminalKilled + "/" + _criminalsKilled;
-        _objectiveText3.text = "Criminals Captured - " + PlayerStats.CriminalCaptured + "/" + _criminalsCaptured;
+        // Update point text and hunger fill bar
+        _poinText.text = "Point: " + PlayerStats.Points.ToString();
+        _hungerFillBar.fillAmount = PlayerStats.Hunger / 100;
     }
-    public void PlayCinematic()
-    {
-
-    }
-
+    // F1
     public void OnIncreaseTime()
     {
-        _gameTime += _increaseAmount;
+        _elapsedTime += _timeChange;
     }
+    // F2
     public void OnDecreaseTime()
     {
-        _gameTime -= _decreaseAmount;
+        _elapsedTime -= _timeChange;
     }
+    // F3
     public void OnIncreasePoint()
     {
-        PlayerStats.Points += _increaseAmount;
+        PlayerStats.Points += _pointChange;
     }
+    // F4
     public void OnDecreasePoint()
     {
-        PlayerStats.Points -= _decreaseAmount;
+        PlayerStats.Points -= _pointChange;
     }
-    public void OnLoadWinScreen()
-    {
-        AddScore();
-        SceneManager.LoadScene("WinScreen");
-    }
-    public void OnLoadLoseScreen()
-    {
-        AddScore();
-        SceneManager.LoadScene("LoseScreen");
-    }
+    // F5
     public void OnRestartScene()
     {
-        SceneManager.LoadScene("GameScene");
-    }
-    public async void AddScore()
-    {
-            try
-            {
-                var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(LeaderboardId, PlayerStats.Points);
-
-            }
-            catch (LeaderboardsException exception)
-            {
-                Debug.LogError($"[Unity Leaderboards] {exception.Reason}: {exception.Message}");
-            }
-    }
-
-    public void OnSpawnCivilian()
-    {
-        _mousePos = Input.mousePosition;
-
-        if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit))
-        {
-            return;
-        }
-
-        Instantiate(_civilian,_hit.point,Quaternion.Euler(0,0,0));
-    }
-    public static void AddPoint()
-    {
-        PlayerStats.Points += _increaseAmount;
-    }
-    public static void LosePoint()
-    {
-        PlayerStats.Points -= _increaseAmount;
+        SceneManager.LoadScene("GameScene - M3");
     }
 }

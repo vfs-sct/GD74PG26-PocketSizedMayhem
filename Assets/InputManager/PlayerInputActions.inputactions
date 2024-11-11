@@ -34,62 +34,17 @@
                 },
                 {
                     "name": "SwitchWeapon",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4aafd15d-6994-48fa-823e-8e6ad96e8172",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "IncreaseTime",
-                    "type": "Button",
-                    "id": "20465dbb-cb91-4f86-aa02-e1611193004a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "DecreaseTime",
                     "type": "Button",
                     "id": "2c69178c-f2a9-4656-8540-f6287b46f658",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "IncreasePoint",
-                    "type": "Button",
-                    "id": "af004a7f-ccfe-4782-9d65-8c10288cdcc4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "DecreasePoint",
-                    "type": "Button",
-                    "id": "722916ba-8184-4436-97c1-cc38bb291dbe",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LoadWinScreen",
-                    "type": "Button",
-                    "id": "c310298a-0ccc-4baa-89ce-eedc6985e0b9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "LoadLoseScreen",
-                    "type": "Button",
-                    "id": "08c0d433-2921-4573-b29c-62396623f645",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -105,27 +60,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpawnCivilian",
+                    "name": "Vacuum",
                     "type": "Button",
-                    "id": "28ccc6ef-410d-4e4a-9c98-62bf62a688e9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectMallet",
-                    "type": "Button",
-                    "id": "3b09d2eb-241d-4cbe-8412-00459bf8f9ea",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectClaw",
-                    "type": "Button",
-                    "id": "c9553806-d68f-4be2-a2c3-499a0b851685",
+                    "id": "fd0bb740-f1bb-4d30-9c6d-9c74a68c8050",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -355,78 +292,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5ed832a6-f089-4304-ae0f-30c228f3d846",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SwitchWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b80c178d-19a6-4b7c-b163-c794dddb7e83",
-                    "path": "<Keyboard>/f1",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "IncreaseTime",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d54a615c-c5d1-4359-b528-18e2aba72e3f",
                     "path": "<Keyboard>/f2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DecreaseTime",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7794bdad-86e4-4137-a3f1-a1976fc119c7",
-                    "path": "<Keyboard>/f3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "IncreasePoint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9c029fd9-beb1-4d4e-aa65-245f878fdcf9",
-                    "path": "<Keyboard>/f4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DecreasePoint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "314dd18c-c896-4281-b520-b727c394cdea",
-                    "path": "<Keyboard>/f5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LoadWinScreen",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3d63ec62-053d-40e8-b1cd-681ea52cad4c",
-                    "path": "<Keyboard>/f6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "LoadLoseScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -443,34 +314,23 @@
                 },
                 {
                     "name": "",
-                    "id": "8ff86d94-09c0-4909-befb-45157c621089",
-                    "path": "<Keyboard>/f8",
-                    "interactions": "",
+                    "id": "2d53065a-72d2-47a2-bdc4-c1ba3435e192",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=0.1,pressPoint=0.1)",
                     "processors": "",
-                    "groups": "",
-                    "action": "SpawnCivilian",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Vacuum",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "5ca5ecbc-a70d-4d9b-8ff3-55a7ef0d1c4d",
-                    "path": "<Keyboard>/1",
+                    "id": "2ef49fa5-3c6b-4341-b9bb-37211534e05e",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "SelectMallet",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ed00fd01-4dae-48a1-a9dd-6f2b5b4c4416",
-                    "path": "<Keyboard>/2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SelectClaw",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

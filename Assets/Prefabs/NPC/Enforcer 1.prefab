@@ -180,7 +180,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 54568956c9a7e334eb2daf145ab87eed,
         type: 3}
       propertyPath: m_Name
-      value: Enforcer
+      value: Enforcer 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 54568956c9a7e334eb2daf145ab87eed,
         type: 3}
@@ -1473,6 +1473,7 @@ MonoBehaviour:
   _npcAnimator: {fileID: 0}
   _ragdollColliders: []
   _ragdollRigidbodies: []
+  _characterMovement: {fileID: 0}
   _bounceForce: 20
 --- !u!114 &2027294562923770415
 MonoBehaviour:
