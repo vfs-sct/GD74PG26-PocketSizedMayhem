@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CivilianFill : MonoBehaviour
 {
-    [SerializeField] private int _civilianInside;
+    private int _civilianInside = 0;
 
     private void OnTriggerEnter(Collider other)
     {

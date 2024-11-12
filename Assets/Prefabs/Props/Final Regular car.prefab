@@ -26,22 +26,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 55.23311
+      value: 31.221184
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6695193
+      value: 0.66951835
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62.62012
+      value: 20.057512
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99144495
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.13052596
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -66,7 +66,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 15
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 61b4bebcb30fa9f47bcd368be153a9bb,
         type: 3}
@@ -180,11 +180,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AttackSFX>k__BackingField:
     Guid:
-      Data1: -1200686515
-      Data2: 1085833484
-      Data3: 818871713
-      Data4: 2143956387
-    Path: event:/SFX/Buildings/RAW_16 Explosion__ Echoey #7046
+      Data1: -625227180
+      Data2: 1280436020
+      Data3: 1938149256
+      Data4: 555290856
+    Path: event:/SFX/Buildings/SFX_CarExplosion
   _explosion: {fileID: 3860599804906413874}
   _wheelBounce: {fileID: 4274554063512300983}
   _meshRenderer: {fileID: 5598232963472076354}

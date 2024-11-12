@@ -5,7 +5,7 @@
 			<value>HardCivilianScreams</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{31c8523b-3da1-41fc-8f6f-e96133db4b91}</destination>
@@ -80,7 +80,7 @@
 	</object>
 	<object class="EventMixerMaster" id="{8e32de08-0e6a-4649-8305-58bfc98edfbc}">
 		<property name="volume">
-			<value>-11.5</value>
+			<value>-10</value>
 		</property>
 		<relationship name="effectChain">
 			<destination>{fad35f34-55dd-4332-82d9-6dfdb625eec9}</destination>
@@ -106,7 +106,6 @@
 	<object class="MixerBusEffectChain" id="{fad35f34-55dd-4332-82d9-6dfdb625eec9}">
 		<relationship name="effects">
 			<destination>{9f0b1d63-182d-40ed-a41f-154835a9b530}</destination>
-			<destination>{0fbbda23-ed8c-4375-a805-8ca4fe08c630}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{f468b2f2-2608-48ca-a21f-ec9f165fe3c5}" />
@@ -117,36 +116,22 @@
 		<property name="volume">
 			<value>10</value>
 		</property>
-		<property name="looping">
-			<value>true</value>
+		<property name="playlistMode">
+			<value>1</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{ca964de2-8319-4dde-ba3a-d74df0bbbaec}</destination>
 		</relationship>
 		<relationship name="sounds">
-			<destination>{1445bf14-afd9-48f0-ad57-2cc569a6072a}</destination>
 			<destination>{26d01039-6cb8-4a8a-9c7a-6585d931e89f}</destination>
 			<destination>{02ff448d-c82a-48ff-9d91-059bd1b16be8}</destination>
 			<destination>{a91422c9-82cd-4d98-9887-d228db590d80}</destination>
 			<destination>{ce824f55-b1b2-4940-96ee-f1e171deea96}</destination>
 			<destination>{dad9c3f2-5ed0-4b31-a584-26eab0604be5}</destination>
-			<destination>{27a68149-fb1a-4d29-a2f8-6f8e756ab895}</destination>
-			<destination>{33ae6ed6-4112-4363-9721-8fdeef2294a1}</destination>
-		</relationship>
-		<relationship name="playPercentages">
-			<destination>{6396a7c0-89a2-480b-90bd-4a8bfa4ceb58}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{f15494fc-6ff5-49df-a41b-28ef22d6f8a8}" />
 	<object class="MixerBusFader" id="{9f0b1d63-182d-40ed-a41f-154835a9b530}" />
-	<object class="ProxyEffect" id="{0fbbda23-ed8c-4375-a805-8ca4fe08c630}">
-		<property name="inputFormat">
-			<value>1</value>
-		</property>
-		<relationship name="preset">
-			<destination>{197c16ed-6545-4cd4-bbbf-aa7eceae8c57}</destination>
-		</relationship>
-	</object>
 	<object class="RandomizerModulator" id="{ca964de2-8319-4dde-ba3a-d74df0bbbaec}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>
@@ -154,11 +139,6 @@
 		<property name="amount">
 			<value>14</value>
 		</property>
-	</object>
-	<object class="SilenceSound" id="{1445bf14-afd9-48f0-ad57-2cc569a6072a}">
-		<relationship name="modulators">
-			<destination>{baaae2a8-1e7d-4f4c-8297-0cd17fb7d055}</destination>
-		</relationship>
 	</object>
 	<object class="SingleSound" id="{26d01039-6cb8-4a8a-9c7a-6585d931e89f}">
 		<relationship name="audioFile">
@@ -184,31 +164,5 @@
 		<relationship name="audioFile">
 			<destination>{3c2f01ed-59d9-414f-9f5c-534f1661be74}</destination>
 		</relationship>
-	</object>
-	<object class="SilenceSound" id="{27a68149-fb1a-4d29-a2f8-6f8e756ab895}">
-		<property name="duration">
-			<value>500</value>
-		</property>
-	</object>
-	<object class="SilenceSound" id="{33ae6ed6-4112-4363-9721-8fdeef2294a1}">
-		<property name="duration">
-			<value>250</value>
-		</property>
-	</object>
-	<object class="PlayPercentage" id="{6396a7c0-89a2-480b-90bd-4a8bfa4ceb58}">
-		<property name="percentage">
-			<value>17</value>
-		</property>
-		<relationship name="sound">
-			<destination>{1445bf14-afd9-48f0-ad57-2cc569a6072a}</destination>
-		</relationship>
-	</object>
-	<object class="RandomizerModulator" id="{baaae2a8-1e7d-4f4c-8297-0cd17fb7d055}">
-		<property name="nameOfPropertyBeingModulated">
-			<value>duration</value>
-		</property>
-		<property name="amount">
-			<value>3.33333349</value>
-		</property>
 	</object>
 </objects>
