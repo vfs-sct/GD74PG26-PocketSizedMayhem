@@ -1,5 +1,7 @@
+using PrimeTween;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static EnemySpawner;
 
@@ -24,7 +26,10 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _hardPooledObjects;
     private List<NewNpcBehavior> _negativePooledObjects;
     [SerializeField]private List<GameObject> _activeNPC;
-
+    [SerializeField] private GameObject _pointPopUp;
+    [SerializeField] private GameObject _negativePopUp;
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private GameObject _pointLocation;
     private void Awake()
     {
         if (instance == null)
@@ -147,6 +152,26 @@ public class NPCObjectPool : MonoBehaviour
             return;
         }
         _activeNPC.Remove(civilian);
+        if (civilian.GetComponent<CivilianDeath>()._pointGiven)
+        {
+            int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
+            Vector3 pointPos = Camera.main.WorldToScreenPoint(civilian.transform.position);
+            pointPos.y += 300;
+            pointPos.x += 100;
+            GameObject point;
+            if (value>0)
+            {
+                point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+            }
+            else
+            {
+                point = Instantiate(_negativePopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+            }    
+            PlayerStats.Points += value;
+            point.GetComponent<TextMeshProUGUI>().text = "" + value;
+            Tween.Position(point.transform, _pointLocation.transform.position, duration: 2, ease: Ease.InOutSine);
+            Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
+        }
         civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
     }
 

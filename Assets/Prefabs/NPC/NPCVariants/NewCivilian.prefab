@@ -1474,8 +1474,7 @@ MonoBehaviour:
   _animator: {fileID: 583236151604148576}
   _rb: {fileID: 2461877797427025339}
   _civilianBehaviour: {fileID: 5646808012954638468}
-  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
-    type: 3}
+  _pointGiven: 0
 --- !u!1 &6032100472753130018
 GameObject:
   m_ObjectHideFlags: 0
