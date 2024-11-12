@@ -27,7 +27,7 @@ public class WinScreenSpawner : MonoBehaviour
 
     IEnumerator SpawmRagdolls()
     {
-        for (int i = 0; i < 600; i++)
+        for (int i = 0; i < PlayerStats.EasyCivilianKilled; i++)
         {
             GameObject obj = Instantiate(_easyCivilianRagdoll, _spawnLocation.position, _easyCivilianRagdoll.transform.rotation);
             _easyCivilianText.text = "Easy Civilian Killed: " + ++easyKilled;

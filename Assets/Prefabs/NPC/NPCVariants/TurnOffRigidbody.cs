@@ -7,6 +7,7 @@ public class TurnOffRigidbody : MonoBehaviour
     [SerializeField] GameObject ragdoll;
     private void Start()
     {
+        
         StartCoroutine(DisableRagdoll());
     }
     IEnumerator DisableRagdoll()

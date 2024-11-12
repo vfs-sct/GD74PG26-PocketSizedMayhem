@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdoll: {fileID: 192164259409760628}
+  _capsuleCollider: {fileID: 0}
 --- !u!1 &192164259409760628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5263085196862208147, guid: a37dd37d1e405c54188183deb12ea62b,
