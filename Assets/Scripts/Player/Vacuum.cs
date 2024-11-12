@@ -1,9 +1,6 @@
 using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
-using UnityEngine.VFX;
-using static UnityEditorInternal.ReorderableList;
 
 public class Vacuum : MonoBehaviour
 {

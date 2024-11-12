@@ -67,6 +67,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "IncreaseTime",
+                    "type": "Button",
+                    "id": "124d38df-8be5-420e-bc7a-49c3d7f0dec3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "IncreasePoint",
+                    "type": "Button",
+                    "id": "eb296129-21f0-4d27-ab05-a1775f33a560",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DecreasePoint",
+                    "type": "Button",
+                    "id": "3b247e21-d43d-4435-951b-060d66949188",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WinScreen",
+                    "type": "Button",
+                    "id": "92076724-13dc-441b-8e69-4a18c9a365f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -304,7 +340,7 @@
                 {
                     "name": "",
                     "id": "5cac6609-22ed-47c2-9a2a-a890b0e018b6",
-                    "path": "<Keyboard>/f7",
+                    "path": "<Keyboard>/f5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -331,6 +367,50 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0225f88b-a821-45c3-b78d-06bcf503288d",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncreaseTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de8904bc-0edb-4fe6-a7f5-eac921a44539",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncreasePoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09b74d30-0c8b-4018-82a3-e3db389301cf",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecreasePoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e298520c-bfa7-4f93-9842-5c9c77eca618",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WinScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

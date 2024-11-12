@@ -23,10 +23,6 @@ public class WinScreenSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawmRagdolls());
-        Debug.Log(PlayerStats.EasyCivilianKilled);
-        Debug.Log(PlayerStats.MediumCivilianKilled);
-        Debug.Log(PlayerStats.HardCivilianKilled);
-        Debug.Log(PlayerStats.NegativeCivilianKilled);
     }
 
     IEnumerator SpawmRagdolls()
