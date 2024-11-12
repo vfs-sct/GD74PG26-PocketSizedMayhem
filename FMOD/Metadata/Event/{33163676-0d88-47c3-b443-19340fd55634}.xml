@@ -5,7 +5,7 @@
 			<value>NegativeCivilianScreams</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{31c8523b-3da1-41fc-8f6f-e96133db4b91}</destination>
@@ -112,7 +112,6 @@
 	<object class="MixerBusEffectChain" id="{b2e6f53a-832b-4421-86e1-203d885c5fdd}">
 		<relationship name="effects">
 			<destination>{e029d133-2bb8-4510-bdbc-3250e55d4f62}</destination>
-			<destination>{755894a7-e001-4b0a-a7e1-9f8dc3fcec42}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{cb391071-ad50-41ec-ae9c-ac441ea55085}" />
@@ -145,14 +144,6 @@
 	</object>
 	<object class="MixerBusFader" id="{e9911a29-f71e-4912-9c69-d77b6fde9f11}" />
 	<object class="MixerBusFader" id="{e029d133-2bb8-4510-bdbc-3250e55d4f62}" />
-	<object class="ProxyEffect" id="{755894a7-e001-4b0a-a7e1-9f8dc3fcec42}">
-		<property name="inputFormat">
-			<value>1</value>
-		</property>
-		<relationship name="preset">
-			<destination>{197c16ed-6545-4cd4-bbbf-aa7eceae8c57}</destination>
-		</relationship>
-	</object>
 	<object class="RandomizerModulator" id="{0d9dbe91-f41c-4479-b6d2-be9580659382}">
 		<property name="nameOfPropertyBeingModulated">
 			<value>pitch</value>

@@ -451,11 +451,11 @@ MonoBehaviour:
   yOffset: 50
   <DeathSFX>k__BackingField:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -721403134
+      Data2: 1184081192
+      Data3: 1073759619
+      Data4: -1454832663
+    Path: event:/SFX/Buildings/SFX_Destruction
 --- !u!54 &6777051000125229025
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1245,7 +1245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985b5cc06f85138419dde3495b12899e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _civilianInside: 9
 --- !u!1 &2645657074777294759
 GameObject:
   m_ObjectHideFlags: 0
