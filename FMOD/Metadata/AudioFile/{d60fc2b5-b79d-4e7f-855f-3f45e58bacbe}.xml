@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="AudioFile" id="{63c82c0d-ad10-4cb9-aeb3-7aafc13bd77f}">
+	<object class="AudioFile" id="{d60fc2b5-b79d-4e7f-855f-3f45e58bacbe}">
 		<property name="assetPath">
-			<value>SFX_ButtonHover01.wav</value>
+			<value>Whoosh Hammer Small.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>96</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.34365625</value>
+			<value>7.4055625000000003</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{0007398a-8526-4222-84a0-9fc057cc09e5}</destination>

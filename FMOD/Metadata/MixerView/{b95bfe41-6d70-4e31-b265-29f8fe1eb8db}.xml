@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="UiMixerView" id="{b95bfe41-6d70-4e31-b265-29f8fe1eb8db}">
+		<property name="name">
+			<value>Mallet</value>
+		</property>
+		<relationship name="assignedStrips">
+			<destination>{bfc11b72-6211-46bc-be20-2bd6ebcf3cbb}</destination>
+			<destination>{2fd5ccb6-16d1-4184-bc15-dfe06d3cbb10}</destination>
+			<destination>{175c9fbe-5ae8-41f1-a6ae-2c0079f33b39}</destination>
+			<destination>{598b78ae-19f0-46fc-9a67-ee81c1588c8e}</destination>
+		</relationship>
+		<relationship name="mixer">
+			<destination>{a411aa95-e250-4143-8c2e-069c398563d5}</destination>
+		</relationship>
+	</object>
+</objects>
