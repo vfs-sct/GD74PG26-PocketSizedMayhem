@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,12 +17,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _poinText;
     [SerializeField] Image _hungerFillBar;
-
+    [SerializeField] Image _mouse;
+    private float t;
     private float _elapsedTime;
+    private float previousValue;
+    private bool mouseLogoAppear = false;
     void Awake()
     {
         _elapsedTime = 0;
-
+        t = 0;
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;
@@ -43,13 +47,25 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("WinScreen");
         }
         // Hunger regen below certain hunger threshold
-        if(PlayerStats.Hunger < _hungerRegenThreshold)
+        if (PlayerStats.Hunger < _hungerRegenThreshold)
         {
             PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
         }
         // Update point text and hunger fill bar
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
-        _hungerFillBar.fillAmount = PlayerStats.Hunger / 100;
+        //
+        _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
+        if(!mouseLogoAppear && PlayerStats.Hunger==0)
+        {
+            mouseLogoAppear = true;
+            StartCoroutine(MakeLogoAppear());
+        }
     }
-    
+    IEnumerator MakeLogoAppear()
+    {
+        _mouse.enabled = true;
+        yield return new WaitForSeconds(5f);
+        _mouse.enabled = false;
+    }
+
 }
