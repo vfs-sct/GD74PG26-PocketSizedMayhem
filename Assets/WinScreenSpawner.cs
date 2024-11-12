@@ -23,15 +23,11 @@ public class WinScreenSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawmRagdolls());
-        Debug.Log(PlayerStats.EasyCivilianKilled);
-        Debug.Log(PlayerStats.MediumCivilianKilled);
-        Debug.Log(PlayerStats.HardCivilianKilled);
-        Debug.Log(PlayerStats.NegativeCivilianKilled);
     }
 
     IEnumerator SpawmRagdolls()
     {
-        for (int i = 0; i < PlayerStats.EasyCivilianKilled; i++)
+        for (int i = 0; i < 600; i++)
         {
             GameObject obj = Instantiate(_easyCivilianRagdoll, _spawnLocation.position, _easyCivilianRagdoll.transform.rotation);
             _easyCivilianText.text = "Easy Civilian Killed: " + ++easyKilled;

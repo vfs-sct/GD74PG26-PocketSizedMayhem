@@ -126,15 +126,18 @@ public class CivilianDeath : MonoBehaviour
             //Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
-        else if (_typeDifficulty != TypeDifficulty.NEGATIVE && collision.gameObject.layer == LayerMask.NameToLayer("Door"))
-        {
-            OnKilled?.Invoke(this, this.gameObject);
-            this.gameObject.SetActive(false);
-        }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             _animator.SetTrigger("GroundHit");
             this.GetComponent<NavMeshAgent>().enabled = true;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_typeDifficulty != TypeDifficulty.NEGATIVE && other.gameObject.layer == LayerMask.NameToLayer("Door"))
+        {
+            OnKilled?.Invoke(this, this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,16 +17,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private TextMeshProUGUI _poinText;
     [SerializeField] Image _hungerFillBar;
-
-    [Header("Debug Control Amounts")]
-    [SerializeField] private float _timeChange;
-    [SerializeField] private float _pointChange;
-
+    [SerializeField] Image _mouse;
+    private float t;
     private float _elapsedTime;
+    private float previousValue;
+    private bool mouseLogoAppear = false;
     void Awake()
     {
         _elapsedTime = 0;
-
+        t = 0;
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;
@@ -47,37 +47,25 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("WinScreen");
         }
         // Hunger regen below certain hunger threshold
-        if(PlayerStats.Hunger < _hungerRegenThreshold)
+        if (PlayerStats.Hunger < _hungerRegenThreshold)
         {
             PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
         }
         // Update point text and hunger fill bar
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
-        _hungerFillBar.fillAmount = PlayerStats.Hunger / 100;
+        //
+        _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
+        if(!mouseLogoAppear && PlayerStats.Hunger==0)
+        {
+            mouseLogoAppear = true;
+            StartCoroutine(MakeLogoAppear());
+        }
     }
-    // F1
-    public void OnIncreaseTime()
+    IEnumerator MakeLogoAppear()
     {
-        _elapsedTime += _timeChange;
+        _mouse.enabled = true;
+        yield return new WaitForSeconds(5f);
+        _mouse.enabled = false;
     }
-    // F2
-    public void OnDecreaseTime()
-    {
-        _elapsedTime -= _timeChange;
-    }
-    // F3
-    public void OnIncreasePoint()
-    {
-        PlayerStats.Points += _pointChange;
-    }
-    // F4
-    public void OnDecreasePoint()
-    {
-        PlayerStats.Points -= _pointChange;
-    }
-    // F5
-    public void OnRestartScene()
-    {
-        SceneManager.LoadScene("GameScene - M3");
-    }
+
 }

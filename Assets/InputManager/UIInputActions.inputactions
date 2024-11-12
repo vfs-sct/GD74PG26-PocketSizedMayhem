@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WinScreen",
+                    "type": "Button",
+                    "id": "4ca5f00a-fe15-46a5-a3aa-30f9a56a493b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -106,6 +115,17 @@
                     "action": "RestartScene",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba435cc5-26fd-4c25-a042-c35292af1d8c",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WinScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -118,6 +138,60 @@
                     "type": "PassThrough",
                     "id": "8fc9a43b-d395-46d3-80d9-7688654c06b3",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RestartScene",
+                    "type": "Button",
+                    "id": "bb7af6e0-27a5-4722-9694-1dc625473340",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DecreasePoint",
+                    "type": "Button",
+                    "id": "9174377e-2d69-4a71-83d7-6420be0cb685",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "IncreasePoint",
+                    "type": "Button",
+                    "id": "52746a51-2f86-41f2-af2b-ae36359784a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DecreaseTime",
+                    "type": "Button",
+                    "id": "0f119438-d160-4ead-8548-e8b9d448a418",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WinScreen",
+                    "type": "Button",
+                    "id": "0324e66f-e358-49d8-bc05-92af3361659f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "IncreaseTime",
+                    "type": "Button",
+                    "id": "2db96378-d7da-4db3-8f0d-912fb1ffe2e8",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -620,6 +694,72 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55e31f03-0ef3-4a9f-85ea-1621ba34be98",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncreaseTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a4bbe2d-fe66-4a82-af4e-d276520d13c8",
+                    "path": "<Keyboard>/f6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WinScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "492e023d-ae88-4e0e-92e0-2fb170c92356",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecreaseTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3e1ea76b-cf6d-4925-a24f-a38457b0be02",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncreasePoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70ffb921-a7b8-4597-bd6b-400947b61e06",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecreasePoint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58f739fa-de5e-4e2d-80ee-3b4476bff30c",
+                    "path": "<Keyboard>/f5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RestartScene",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
