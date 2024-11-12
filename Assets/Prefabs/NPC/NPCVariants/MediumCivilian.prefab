@@ -186,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: <Speed>k__BackingField
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
