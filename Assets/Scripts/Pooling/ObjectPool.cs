@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public class ObjectPool : MonoBehaviour
@@ -10,7 +11,7 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] private GameObject _pooledObject;
     [SerializeField] private int _poolAmount;
-
+    
     private List<GameObject> pooledObjects;
     
     private void Awake()

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static EnemySpawner;
 
 public class NPCObjectPool : MonoBehaviour
@@ -30,6 +31,8 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private GameObject _pointLocation;
+    [SerializeField] Image _comboBar;
+    [SerializeField]private float combo = 0;
     private void Awake()
     {
         if (instance == null)
@@ -162,10 +165,12 @@ public class NPCObjectPool : MonoBehaviour
             if (value>0)
             {
                 point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+                combo++;
             }
             else
             {
                 point = Instantiate(_negativePopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+                combo = 0;
             }    
             PlayerStats.Points += value;
             point.GetComponent<TextMeshProUGUI>().text = "" + value;
@@ -173,6 +178,8 @@ public class NPCObjectPool : MonoBehaviour
             Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
         }
         civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
+        _comboBar.fillAmount = Mathf.Clamp(combo*5,0,100)/100;
+        Debug.Log(Mathf.Clamp(combo * 5, 0, 100));
     }
 
     public void AddToCivilianList(GameObject civilian)

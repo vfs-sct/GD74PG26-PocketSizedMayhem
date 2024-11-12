@@ -1,4 +1,5 @@
 using CharacterMovement;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -63,7 +64,7 @@ public class NewNpcBehavior : CharacterMovement3D
             }
             if (_endTarget == EndTarget.NO_TARGET)
             {
-                _pattern = (Pattern)Random.Range(0, 2);
+                
             }
             else if (_endTarget == EndTarget.CIVILIAN)
             {
@@ -73,6 +74,7 @@ public class NewNpcBehavior : CharacterMovement3D
             {
                 SetEscapeDestination();
             }
+            _pattern = (Pattern)Random.Range(0, 2);
         }
         else
         {
@@ -81,7 +83,10 @@ public class NewNpcBehavior : CharacterMovement3D
             Speed = 20;
         }
     }
-
+    private void OnEnable()
+    {
+        StartCoroutine(PatternStart());
+    }
     public void BuildingSpawn()
     {
         _spawnState = SpawnState.BUILDING;
@@ -104,7 +109,13 @@ public class NewNpcBehavior : CharacterMovement3D
             _objectMaterial.SetVector("_Target", vacuum.transform.position);
         }
     }
-
+    IEnumerator PatternStart()
+    {
+        yield return new WaitForSeconds(Random.Range(3, 6));
+        _endTarget = EndTarget.NO_TARGET;
+        yield return new WaitForSeconds(Random.Range(1, 4));
+        _endTarget = EndTarget.TARGET;
+    }
     protected override void Update()
     {
         base.Update();
