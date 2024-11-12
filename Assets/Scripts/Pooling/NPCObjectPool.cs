@@ -33,6 +33,7 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private GameObject _pointLocation;
     [SerializeField] Image _comboBar;
     [SerializeField]private float combo = 0;
+    [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
     private void Awake()
     {
         if (instance == null)
@@ -172,14 +173,17 @@ public class NPCObjectPool : MonoBehaviour
                 point = Instantiate(_negativePopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
                 combo = 0;
             }    
-            PlayerStats.Points += value;
+            
             point.GetComponent<TextMeshProUGUI>().text = "" + value;
             Tween.Position(point.transform, _pointLocation.transform.position, duration: 2, ease: Ease.InOutSine);
             Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
+            combo = Mathf.Clamp(combo, 0, 20);
+            _comboBar.fillAmount = Mathf.Clamp(combo * 5, 0, 100) / 100;
+            _textMeshProUGUI.text = "X" + combo;
+            PlayerStats.Points += value * combo;
         }
         civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
-        _comboBar.fillAmount = Mathf.Clamp(combo*5,0,100)/100;
-        Debug.Log(Mathf.Clamp(combo * 5, 0, 100));
+        
     }
 
     public void AddToCivilianList(GameObject civilian)
