@@ -1134,7 +1134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &996939513027191270
 Transform:
   m_ObjectHideFlags: 0
@@ -1212,13 +1212,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4721327085560725874}
   - component: {fileID: 2461877797427025339}
-  - component: {fileID: 2011792685782677946}
   - component: {fileID: 2148797612866960583}
   - component: {fileID: 583236151604148576}
   - component: {fileID: 1826475401945314331}
   - component: {fileID: 5646808012954638468}
-  - component: {fileID: 1041028353720300704}
   - component: {fileID: 940318795407769195}
+  - component: {fileID: 1041028353720300704}
   m_Layer: 6
   m_Name: NewCivilian
   m_TagString: Untagged
@@ -1270,7 +1269,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &2011792685782677946
+--- !u!136 &2148797612866960583
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1293,29 +1292,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!136 &2148797612866960583
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5390339625992018888}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 1.8289888
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9455055, z: 0}
 --- !u!95 &583236151604148576
 Animator:
   serializedVersion: 7
@@ -1345,7 +1321,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5390339625992018888}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
   m_Speed: 1
@@ -1416,10 +1392,14 @@ MonoBehaviour:
   <ClampSearchRadius>k__BackingField: 1
   <Rigidbody>k__BackingField: {fileID: 2461877797427025339}
   <NavMeshAgent>k__BackingField: {fileID: 1826475401945314331}
-  <CapsuleCollider>k__BackingField: {fileID: 2011792685782677946}
+  <CapsuleCollider>k__BackingField: {fileID: 2148797612866960583}
+  _target: {fileID: 0}
+  _capsuleCollider: {fileID: 2148797612866960583}
+  _vacuum: {fileID: 0}
   _upForce: 0
   _forwardForce: 0
   point: 0
+  _type: 0
   fadeOutTime: 8
   _fadeSpeed: 1
   _endTarget: 1
@@ -1430,40 +1410,6 @@ MonoBehaviour:
   _zigzagVerticalDistance: 10
   _rotationSpeed: 2
   _radius: 15
-  _target: {fileID: 0}
-  _capsuleCollider: {fileID: 0}
-  _vacuum: {fileID: 0}
---- !u!114 &1041028353720300704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5390339625992018888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680054670b1241d4c98fa81f659769fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DeathSFX>k__BackingField:
-    Guid:
-      Data1: 2053328739
-      Data2: 1290538230
-      Data3: -972561278
-      Data4: 1205326739
-    Path: event:/SFX/SFX_Die01
-  _bloodEffect: {fileID: 1008613358010677320, guid: da7c570f629860b4cb9803e52be42acb,
-    type: 3}
-  _capsuleCollider: {fileID: 2011792685782677946}
-  _triggerCollider: {fileID: 2148797612866960583}
-  _ragdollController: {fileID: 940318795407769195}
-  _animator: {fileID: 583236151604148576}
-  _rb: {fileID: 2461877797427025339}
-  _civilianBehaviour: {fileID: 5646808012954638468}
-  _animNo: 4
-  canvas: {fileID: 0}
-  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
-    type: 3}
 --- !u!114 &940318795407769195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,7 +1422,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f48f8379e1a4b44bc6a0f1ea4ba6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bloodEffect: {fileID: 0}
   _npcAnimator: {fileID: 583236151604148576}
   _ragdollColliders:
   - {fileID: 1584970626848068677}
@@ -1504,6 +1449,33 @@ MonoBehaviour:
   - {fileID: 3479897573386339620}
   _characterMovement: {fileID: 5646808012954638468}
   _bounceForce: 120
+--- !u!114 &1041028353720300704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5390339625992018888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680054670b1241d4c98fa81f659769fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DeathSFX>k__BackingField:
+    Guid:
+      Data1: 2053328739
+      Data2: 1290538230
+      Data3: -972561278
+      Data4: 1205326739
+    Path: event:/SFX/SFX_Die01
+  _capsuleCollider: {fileID: 2148797612866960583}
+  _ragdollController: {fileID: 940318795407769195}
+  _ragdollBody: {fileID: 5263085196862208147}
+  _animator: {fileID: 583236151604148576}
+  _rb: {fileID: 2461877797427025339}
+  _civilianBehaviour: {fileID: 5646808012954638468}
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
 --- !u!1 &6032100472753130018
 GameObject:
   m_ObjectHideFlags: 0

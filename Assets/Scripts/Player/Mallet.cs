@@ -1,208 +1,54 @@
-
-using CharacterMovement;
 using FMODUnity;
-using PrimeTween;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.VFX;
-using static UnityEngine.Timeline.DirectorControlPlayable;
-using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class Mallet : MonoBehaviour
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
-    [field: SerializeField] public EventReference PukeSFX { get; set; }
-    
+
+    [Header("VFX Prefab References")]
     [SerializeField] private GameObject _debrisVFX;
-    
-    [SerializeField] private GameObject _impact;
+
+    [Header("Target Attributes")]
     [SerializeField] private GameObject _target;
-    [SerializeField] private float _originalStartY;
     [SerializeField] private float _targetOffset;
 
-    [SerializeField] private Animator _malletAnimator;
-    [SerializeField] private GameObject _impactPos;
-    [SerializeField] private GameObject _malletHandle;
-    [SerializeField] private GameObject _floor;
+    [Header("Mallet References")]
     [SerializeField] InputActionAsset inputActions;
-    [SerializeField] private GameObject _mouth;
+    [SerializeField] private Animator _malletAnimator;
+    [SerializeField] private GameObject _malletHandle;
+    [SerializeField] private float _originalStartY;
+    [SerializeField] private float _hungerExpense;
+    [SerializeField] private float _switchCooldown;
+
+    [Header("Vacuum References")]
+    [SerializeField] private Vacuum _vacuum;
+
+    [Header("Rotate Icon References")]
+    [SerializeField] private RotateIcon _rotateIcon;
+
+    private float _cooldown;
+    private int _attackMode;
     private InputAction vacuumAction;
-    private InputAction pukeAction;
     private Vector3 _mousePos;
     private Vector3 hitpoint;
     private RaycastHit _hit;
     private LayerMask _layerMask;
-    private LayerMask _vacuumLayerMask;
     private Vector3 _hitTargetpos;
-    [SerializeField] private float _impactRadius;
-    [SerializeField] private float _malletMovementSpeed ;
-   // private bool _isAttacking = false;
-    private int layerAsLayerMask;
-    private int _attackMode;
-    //private bool isVacuuming = false;
-    [SerializeField]private int pullIntensity;
-    List<GameObject> enemies;
-    [SerializeField] private Vacuum _vacuum;
-    [SerializeField] private float _hungerExpense;
-    
-    [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private RotateIcon _rotateIcon;
-    private bool puking = false;
+
     private void Start()
     {
+        _layerMask = LayerMask.GetMask("Floor");
         _attackMode = 0;
-        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Enemy"));
-        _vacuumLayerMask |= (1 << LayerMask.NameToLayer("Civilian"));
-        enemies = new List<GameObject>();
-    }
-    public void OnRestartScene()
-    {
-        SceneManager.LoadScene("GameScene - M3");
     }
 
-    public void OnIncreasePoint()
-    {
-        PlayerStats.Points += 10;
-    }
-    public void OnDecreasePoint()
-    {
-        Debug.Log("hehe");
-        PlayerStats.Points -= 10;
-    }
-    private void OnEnable()
-    {
-        // Get the action map and the specific action for the mouse click
-        var playerActionMap = inputActions.FindActionMap("Player");
-        vacuumAction = playerActionMap.FindAction("Vacuum");
-        pukeAction = playerActionMap.FindAction("Release");
-        
-        vacuumAction.canceled += OnMouseRelease;
-        pukeAction.canceled += OnMouseReleasePuke;
-
-        // Enable the action
-        vacuumAction.Enable();
-        pukeAction.Enable();
-    }
-    private void OnMouseRelease(InputAction.CallbackContext context)
-    {
-        _malletAnimator.SetBool("VacuumReleased", true);
-        _vacuum.VacuumOff();
-    }
-    private void OnMouseReleasePuke(InputAction.CallbackContext context)
-    {
-        var emission = _particleSystem.emission;
-        puking = false;
-        emission.rateOverTime = 0;
-    }
-    public void OnRelease()
-    {
-        if(PlayerStats.Hunger >0)
-        {
-            RuntimeManager.PlayOneShot(PukeSFX, this.gameObject.transform.position);
-            _particleSystem.Play();
-            var emission = _particleSystem.emission;
-            emission.rateOverTime = 100;
-            puking = true;
-        }
-    }
-
-    private void OnDisable()
-    {
-        // Unsubscribe from the events and disable the action
-        vacuumAction.canceled -= OnMouseRelease;
-        vacuumAction.Disable();
-        pukeAction.canceled -= OnMouseReleasePuke;
-        pukeAction.Disable();
-    }
-    
-    public  void OnFire()
-    {
-        if(PlayerStats.Hunger>=_hungerExpense)
-        {
-            _malletAnimator.SetFloat("Direction", 1);
-            if (_attackMode == 0)
-            {
-                _malletAnimator.SetTrigger("Swing");
-                _layerMask = LayerMask.GetMask("Floor");
-            }
-            PlayerStats.Hunger -= _hungerExpense;
-            Mathf.Clamp(PlayerStats.Hunger,0,100);
-        }
-        
-    }
-    public void OnSwitchWeapon()
-    {
-        //if (_attackMode == 0)
-        //{
-        //    gameObject.tag = "Vacuum";
-        //    _attackMode = 1;
-        //    _malletAnimator.SetTrigger("SwitchVacuum");
-        //    _rotateIcon.SwitchSides();
-        //}
-        //else if (_attackMode == 1)
-        //{
-        //    gameObject.tag = "Mallet";
-        //    _attackMode = 0;
-        //    _malletAnimator.SetTrigger("SwitchMallet");
-        //    _vacuum.VacuumOff();
-        //    _rotateIcon.SwitchSides();
-        //}
-    }
-    public void OnVacuum()
-    {
-        if(_attackMode==1)
-        {
-            _vacuum.VacuumOn();
-            //isVacuuming = true;
-            _malletAnimator.SetTrigger("Vacuum");
-            _malletAnimator.SetBool("VacuumReleased", false);
-        }
-        
-    }
-    public void OnSelectMallet()
-    {
-        if (_attackMode == 1)
-        {
-            gameObject.tag = "Mallet";
-            _attackMode = 0;
-            _malletAnimator.SetTrigger("SwitchMallet");
-            _vacuum.VacuumOff();
-            _rotateIcon.SwitchSides();
-        }
-    }
-
-    public void OnSelectClaw()
-    {
-        if (_attackMode == 0)
-        {
-            gameObject.tag = "Vacuum";
-            _attackMode = 1;
-            _malletAnimator.SetTrigger("SwitchVacuum");
-            _rotateIcon.SwitchSides();
-        }
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(_mouth.transform.position, 15);
-    }
     private void Update()
     {
-        if(puking)
-        {
-            
-            PlayerStats.Hunger-=0.5f;
-        }
-        if (PlayerStats.Hunger<=0)
-        {
-            var emission = _particleSystem.emission;
-            emission.rateOverTime = 0;
-            puking = false;
-        }
         _mousePos = Input.mousePosition;
+
         if (!Physics.Raycast(Camera.main.ScreenPointToRay(_mousePos), out _hit, Mathf.Infinity, _layerMask))
         {
             return;
@@ -217,26 +63,76 @@ public class Mallet : MonoBehaviour
         hitpoint.y = _originalStartY;
         _malletHandle.gameObject.transform.position = hitpoint;
     }
-
-    public void DisableColliders()
+    private void OnEnable()
     {
-        GetComponentInChildren<Collider>().enabled = false;
-        //_isAttacking = false;
+        var playerActionMap = inputActions.FindActionMap("Player");
+        vacuumAction = playerActionMap.FindAction("Vacuum");
+
+        vacuumAction.canceled += OnMouseRelease;
+        vacuumAction.Enable();
     }
 
-    public void EnableColldiers()
+    private void OnMouseRelease(InputAction.CallbackContext context)
     {
-        GetComponentInChildren<Collider>().enabled = true;
-        //_isAttacking = true;
-
+        _malletAnimator.SetBool("VacuumReleased", true);
+        _vacuum.VacuumOff();
     }
+
+    private void OnDisable()
+    {
+        vacuumAction.canceled -= OnMouseRelease;
+        vacuumAction.Disable();
+    }
+    public void OnVacuum()
+    {
+        if (_attackMode == 1)
+        {
+            _vacuum.VacuumOn();
+            _malletAnimator.SetTrigger("Vacuum");
+            _malletAnimator.SetBool("VacuumReleased", false);
+        }
+    }
+
+    public void OnFire()
+    {
+        if (PlayerStats.Hunger >= _hungerExpense && _attackMode == 0)
+        {
+            _malletAnimator.SetTrigger("Swing");
+            PlayerStats.Hunger -= _hungerExpense;
+            Mathf.Clamp(PlayerStats.Hunger, 0, 100);
+        }
+    }
+
+    public void OnSwitchWeapon()
+    {
+        if (Time.time > _cooldown)
+        {
+            if (_attackMode == 0)
+            {
+                gameObject.tag = "Vacuum";
+                _attackMode = 1;
+                _malletAnimator.SetTrigger("SwitchVacuum");
+                _rotateIcon.SwitchSides();
+            }
+            else if (_attackMode == 1)
+            {
+                gameObject.tag = "Mallet";
+                _attackMode = 0;
+                _malletAnimator.SetTrigger("SwitchMallet");
+                _vacuum.VacuumOff();
+                _rotateIcon.SwitchSides();
+            }
+            _cooldown = Time.time + _switchCooldown;
+        }
+    }
+
     public void ImpactEffects()
     { 
         GameObject impactVFX = ObjectPool.instance.GetPooledObject();
 
         if (impactVFX != null)
         {
-            impactVFX.transform.position = _impactPos.transform.position + Vector3.up;
+            impactVFX.transform.position = _target.transform.position + Vector3.up;
             impactVFX.GetComponent<VisualEffect>().Play();
         }
 
@@ -244,27 +140,6 @@ public class Mallet : MonoBehaviour
         {
             RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Debris"))
-        {
-            Instantiate(_debrisVFX, other.transform.position, _debrisVFX.transform.rotation);
-            Destroy(other.gameObject);
-        }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            
-            enemies.Add(other.gameObject);
-        }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
-        {
-            _malletAnimator.SetFloat("Direction", -1);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        enemies.Remove(other.gameObject);
     }
 }
 

@@ -4,22 +4,21 @@ using UnityEngine.AI;
 using UnityEngine.VFX;
 using FMODUnity;
 using System.Collections;
-using Unity.VisualScripting;
 using PrimeTween;
 using TMPro;
+
+using static NewNpcBehavior;
 public class CivilianDeath : MonoBehaviour
 {
     [field: SerializeField] public EventReference DeathSFX { get; set; }
 
-    [SerializeField] private GameObject _bloodEffect;
     [SerializeField] private CapsuleCollider _capsuleCollider;
-    [SerializeField] private CapsuleCollider _triggerCollider;
     [SerializeField] private RagdollOnOffController _ragdollController;
+    [SerializeField] private GameObject _ragdollBody;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody _rb;
-    //[SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private NewNpcBehavior _civilianBehaviour;
-    [SerializeField] private int _animNo;
+    [SerializeField] private GameObject _pointPopUp;
     
     public event EventHandler<GameObject> OnKilled;
     private bool _pointGiven;
@@ -27,17 +26,16 @@ public class CivilianDeath : MonoBehaviour
     private float _fadeTime;
     private float _fadeThresholdTime;
     private float _fadeAmount;
-    [SerializeField] private Canvas canvas;
-
-    [SerializeField] private GameObject _pointPopUp;
+    
     private Renderer _objectRenderer;
     private Material _objectMaterial;
     private Color _objectColor;
     private int pointValueOnDeath;
+    private TypeDifficulty _typeDifficulty;
     private void Start()
     {
+        _typeDifficulty = _civilianBehaviour.GetDifficultyType();
         pointValueOnDeath = _civilianBehaviour.GetPoint();
-        canvas = GameObject.Find("HUD_Alpha").GetComponent<Canvas>();
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _fadeTime = 0;
@@ -53,8 +51,8 @@ public class CivilianDeath : MonoBehaviour
                 this.gameObject.SetActive(false);
                 _ragdollController.RagdollModeOff();
                 _capsuleCollider.enabled = true;
+                _ragdollBody.SetActive(false);
                 _civilianBehaviour.enabled = true;
-                _triggerCollider.enabled = true;
                 _fadeTime = 0;
                 _isFading = false;
                 _objectMaterial.SetFloat("_Alpha", 1);
@@ -67,12 +65,20 @@ public class CivilianDeath : MonoBehaviour
             }
         }
     }
-    public void OnTriggerEnter(Collider other)
+
+    IEnumerator StartFading()
     {
-        if (other.gameObject.tag == "Mallet")
+        yield return new WaitForSeconds(2);
+        _isFading = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Mallet")
         {
             _capsuleCollider.enabled = false;
             _civilianBehaviour.enabled = false;
+            _ragdollBody.SetActive(true);
             _ragdollController.RagdollModeOn();
             _ragdollController.DeathBounce();
 
@@ -85,45 +91,53 @@ public class CivilianDeath : MonoBehaviour
             }
 
             OnKilled?.Invoke(this, this.gameObject);
-            
+
             if (!_pointGiven)
             {
                 PlayerStats.Points += _civilianBehaviour.GetPoint();
-                _pointGiven= true;
+                _pointGiven = true;
             }
             if (!DeathSFX.IsNull)
             {
                 RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             }
-            _triggerCollider.enabled = false;
-            Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
-            pointPos.y += 100;
-            GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
-            PlayerStats.Points += pointValueOnDeath;
-            point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
-            Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
-            pointPos.y += 200;
-            Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
+            //Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+            //pointPos.y += 100;
+            //// GameObject point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, canvas.transform);
+            //PlayerStats.Points += pointValueOnDeath;
+            //point.GetComponent<TextMeshProUGUI>().text = "" + pointValueOnDeath;
+            //Tween.Scale(point.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+            //pointPos.y += 200;
+            switch (_civilianBehaviour.GetDifficultyType())
+            {
+                case TypeDifficulty.EASY:
+                    PlayerStats.EasyCivilianKilled++;
+                    break;
+                case TypeDifficulty.NORMAL:
+                    PlayerStats.MediumCivilianKilled++;
+                    break;
+                case TypeDifficulty.HARD:
+                    PlayerStats.HardCivilianKilled++;
+                    break;
+                case TypeDifficulty.NEGATIVE:
+                    PlayerStats.NegativeCivilianKilled++;
+                    break;
+            }
+            //Tween.Position(point.transform, pointPos, duration: 1, ease: Ease.OutSine);
             StartCoroutine(StartFading());
         }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Door"))
-        {
-            this.gameObject.SetActive(false);
-        }
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             _animator.SetTrigger("GroundHit");
             this.GetComponent<NavMeshAgent>().enabled = true;
-            _triggerCollider.enabled = true;
         }
     }
-    IEnumerator StartFading()
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(2);
-        _isFading = true;
+        if (_typeDifficulty != TypeDifficulty.NEGATIVE && other.gameObject.layer == LayerMask.NameToLayer("Door"))
+        {
+            OnKilled?.Invoke(this, this.gameObject);
+            this.gameObject.SetActive(false);
+        }
     }
 }
