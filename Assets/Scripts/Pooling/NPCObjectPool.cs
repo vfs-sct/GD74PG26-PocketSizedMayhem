@@ -179,7 +179,7 @@ public class NPCObjectPool : MonoBehaviour
             Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
             combo = Mathf.Clamp(combo, 0, 20);
             _comboBar.fillAmount = Mathf.Clamp(combo * 5, 0, 100) / 100;
-            _textMeshProUGUI.text = "X" + combo;
+            _textMeshProUGUI.text = "Combo X" + combo;
             PlayerStats.Points += value * combo;
         }
         civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;

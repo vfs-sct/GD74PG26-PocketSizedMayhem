@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
         //
         _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
-        if(!mouseLogoAppear && PlayerStats.Hunger==0)
+        if (!mouseLogoAppear && PlayerStats.Hunger==0)
         {
             mouseLogoAppear = true;
             StartCoroutine(MakeLogoAppear());
