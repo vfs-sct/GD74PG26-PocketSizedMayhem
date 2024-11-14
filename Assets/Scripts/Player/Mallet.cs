@@ -109,6 +109,7 @@ public class Mallet : MonoBehaviour
         {
             if (_attackMode == 0)
             {
+                _target.SetActive(false);
                 gameObject.tag = "Vacuum";
                 _attackMode = 1;
                 _malletAnimator.SetTrigger("SwitchVacuum");
@@ -116,6 +117,7 @@ public class Mallet : MonoBehaviour
             }
             else if (_attackMode == 1)
             {
+                _target.SetActive(true);
                 gameObject.tag = "Mallet";
                 _attackMode = 0;
                 _malletAnimator.SetTrigger("SwitchMallet");
