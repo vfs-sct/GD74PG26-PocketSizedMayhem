@@ -58,22 +58,6 @@ public class NewNpcBehavior : CharacterMovement3D
             _civilianTargetLayerMask |= (1 << 6);
             _newDirectionVector = new Vector3(_zigzagHorizontalDistance, 0, _zigzagVerticalDistance);
             _endTarget = (EndTarget)Random.Range(0, 2);
-            if (point < 0)
-            {
-                _endTarget = EndTarget.CIVILIAN;
-            }
-            if (_endTarget == EndTarget.NO_TARGET)
-            {
-                
-            }
-            else if (_endTarget == EndTarget.CIVILIAN)
-            {
-                
-            }
-            else
-            {
-                SetEscapeDestination();
-            }
             _pattern = (Pattern)Random.Range(0, 2);
         }
         else
@@ -90,16 +74,6 @@ public class NewNpcBehavior : CharacterMovement3D
     public void BuildingSpawn()
     {
         _spawnState = SpawnState.BUILDING;
-    }
-
-    private void SetEscapeDestination()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _doorLayerMask);
-        if(hitColliders.Length !=0)
-        {
-            _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
-            MoveTo(_target.transform.position);
-        }
     }
 
     public void AssignVacuumPos(GameObject vacuum)
@@ -166,26 +140,6 @@ public class NewNpcBehavior : CharacterMovement3D
         return false;
     }
 
-    private void AssignTarget()
-    {
-        if (point < 0)
-        {
-            _endTarget = EndTarget.CIVILIAN;
-            return;
-        }
-
-        if (_endTarget == EndTarget.TARGET)
-        {
-            SetEscapeDestination();
-        }
-        else
-        {
-            if (_pattern == Pattern.ZIGZAG)
-            {
-                MoveTo(transform.position + _newDirectionVector);
-            }
-        }
-    }
 
     public int GetPoint()
     {

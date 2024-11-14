@@ -26,7 +26,8 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _mediumPooledObjects;
     private List<GameObject> _hardPooledObjects;
     private List<NewNpcBehavior> _negativePooledObjects;
-    [SerializeField]private List<GameObject> _activeNPC;
+    [SerializeField]private List<NewNpcBehavior> _activeNPC;
+    [SerializeField]private List<GameObject> _doors;
     [SerializeField] private GameObject _pointPopUp;
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
@@ -48,7 +49,7 @@ public class NPCObjectPool : MonoBehaviour
         _mediumPooledObjects = new List<GameObject>();
         _hardPooledObjects = new List<GameObject>();
         _negativePooledObjects = new List<NewNpcBehavior>();
-        _activeNPC = new List<GameObject>();
+        _activeNPC = new List<NewNpcBehavior>();
 
         for (int i = 0; i < _easyPoolAmount; i++)
         {
@@ -85,11 +86,11 @@ public class NPCObjectPool : MonoBehaviour
 
     private void Update()
     {
-        foreach (NewNpcBehavior negativeCivilian in _negativePooledObjects)
+        foreach (NewNpcBehavior civilian in _activeNPC)
         {
-            if (!negativeCivilian.HasTarget() && _activeNPC.Count!=0)
+            if (!civilian.HasTarget() && _activeNPC.Count!=0)
             {
-                negativeCivilian.SetTarget(_activeNPC[UnityEngine.Random.Range(0, _activeNPC.Count)]);
+                civilian.SetTarget(_doors[UnityEngine.Random.Range(0, _doors.Count)]);
             }
         }
     }
@@ -151,11 +152,11 @@ public class NPCObjectPool : MonoBehaviour
 
     public void RemoveCivilian(object sender, GameObject civilian)
     {
-        if (!_activeNPC.Contains(civilian))
+        if (!_activeNPC.Contains(civilian.GetComponent<NewNpcBehavior>()))
         {
             return;
         }
-        _activeNPC.Remove(civilian);
+        _activeNPC.Remove(civilian.GetComponent<NewNpcBehavior>());
         if (civilian.GetComponent<CivilianDeath>()._pointGiven)
         {
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
@@ -189,6 +190,6 @@ public class NPCObjectPool : MonoBehaviour
     public void AddToCivilianList(GameObject civilian)
     {
         civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
-        _activeNPC.Add(civilian);
+        _activeNPC.Add(civilian.GetComponent<NewNpcBehavior>());
     }
 }
