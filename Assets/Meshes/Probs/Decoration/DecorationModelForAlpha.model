@@ -1,0 +1,39 @@
+# Made using Asset Forge (2.4.1)
+
+:materials
+
+[name:bricks;color:RGBA(0.520, 0.220, 0.178, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:wood;color:RGBA(0.630, 0.400, 0.326, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:stone;color:RGBA(0.459, 0.454, 0.524, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.5;valueB:0;]
+[name:_defaultMat;color:RGBA(0.852, 0.886, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0.25;]
+[name:foliage;color:RGBA(0.002, 0.667, 0.075, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:metalLight;color:RGBA(0.789, 0.781, 0.910, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0.25;]
+[name:metal;color:RGBA(0.731, 0.805, 0.846, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0.25;]
+[name:metalDark;color:RGBA(0.329, 0.325, 0.405, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0.5;]
+[name:woodDark;color:RGBA(0.363, 0.238, 0.198, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+[name:metalPurple;color:RGBA(0.551, 0.453, 0.874, 1.000);scale:(1.0, 1.0);shader:Default;mapping:0;valueA:0.35;valueB:0;]
+
+:models
+
+[name:;collection:Fences;type:poles_garlandFlags;position:(0.0000, 0.0000, -1.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:_defaultMat+wood+bricks+foliage+metalLight;]
+[name:;collection:Dungeons;type:floor_detail;position:(0.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:stone;]
+[name:;collection:Foliage;type:plant_small;position:(0.0000, 0.0000, 3.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Foliage;type:plant_largeLeaf;position:(0.0000, 0.0000, 4.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Foliage;type:plant_large;position:(1.0000, 0.0000, 3.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Foliage;type:plant_smallLeaf;position:(1.0000, 0.0000, 4.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Foliage;type:plant_large;position:(0.0000, 0.5000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Foliage;type:trunk_detailedB;position:(0.0000, 0.0000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:wood;]
+[name:;collection:Foliage;type:plant_largeLeaf;position:(0.0000, 0.5000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Western;type:detail_crate;position:(0.0000, 0.0000, 9.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:wood+woodDark;]
+[name:;collection:Western;type:cart;position:(0.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metal+_defaultMat+metalDark+wood;]
+[name:;collection:Foliage;type:trunk_baseDetailed;position:(2.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:wood;]
+[name:;collection:Foliage;type:trunk;position:(2.0000, 0.5000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:wood;]
+[name:;collection:Foliage;type:trunk_topBroken;position:(2.0000, 1.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:wood;]
+[name:;collection:Alphanumeric;type:S;position:(-6.0000, 0.0000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:H;position:(-7.0000, 0.0000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:O;position:(-8.0000, 0.0000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:P;position:(-9.0000, 0.0000, 7.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:_defaultMat+metalPurple;]
+[name:;collection:Alphanumeric;type:C;position:(-7.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:A;position:(-8.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:F;position:(-9.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
+[name:;collection:Alphanumeric;type:E;position:(-10.0000, 0.0000, 10.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:metalPurple+_defaultMat;]
