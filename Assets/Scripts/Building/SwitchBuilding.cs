@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using static EnemySpawner;
 
 public class SwitchBuilding : MonoBehaviour
 {
@@ -12,33 +14,40 @@ public class SwitchBuilding : MonoBehaviour
     [SerializeField] private List<Transform> _rightSpawnPoints;
 
     [Header("Civilian Type Weights")]
-    [SerializeField] private int _easyCivilianWeight;
-    [SerializeField] private int _mediumCivilianWeight;
-    [SerializeField] private int _hardCivilianWeight;
-    [SerializeField] private int _negativeCivilianWeight;
+    [SerializeField] private float _easyCivilianWeight;
+    [SerializeField] private float _mediumCivilianWeight;
+    [SerializeField] private float _hardCivilianWeight;
+    [SerializeField] private float _negativeCivilianWeight;
 
     [Header("Spawn Location Weights")]
-    [SerializeField] private int _topWeight;
-    [SerializeField] private int _leftWeight;
-    [SerializeField] private int _bottomWeight;
-    [SerializeField] private int _rightWeight;
+    [SerializeField] private float _topWeight;
+    [SerializeField] private float _leftWeight;
+    [SerializeField] private float _bottomWeight;
+    [SerializeField] private float _rightWeight;
 
     private int _spawnCount;
-    private int _spawnWeightTotal;
-    private int _spawnPointWeightTotal;
+    private float _spawnWeightTotal;
+    private float _spawnPointWeightTotal;
 
     [SerializeField] private GameObject _unShattered;
     [SerializeField] private GameObject _shattered;
     [SerializeField] private CivilianFill _civilianFillTracker;
-
+    private void Start()
+    {
+        _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight);
+        _easyCivilianWeight = (_easyCivilianWeight / _spawnWeightTotal) * 100;
+        _mediumCivilianWeight = (_mediumCivilianWeight / _spawnWeightTotal) * 100;
+        _hardCivilianWeight = (_hardCivilianWeight / _spawnWeightTotal) * 100;
+        _negativeCivilianWeight = (_negativeCivilianWeight / _spawnWeightTotal) * 100;
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Mallet")
+        if(_unShattered.activeInHierarchy && other.tag == "Mallet")
         {
             _unShattered.SetActive(false);
             _shattered.SetActive(true);
             _spawnCount = _civilianFillTracker.GetCivilianCount();
-            _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight) * _spawnCount;
+            
             SpawnAtPoint();
         }
     }
@@ -47,7 +56,7 @@ public class SwitchBuilding : MonoBehaviour
     {
         for (int i = 0; i < _spawnCount; i++)
         {
-            int selection = Random.Range(0, _spawnPointWeightTotal);
+            float selection = Random.Range(0, _spawnPointWeightTotal);
 
             if (selection >= 0 && selection < _topWeight && _topWeight != 0)
             {
@@ -76,32 +85,40 @@ public class SwitchBuilding : MonoBehaviour
 
     private Transform SpawnCivilians(Transform point)
     {
-        int selection = Random.Range(0, _spawnWeightTotal);
+        float selection = Random.Range(0, 100);
         GameObject civilian;
-
-        if (selection >= 0 && selection < _easyCivilianWeight * _spawnCount && _easyCivilianWeight != 0)
+        if (selection >= 0 && selection < _easyCivilianWeight )
         {
-            civilian = Instantiate(_civilians[0], point.position, point.rotation);
-            _easyCivilianWeight-=((_spawnWeightTotal) / _spawnCount);
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.EASY);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
         }
-        else if (selection >= _easyCivilianWeight * _spawnCount && selection < (_easyCivilianWeight + _mediumCivilianWeight) * _spawnCount && _mediumCivilianWeight != 0)
+        else if (selection >= _easyCivilianWeight  && selection < (_easyCivilianWeight + _mediumCivilianWeight) )
         {
-            civilian = Instantiate(_civilians[1], point.position, point.rotation);
-            _mediumCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.MEDIUM);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
         }
-        else if (selection >= (_easyCivilianWeight + _mediumCivilianWeight) * _spawnCount && selection < (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight) * _spawnCount && _hardCivilianWeight != 0)
+        else if (selection >= (_easyCivilianWeight + _mediumCivilianWeight)  && selection < (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight) )
         {
-            civilian = Instantiate(_civilians[2], point.position, point.rotation);
-            _hardCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.HARD);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
         }
         else
         {
-            civilian = Instantiate(_civilians[3], point.position, point.rotation);
-            _negativeCivilianWeight -= ((_spawnWeightTotal) / _spawnCount);
+            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.NEGATIVE);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
         }
         civilian.GetComponent<NewNpcBehavior>().BuildingSpawn();
-        _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight) * _spawnCount;
-        civilian.GetComponent<Rigidbody>().AddForce(civilian.transform.forward*1000+Vector3.up*1000);
+        civilian.GetComponent<NavMeshAgent>().enabled = false;
+        civilian.GetComponent<CivilianDeath>().enabled = false;
+        civilian.GetComponent<Rigidbody>().AddForce(civilian.transform.forward*500+Vector3.up*1000);
         return point;
     }
 }

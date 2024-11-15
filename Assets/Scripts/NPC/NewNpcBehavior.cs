@@ -71,6 +71,11 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         StartCoroutine(PatternStart());
     }
+    private void OnDisable()
+    {
+        _target = null;
+    }
+
     public void BuildingSpawn()
     {
         _spawnState = SpawnState.BUILDING;
@@ -85,15 +90,21 @@ public class NewNpcBehavior : CharacterMovement3D
     }
     IEnumerator PatternStart()
     {
-        yield return new WaitForSeconds(Random.Range(3, 6));
+        yield return new WaitForSeconds(Random.Range(1, 6));
         _endTarget = EndTarget.NO_TARGET;
-        yield return new WaitForSeconds(Random.Range(1, 4));
+        _pattern = (Pattern)Random.Range(0, 2);
+        yield return new WaitForSeconds(Random.Range(3, 5));
         _endTarget = EndTarget.TARGET;
     }
     protected override void Update()
     {
+        if (LookDirection.magnitude < 0.5f) Debug.LogError("bad direction", gameObject);
         base.Update();
         angle += Time.deltaTime * _rotationSpeed;
+        if(!NavMeshAgent.isOnNavMesh)
+        {
+            return;
+        }
         if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && _target!=null)
         {
             MoveTo(_target.transform.position);
@@ -140,6 +151,11 @@ public class NewNpcBehavior : CharacterMovement3D
         return false;
     }
 
+    public void EnableComponents()
+    {
+        NavMeshAgent.enabled = true;
+        GetComponent<CivilianDeath>().enabled = true;
+    }
 
     public int GetPoint()
     {

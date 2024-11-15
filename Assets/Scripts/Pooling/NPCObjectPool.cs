@@ -25,7 +25,7 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _easyPooledObjects;
     private List<GameObject> _mediumPooledObjects;
     private List<GameObject> _hardPooledObjects;
-    private List<NewNpcBehavior> _negativePooledObjects;
+    private List<GameObject> _negativePooledObjects;
     [SerializeField]private List<NewNpcBehavior> _activeNPC;
     [SerializeField]private List<GameObject> _doors;
     [SerializeField] private GameObject _pointPopUp;
@@ -48,7 +48,7 @@ public class NPCObjectPool : MonoBehaviour
         _easyPooledObjects = new List<GameObject>();
         _mediumPooledObjects = new List<GameObject>();
         _hardPooledObjects = new List<GameObject>();
-        _negativePooledObjects = new List<NewNpcBehavior>();
+        _negativePooledObjects = new List<GameObject>();
         _activeNPC = new List<NewNpcBehavior>();
 
         for (int i = 0; i < _easyPoolAmount; i++)
@@ -79,7 +79,7 @@ public class NPCObjectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(_negativeCivilian);
             obj.transform.parent = gameObject.transform;
-            _negativePooledObjects.Add(obj.GetComponent<NewNpcBehavior>());
+            _negativePooledObjects.Add(obj);
             obj.SetActive(false);
         }
     }
@@ -88,7 +88,7 @@ public class NPCObjectPool : MonoBehaviour
     {
         foreach (NewNpcBehavior civilian in _activeNPC)
         {
-            if (!civilian.HasTarget() && _activeNPC.Count!=0)
+            if (civilian.IsGrounded &&!civilian.HasTarget() && _activeNPC.Count!=0)
             {
                 civilian.SetTarget(_doors[UnityEngine.Random.Range(0, _doors.Count)]);
             }
@@ -139,9 +139,10 @@ public class NPCObjectPool : MonoBehaviour
                 {
                     for (int i = 0; i < _negativePooledObjects.Count; i++)
                     {
-                        if (!_negativePooledObjects[i].gameObject.activeInHierarchy)
+                        if (!_negativePooledObjects[i].activeInHierarchy)
                         {
-                            return _negativePooledObjects[i].gameObject;
+                            AddToCivilianList(_negativePooledObjects[i]);
+                            return _negativePooledObjects[i];
                         }
                     }
                     break;

@@ -63,35 +63,7 @@ public class Mallet : MonoBehaviour
         hitpoint.y = _originalStartY;
         _malletHandle.gameObject.transform.position = hitpoint;
     }
-    private void OnEnable()
-    {
-        var playerActionMap = inputActions.FindActionMap("Player");
-        vacuumAction = playerActionMap.FindAction("Vacuum");
 
-        vacuumAction.canceled += OnMouseRelease;
-        vacuumAction.Enable();
-    }
-
-    private void OnMouseRelease(InputAction.CallbackContext context)
-    {
-        _malletAnimator.SetBool("VacuumReleased", true);
-        _vacuum.VacuumOff();
-    }
-
-    private void OnDisable()
-    {
-        vacuumAction.canceled -= OnMouseRelease;
-        vacuumAction.Disable();
-    }
-    public void OnVacuum()
-    {
-        if (_attackMode == 1)
-        {
-            _vacuum.VacuumOn();
-            _malletAnimator.SetTrigger("Vacuum");
-            _malletAnimator.SetBool("VacuumReleased", false);
-        }
-    }
 
     public void OnFire()
     {
@@ -114,6 +86,7 @@ public class Mallet : MonoBehaviour
                 _attackMode = 1;
                 _malletAnimator.SetTrigger("SwitchVacuum");
                 _rotateIcon.SwitchSides();
+                _vacuum.VacuumOn();
             }
             else if (_attackMode == 1)
             {
