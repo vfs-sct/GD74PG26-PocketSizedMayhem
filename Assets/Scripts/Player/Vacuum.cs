@@ -6,6 +6,7 @@ public class Vacuum : MonoBehaviour
 {
     [field: SerializeField] public EventReference VacuumSFX { get; set; }
     [field: SerializeField] public EventReference SuckSFX { get; set; }
+    [field: SerializeField] public EventReference VacuumOffSFX { get; set; }
 
     [Header("Colliders")]
     [SerializeField] private MeshCollider _rayCollider;
@@ -65,6 +66,7 @@ public class Vacuum : MonoBehaviour
 
     public void VacuumOff()
     {
+        RuntimeManager.PlayOneShot(VacuumOffSFX, this.gameObject.transform.position);
         _pulledObjects.Clear();
         _vacuumOn = false;
         _rayCollider.enabled = false;
