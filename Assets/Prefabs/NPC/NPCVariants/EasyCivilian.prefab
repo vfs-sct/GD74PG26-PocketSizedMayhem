@@ -18,6 +18,31 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: <DeathSFX>k__BackingField.Path
+      value: event:/SFX/NPCs/HardCivilianScreams
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: <DeathSFX>k__BackingField.Guid.Data1
+      value: 725716249
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: <DeathSFX>k__BackingField.Guid.Data2
+      value: 1245852019
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: <DeathSFX>k__BackingField.Guid.Data3
+      value: -1124574792
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041028353720300704, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      propertyPath: <DeathSFX>k__BackingField.Guid.Data4
+      value: 1498476755
+      objectReference: {fileID: 0}
     - target: {fileID: 1379784036892103186, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
       propertyPath: m_Layer
@@ -150,8 +175,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}
+      propertyPath: _radius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
       propertyPath: <Speed>k__BackingField
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5646808012954638468, guid: a37dd37d1e405c54188183deb12ea62b,
         type: 3}

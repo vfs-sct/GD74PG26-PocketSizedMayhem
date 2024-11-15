@@ -135,7 +135,7 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 15
     - _StencilWriteMaskMV: 41
-    - _SuckRange: 2
+    - _SuckRange: 6
     - _SupportDecals: 1
     - _SurfaceType: 1
     - _TessellationBackFaceCullEpsilon: -0.25
@@ -145,7 +145,7 @@ Material:
     - _TessellationMaxDisplacement: 0.01
     - _TessellationMode: 0
     - _TessellationShapeFactor: 0.75
-    - _Threshold: 2
+    - _Threshold: 6
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -163,7 +163,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
+    - _BaseColor: {r: 0, g: 0.10661459, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DisplacementPosition: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

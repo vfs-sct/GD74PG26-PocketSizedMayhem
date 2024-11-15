@@ -15,6 +15,7 @@ public class WinScreenSpawner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _mediumCivilianText;
     [SerializeField] private TextMeshProUGUI _hardCivilianText;
     [SerializeField] private TextMeshProUGUI _negativeCivilianText;
+    [SerializeField] private TextMeshProUGUI _totalPoint;
 
     private int easyKilled = 0;
     private int mediumKilled = 0;
@@ -54,6 +55,8 @@ public class WinScreenSpawner : MonoBehaviour
             _negativeCivilianText.text = "Negative Civilian Killed: " + ++negativeKilled;
             yield return new WaitForSeconds(0.05f);
         }
+        yield return new WaitForSeconds(1f);
+        _totalPoint.text = "Total Points: " + PlayerStats.Points;
         yield return null;
     }
 }

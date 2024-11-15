@@ -284,6 +284,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4277101947496394924}
+    - targetCorrespondingSourceObject: {fileID: 5390339625992018888, guid: a37dd37d1e405c54188183deb12ea62b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8935291678989084681}
   m_SourcePrefab: {fileID: 100100000, guid: a37dd37d1e405c54188183deb12ea62b, type: 3}
 --- !u!1 &103263028577104431 stripped
 GameObject:
@@ -304,6 +308,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdoll: {fileID: 192164259409760628}
+  _capsuleCollider: {fileID: 8935291678989084681}
+--- !u!136 &8935291678989084681
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103263028577104431}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.2938385
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.64691925, z: 0}
 --- !u!1 &192164259409760628 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5263085196862208147, guid: a37dd37d1e405c54188183deb12ea62b,
