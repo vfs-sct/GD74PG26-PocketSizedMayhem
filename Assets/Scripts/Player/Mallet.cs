@@ -8,6 +8,8 @@ using Vector3 = UnityEngine.Vector3;
 public class Mallet : MonoBehaviour
 {
     [field: SerializeField] public EventReference AttackSFX { get; set; }
+    [field: SerializeField] public EventReference HungerSFX { get; set; }
+    [field: SerializeField] public EventReference SwingSFX { get; set; }
 
     [Header("VFX Prefab References")]
     [SerializeField] private GameObject _debrisVFX;
@@ -72,6 +74,11 @@ public class Mallet : MonoBehaviour
             _malletAnimator.SetTrigger("Swing");
             PlayerStats.Hunger -= _hungerExpense;
             Mathf.Clamp(PlayerStats.Hunger, 0, 100);
+            RuntimeManager.PlayOneShot(SwingSFX, this.gameObject.transform.position);
+        }
+        else if(PlayerStats.Hunger < _hungerExpense && _attackMode == 0)
+        {
+            RuntimeManager.PlayOneShot(HungerSFX, this.gameObject.transform.position);
         }
     }
 
