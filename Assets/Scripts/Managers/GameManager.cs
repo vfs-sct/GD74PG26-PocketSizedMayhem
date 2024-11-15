@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;
+        PlayerStats.EasyCivilianKilled = 0;
+        PlayerStats.MediumCivilianKilled = 0;
+        PlayerStats.HardCivilianKilled = 0;
+        PlayerStats.NegativeCivilianKilled = 0;
     }
 
     void Update()

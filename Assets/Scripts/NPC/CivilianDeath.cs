@@ -123,15 +123,6 @@ public class CivilianDeath : MonoBehaviour
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             _animator.SetTrigger("GroundHit");
-            this.GetComponent<NavMeshAgent>().enabled = true;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_typeDifficulty != TypeDifficulty.NEGATIVE && other.gameObject.layer == LayerMask.NameToLayer("Door"))
-        {
-            //OnKilled?.Invoke(this, this.gameObject);
-            this.gameObject.SetActive(false);
         }
     }
 }
