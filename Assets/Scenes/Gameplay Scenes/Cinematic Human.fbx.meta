@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 82bc1fa3cff4f754a95f92ce54355c1e
+guid: 156313ccdbd1b394ca73f982520e47c1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Meadow_Grass_TerrainSampled
-    second: {fileID: 2100000, guid: a2b73ef830a96d54fb21210c5ed56aca, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
