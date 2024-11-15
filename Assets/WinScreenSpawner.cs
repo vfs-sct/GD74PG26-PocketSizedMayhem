@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class WinScreenSpawner : MonoBehaviour
 {
+    [field: SerializeField] public EventReference CivilianSpawnSFX { get; set; }
+
     [SerializeField] private GameObject _easyCivilianRagdoll;
     [SerializeField] private GameObject _mediumCivilianRagdoll;
     [SerializeField] private GameObject _hardCivilianRagdoll;
@@ -32,6 +35,7 @@ public class WinScreenSpawner : MonoBehaviour
         {
             GameObject obj = Instantiate(_easyCivilianRagdoll, _spawnLocation.position, _easyCivilianRagdoll.transform.rotation);
             _easyCivilianText.text = "Easy Civilian Killed: " + ++easyKilled;
+            RuntimeManager.PlayOneShot(CivilianSpawnSFX, this.gameObject.transform.position);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(1f);
