@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;
+        PlayerStats.EasyCivilianKilled = 0;
+        PlayerStats.MediumCivilianKilled = 0;
+        PlayerStats.HardCivilianKilled = 0;
+        PlayerStats.NegativeCivilianKilled = 0;
     }
 
     void Update()
@@ -55,7 +59,7 @@ public class GameManager : MonoBehaviour
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
         //
         _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
-        if(!mouseLogoAppear && PlayerStats.Hunger==0)
+        if (!mouseLogoAppear && PlayerStats.Hunger==0)
         {
             mouseLogoAppear = true;
             StartCoroutine(MakeLogoAppear());

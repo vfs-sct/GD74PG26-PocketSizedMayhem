@@ -25,8 +25,9 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _easyPooledObjects;
     private List<GameObject> _mediumPooledObjects;
     private List<GameObject> _hardPooledObjects;
-    private List<NewNpcBehavior> _negativePooledObjects;
-    [SerializeField]private List<GameObject> _activeNPC;
+    private List<GameObject> _negativePooledObjects;
+    [SerializeField]private List<NewNpcBehavior> _activeNPC;
+    [SerializeField]private List<GameObject> _doors;
     [SerializeField] private GameObject _pointPopUp;
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
@@ -47,8 +48,8 @@ public class NPCObjectPool : MonoBehaviour
         _easyPooledObjects = new List<GameObject>();
         _mediumPooledObjects = new List<GameObject>();
         _hardPooledObjects = new List<GameObject>();
-        _negativePooledObjects = new List<NewNpcBehavior>();
-        _activeNPC = new List<GameObject>();
+        _negativePooledObjects = new List<GameObject>();
+        _activeNPC = new List<NewNpcBehavior>();
 
         for (int i = 0; i < _easyPoolAmount; i++)
         {
@@ -78,18 +79,18 @@ public class NPCObjectPool : MonoBehaviour
         {
             GameObject obj = Instantiate(_negativeCivilian);
             obj.transform.parent = gameObject.transform;
-            _negativePooledObjects.Add(obj.GetComponent<NewNpcBehavior>());
+            _negativePooledObjects.Add(obj);
             obj.SetActive(false);
         }
     }
 
     private void Update()
     {
-        foreach (NewNpcBehavior negativeCivilian in _negativePooledObjects)
+        foreach (NewNpcBehavior civilian in _activeNPC)
         {
-            if (!negativeCivilian.HasTarget() && _activeNPC.Count!=0)
+            if (civilian.IsGrounded &&!civilian.HasTarget() && _activeNPC.Count!=0)
             {
-                negativeCivilian.SetTarget(_activeNPC[UnityEngine.Random.Range(0, _activeNPC.Count)]);
+                civilian.SetTarget(_doors[UnityEngine.Random.Range(0, _doors.Count)]);
             }
         }
     }
@@ -138,9 +139,10 @@ public class NPCObjectPool : MonoBehaviour
                 {
                     for (int i = 0; i < _negativePooledObjects.Count; i++)
                     {
-                        if (!_negativePooledObjects[i].gameObject.activeInHierarchy)
+                        if (!_negativePooledObjects[i].activeInHierarchy)
                         {
-                            return _negativePooledObjects[i].gameObject;
+                            AddToCivilianList(_negativePooledObjects[i]);
+                            return _negativePooledObjects[i];
                         }
                     }
                     break;
@@ -151,11 +153,11 @@ public class NPCObjectPool : MonoBehaviour
 
     public void RemoveCivilian(object sender, GameObject civilian)
     {
-        if (!_activeNPC.Contains(civilian))
+        if (!_activeNPC.Contains(civilian.GetComponent<NewNpcBehavior>()))
         {
             return;
         }
-        _activeNPC.Remove(civilian);
+        _activeNPC.Remove(civilian.GetComponent<NewNpcBehavior>());
         if (civilian.GetComponent<CivilianDeath>()._pointGiven)
         {
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
@@ -179,7 +181,7 @@ public class NPCObjectPool : MonoBehaviour
             Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
             combo = Mathf.Clamp(combo, 0, 20);
             _comboBar.fillAmount = Mathf.Clamp(combo * 5, 0, 100) / 100;
-            _textMeshProUGUI.text = "X" + combo;
+            _textMeshProUGUI.text = "Combo X" + combo;
             PlayerStats.Points += value * combo;
         }
         civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
@@ -189,6 +191,6 @@ public class NPCObjectPool : MonoBehaviour
     public void AddToCivilianList(GameObject civilian)
     {
         civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
-        _activeNPC.Add(civilian);
+        _activeNPC.Add(civilian.GetComponent<NewNpcBehavior>());
     }
 }
