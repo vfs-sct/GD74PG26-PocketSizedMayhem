@@ -5,6 +5,7 @@ using UnityEngine;
 public class Vacuum : MonoBehaviour
 {
     [field: SerializeField] public EventReference VacuumSFX { get; set; }
+    [field: SerializeField] public EventReference SuckSFX { get; set; }
 
     [Header("Colliders")]
     [SerializeField] private MeshCollider _rayCollider;
@@ -96,6 +97,7 @@ public class Vacuum : MonoBehaviour
             collision.gameObject.gameObject.SetActive(false);
             PlayerStats.Hunger += 10;
             PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,100);
+            RuntimeManager.PlayOneShot(SuckSFX, this.gameObject.transform.position);
         }
     }
 
