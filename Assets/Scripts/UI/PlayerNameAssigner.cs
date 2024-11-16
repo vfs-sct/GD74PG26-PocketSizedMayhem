@@ -10,10 +10,6 @@ using UnityEngine.UI;
 public class PlayerNameAssigner : MonoBehaviour
 {
     [SerializeField] private GameObject _nameInputField;
-    private void Start()
-    {
-        PlayerStats.SignedIn = false;
-    }
     public void SetPlayerName()
     {
         PlayerStats.PlayerName = _nameInputField.GetComponent<TMP_InputField>().text;
