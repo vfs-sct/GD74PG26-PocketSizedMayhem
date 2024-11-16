@@ -16,6 +16,7 @@ public class Mallet : MonoBehaviour
 
     [Header("Target Attributes")]
     [SerializeField] private GameObject _target;
+    [SerializeField] private float _targetYOfffset;
     [SerializeField] private float _targetOffset;
 
     [Header("Mallet References")]
@@ -57,6 +58,7 @@ public class Mallet : MonoBehaviour
         }
         
         _hitTargetpos = _hit.point;
+        _hitTargetpos.y = _targetYOfffset;
         _target.transform.position = _hitTargetpos;
 
         this.gameObject.transform.position = _hit.point;
