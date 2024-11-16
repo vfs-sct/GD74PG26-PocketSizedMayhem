@@ -51,8 +51,15 @@ public class Vacuum : MonoBehaviour
             foreach (GameObject enemy in _pulledObjects)
             {
                 Vector3 pullForce = (this.gameObject.transform.position - enemy.transform.position).normalized/ Vector3.Distance(this.gameObject.transform.position, enemy.transform.position) * 50;
-                enemy.GetComponent<Rigidbody>().velocity  = (new Vector3(pullForce.x * 4, pullForce.y *6, pullForce.z * 4));
-                enemy.GetComponent<NewNpcBehavior>().AssignVacuumPos(this.gameObject);
+                if(enemy.activeInHierarchy)
+                {
+                    enemy.GetComponent<Rigidbody>().velocity = (new Vector3(pullForce.x * 4, pullForce.y * 6, pullForce.z * 4));
+                    enemy.GetComponent<NewNpcBehavior>().AssignVacuumPos(this.gameObject);
+                }
+                else
+                {
+                    _pulledObjects.Remove(enemy);
+                }
             }
         }
     }
