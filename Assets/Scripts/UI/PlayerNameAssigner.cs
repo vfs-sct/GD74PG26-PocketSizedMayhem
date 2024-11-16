@@ -10,11 +10,24 @@ using UnityEngine.UI;
 public class PlayerNameAssigner : MonoBehaviour
 {
     [SerializeField] private GameObject _nameInputField;
+    [SerializeField] private GameObject _errorField;
     public void SetPlayerName()
     {
-        PlayerStats.PlayerName = _nameInputField.GetComponent<TMP_InputField>().text;
-        PlayerStats.SignedIn = true;
-        UpdateName();
+        if (string.IsNullOrWhiteSpace(_nameInputField.GetComponent<TMP_InputField>().text))
+        {
+            PlayerStats.SignedIn = false;
+            _errorField.SetActive(true);
+            return;
+        }
+        else
+        {
+            PlayerStats.PlayerName = _nameInputField.GetComponent<TMP_InputField>().text;
+            PlayerStats.SignedIn = true;
+            UpdateName();
+            _errorField.SetActive(false);
+            SceneManager.LoadScene("GameScene - M3");
+        }
+        
     }
     public bool NameChecker()
     {
