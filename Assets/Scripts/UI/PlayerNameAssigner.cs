@@ -17,6 +17,21 @@ public class PlayerNameAssigner : MonoBehaviour
         {
             PlayerStats.SignedIn = false;
             _errorField.SetActive(true);
+            _errorField.GetComponent<TextMeshProUGUI>().text = "Name cannot contain white space!";
+            return;
+        }
+        else if (_nameInputField.GetComponent<TMP_InputField>().text.Length < 3 || _nameInputField.GetComponent<TMP_InputField>().text.Length > 20)
+        {
+            PlayerStats.SignedIn = false;
+            _errorField.SetActive(true);
+            _errorField.GetComponent<TextMeshProUGUI>().text = "Name must be between 3 and 20 characters!";
+            return;
+        }
+        else if (!System.Text.RegularExpressions.Regex.IsMatch(_nameInputField.GetComponent<TMP_InputField>().text, "^[a-zA-Z0-9 _-]+$"))
+        {
+            PlayerStats.SignedIn = false;
+            _errorField.SetActive(true);
+            _errorField.GetComponent<TextMeshProUGUI>().text = "Name cannot contain invalid characters!";
             return;
         }
         else
