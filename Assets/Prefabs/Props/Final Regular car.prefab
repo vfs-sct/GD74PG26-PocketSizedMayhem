@@ -185,8 +185,10 @@ MonoBehaviour:
       Data3: 1938149256
       Data4: 555290856
     Path: event:/SFX/Buildings/SFX_CarExplosion
-  _explosion: {fileID: 3860599804906413874}
-  _wheelBounce: {fileID: 4274554063512300983}
+  _explosion: {fileID: 6581819978879567992, guid: fc6adaa361f742e4cbe2067da30cef82,
+    type: 3}
+  _wheelBounce: {fileID: 600671940771426043, guid: e443b4f2551eea14ba2f1b9dcd47a940,
+    type: 3}
   _meshRenderer: {fileID: 5598232963472076354}
 --- !u!65 &714302811298020309
 BoxCollider:
@@ -348,12 +350,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2281307826281379737}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4274554063512300983 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2664601714959292974, guid: 054ca644e4de2a8458163a0e3d4efe92,
-    type: 3}
-  m_PrefabInstance: {fileID: 2281307826281379737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7981725954421299018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,12 +508,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc6adaa361f742e4cbe2067da30cef82, type: 3}
---- !u!1 &3860599804906413874 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6581819978879567992, guid: fc6adaa361f742e4cbe2067da30cef82,
-    type: 3}
-  m_PrefabInstance: {fileID: 7981725954421299018}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5874272322025937333 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4558015535120371455, guid: fc6adaa361f742e4cbe2067da30cef82,
