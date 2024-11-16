@@ -18,14 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _poinText;
     [SerializeField] Image _hungerFillBar;
     [SerializeField] Image _mouse;
-    private float t;
     private float _elapsedTime;
     private float previousValue;
     private bool mouseLogoAppear = false;
     void Awake()
     {
         _elapsedTime = 0;
-        t = 0;
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;

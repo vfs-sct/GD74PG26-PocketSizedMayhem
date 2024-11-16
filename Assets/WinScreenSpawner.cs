@@ -2,10 +2,14 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Leaderboards.Exceptions;
+using Unity.Services.Leaderboards;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class WinScreenSpawner : MonoBehaviour
 {
+    const string LeaderboardId = "High_Score";
     [field: SerializeField] public EventReference CivilianSpawnSFX { get; set; }
 
     [SerializeField] private GameObject _easyCivilianRagdoll;
@@ -26,6 +30,7 @@ public class WinScreenSpawner : MonoBehaviour
     private int negativeKilled = 0;
     void Start()
     {
+        AddScore();
         StartCoroutine(SpawmRagdolls());
     }
 
@@ -62,5 +67,19 @@ public class WinScreenSpawner : MonoBehaviour
         yield return new WaitForSeconds(1f);
         _totalPoint.text = "Total Points: " + PlayerStats.Points;
         yield return null;
+    }
+
+    public async void AddScore()
+    {
+        try
+        {
+            var scoreResponse = await LeaderboardsService.Instance.AddPlayerScoreAsync(LeaderboardId, PlayerStats.Points);
+
+        }
+        catch (LeaderboardsException exception)
+        {
+            Debug.LogError($"[Unity Leaderboards] {exception.Reason}: {exception.Message}");
+        }
+
     }
 }

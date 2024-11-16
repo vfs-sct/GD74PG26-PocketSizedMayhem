@@ -36,10 +36,6 @@ public class NewNpcBehavior : CharacterMovement3D
     private Material _objectMaterial;
     
     private Vector3 _newDirectionVector;
-
-    private float _originalSpeed;
-    private float t = 0;
-    private float acceleration = 1;
     private float angle = 0;
 
     LayerMask _doorLayerMask;
@@ -49,7 +45,6 @@ public class NewNpcBehavior : CharacterMovement3D
 
     void Start()
     {
-        _originalSpeed = Speed;
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _doorLayerMask |= (1 << 25);
@@ -109,7 +104,7 @@ public class NewNpcBehavior : CharacterMovement3D
         {
             MoveTo(_target.transform.position);
         }
-        else if (_endTarget == EndTarget.NO_TARGET)
+        else if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
         {
             if (_pattern == Pattern.ZIGZAG)
             {
@@ -134,6 +129,11 @@ public class NewNpcBehavior : CharacterMovement3D
                 _newDirectionVector.z = Mathf.Sin(angle) * _radius;
                 MoveTo(transform.position + _newDirectionVector);
             }
+        }
+        else
+        {
+            if(_target!=null)
+                MoveTo(_target.transform.position);
         }
     }
 
