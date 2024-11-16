@@ -132,7 +132,8 @@ public class NewNpcBehavior : CharacterMovement3D
         }
         else
         {
-            MoveTo(_target.transform.position);
+            if(_target!=null)
+                MoveTo(_target.transform.position);
         }
     }
 
