@@ -1,10 +1,13 @@
 using PrimeTween;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using static EnemySpawner;
+using static UnityEngine.Rendering.DebugUI;
 
 public class NPCObjectPool : MonoBehaviour
 {
@@ -21,6 +24,11 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField]private int _mediumPoolAmount ;
     [SerializeField]private int _hardPoolAmount ;
     [SerializeField]private int _negativePoolAmount;
+    [Header("Point Pop Up Random Range")]
+    [SerializeField] private int _xMin;
+    [SerializeField] private int _xMax;
+    [SerializeField] private int _yMin;
+    [SerializeField] private int _yMax;
 
     private List<GameObject> _easyPooledObjects;
     private List<GameObject> _mediumPooledObjects;
@@ -33,7 +41,7 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private Canvas _canvas;
     [SerializeField] private GameObject _pointLocation;
     [SerializeField] Image _comboBar;
-    [SerializeField]private float combo = 0;
+    [SerializeField]private int combo = 0;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
     private void Awake()
     {
@@ -41,6 +49,7 @@ public class NPCObjectPool : MonoBehaviour
         {
             instance = this;
         }
+        _textMeshProUGUI.text = "Combo X" + combo;
     }
 
     void Start()
@@ -157,37 +166,41 @@ public class NPCObjectPool : MonoBehaviour
         {
             return;
         }
-        _activeNPC.Remove(civilian.GetComponent<NewNpcBehavior>());
-        if (civilian.GetComponent<CivilianDeath>()._pointGiven)
+        
+        if (!civilian.GetComponent<CivilianDeath>()._pointGiven)
         {
+            _activeNPC.Remove(civilian.GetComponent<NewNpcBehavior>());
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
             Vector3 pointPos = Camera.main.WorldToScreenPoint(civilian.transform.position);
-            pointPos.y += 300;
-            pointPos.x += 100;
-            GameObject point;
-            if (value>0)
-            {
-                point = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
-                combo++;
-            }
-            else
-            {
-                point = Instantiate(_negativePopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
-                combo = 0;
-            }    
-            
-            point.GetComponent<TextMeshProUGUI>().text = "" + value;
-            Tween.Position(point.transform, _pointLocation.transform.position, duration: 2, ease: Ease.InOutSine);
-            Tween.Scale(point.transform, Vector3.zero, duration: 2, ease: Ease.InOutSine);
-            combo = Mathf.Clamp(combo, 0, 20);
-            _comboBar.fillAmount = Mathf.Clamp(combo * 5, 0, 100) / 100;
-            _textMeshProUGUI.text = "Combo X" + combo;
-            PlayerStats.Points += value * combo;
+            pointPos += new Vector3(UnityEngine.Random.Range(_xMin,_xMax), UnityEngine.Random.Range(_yMin,_yMax),0);
+            StartCoroutine(CreatePoint(pointPos, value));
+            civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
+            civilian.GetComponent<CivilianDeath>()._pointGiven = true;
         }
-        civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
-        
     }
-
+    IEnumerator CreatePoint(Vector3 civilianPos, int point)
+    {
+        GameObject pointPopUp;
+        if (point > 0)
+        {
+            pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
+            combo++;
+            point *= combo;
+        }
+        else
+        {
+            pointPopUp = Instantiate(_negativePopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
+            combo = 0;
+        }
+        PlayerStats.Points += point;
+        _textMeshProUGUI.text = "Combo X" + combo;
+        pointPopUp.transform.localScale += new Vector3(combo,combo,combo)/10;
+        pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
+        Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
+        Tween.Position(pointPopUp.transform, _pointLocation.transform.position, duration: 1, ease: Ease.InOutSine);
+        combo = Mathf.Clamp(combo, 0, 20);
+        yield return null;
+    }
     public void AddToCivilianList(GameObject civilian)
     {
         civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
