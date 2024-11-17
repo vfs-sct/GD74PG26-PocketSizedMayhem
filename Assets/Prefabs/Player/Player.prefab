@@ -389,7 +389,8 @@ MonoBehaviour:
   _rayCollider: {fileID: 996326860585350106}
   _storeCollider: {fileID: 2980355788680481407}
   _rayChangeSpeed: 3
-  _hungerGain: 10
+  _hungerGain: 6
+  _pulledObjects: []
 --- !u!1001 &8485790466828756111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1030,10 +1031,10 @@ MonoBehaviour:
   _malletAnimator: {fileID: 1273844738780863604}
   _malletHandle: {fileID: 959247359681999196}
   _originalStartY: 0
-  _switchCooldown: 0.5
+  _switchCooldown: 0.7
   _vacuum: {fileID: 816947630728480045}
   _rotateIcon: {fileID: 0}
-  _hungerExpense: 4
+  _hungerExpense: 20
 --- !u!136 &4358332704078819972
 CapsuleCollider:
   m_ObjectHideFlags: 0
