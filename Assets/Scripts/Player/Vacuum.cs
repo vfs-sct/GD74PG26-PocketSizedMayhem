@@ -20,7 +20,7 @@ public class Vacuum : MonoBehaviour
 
     private bool _vacuumOn = false;
     private Vector3 _rayStartScale;
-    private List<GameObject> _pulledObjects;
+    [SerializeField] private List<GameObject> _pulledObjects;
     LayerMask _layerMask;
    
     private void Start()
@@ -84,7 +84,7 @@ public class Vacuum : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((_layerMask.value & (1 << other.transform.gameObject.layer)) != 0)
+        if (other.TryGetComponent<NewNpcBehavior>(out NewNpcBehavior civilian))
         {
             _pulledObjects.Add(other.gameObject);
         }
