@@ -64,8 +64,11 @@ public class BuildingDestruction : MonoBehaviour
         }
         yield return new WaitForSeconds(_respawnSpeed + 0.2f);
         _isDestoyed = false;
-        _unShattered.SetActive(true);
-        _shattered.SetActive(false);
+        if(_shattered!=null)
+        {
+            _unShattered.SetActive(true);
+            _shattered.SetActive(false);
+        }
     }
 
     IEnumerator AssignDebri()
