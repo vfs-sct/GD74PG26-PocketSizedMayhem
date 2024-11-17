@@ -30,6 +30,7 @@ public class WinScreenSpawner : MonoBehaviour
     private int negativeKilled = 0;
     void Start()
     {
+        Cursor.visible = true;
         AddScore();
         StartCoroutine(SpawmRagdolls());
     }

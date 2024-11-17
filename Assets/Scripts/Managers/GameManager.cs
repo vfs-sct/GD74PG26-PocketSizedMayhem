@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private bool mouseLogoAppear = false;
     void Awake()
     {
+        Cursor.visible = false;
         _elapsedTime = 0;
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;

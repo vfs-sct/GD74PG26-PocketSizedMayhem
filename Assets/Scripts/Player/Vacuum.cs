@@ -93,9 +93,9 @@ public class Vacuum : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
        
-        if ((_layerMask.value & (1 << other.transform.gameObject.layer)) !=0)
+        if (other.TryGetComponent<NewNpcBehavior>(out NewNpcBehavior civilian))
         {
-            other.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
+            civilian.AssignVacuumPos(null);
             _pulledObjects.Remove(other.gameObject);
         }
     }
