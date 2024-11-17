@@ -6,8 +6,7 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using static EnemySpawner;
-using static UnityEngine.Rendering.DebugUI;
+using static NewNpcBehavior;
 
 public class NPCObjectPool : MonoBehaviour
 {
@@ -43,6 +42,7 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] Image _comboBar;
     [SerializeField]private int combo = 0;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+    [SerializeField] private TypeDifficulty _negativeType;
     private void Awake()
     {
         if (instance == null)
@@ -104,11 +104,11 @@ public class NPCObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledObject(NPCType npcType)
+    public GameObject GetPooledObject(TypeDifficulty npcType)
     {
         switch (npcType)
         {
-            case NPCType.EASY:
+            case TypeDifficulty.EASY:
                 {
                     for (int i = 0; i < _easyPooledObjects.Count; i++)
                     {
@@ -120,7 +120,7 @@ public class NPCObjectPool : MonoBehaviour
                     }
                     break;
                 }
-            case NPCType.MEDIUM:
+            case TypeDifficulty.NORMAL:
                 {
                     for (int i = 0; i < _mediumPooledObjects.Count; i++)
                     {
@@ -132,7 +132,7 @@ public class NPCObjectPool : MonoBehaviour
                     }
                     break;
                 }
-            case NPCType.HARD:
+            case TypeDifficulty.HARD:
                 {
                     for (int i = 0; i < _hardPooledObjects.Count; i++)
                     {
@@ -144,7 +144,7 @@ public class NPCObjectPool : MonoBehaviour
                     }
                     break;
                 }
-            case NPCType.NEGATIVE:
+            case TypeDifficulty.NEGATIVE:
                 {
                     for (int i = 0; i < _negativePooledObjects.Count; i++)
                     {
@@ -173,6 +173,10 @@ public class NPCObjectPool : MonoBehaviour
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
             Vector3 pointPos = Camera.main.WorldToScreenPoint(civilian.transform.position);
             pointPos += new Vector3(UnityEngine.Random.Range(_xMin,_xMax), UnityEngine.Random.Range(_yMin,_yMax),0);
+            if(civilian.GetComponent<NewNpcBehavior>().GetDifficultyType().Equals(_negativeType))
+            {
+                value *= -1;
+            }
             StartCoroutine(CreatePoint(pointPos, value));
             civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
             civilian.GetComponent<CivilianDeath>()._pointGiven = true;

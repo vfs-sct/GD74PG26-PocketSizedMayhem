@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static EnemySpawner;
+using static NewNpcBehavior;
 
 public class SwitchBuilding : MonoBehaviour
 {
@@ -89,28 +90,28 @@ public class SwitchBuilding : MonoBehaviour
         GameObject civilian;
         if (selection >= 0 && selection < _easyCivilianWeight )
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.EASY);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.EASY);
             civilian.SetActive(true);
             civilian.transform.position = point.position;
             civilian.transform.rotation = point.rotation;
         }
         else if (selection >= _easyCivilianWeight  && selection < (_easyCivilianWeight + _mediumCivilianWeight) )
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.MEDIUM);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NORMAL);
             civilian.SetActive(true);
             civilian.transform.position = point.position;
             civilian.transform.rotation = point.rotation;
         }
         else if (selection >= (_easyCivilianWeight + _mediumCivilianWeight)  && selection < (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight) )
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.HARD);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.HARD);
             civilian.SetActive(true);
             civilian.transform.position = point.position;
             civilian.transform.rotation = point.rotation;
         }
         else
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.NEGATIVE);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NEGATIVE);
             civilian.SetActive(true);
             civilian.transform.position = point.position;
             civilian.transform.rotation = point.rotation;

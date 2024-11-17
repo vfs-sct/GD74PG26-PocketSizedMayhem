@@ -16,6 +16,7 @@ public class BuildingDestruction : MonoBehaviour
     [SerializeField] private GameObject _unShattered;
     private bool _isDestoyed;
     [SerializeField ]private float yOffset;
+    [SerializeField ]private float _respawnSpeed;
 
     [field: SerializeField] public EventReference DeathSFX { get; set; }
     void Awake()
@@ -58,10 +59,10 @@ public class BuildingDestruction : MonoBehaviour
         }
         for (int i = 0; i < _pieces.Count; i++)
         {
-            Tween.PositionY(_pieces[i].transform, endValue: _piecePosition[i].y, duration: 3, ease: Ease.OutExpo);
+            Tween.PositionY(_pieces[i].transform, endValue: _piecePosition[i].y, duration: _respawnSpeed, ease: Ease.OutExpo);
             yield return new WaitForSeconds(0.3f);
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(_respawnSpeed + 0.2f);
         _isDestoyed = false;
         _unShattered.SetActive(true);
         _shattered.SetActive(false);

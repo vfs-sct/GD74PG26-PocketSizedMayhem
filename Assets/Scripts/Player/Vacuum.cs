@@ -15,6 +15,9 @@ public class Vacuum : MonoBehaviour
     [Header("Vacuum Ray")]
     [SerializeField] private float _rayChangeSpeed;
 
+    [Header("Tim Hunger Gain")]
+    [SerializeField] private float _hungerGain;
+
     private bool _vacuumOn = false;
     private Vector3 _rayStartScale;
     private List<GameObject> _pulledObjects;
@@ -104,7 +107,7 @@ public class Vacuum : MonoBehaviour
             collision.gameObject.GetComponent<NewNpcBehavior>().AssignVacuumPos(null);
             _pulledObjects.Remove(collision.gameObject);
             collision.gameObject.gameObject.SetActive(false);
-            PlayerStats.Hunger += 10;
+            PlayerStats.Hunger += _hungerGain;
             PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,100);
             RuntimeManager.PlayOneShot(SuckSFX, this.gameObject.transform.position);
         }
