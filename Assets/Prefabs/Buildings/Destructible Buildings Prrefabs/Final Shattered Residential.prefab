@@ -208,7 +208,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 3, y: 3, z: 2.5}
+  m_Extents: {x: 3, y: 3, z: 3.78}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -573,7 +573,10 @@ MonoBehaviour:
   _respawnTimer: 3
   _pieceRotation: []
   _piecePosition: []
+  _shattered: {fileID: 0}
+  _unShattered: {fileID: 0}
   yOffset: 50
+  _respawnSpeed: 3
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134
@@ -835,7 +838,7 @@ GameObject:
   - component: {fileID: 5848545080433857256}
   - component: {fileID: 7357585881259937207}
   m_Layer: 25
-  m_Name: Cube
+  m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -850,8 +853,8 @@ Transform:
   m_GameObject: {fileID: 7935792017534667800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.14, y: 0, z: 1.45}
-  m_LocalScale: {x: 2.4907162, y: 2.4907162, z: 2.4907162}
+  m_LocalPosition: {x: 0.14, y: 0.81, z: 4.12}
+  m_LocalScale: {x: 2.4907162, y: 2.4907162, z: 0.84255946}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2623081345800410570}

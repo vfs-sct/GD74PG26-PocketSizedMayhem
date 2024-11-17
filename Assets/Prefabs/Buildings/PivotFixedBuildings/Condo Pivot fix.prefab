@@ -449,6 +449,7 @@ MonoBehaviour:
   _shattered: {fileID: 382215951578620750}
   _unShattered: {fileID: 4862761381532014169}
   yOffset: 50
+  _respawnSpeed: 3
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134
@@ -1206,8 +1207,8 @@ Transform:
   m_GameObject: {fileID: 2450909686684088203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89.9, y: -281, z: 173.6}
-  m_LocalScale: {x: 50.1, y: 50.1, z: 92.3844}
+  m_LocalPosition: {x: 90.4, y: -281, z: 187.6}
+  m_LocalScale: {x: 50.1, y: 50.1, z: 35.4017}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3632891640728808934}
@@ -1245,7 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985b5cc06f85138419dde3495b12899e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _civilianInside: 4
+  _civilianInside: 0
   _civilianMaxCount: 5
   _civilianCountText: {fileID: 5923266009262905873}
 --- !u!1 &2645657074777294759
@@ -2966,11 +2967,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 118.285, y: 250, z: 148.7}
+  m_Extents: {x: 139.185, y: 250, z: 131.025}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 10.4, y: 0, z: -7.7}
   m_TimeToStationary: 0.5
 --- !u!114 &2686765851713300722
 MonoBehaviour:
