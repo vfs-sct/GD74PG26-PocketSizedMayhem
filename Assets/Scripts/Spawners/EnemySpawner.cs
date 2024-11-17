@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static NewNpcBehavior;
 
 public class EnemySpawner : Spawner
 {
@@ -54,19 +55,19 @@ public class EnemySpawner : Spawner
 
         if (selection >= 0 && selection < _easyCivilianWeight )
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.EASY);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.EASY);
         }
         else if (selection >= _easyCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight)
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.MEDIUM);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NORMAL);
         }
         else if (selection >= _easyCivilianWeight + _mediumCivilianWeight && selection < _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight )
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.HARD);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.HARD);
         }
         else
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(NPCType.NEGATIVE);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NEGATIVE);
         }
         if (civilian != null)
         {
