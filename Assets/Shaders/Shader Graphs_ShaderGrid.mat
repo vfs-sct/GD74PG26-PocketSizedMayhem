@@ -7,60 +7,28 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
-  m_Shader: {fileID: -6465566751694194690, guid: f4638931901d6364bb803d166fab2d27,
+  m_Name: Shader Graphs_ShaderGrid
+  m_Shader: {fileID: -6465566751694194690, guid: bb3e2da85aedee541ab80b76b2c2a491,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ALPHATEST_ON
-  - _BLEND_MODE_VERTEX_COLORS
-  - _DEPTHOFFSET_ON
-  - _DISABLE_SSR_TRANSPARENT
-  - _PREVIEW_VERTEX_COLORS_OFF
-  m_InvalidKeywords:
-  - _NORMALMAP_TANGENT_SPACE
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2475
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
-    RenderType: TransparentCutout
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
-  - RayTracingPrepass
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BlendBaseColor:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BlendMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BlendNormal:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e1ed10086ac96084288625d47243c059, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Mask:
-        m_Texture: {fileID: 2800000, guid: 3b2fcdb4dd0a1eb4cbbb43e895602026, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal:
-        m_Texture: {fileID: 2800000, guid: eeafd4f775d3dc04885dd627ad6a8928, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,57 +44,38 @@ Material:
     m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _BLEND_MODE: 0
-    - _Base_Normal_Strength: 1
     - _BlendMode: 0
-    - _BlendTiling: 1
-    - _Blend_Contrast: 2
-    - _Blend_Normal_Strength: 1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
-    - _DepthOffsetEnable: 1
+    - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
     - _DstBlend2: 0
-    - _Dusting_Angle: 0.8
-    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
-    - _Height: 1.82
-    - _Height_Blend_Strength: 1
-    - _MaterialID: 1
-    - _MaterialTypeMask: 2
+    - _Fill_Rate: -2.04
     - _OpaqueCullMode: 2
-    - _PREVIEW_VERTEX_COLORS: 2
     - _PerPixelSorting: 0
-    - _RayTracing: 0
-    - _ReceivesSSR: 1
-    - _ReceivesSSRTransparent: 0
-    - _RefractionModel: 0
     - _RenderQueueType: 1
-    - _RequireSplitLighting: 0
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 8
+    - _StencilRefDepth: 1
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 40
+    - _StencilRefMV: 33
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 9
     - _StencilWriteMaskDistortionVec: 4
-    - _StencilWriteMaskGBuffer: 15
-    - _StencilWriteMaskMV: 41
-    - _Steps: 6.63
-    - _SupportDecals: 1
+    - _StencilWriteMaskMV: 43
     - _SurfaceType: 0
-    - _Tiling: 0.16
-    - _TransmissionEnable: 1
+    - _TileCount: 3
+    - _TileScale: 0.9
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -134,25 +83,18 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _USE_BLEND_LAYER: 0
-    - _USE_POM: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 3
-    - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _Base_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
-    - _Base_Tint: {r: 0.6886792, g: 0.65293497, b: 0.4190548, a: 1}
-    - _Blend_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
-    - _Blend_Tint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 0}
-    - _EmissiveColor_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Empty_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Fill_Color: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1137597867543414511
+--- !u!114 &8664361870860542261
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
