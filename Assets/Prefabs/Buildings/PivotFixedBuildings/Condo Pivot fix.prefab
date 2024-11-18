@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _civilianInside: 0
-  _civilianMaxCount: 5
+  _civilianMaxCount: 15
   _civilianCountText: {fileID: 5923266009262905873}
 --- !u!1 &2645657074777294759
 GameObject:

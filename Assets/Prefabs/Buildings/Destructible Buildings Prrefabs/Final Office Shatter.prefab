@@ -685,7 +685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _civilianInside: 0
-  _civilianMaxCount: 5
+  _civilianMaxCount: 10
   _civilianCountText: {fileID: 6720646402331106967}
 --- !u!1 &3340303660286758920
 GameObject:
@@ -1163,7 +1163,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1592908944180284483}

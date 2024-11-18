@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _civilianInside: 0
-  _civilianMaxCount: 5
+  _civilianMaxCount: 2
   _civilianCountText: {fileID: 5369669792448235883}
 --- !u!1 &6312911102252446371
 GameObject:
@@ -841,7 +841,7 @@ MonoBehaviour:
   _shattered: {fileID: 0}
   _unShattered: {fileID: 0}
   yOffset: 50
-  _respawnSpeed: 3
+  _respawnSpeed: 1
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134
