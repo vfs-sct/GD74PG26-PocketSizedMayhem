@@ -78,7 +78,6 @@ public class Mallet : MonoBehaviour
         {
             _malletAnimator.SetTrigger("Swing");
             PlayerStats.Hunger -= _hungerExpense;
-            Mathf.Clamp(PlayerStats.Hunger, 0, 100);
             RuntimeManager.PlayOneShot(SwingSFX, this.gameObject.transform.position);
         }
         else if(PlayerStats.Hunger < _hungerExpense && _attackMode == 0)

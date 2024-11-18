@@ -108,7 +108,6 @@ public class Vacuum : MonoBehaviour
             _pulledObjects.Remove(collision.gameObject);
             collision.gameObject.gameObject.SetActive(false);
             PlayerStats.Hunger += _hungerGain;
-            PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,100);
             RuntimeManager.PlayOneShot(SuckSFX, this.gameObject.transform.position);
         }
     }

@@ -57,12 +57,13 @@ public class GameManager : MonoBehaviour
         // Update point text and hunger fill bar
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
         //
-        _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
+        _hungerFillBar.fillAmount = PlayerStats.Hunger/ _startHunger;
         if (!mouseLogoAppear && PlayerStats.Hunger==0)
         {
             mouseLogoAppear = true;
             StartCoroutine(MakeLogoAppear());
         }
+        PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,_startHunger);
     }
     IEnumerator MakeLogoAppear()
     {
