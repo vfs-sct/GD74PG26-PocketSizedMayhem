@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameTime: 300
-  _startHunger: 100
+  _startHunger: 150
   _startPoint: 0
   _regenSpeed: 3
   _hungerRegenThreshold: 0
