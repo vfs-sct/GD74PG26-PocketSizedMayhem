@@ -50,15 +50,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: eba25418db09def47acbee890df91704, type: 3}
+        m_Texture: {fileID: 2800000, guid: e1ed10086ac96084288625d47243c059, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: 8789573f38bffae4daeb4a14a634d32e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3b2fcdb4dd0a1eb4cbbb43e895602026, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: 129787dd6e87b2e43898f01a93333380, type: 3}
+        m_Texture: {fileID: 2800000, guid: eeafd4f775d3dc04885dd627ad6a8928, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -125,7 +125,7 @@ Material:
     - _Steps: 6.63
     - _SupportDecals: 1
     - _SurfaceType: 0
-    - _Tiling: 1
+    - _Tiling: 0.16
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -143,7 +143,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Base_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
-    - _Base_Tint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Base_Tint: {r: 0.6886792, g: 0.65293497, b: 0.4190548, a: 1}
     - _Blend_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
     - _Blend_Tint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static NewNpcBehavior;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,14 +19,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _poinText;
     [SerializeField] Image _hungerFillBar;
     [SerializeField] Image _mouse;
-    private float t;
     private float _elapsedTime;
     private float previousValue;
     private bool mouseLogoAppear = false;
+
+    [SerializeField] NPCObjectPool _npcObjectPool;
     void Awake()
     {
+        Cursor.visible = false;
         _elapsedTime = 0;
-        t = 0;
         PlayerStats.GameTime = _gameTime;
         PlayerStats.Hunger = _startHunger;
         PlayerStats.Points = _startPoint;
@@ -45,6 +47,10 @@ public class GameManager : MonoBehaviour
 
             _timerText.text = "Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
             _elapsedTime += Time.deltaTime;
+            if(seconds%30==0)
+            {
+                _npcObjectPool.ChangeNegative();
+            }
         }
         else
         {
@@ -58,12 +64,13 @@ public class GameManager : MonoBehaviour
         // Update point text and hunger fill bar
         _poinText.text = "Point: " + PlayerStats.Points.ToString();
         //
-        _hungerFillBar.fillAmount = PlayerStats.Hunger/100;
+        _hungerFillBar.fillAmount = PlayerStats.Hunger/ _startHunger;
         if (!mouseLogoAppear && PlayerStats.Hunger==0)
         {
             mouseLogoAppear = true;
             StartCoroutine(MakeLogoAppear());
         }
+        PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,_startHunger);
     }
     IEnumerator MakeLogoAppear()
     {

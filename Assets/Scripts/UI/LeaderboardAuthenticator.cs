@@ -39,6 +39,7 @@ public class LeaderboardAuthenticator : MonoBehaviour
         {
             Debug.Log(s);
         };
+        PlayerStats.SignedIn = false;
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         await AuthenticationService.Instance.UpdatePlayerNameAsync(_playerName);
     }

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2626953
+      value: -4.631222
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.11088562
+      value: -27.90683
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
@@ -108,6 +108,9 @@ MonoBehaviour:
   _treePosition: {x: 0, y: 0, z: 0}
   _treeRotation: {x: 0, y: 0, z: 0, w: 0}
   _bouncePower: 0
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
+  point: 10
 --- !u!54 &4565424372947680695
 Rigidbody:
   m_ObjectHideFlags: 0
