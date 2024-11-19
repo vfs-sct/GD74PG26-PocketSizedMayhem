@@ -55,16 +55,14 @@ public class NewNpcBehavior : CharacterMovement3D
             _endTarget = (EndTarget)Random.Range(0, 2);
             _pattern = (Pattern)Random.Range(0, 2);
         }
-        else
-        {
-            _endTarget = EndTarget.TARGET;
-            GetComponent<Animator>().SetTrigger("Scatter");
-            Speed = 20;
-        }
+
     }
     private void OnEnable()
     {
-        StartCoroutine(PatternStart());
+
+            StartCoroutine(PatternStart());
+            Speed = 12;
+        
     }
     private void OnDisable()
     {
@@ -73,7 +71,10 @@ public class NewNpcBehavior : CharacterMovement3D
 
     public void BuildingSpawn()
     {
-        _spawnState = SpawnState.BUILDING;
+        StartCoroutine(DisableColliderForSeconds());
+        _endTarget = EndTarget.TARGET;
+        GetComponent<Animator>().SetTrigger("Scatter");
+        Speed = 20;
     }
 
     public void AssignVacuumPos(GameObject vacuum)
@@ -83,6 +84,11 @@ public class NewNpcBehavior : CharacterMovement3D
             _objectMaterial.SetVector("_Target", vacuum.transform.position);
         }
     }
+    public void StopObject()
+    {
+        Debug.Log("stop");
+        Rigidbody.velocity = Vector3.zero;
+    }
     IEnumerator PatternStart()
     {
         yield return new WaitForSeconds(Random.Range(1, 6));
@@ -90,6 +96,12 @@ public class NewNpcBehavior : CharacterMovement3D
         _pattern = (Pattern)Random.Range(0, 2);
         yield return new WaitForSeconds(Random.Range(3, 5));
         _endTarget = EndTarget.TARGET;
+    }
+    IEnumerator DisableColliderForSeconds()
+    {
+        _capsuleCollider.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _capsuleCollider.enabled = true;
     }
     protected override void Update()
     {

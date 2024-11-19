@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static NewNpcBehavior;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     private float _elapsedTime;
     private float previousValue;
     private bool mouseLogoAppear = false;
+
+    [SerializeField] NPCObjectPool _npcObjectPool;
     void Awake()
     {
         Cursor.visible = false;
@@ -44,6 +47,10 @@ public class GameManager : MonoBehaviour
 
             _timerText.text = "Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
             _elapsedTime += Time.deltaTime;
+            if(seconds%30==0)
+            {
+                _npcObjectPool.ChangeNegative();
+            }
         }
         else
         {

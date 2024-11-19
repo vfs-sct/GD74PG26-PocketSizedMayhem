@@ -29,7 +29,11 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private int _xMax;
     [SerializeField] private int _yMin;
     [SerializeField] private int _yMax;
-
+    [SerializeField] Color _color;
+    [SerializeField] Color _color2;
+    [SerializeField] Color _color3;
+    [SerializeField] Color _color4;
+    [SerializeField] Image image;
     private List<GameObject> _easyPooledObjects;
     private List<GameObject> _mediumPooledObjects;
     private List<GameObject> _hardPooledObjects;
@@ -101,7 +105,31 @@ public class NPCObjectPool : MonoBehaviour
             _emptyBuildings.Add(door.gameObject);
         }
     }
-
+    public void ChangeNegative()
+    {
+        int rand = UnityEngine.Random.Range(0, 4);
+        if(rand==0)
+        {
+            _negativeType = TypeDifficulty.EASY;
+            image.color = Color.green;
+        }
+        else if(rand == 1)
+        {
+            _negativeType = TypeDifficulty.NORMAL;
+            image.color = Color.yellow;
+        }
+        else if (rand == 2)
+        {
+            _negativeType = TypeDifficulty.HARD;
+            image.color = Color.red;
+        }
+        else if (rand == 3)
+        {
+            _negativeType = TypeDifficulty.NEGATIVE;
+            image.color = Color.blue;
+        }
+        
+    }
     private void Update()
     {
         foreach (NewNpcBehavior civilian in _activeNPC)

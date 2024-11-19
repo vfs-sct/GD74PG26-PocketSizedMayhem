@@ -585,8 +585,6 @@ MonoBehaviour:
   _force: 50
   _pieces:
   - {fileID: 462114405915376499}
-  _civilians: {fileID: 6660491637078578144, guid: 69ac7de5014f21449bcc16257cc17696,
-    type: 3}
   _respawnTimer: 3
   _pieceRotation: []
   _piecePosition: []
@@ -595,6 +593,19 @@ MonoBehaviour:
   yOffset: 50
   _respawnSpeed: 1
   civilianFill: {fileID: 6515823761033847215}
+  _civilians:
+  - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
+  - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
+  - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
+  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
+  _topSpawnPoints: []
+  _leftSpawnPoints: []
+  _bottomSpawnPoints: []
+  _rightSpawnPoints: []
+  _easyCivilianWeight: 1
+  _mediumCivilianWeight: 1
+  _hardCivilianWeight: 1
+  _negativeCivilianWeight: 1
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134

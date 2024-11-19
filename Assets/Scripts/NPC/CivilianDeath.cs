@@ -118,6 +118,7 @@ public class CivilianDeath : MonoBehaviour
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             _animator.SetTrigger("GroundHit");
+            
         }
     }
 }
