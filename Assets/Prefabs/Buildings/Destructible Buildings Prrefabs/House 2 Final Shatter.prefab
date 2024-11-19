@@ -842,6 +842,7 @@ MonoBehaviour:
   _unShattered: {fileID: 0}
   yOffset: 50
   _respawnSpeed: 1
+  civilianFill: {fileID: 2802159510008880254}
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134

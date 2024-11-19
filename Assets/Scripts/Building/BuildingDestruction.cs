@@ -17,6 +17,7 @@ public class BuildingDestruction : MonoBehaviour
     private bool _isDestoyed;
     [SerializeField ]private float yOffset;
     [SerializeField ]private float _respawnSpeed;
+    [SerializeField ]private CivilianFill civilianFill;
 
     [field: SerializeField] public EventReference DeathSFX { get; set; }
     void Awake()
@@ -44,6 +45,7 @@ public class BuildingDestruction : MonoBehaviour
                 piece.GetComponent<Rigidbody>().AddForce(direction * _force, ForceMode.Impulse);
             }
             _isDestoyed = true;
+            civilianFill.ResetFill();
             StartCoroutine(RespawmPieces());
         }
     }
