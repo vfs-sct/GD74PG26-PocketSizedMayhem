@@ -78,7 +78,7 @@ public class CivilianDeath : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Mallet")
+        if (collision.gameObject.tag == "Mallet" && !_pointGiven)
         {
             _capsuleCollider.enabled = false;
             _civilianBehaviour.enabled = false;
@@ -92,11 +92,6 @@ public class CivilianDeath : MonoBehaviour
             {
                 impactVFX.transform.position = transform.position;
                 impactVFX.GetComponent<VisualEffect>().Play();
-            }
-            if (!_pointGiven)
-            {
-                PlayerStats.Points += _civilianBehaviour.GetPoint();
-                _pointGiven = true;
             }
             OnKilled?.Invoke(this, this.gameObject);
             if (!DeathSFX.IsNull)
@@ -123,15 +118,7 @@ public class CivilianDeath : MonoBehaviour
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             _animator.SetTrigger("GroundHit");
-            this.GetComponent<NavMeshAgent>().enabled = true;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_typeDifficulty != TypeDifficulty.NEGATIVE && other.gameObject.layer == LayerMask.NameToLayer("Door"))
-        {
-            //OnKilled?.Invoke(this, this.gameObject);
-            this.gameObject.SetActive(false);
+            
         }
     }
 }

@@ -15,11 +15,9 @@ public class CarExplosion : MonoBehaviour
         if (other.gameObject.tag == "Mallet")
         {
             RuntimeManager.PlayOneShot(AttackSFX, this.gameObject.transform.position);
-            _wheelBounce.gameObject.SetActive(true);
-            _explosion.gameObject.SetActive(true);
-
-            _meshRenderer.enabled = false;
-            this.enabled = false;
+            Instantiate(_explosion,this.gameObject.transform.position,this.gameObject.transform.rotation);
+            Instantiate(_wheelBounce, this.gameObject.transform.position, this.gameObject.transform.rotation);
+            this.gameObject.SetActive(false);
         }
     }
 }

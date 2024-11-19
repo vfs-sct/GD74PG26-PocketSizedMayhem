@@ -23,7 +23,7 @@ public class PlayerDebug : MonoBehaviour
     // F5
     public void OnRestartScene()
     {
-        SceneManager.LoadScene("GameScene - M3");
+        SceneManager.LoadScene("GameScene");
     }
     //F6
     public void OnWinScreen()

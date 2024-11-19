@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 46d22aeeb355f0c4f8d53334b406159d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.955833
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46d22aeeb355f0c4f8d53334b406159d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3683136
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46d22aeeb355f0c4f8d53334b406159d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45.756374
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 46d22aeeb355f0c4f8d53334b406159d,
         type: 3}
@@ -156,3 +156,6 @@ MonoBehaviour:
   _treePosition: {x: 0, y: 0, z: 0}
   _treeRotation: {x: 0, y: 0, z: 0, w: 0}
   _bouncePower: 100
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
+  point: 10

@@ -36,10 +36,6 @@ public class NewNpcBehavior : CharacterMovement3D
     private Material _objectMaterial;
     
     private Vector3 _newDirectionVector;
-
-    private float _originalSpeed;
-    private float t = 0;
-    private float acceleration = 1;
     private float angle = 0;
 
     LayerMask _doorLayerMask;
@@ -49,7 +45,6 @@ public class NewNpcBehavior : CharacterMovement3D
 
     void Start()
     {
-        _originalSpeed = Speed;
         _objectRenderer = GetComponentInChildren<Renderer>();
         _objectMaterial = _objectRenderer.material;
         _doorLayerMask |= (1 << 25);
@@ -58,48 +53,28 @@ public class NewNpcBehavior : CharacterMovement3D
             _civilianTargetLayerMask |= (1 << 6);
             _newDirectionVector = new Vector3(_zigzagHorizontalDistance, 0, _zigzagVerticalDistance);
             _endTarget = (EndTarget)Random.Range(0, 2);
-            if (point < 0)
-            {
-                _endTarget = EndTarget.CIVILIAN;
-            }
-            if (_endTarget == EndTarget.NO_TARGET)
-            {
-                
-            }
-            else if (_endTarget == EndTarget.CIVILIAN)
-            {
-                
-            }
-            else
-            {
-                SetEscapeDestination();
-            }
             _pattern = (Pattern)Random.Range(0, 2);
         }
-        else
-        {
-            _endTarget = EndTarget.TARGET;
-            GetComponent<Animator>().SetTrigger("Scatter");
-            Speed = 20;
-        }
+
     }
     private void OnEnable()
     {
-        StartCoroutine(PatternStart());
+
+            StartCoroutine(PatternStart());
+            Speed = 12;
+        
     }
-    public void BuildingSpawn()
+    private void OnDisable()
     {
-        _spawnState = SpawnState.BUILDING;
+        _target = null;
     }
 
-    private void SetEscapeDestination()
+    public void BuildingSpawn()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _escapeRangeFindRadius, _doorLayerMask);
-        if(hitColliders.Length !=0)
-        {
-            _target = hitColliders[Random.Range(0, hitColliders.Length)].gameObject;
-            MoveTo(_target.transform.position);
-        }
+        StartCoroutine(DisableColliderForSeconds());
+        _endTarget = EndTarget.TARGET;
+        GetComponent<Animator>().SetTrigger("Scatter");
+        Speed = 20;
     }
 
     public void AssignVacuumPos(GameObject vacuum)
@@ -109,22 +84,39 @@ public class NewNpcBehavior : CharacterMovement3D
             _objectMaterial.SetVector("_Target", vacuum.transform.position);
         }
     }
+    public void StopObject()
+    {
+        Debug.Log("stop");
+        Rigidbody.velocity = Vector3.zero;
+    }
     IEnumerator PatternStart()
     {
-        yield return new WaitForSeconds(Random.Range(3, 6));
+        yield return new WaitForSeconds(Random.Range(1, 6));
         _endTarget = EndTarget.NO_TARGET;
-        yield return new WaitForSeconds(Random.Range(1, 4));
+        _pattern = (Pattern)Random.Range(0, 2);
+        yield return new WaitForSeconds(Random.Range(3, 5));
         _endTarget = EndTarget.TARGET;
+    }
+    IEnumerator DisableColliderForSeconds()
+    {
+        _capsuleCollider.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _capsuleCollider.enabled = true;
     }
     protected override void Update()
     {
+        if (LookDirection.magnitude < 0.5f) Debug.LogError("bad direction", gameObject);
         base.Update();
         angle += Time.deltaTime * _rotationSpeed;
+        if(!NavMeshAgent.isOnNavMesh)
+        {
+            return;
+        }
         if ((_endTarget == EndTarget.TARGET || _endTarget == EndTarget.CIVILIAN) && _target!=null)
         {
             MoveTo(_target.transform.position);
         }
-        else if (_endTarget == EndTarget.NO_TARGET)
+        else if (_endTarget == EndTarget.NO_TARGET && NavMeshAgent.hasPath)
         {
             if (_pattern == Pattern.ZIGZAG)
             {
@@ -150,6 +142,11 @@ public class NewNpcBehavior : CharacterMovement3D
                 MoveTo(transform.position + _newDirectionVector);
             }
         }
+        else
+        {
+            if(_target!=null)
+                MoveTo(_target.transform.position);
+        }
     }
 
     public void SetTarget(GameObject target)
@@ -166,25 +163,10 @@ public class NewNpcBehavior : CharacterMovement3D
         return false;
     }
 
-    private void AssignTarget()
+    public void EnableComponents()
     {
-        if (point < 0)
-        {
-            _endTarget = EndTarget.CIVILIAN;
-            return;
-        }
-
-        if (_endTarget == EndTarget.TARGET)
-        {
-            SetEscapeDestination();
-        }
-        else
-        {
-            if (_pattern == Pattern.ZIGZAG)
-            {
-                MoveTo(transform.position + _newDirectionVector);
-            }
-        }
+        NavMeshAgent.enabled = true;
+        GetComponent<CivilianDeath>().enabled = true;
     }
 
     public int GetPoint()
