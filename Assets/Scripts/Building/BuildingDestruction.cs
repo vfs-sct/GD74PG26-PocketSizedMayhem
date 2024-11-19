@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static NewNpcBehavior;
 using UnityEngine.AI;
+using TMPro;
 
 public class BuildingDestruction : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class BuildingDestruction : MonoBehaviour
     [SerializeField] private float _mediumCivilianWeight;
     [SerializeField] private float _hardCivilianWeight;
     [SerializeField] private float _negativeCivilianWeight;
+    [Header("Point")]
+    [SerializeField] private GameObject _pointPopUp;
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private int point;
     [field: SerializeField] public EventReference DeathSFX { get; set; }
     void Awake()
     {
@@ -48,6 +53,7 @@ public class BuildingDestruction : MonoBehaviour
     }
     private void Start()
     {
+        _canvas = FindAnyObjectByType<Canvas>();
         _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight);
         _easyCivilianWeight = (_easyCivilianWeight / _spawnWeightTotal) * 100;
         _mediumCivilianWeight = (_mediumCivilianWeight / _spawnWeightTotal) * 100;
@@ -58,6 +64,14 @@ public class BuildingDestruction : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
+            Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+            pointPos += new Vector3(UnityEngine.Random.Range(0, 300), UnityEngine.Random.Range(0, 300), 0);
+            GameObject pointPopUp;
+            pointPopUp = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+
+            PlayerStats.Points += point;
+            pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
+            Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
             RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             this.GetComponent<Rigidbody>().isKinematic = false;
             foreach (GameObject piece in _pieces)

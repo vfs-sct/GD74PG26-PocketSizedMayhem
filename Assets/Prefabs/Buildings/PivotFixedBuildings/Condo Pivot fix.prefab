@@ -463,6 +463,10 @@ MonoBehaviour:
   _mediumCivilianWeight: 1
   _hardCivilianWeight: 1
   _negativeCivilianWeight: 1
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
+  _canvas: {fileID: 0}
+  point: 20
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134
