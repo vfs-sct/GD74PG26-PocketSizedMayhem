@@ -49,6 +49,7 @@ public class WinScreenSpawner : MonoBehaviour
         {
             GameObject obj = Instantiate(_mediumCivilianRagdoll, _spawnLocation.position, _mediumCivilianRagdoll.transform.rotation);
             _mediumCivilianText.text = "Medium Civilian Killed: " + ++mediumKilled;
+            RuntimeManager.PlayOneShot(CivilianSpawnSFX, this.gameObject.transform.position);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(1f);
@@ -56,6 +57,7 @@ public class WinScreenSpawner : MonoBehaviour
         {
             GameObject obj = Instantiate(_hardCivilianRagdoll, _spawnLocation.position, _hardCivilianRagdoll.transform.rotation);
             _hardCivilianText.text = "Hard Civilian Killed: " + ++hardKilled;
+            RuntimeManager.PlayOneShot(CivilianSpawnSFX, this.gameObject.transform.position);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(1f);
@@ -63,6 +65,7 @@ public class WinScreenSpawner : MonoBehaviour
         {
             GameObject obj = Instantiate(_negativeCivilianRagdoll, _spawnLocation.position, _negativeCivilianRagdoll.transform.rotation);
             _negativeCivilianText.text = "Negative Civilian Killed: " + ++negativeKilled;
+            RuntimeManager.PlayOneShot(CivilianSpawnSFX, this.gameObject.transform.position);
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(1f);
