@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu Scenes/MainMenu.unity
     guid: 845efb974a677a5469d40ae22c2af6ac
   - enabled: 1
-    path: Assets/Scenes/Gameplay Scenes/GameScene - M3.unity
-    guid: 435e4df481ecd7245809b309a537d616
+    path: Assets/Scenes/Gameplay Scenes/GameScene.unity
+    guid: f2f78fce0613123439447d0d78065db9
   - enabled: 1
     path: Assets/Scenes/Gameplay Scenes/GameScene-Cameras.unity
     guid: 6ea537ac0a8c3bb4b857ba194d708896
