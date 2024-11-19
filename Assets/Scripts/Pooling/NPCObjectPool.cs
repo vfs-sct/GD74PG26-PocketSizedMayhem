@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 using static NewNpcBehavior;
 
@@ -34,7 +35,8 @@ public class NPCObjectPool : MonoBehaviour
     private List<GameObject> _hardPooledObjects;
     private List<GameObject> _negativePooledObjects;
     [SerializeField]private List<NewNpcBehavior> _activeNPC;
-    [SerializeField]private List<GameObject> _doors;
+    [SerializeField]private List<CivilianFill> _doors;
+    [SerializeField]private List<GameObject> _emptyBuildings;
     [SerializeField] private GameObject _pointPopUp;
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
@@ -54,6 +56,7 @@ public class NPCObjectPool : MonoBehaviour
 
     void Start()
     {
+        _emptyBuildings = new List<GameObject>();
         _easyPooledObjects = new List<GameObject>();
         _mediumPooledObjects = new List<GameObject>();
         _hardPooledObjects = new List<GameObject>();
@@ -91,6 +94,12 @@ public class NPCObjectPool : MonoBehaviour
             _negativePooledObjects.Add(obj);
             obj.SetActive(false);
         }
+        foreach (CivilianFill door in _doors)
+        {
+            door.Empty += AddToDoorList;
+            door.Full += RemoveFromDoorList;
+            _emptyBuildings.Add(door.gameObject);
+        }
     }
 
     private void Update()
@@ -99,7 +108,7 @@ public class NPCObjectPool : MonoBehaviour
         {
             if (civilian.IsGrounded &&!civilian.HasTarget() && _activeNPC.Count!=0)
             {
-                civilian.SetTarget(_doors[UnityEngine.Random.Range(0, _doors.Count)]);
+                civilian.SetTarget(_emptyBuildings[UnityEngine.Random.Range(0, _emptyBuildings.Count)]);
             }
         }
     }
@@ -209,5 +218,13 @@ public class NPCObjectPool : MonoBehaviour
     {
         civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
         _activeNPC.Add(civilian.GetComponent<NewNpcBehavior>());
+    }
+    public void AddToDoorList(object sender, GameObject door)
+    {
+        _emptyBuildings.Add(door);
+    }
+    public void RemoveFromDoorList(object sender, GameObject door)
+    {
+        _emptyBuildings.Remove(door);
     }
 }
