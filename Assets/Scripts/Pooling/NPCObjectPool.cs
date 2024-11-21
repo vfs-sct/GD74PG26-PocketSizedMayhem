@@ -210,10 +210,6 @@ public class NPCObjectPool : MonoBehaviour
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
             Vector3 pointPos = Camera.main.WorldToScreenPoint(civilian.transform.position);
             pointPos += new Vector3(UnityEngine.Random.Range(_xMin,_xMax), UnityEngine.Random.Range(_yMin,_yMax),0);
-            if(civilian.GetComponent<NewNpcBehavior>().GetDifficultyType().Equals(_negativeType))
-            {
-                value *= -1;
-            }
             StartCoroutine(CreatePoint(pointPos, value));
             civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
             civilian.GetComponent<CivilianDeath>()._pointGiven = true;
@@ -222,20 +218,14 @@ public class NPCObjectPool : MonoBehaviour
     IEnumerator CreatePoint(Vector3 civilianPos, int point)
     {
         GameObject pointPopUp;
-        if (point > 0)
-        {
-            pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
-            combo++;
-            point *= combo;
-        }
-        else
-        {
-            pointPopUp = Instantiate(_negativePopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
-            combo = 0;
-        }
+
+        pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
+        combo++;
+        point *= combo;
+
         PlayerStats.Points += point;
         _textMeshProUGUI.text = "Combo X" + combo;
-        pointPopUp.transform.localScale += new Vector3(combo,combo,combo)/10;
+        pointPopUp.transform.localScale += new Vector3(combo, combo, combo) / 10;
         pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
         Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
         Tween.Position(pointPopUp.transform, _pointLocation.transform.position, duration: 1, ease: Ease.InOutSine);
