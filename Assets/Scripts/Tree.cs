@@ -1,12 +1,7 @@
 using PrimeTween;
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Tree : MonoBehaviour
 {

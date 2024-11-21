@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.631222
+      value: 17.81136
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.90683
+      value: -28.624756
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1409a65e0c4ab5643927d98c429ad310,
         type: 3}
@@ -110,7 +110,8 @@ MonoBehaviour:
   _bouncePower: 0
   _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
     type: 3}
-  point: 10
+  _canvas: {fileID: 0}
+  point: 2
 --- !u!54 &4565424372947680695
 Rigidbody:
   m_ObjectHideFlags: 0
