@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 using static NewNpcBehavior;
 
@@ -28,13 +29,18 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private int _xMax;
     [SerializeField] private int _yMin;
     [SerializeField] private int _yMax;
-
+    [SerializeField] Color _color;
+    [SerializeField] Color _color2;
+    [SerializeField] Color _color3;
+    [SerializeField] Color _color4;
+    [SerializeField] Image image;
     private List<GameObject> _easyPooledObjects;
     private List<GameObject> _mediumPooledObjects;
     private List<GameObject> _hardPooledObjects;
     private List<GameObject> _negativePooledObjects;
     [SerializeField]private List<NewNpcBehavior> _activeNPC;
-    [SerializeField]private List<GameObject> _doors;
+    [SerializeField]private List<CivilianFill> _doors;
+    [SerializeField]private List<GameObject> _emptyBuildings;
     [SerializeField] private GameObject _pointPopUp;
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
@@ -54,6 +60,7 @@ public class NPCObjectPool : MonoBehaviour
 
     void Start()
     {
+        _emptyBuildings = new List<GameObject>();
         _easyPooledObjects = new List<GameObject>();
         _mediumPooledObjects = new List<GameObject>();
         _hardPooledObjects = new List<GameObject>();
@@ -91,15 +98,45 @@ public class NPCObjectPool : MonoBehaviour
             _negativePooledObjects.Add(obj);
             obj.SetActive(false);
         }
+        foreach (CivilianFill door in _doors)
+        {
+            door.Empty += AddToDoorList;
+            door.Full += RemoveFromDoorList;
+            _emptyBuildings.Add(door.gameObject);
+        }
     }
-
+    public void ChangeNegative()
+    {
+        int rand = UnityEngine.Random.Range(0, 4);
+        if(rand==0)
+        {
+            _negativeType = TypeDifficulty.EASY;
+            image.color = Color.green;
+        }
+        else if(rand == 1)
+        {
+            _negativeType = TypeDifficulty.NORMAL;
+            image.color = Color.yellow;
+        }
+        else if (rand == 2)
+        {
+            _negativeType = TypeDifficulty.HARD;
+            image.color = Color.red;
+        }
+        else if (rand == 3)
+        {
+            _negativeType = TypeDifficulty.NEGATIVE;
+            image.color = Color.blue;
+        }
+        
+    }
     private void Update()
     {
         foreach (NewNpcBehavior civilian in _activeNPC)
         {
             if (civilian.IsGrounded &&!civilian.HasTarget() && _activeNPC.Count!=0)
             {
-                civilian.SetTarget(_doors[UnityEngine.Random.Range(0, _doors.Count)]);
+                civilian.SetTarget(_emptyBuildings[UnityEngine.Random.Range(0, _emptyBuildings.Count)]);
             }
         }
     }
@@ -209,5 +246,13 @@ public class NPCObjectPool : MonoBehaviour
     {
         civilian.GetComponent<CivilianDeath>().OnKilled += RemoveCivilian;
         _activeNPC.Add(civilian.GetComponent<NewNpcBehavior>());
+    }
+    public void AddToDoorList(object sender, GameObject door)
+    {
+        _emptyBuildings.Add(door);
+    }
+    public void RemoveFromDoorList(object sender, GameObject door)
+    {
+        _emptyBuildings.Remove(door);
     }
 }

@@ -40,7 +40,7 @@ public class PlayerNameAssigner : MonoBehaviour
             PlayerStats.SignedIn = true;
             UpdateName();
             _errorField.SetActive(false);
-            SceneManager.LoadScene("GameScene - M3");
+            SceneManager.LoadScene("GameScene");
         }
         
     }
@@ -65,7 +65,7 @@ public class PlayerNameAssigner : MonoBehaviour
     {
         if (PlayerStats.SignedIn)
         {
-            SceneManager.LoadScene("GameScene - M3");
+            SceneManager.LoadScene("GameScene");
         }
         else
         {

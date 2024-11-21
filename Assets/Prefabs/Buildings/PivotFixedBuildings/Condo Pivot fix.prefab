@@ -441,7 +441,6 @@ MonoBehaviour:
   - {fileID: 7707524961001365903}
   - {fileID: 5523806443423702543}
   - {fileID: 7865265112491496526}
-  _civilians: {fileID: 0}
   _respawnTimer: 3
   _pieceRotation: []
   _piecePosition:
@@ -450,6 +449,24 @@ MonoBehaviour:
   _unShattered: {fileID: 4862761381532014169}
   yOffset: 50
   _respawnSpeed: 3
+  civilianFill: {fileID: 1611658834125734957}
+  _civilians:
+  - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
+  - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
+  - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
+  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
+  _topSpawnPoints: []
+  _leftSpawnPoints: []
+  _bottomSpawnPoints: []
+  _rightSpawnPoints: []
+  _easyCivilianWeight: 1
+  _mediumCivilianWeight: 1
+  _hardCivilianWeight: 1
+  _negativeCivilianWeight: 1
+  _pointPopUp: {fileID: 2363712627127984821, guid: c2e235c77b68a5e43b616ff862eae1f0,
+    type: 3}
+  _canvas: {fileID: 0}
+  point: 20
   <DeathSFX>k__BackingField:
     Guid:
       Data1: -721403134
@@ -2810,35 +2827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d87e9c704ab2074abb7e220d3b95af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _civilians:
-  - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
-  - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
-  - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
-  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
-  _topSpawnPoints:
-  - {fileID: 8693903516996424023}
-  - {fileID: 3916459001717947587}
-  - {fileID: 1182171785014787410}
-  _leftSpawnPoints:
-  - {fileID: 6847730613494702513}
-  - {fileID: 6119320583816557667}
-  - {fileID: 1940914507835179108}
-  _bottomSpawnPoints:
-  - {fileID: 9022403457532530627}
-  - {fileID: 4341806526555142100}
-  - {fileID: 3253387369473457396}
-  _rightSpawnPoints:
-  - {fileID: 6062836361751429109}
-  - {fileID: 8659644226708379692}
-  - {fileID: 948343285938241216}
-  _easyCivilianWeight: 1
-  _mediumCivilianWeight: 1
-  _hardCivilianWeight: 1
-  _negativeCivilianWeight: 1
-  _topWeight: 1
-  _leftWeight: 1
-  _bottomWeight: 1
-  _rightWeight: 1
   _unShattered: {fileID: 4862761381532014169}
   _shattered: {fileID: 382215951578620750}
   _civilianFillTracker: {fileID: 1611658834125734957}

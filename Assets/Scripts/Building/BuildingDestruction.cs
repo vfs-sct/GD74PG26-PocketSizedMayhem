@@ -3,21 +3,42 @@ using PrimeTween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static NewNpcBehavior;
+using UnityEngine.AI;
+using TMPro;
 
 public class BuildingDestruction : MonoBehaviour
 {
     [SerializeField] private int _force;
     [SerializeField] private List<GameObject> _pieces;
-    [SerializeField] private GameObject _civilians;
     [SerializeField] private float _respawnTimer;
     [SerializeField] private List<Quaternion> _pieceRotation;
     [SerializeField] private List<Vector3> _piecePosition;
     [SerializeField] private GameObject _shattered;
     [SerializeField] private GameObject _unShattered;
     private bool _isDestoyed;
+    private int _spawnCount;
+    private float _spawnWeightTotal;
     [SerializeField ]private float yOffset;
     [SerializeField ]private float _respawnSpeed;
+    [SerializeField ]private CivilianFill civilianFill;
 
+    [Header("Object References")]
+    [SerializeField] private List<GameObject> _civilians;
+    [SerializeField] private List<Transform> _topSpawnPoints;
+    [SerializeField] private List<Transform> _leftSpawnPoints;
+    [SerializeField] private List<Transform> _bottomSpawnPoints;
+    [SerializeField] private List<Transform> _rightSpawnPoints;
+
+    [Header("Civilian Type Weights")]
+    [SerializeField] private float _easyCivilianWeight;
+    [SerializeField] private float _mediumCivilianWeight;
+    [SerializeField] private float _hardCivilianWeight;
+    [SerializeField] private float _negativeCivilianWeight;
+    [Header("Point")]
+    [SerializeField] private GameObject _pointPopUp;
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private int point;
     [field: SerializeField] public EventReference DeathSFX { get; set; }
     void Awake()
     {
@@ -30,11 +51,27 @@ public class BuildingDestruction : MonoBehaviour
             _piecePosition.Add(_pieces[i].transform.position);
         }
     }
-
+    private void Start()
+    {
+        _canvas = FindAnyObjectByType<Canvas>();
+        _spawnWeightTotal = (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight);
+        _easyCivilianWeight = (_easyCivilianWeight / _spawnWeightTotal) * 100;
+        _mediumCivilianWeight = (_mediumCivilianWeight / _spawnWeightTotal) * 100;
+        _hardCivilianWeight = (_hardCivilianWeight / _spawnWeightTotal) * 100;
+        _negativeCivilianWeight = (_negativeCivilianWeight / _spawnWeightTotal) * 100;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
+            Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
+            pointPos += new Vector3(UnityEngine.Random.Range(0, 300), UnityEngine.Random.Range(0, 300), 0);
+            GameObject pointPopUp;
+            pointPopUp = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
+
+            PlayerStats.Points += point;
+            pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
+            Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
             RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             this.GetComponent<Rigidbody>().isKinematic = false;
             foreach (GameObject piece in _pieces)
@@ -44,7 +81,10 @@ public class BuildingDestruction : MonoBehaviour
                 piece.GetComponent<Rigidbody>().AddForce(direction * _force, ForceMode.Impulse);
             }
             _isDestoyed = true;
+            _spawnCount = civilianFill.GetCivilianCount();
+            civilianFill.ResetFill();
             StartCoroutine(RespawmPieces());
+            SpawnAtPoint();
         }
     }
 
@@ -71,12 +111,50 @@ public class BuildingDestruction : MonoBehaviour
         }
     }
 
-    IEnumerator AssignDebri()
+    public void SpawnAtPoint()
     {
-        yield return new WaitForSeconds(1f);
-        foreach (GameObject piece in _pieces)
+        for (int i = 0; i < _spawnCount; i++)
         {
-            piece.layer = LayerMask.NameToLayer("Debris");
+            SpawnCivilians(this.gameObject.transform);
         }
+    }
+
+    private Transform SpawnCivilians(Transform point)
+    {
+        float selection = Random.Range(0, 100);
+        GameObject civilian;
+        if (selection >= 0 && selection < _easyCivilianWeight)
+        {
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.EASY);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
+        }
+        else if (selection >= _easyCivilianWeight && selection < (_easyCivilianWeight + _mediumCivilianWeight))
+        {
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NORMAL);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
+        }
+        else if (selection >= (_easyCivilianWeight + _mediumCivilianWeight) && selection < (_easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight))
+        {
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.HARD);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
+        }
+        else
+        {
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NEGATIVE);
+            civilian.SetActive(true);
+            civilian.transform.position = point.position;
+            civilian.transform.rotation = point.rotation;
+        }
+        civilian.GetComponent<NewNpcBehavior>().BuildingSpawn();
+        civilian.GetComponent<NavMeshAgent>().enabled = false;
+        civilian.GetComponent<CivilianDeath>().enabled = false;
+        civilian.GetComponent<Rigidbody>().AddForce(civilian.transform.forward * 200 + Vector3.up * 2000);
+        return point;
     }
 }
