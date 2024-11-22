@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0, y: 0, z: 0, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -437,11 +437,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   limitMin:
-    m_OverrideState: 1
-    m_Value: 8.855173
+    m_OverrideState: 0
+    m_Value: -5
   limitMax:
     m_OverrideState: 1
-    m_Value: 9
+    m_Value: 8
   curveMap:
     m_OverrideState: 0
     m_Value:
