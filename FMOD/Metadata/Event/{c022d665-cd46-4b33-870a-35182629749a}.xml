@@ -23,6 +23,7 @@
 			<destination>{116fd195-2b2d-4dc3-bbee-71bda0942770}</destination>
 		</relationship>
 		<relationship name="markerTracks">
+			<destination>{23c09b02-8af3-44bb-b306-d385aa42ad4f}</destination>
 			<destination>{bba2ebba-209b-4f2b-bdfc-cda8297e7ffb}</destination>
 		</relationship>
 		<relationship name="groupTracks">
@@ -54,10 +55,11 @@
 			<destination>{653e53d3-a0ad-48fe-80a7-844634a53e24}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{fd354eed-d229-4a55-a0ab-8ed4aa1f6b44}</destination>
+			<destination>{175c9fbe-5ae8-41f1-a6ae-2c0079f33b39}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{116fd195-2b2d-4dc3-bbee-71bda0942770}" />
+	<object class="MarkerTrack" id="{23c09b02-8af3-44bb-b306-d385aa42ad4f}" />
 	<object class="MarkerTrack" id="{bba2ebba-209b-4f2b-bdfc-cda8297e7ffb}" />
 	<object class="GroupTrack" id="{f1be902b-71ab-4938-aab0-742c977f7002}">
 		<relationship name="modules">
@@ -75,6 +77,11 @@
 	<object class="Timeline" id="{2e95999d-8b2c-4f5d-84ce-b676346e16ce}">
 		<relationship name="modules">
 			<destination>{ebb1d083-76b5-49f6-a96f-1e96318f6858}</destination>
+		</relationship>
+		<relationship name="markers">
+			<destination>{ef460315-17fb-4332-a5da-8df0267a87e1}</destination>
+			<destination>{22813aa5-3eb3-45d1-994d-431a70273f84}</destination>
+			<destination>{1f8c5b7f-2332-408f-b031-d8fb69005620}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{4562d153-d3fb-4c0f-b3d6-ba22086c4292}">
@@ -133,6 +140,54 @@
 			<destination>{4562d153-d3fb-4c0f-b3d6-ba22086c4292}</destination>
 		</relationship>
 	</object>
+	<object class="LoopRegion" id="{ef460315-17fb-4332-a5da-8df0267a87e1}">
+		<property name="position">
+			<value>0.97496921182266028</value>
+		</property>
+		<property name="length">
+			<value>1.2006557881773396</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{2e95999d-8b2c-4f5d-84ce-b676346e16ce}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{23c09b02-8af3-44bb-b306-d385aa42ad4f}</destination>
+		</relationship>
+	</object>
+	<object class="NamedMarker" id="{22813aa5-3eb3-45d1-994d-431a70273f84}">
+		<property name="position">
+			<value>2.1756250000000001</value>
+		</property>
+		<property name="name">
+			<value>Marker A</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{2e95999d-8b2c-4f5d-84ce-b676346e16ce}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{bba2ebba-209b-4f2b-bdfc-cda8297e7ffb}</destination>
+		</relationship>
+	</object>
+	<object class="TransitionRegion" id="{1f8c5b7f-2332-408f-b031-d8fb69005620}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="length">
+			<value>2.1756250000000001</value>
+		</property>
+		<relationship name="timeline">
+			<destination>{2e95999d-8b2c-4f5d-84ce-b676346e16ce}</destination>
+		</relationship>
+		<relationship name="markerTrack">
+			<destination>{bba2ebba-209b-4f2b-bdfc-cda8297e7ffb}</destination>
+		</relationship>
+		<relationship name="destination">
+			<destination>{22813aa5-3eb3-45d1-994d-431a70273f84}</destination>
+		</relationship>
+		<relationship name="triggerConditions">
+			<destination>{e6562a99-fe99-4794-8ab5-879502c61e93}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusEffectChain" id="{d8074a7a-e247-483e-aca8-4c871b9f3716}">
 		<relationship name="effects">
 			<destination>{a58ea3b7-96f3-425c-95e4-6922356cb709}</destination>
@@ -152,6 +207,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{69c2963b-e995-4125-987a-64d00a1990b8}" />
+	<object class="EventCondition" id="{e6562a99-fe99-4794-8ab5-879502c61e93}">
+		<property name="eventState">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{a58ea3b7-96f3-425c-95e4-6922356cb709}" />
 	<object class="MixerBusFader" id="{14de88d6-5f68-4235-ba68-dc8ba69ac2da}" />
 	<object class="MixerBusFader" id="{dc30cedd-1dfd-4fe8-9bd8-d3e0d999e5ae}" />
