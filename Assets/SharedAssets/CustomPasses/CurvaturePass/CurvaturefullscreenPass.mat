@@ -39,7 +39,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Cavity: 0.4
-    - _Edge: 0
+    - _Edge: 0.5
     - _Edge_Removal: 1.5
     - _Edge_Removal_Size: 1
     - _Ridge: 1

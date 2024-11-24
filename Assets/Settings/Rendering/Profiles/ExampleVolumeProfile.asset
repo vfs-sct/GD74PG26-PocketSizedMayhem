@@ -162,13 +162,13 @@ MonoBehaviour:
     m_Value: 580.02
   upperHemisphereLuxValue:
     m_OverrideState: 1
-    m_Value: 4.3271575
+    m_Value: 4.327811
   upperHemisphereLuxColor:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.4471253, z: 0.31438386}
+    m_Value: {x: 0.5, y: 0.44726086, z: 0.31442386}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 5000
+    m_Value: 2500
   updateMode:
     m_OverrideState: 0
     m_Value: 0
@@ -345,13 +345,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7593b3a9277ac4696b20006c21dde2, type: 3}
   m_Name: VisualEnvironment
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skyType:
     m_OverrideState: 1
     m_Value: 1
   cloudType:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   skyAmbientMode:
     m_OverrideState: 1
     m_Value: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   meteringMode:
     m_OverrideState: 1
     m_Value: 2
@@ -432,7 +432,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 12.173409
+    m_Value: 8.5
   compensation:
     m_OverrideState: 0
     m_Value: 0
@@ -441,7 +441,7 @@ MonoBehaviour:
     m_Value: -5
   limitMax:
     m_OverrideState: 0
-    m_Value: 9
+    m_Value: 5.225195
   curveMap:
     m_OverrideState: 0
     m_Value:
