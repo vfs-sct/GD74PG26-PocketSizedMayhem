@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 0
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.5}
   gain:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.44726086, z: 0.31442386}
   desiredLuxValue:
     m_OverrideState: 1
-    m_Value: 2500
+    m_Value: 5000
   updateMode:
     m_OverrideState: 0
     m_Value: 0
