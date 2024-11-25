@@ -91,13 +91,6 @@ public class NPCObjectPool : MonoBehaviour
             obj.SetActive(false);
         }
 
-        for (int i = 0; i < _negativePoolAmount; i++)
-        {
-            GameObject obj = Instantiate(_negativeCivilian);
-            obj.transform.parent = gameObject.transform;
-            _negativePooledObjects.Add(obj);
-            obj.SetActive(false);
-        }
         foreach (CivilianFill door in _doors)
         {
             door.Empty += AddToDoorList;
@@ -108,12 +101,12 @@ public class NPCObjectPool : MonoBehaviour
     public void ChangeNegative()
     {
         int rand = UnityEngine.Random.Range(0, 4);
-        if(rand==0)
+        if (rand == 0)
         {
             _negativeType = TypeDifficulty.EASY;
             image.color = Color.green;
         }
-        else if(rand == 1)
+        else if (rand == 1)
         {
             _negativeType = TypeDifficulty.NORMAL;
             image.color = Color.yellow;
@@ -122,11 +115,6 @@ public class NPCObjectPool : MonoBehaviour
         {
             _negativeType = TypeDifficulty.HARD;
             image.color = Color.red;
-        }
-        else if (rand == 3)
-        {
-            _negativeType = TypeDifficulty.NEGATIVE;
-            image.color = Color.blue;
         }
         
     }
@@ -177,18 +165,6 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             AddToCivilianList(_hardPooledObjects[i]);
                             return _hardPooledObjects[i];
-                        }
-                    }
-                    break;
-                }
-            case TypeDifficulty.NEGATIVE:
-                {
-                    for (int i = 0; i < _negativePooledObjects.Count; i++)
-                    {
-                        if (!_negativePooledObjects[i].activeInHierarchy)
-                        {
-                            AddToCivilianList(_negativePooledObjects[i]);
-                            return _negativePooledObjects[i];
                         }
                     }
                     break;

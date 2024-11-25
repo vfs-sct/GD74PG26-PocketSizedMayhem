@@ -109,9 +109,6 @@ public class CivilianDeath : MonoBehaviour
                 case TypeDifficulty.HARD:
                     PlayerStats.HardCivilianKilled++;
                     break;
-                case TypeDifficulty.NEGATIVE:
-                    PlayerStats.NegativeCivilianKilled++;
-                    break;
             }
             StartCoroutine(StartFading());
         }
