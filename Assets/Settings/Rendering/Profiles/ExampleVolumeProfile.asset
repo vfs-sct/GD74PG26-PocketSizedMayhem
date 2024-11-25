@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: {x: 0.9570483, y: 0.99262315, z: 1, w: 0.008826198}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.011915329}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.5}
   gain:
     m_OverrideState: 1
     m_Value: {x: 1, y: 0.9817703, z: 0.9374611, w: 0.11473963}
@@ -427,7 +427,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.77
+    m_Value: 0.5
   response:
     m_OverrideState: 0
     m_Value: 0.8
@@ -458,7 +458,7 @@ MonoBehaviour:
     m_Value: 1
   fixedExposure:
     m_OverrideState: 1
-    m_Value: 8.5
+    m_Value: 11
   compensation:
     m_OverrideState: 0
     m_Value: 0

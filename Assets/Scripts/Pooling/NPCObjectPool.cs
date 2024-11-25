@@ -186,10 +186,6 @@ public class NPCObjectPool : MonoBehaviour
             int value = civilian.GetComponent<NewNpcBehavior>().GetPoint();
             Vector3 pointPos = Camera.main.WorldToScreenPoint(civilian.transform.position);
             pointPos += new Vector3(UnityEngine.Random.Range(_xMin,_xMax), UnityEngine.Random.Range(_yMin,_yMax),0);
-            if(civilian.GetComponent<NewNpcBehavior>().GetDifficultyType().Equals(_negativeType))
-            {
-                value *= -1;
-            }
             StartCoroutine(CreatePoint(pointPos, value));
             civilian.GetComponent<CivilianDeath>().OnKilled -= RemoveCivilian;
             civilian.GetComponent<CivilianDeath>()._pointGiven = true;
