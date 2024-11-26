@@ -146,7 +146,7 @@ public class BuildingDestruction : MonoBehaviour
         }
         else
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NEGATIVE);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.HARD);
             civilian.SetActive(true);
             civilian.transform.position = point.position;
             civilian.transform.rotation = point.rotation;

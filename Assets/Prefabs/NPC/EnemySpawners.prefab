@@ -49,7 +49,6 @@ MonoBehaviour:
   - {fileID: 103263028577104431, guid: 63a0a73af3c6abb4982a154d395424a9, type: 3}
   - {fileID: 103263028577104431, guid: 027687a031255784bbe6755ea9b16811, type: 3}
   - {fileID: 103263028577104431, guid: febe5b2355ce54f4ab20a76c6b61ece2, type: 3}
-  - {fileID: 103263028577104431, guid: 11858f35691927e4d8919895019283cd, type: 3}
   _easyCivilianWeight: 1
   _mediumCivilianWeight: 1
   _hardCivilianWeight: 1

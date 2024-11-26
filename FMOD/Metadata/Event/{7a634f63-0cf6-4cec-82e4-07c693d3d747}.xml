@@ -5,7 +5,7 @@
 			<value>SFX_Die</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{31c8523b-3da1-41fc-8f6f-e96133db4b91}</destination>
@@ -139,7 +139,6 @@
 	<object class="MixerBusEffectChain" id="{de07ab99-8f3a-48e7-9448-b4234ed7c8da}">
 		<relationship name="effects">
 			<destination>{7684b0d2-a10a-4f35-b111-c3e007d4eb9b}</destination>
-			<destination>{f472fbb8-628e-4ce1-9bbd-9a2922e1fd3b}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3c065567-dded-414f-b0e9-6a0ddd4e990a}" />
@@ -157,26 +156,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{b3409623-5e51-4c2e-ac1b-b99675f6b357}" />
 	<object class="MixerBusFader" id="{7684b0d2-a10a-4f35-b111-c3e007d4eb9b}" />
-	<object class="SpatialiserEffect" id="{f472fbb8-628e-4ce1-9bbd-9a2922e1fd3b}">
-		<property name="distanceRolloffType">
-			<value>1</value>
-		</property>
-		<property name="minimumDistance">
-			<value>0</value>
-		</property>
-		<property name="maximumDistance">
-			<value>70</value>
-		</property>
-		<property name="overrideRange">
-			<value>true</value>
-		</property>
-		<property name="extentMode">
-			<value>1</value>
-		</property>
-		<property name="soundSize">
-			<value>2</value>
-		</property>
-	</object>
 	<object class="MixerBusFader" id="{063be503-eb35-4008-834a-c0927a1cd019}" />
 	<object class="MixerBusFader" id="{8807c85f-d89b-448e-82ec-e285473e7d95}" />
 </objects>
