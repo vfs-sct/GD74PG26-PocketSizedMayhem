@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
+using UnityEngine.AI;
 using static NewNpcBehavior;
 
 public class NPCObjectPool : MonoBehaviour
@@ -48,7 +49,6 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] Image _comboBar;
     [SerializeField]private int combo = 0;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
-    [SerializeField] private TypeDifficulty _negativeType;
     private void Awake()
     {
         if (instance == null)
@@ -56,6 +56,7 @@ public class NPCObjectPool : MonoBehaviour
             instance = this;
         }
         _textMeshProUGUI.text = "Combo X" + combo;
+        NavMesh.pathfindingIterationsPerFrame = 250;
     }
 
     void Start()
@@ -91,45 +92,15 @@ public class NPCObjectPool : MonoBehaviour
             obj.SetActive(false);
         }
 
-        for (int i = 0; i < _negativePoolAmount; i++)
-        {
-            GameObject obj = Instantiate(_negativeCivilian);
-            obj.transform.parent = gameObject.transform;
-            _negativePooledObjects.Add(obj);
-            obj.SetActive(false);
-        }
         foreach (CivilianFill door in _doors)
         {
             door.Empty += AddToDoorList;
             door.Full += RemoveFromDoorList;
             _emptyBuildings.Add(door.gameObject);
         }
+
     }
-    public void ChangeNegative()
-    {
-        int rand = UnityEngine.Random.Range(0, 4);
-        if(rand==0)
-        {
-            _negativeType = TypeDifficulty.EASY;
-            image.color = Color.green;
-        }
-        else if(rand == 1)
-        {
-            _negativeType = TypeDifficulty.NORMAL;
-            image.color = Color.yellow;
-        }
-        else if (rand == 2)
-        {
-            _negativeType = TypeDifficulty.HARD;
-            image.color = Color.red;
-        }
-        else if (rand == 3)
-        {
-            _negativeType = TypeDifficulty.NEGATIVE;
-            image.color = Color.blue;
-        }
-        
-    }
+
     private void Update()
     {
         foreach (NewNpcBehavior civilian in _activeNPC)
@@ -177,18 +148,6 @@ public class NPCObjectPool : MonoBehaviour
                         {
                             AddToCivilianList(_hardPooledObjects[i]);
                             return _hardPooledObjects[i];
-                        }
-                    }
-                    break;
-                }
-            case TypeDifficulty.NEGATIVE:
-                {
-                    for (int i = 0; i < _negativePooledObjects.Count; i++)
-                    {
-                        if (!_negativePooledObjects[i].activeInHierarchy)
-                        {
-                            AddToCivilianList(_negativePooledObjects[i]);
-                            return _negativePooledObjects[i];
                         }
                     }
                     break;
