@@ -204,7 +204,6 @@ public class NewNpcBehavior : CharacterMovement3D
     {
         EASY,
         NORMAL,
-        HARD,
-        NEGATIVE
+        HARD
     }
 }
