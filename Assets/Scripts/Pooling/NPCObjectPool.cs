@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
+using UnityEngine.AI;
 using static NewNpcBehavior;
 
 public class NPCObjectPool : MonoBehaviour
@@ -55,6 +56,7 @@ public class NPCObjectPool : MonoBehaviour
             instance = this;
         }
         _textMeshProUGUI.text = "Combo X" + combo;
+        NavMesh.pathfindingIterationsPerFrame = 250;
     }
 
     void Start()
@@ -96,6 +98,7 @@ public class NPCObjectPool : MonoBehaviour
             door.Full += RemoveFromDoorList;
             _emptyBuildings.Add(door.gameObject);
         }
+
     }
 
     private void Update()
