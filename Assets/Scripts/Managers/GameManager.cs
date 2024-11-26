@@ -47,10 +47,6 @@ public class GameManager : MonoBehaviour
 
             _timerText.text = "Time: " + string.Format("{0:0}:{1:00}", minutes, seconds);
             _elapsedTime += Time.deltaTime;
-            if(seconds%30==0)
-            {
-                _npcObjectPool.ChangeNegative();
-            }
         }
         else
         {

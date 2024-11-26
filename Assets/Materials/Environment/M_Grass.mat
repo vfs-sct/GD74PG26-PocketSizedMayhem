@@ -187,7 +187,7 @@ Material:
     - _Base_Normal_Strength: 1
     - _BlendMode: 0
     - _BlendTiling: 1
-    - _Blend_Contrast: 2
+    - _Blend_Contrast: 1
     - _Blend_Normal_Strength: 1
     - _CoatMask: 0
     - _ConservativeDepthOffsetEnable: 0
@@ -208,7 +208,7 @@ Material:
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
     - _DstBlend2: 0
-    - _Dusting_Angle: 0.8
+    - _Dusting_Angle: 1
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
     - _EmissiveIntensity: 1
@@ -306,7 +306,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Base_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
-    - _Base_Tint: {r: 0.18039216, g: 0.49019608, b: 0.19607843, a: 1}
+    - _Base_Tint: {r: 0.33333334, g: 0.41960785, b: 0.18431373, a: 1}
     - _Blend_Height_Remap: {r: 0, g: 1, b: 0, a: 0}
     - _Blend_Tint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

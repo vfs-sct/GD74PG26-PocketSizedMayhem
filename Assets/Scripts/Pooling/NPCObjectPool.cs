@@ -48,7 +48,6 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] Image _comboBar;
     [SerializeField]private int combo = 0;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
-    [SerializeField] private TypeDifficulty _negativeType;
     private void Awake()
     {
         if (instance == null)
@@ -98,26 +97,7 @@ public class NPCObjectPool : MonoBehaviour
             _emptyBuildings.Add(door.gameObject);
         }
     }
-    public void ChangeNegative()
-    {
-        int rand = UnityEngine.Random.Range(0, 4);
-        if (rand == 0)
-        {
-            _negativeType = TypeDifficulty.EASY;
-            image.color = Color.green;
-        }
-        else if (rand == 1)
-        {
-            _negativeType = TypeDifficulty.NORMAL;
-            image.color = Color.yellow;
-        }
-        else if (rand == 2)
-        {
-            _negativeType = TypeDifficulty.HARD;
-            image.color = Color.red;
-        }
-        
-    }
+
     private void Update()
     {
         foreach (NewNpcBehavior civilian in _activeNPC)
