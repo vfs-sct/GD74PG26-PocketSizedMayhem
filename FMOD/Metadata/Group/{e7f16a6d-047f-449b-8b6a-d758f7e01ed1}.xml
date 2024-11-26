@@ -28,6 +28,7 @@
 	<object class="MixerBusEffectChain" id="{cb17f602-df14-4f66-bbdb-39cd9c5686c7}">
 		<relationship name="effects">
 			<destination>{34abc085-d07a-4eef-a19d-dd8ca7ab07b7}</destination>
+			<destination>{35df456e-59b0-4891-84aa-892b479da0d7}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ea7ce33b-7497-4430-862a-551ec43ab6b6}" />
@@ -41,12 +42,23 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{34abc085-d07a-4eef-a19d-dd8ca7ab07b7}" />
+	<object class="CompressorEffect" id="{35df456e-59b0-4891-84aa-892b479da0d7}">
+		<property name="threshold">
+			<value>-13</value>
+		</property>
+		<property name="ratio">
+			<value>3</value>
+		</property>
+		<relationship name="sidechains">
+			<destination>{bd6182c9-92e5-45e3-90ca-bb6ca0cae780}</destination>
+		</relationship>
+	</object>
 	<object class="AutomationPoint" id="{7942c299-eac1-4c7e-9e83-1bc92d4ca207}">
 		<property name="position">
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-66.6666641</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{dc1eba78-5ebf-4e03-94d1-7f7464feeaa7}">

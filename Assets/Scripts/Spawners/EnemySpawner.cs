@@ -67,7 +67,7 @@ public class EnemySpawner : Spawner
         }
         else
         {
-            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.NEGATIVE);
+            civilian = NPCObjectPool.instance.GetPooledObject(TypeDifficulty.HARD);
         }
         if (civilian != null)
         {

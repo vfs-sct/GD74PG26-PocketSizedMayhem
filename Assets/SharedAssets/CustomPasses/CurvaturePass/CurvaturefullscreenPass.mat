@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cavity: 0.5
-    - _Edge: 1
+    - _Cavity: 0.4
+    - _Edge: 0.5
     - _Edge_Removal: 1.5
     - _Edge_Removal_Size: 1
     - _Ridge: 1

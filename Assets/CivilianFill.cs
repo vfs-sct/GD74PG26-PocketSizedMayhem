@@ -52,6 +52,7 @@ public class CivilianFill : MonoBehaviour
         return _full; }
     public void ResetFill()
     {
+        _full= false;
         _civilianInside = 0;
         _civilianCountText.text = _civilianInside + "/" + _civilianMaxCount;
         Empty?.Invoke(this, this.gameObject);
