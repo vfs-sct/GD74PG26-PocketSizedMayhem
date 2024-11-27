@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private bool mouseLogoAppear = false;
     private bool shake = false;
     private bool scale = false;
+    private bool timershake = false;
     [SerializeField] NPCObjectPool _npcObjectPool;
     void Awake()
     {
@@ -58,6 +59,12 @@ public class GameManager : MonoBehaviour
         if (PlayerStats.Hunger < _hungerRegenThreshold)
         {
             PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
+        }
+        if(_gameTime<30 && !timershake)
+        {
+            timershake = true;
+            Tween.ShakeLocalRotation(_timerText.gameObject.transform, strength: new Vector3(0, 0, 5), duration: 30, frequency: 5);
+            StartCoroutine(ScaleTimer());
         }
         // Update point text and hunger fill bar
         _poinText.text = "Score: " + PlayerStats.Points.ToString();
@@ -93,5 +100,13 @@ public class GameManager : MonoBehaviour
         Tween.Scale(_mouse.gameObject.transform, 2, 1, duration: 1, ease: Ease.Default);
         yield return new WaitForSeconds(1f);
         StartCoroutine(ScaleMouse());
+    }
+    IEnumerator ScaleTimer()
+    {
+        Tween.Scale(_timerText.transform, 1, 1.5f, duration: 1, ease: Ease.Default);
+        yield return new WaitForSeconds(1f);
+        Tween.Scale(_timerText.transform, 1.5f, 1, duration: 1, ease: Ease.Default);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(ScaleTimer());
     }
 }

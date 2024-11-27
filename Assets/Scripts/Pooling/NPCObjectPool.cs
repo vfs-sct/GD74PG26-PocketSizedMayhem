@@ -46,16 +46,12 @@ public class NPCObjectPool : MonoBehaviour
     [SerializeField] private GameObject _negativePopUp;
     [SerializeField] private Canvas _canvas;
     [SerializeField] private GameObject _pointLocation;
-    [SerializeField] Image _comboBar;
-    [SerializeField]private int combo = 0;
-    [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
-        _textMeshProUGUI.text = "Combo X" + combo;
         NavMesh.pathfindingIterationsPerFrame = 250;
     }
 
@@ -179,16 +175,11 @@ public class NPCObjectPool : MonoBehaviour
         GameObject pointPopUp;
 
         pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
-        combo++;
-        point *= combo;
 
         PlayerStats.Points += point;
-        _textMeshProUGUI.text = "Combo X" + combo;
-        pointPopUp.transform.localScale += new Vector3(combo, combo, combo) / 10;
         pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
         Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
         Tween.Position(pointPopUp.transform, _pointLocation.transform.position, duration: 1, ease: Ease.InOutSine);
-        combo = Mathf.Clamp(combo, 0, 20);
         yield return null;
     }
     public void AddToCivilianList(GameObject civilian)

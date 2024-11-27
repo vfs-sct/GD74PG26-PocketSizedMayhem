@@ -1,3 +1,4 @@
+using PrimeTween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,10 +32,13 @@ public class CivilianFill : MonoBehaviour
             _civilianInside++;
             _civilianCountText.text = _civilianInside + "/" + _civilianMaxCount;
             other.gameObject.SetActive(false);
-            if(_civilianInside == _civilianMaxCount)
+            _civilianCountText.color = Color.green;
+            if (_civilianInside == _civilianMaxCount)
             {
                 _full = true;
                 Full?.Invoke(this, this.gameObject);
+                _civilianCountText.color = Color.red;
+                StartCoroutine(ScaleText());
             }
         }
         else if((_layerMask.value & (1 << other.transform.gameObject.layer)) != 0)
@@ -59,6 +63,14 @@ public class CivilianFill : MonoBehaviour
         _full= false;
         _civilianInside = 0;
         _civilianCountText.text = _civilianInside + "/" + _civilianMaxCount;
+        _civilianCountText.color = Color.white;
         Empty?.Invoke(this, this.gameObject);
+    }
+
+    IEnumerator ScaleText()
+    {
+        Tween.ShakeLocalRotation(_civilianCountText.gameObject.transform, strength: new Vector3(0, 0, 15), duration: 5, frequency: 5);
+        yield return new WaitForSeconds(5f);
+        ResetFill();
     }
 }

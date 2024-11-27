@@ -6,6 +6,7 @@ public class KillZ : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
+        if(other.gameObject.TryGetComponent<NewNpcBehavior>( out NewNpcBehavior hehe))
+            other.gameObject.SetActive(false);
     }
 }
