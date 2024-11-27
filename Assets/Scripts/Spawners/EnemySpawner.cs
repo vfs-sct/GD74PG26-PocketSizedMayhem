@@ -15,7 +15,7 @@ public class EnemySpawner : Spawner
     public List<float> spawncount;
     public List<float> times;
 
-    private int _iteration = 0;
+    private int _iteration;
     private int _iterationCount;
     private int _spawnWeightTotal;
 
@@ -26,6 +26,7 @@ public class EnemySpawner : Spawner
 
     private void Start()
     {
+        _iteration = 0;
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
         _iterationCount = times.Count;
         StartCoroutine(SpawnWave());
