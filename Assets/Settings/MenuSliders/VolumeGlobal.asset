@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: VolumeGlobal
   m_EditorClassIdentifier: 
   _name: VolumeGlobal
-  _default: 1
-  _current: 1
+  _default: 0.5
+  _current: 0.5
   _valueMinMax: {x: 0, y: 1}
   _sliderMinMax: {x: 0, y: 1}
   _fmodParameter: MasterVolume
