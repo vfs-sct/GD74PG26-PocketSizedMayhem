@@ -15,8 +15,8 @@ public class EnemySpawner : Spawner
     public List<float> spawncount;
     public List<float> times;
 
-    private int _iteration = 0;
-    private int _iterationCount;
+    [SerializeField]private int _iteration;
+    [SerializeField]private int _iterationCount;
     private int _spawnWeightTotal;
 
     private void Awake()
@@ -26,6 +26,7 @@ public class EnemySpawner : Spawner
 
     private void Start()
     {
+        _iteration = 0;
         _spawnWeightTotal = _easyCivilianWeight + _mediumCivilianWeight + _hardCivilianWeight + _negativeCivilianWeight;
         _iterationCount = times.Count;
         StartCoroutine(SpawnWave());
@@ -34,10 +35,10 @@ public class EnemySpawner : Spawner
     IEnumerator SpawnWave()
     {
         yield return new WaitForSeconds(1);
-        _iterationCount = times.Count;
-        yield return new WaitForSeconds(times[_iteration] - Time.time);
+        yield return new WaitForSeconds(times[_iteration] - Time.timeSinceLevelLoad);
         for (int i = 0; i < spawncount[_iteration]; i++)
         {
+            Debug.Log(this.gameObject.name + ": "+ i);
             SpawnCivilian();
         }
         _iteration++;
