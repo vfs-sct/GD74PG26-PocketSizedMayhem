@@ -38,6 +38,7 @@ public class EnemySpawner : Spawner
         yield return new WaitForSeconds(times[_iteration] - Time.time);
         for (int i = 0; i < spawncount[_iteration]; i++)
         {
+            Debug.Log(this.gameObject.name + ": "+ i);
             SpawnCivilian();
         }
         _iteration++;
