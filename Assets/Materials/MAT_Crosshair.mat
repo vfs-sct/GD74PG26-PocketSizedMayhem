@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_Crosshair
-  m_Shader: {fileID: -6465566751694194690, guid: f75afe75309c90049acef4f681a2728d,
+  m_Shader: {fileID: -6465566751694194690, guid: 5d7e78f0101755e4abc71e03962ff9b7,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -141,7 +141,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AlphaClip_: 0
     - Vector1_AE769210: 20
     - _AORemapMax: 1
     - _AORemapMin: 0
@@ -265,7 +264,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_: {r: 16, g: 0, b: 0, a: 1}
+    - Color_: {r: 1, g: 0, b: 0, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

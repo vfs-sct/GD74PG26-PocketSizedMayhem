@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             PlayerStats.Hunger += Time.deltaTime * _regenSpeed;
         }
         // Update point text and hunger fill bar
-        _poinText.text = "Point: " + PlayerStats.Points.ToString();
+        _poinText.text = "Score: " + PlayerStats.Points.ToString();
         //
         _hungerFillBar.fillAmount = PlayerStats.Hunger/ _startHunger;
         if (!mouseLogoAppear && PlayerStats.Hunger==0)
