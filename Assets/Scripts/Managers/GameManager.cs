@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private float previousValue;
     private bool mouseLogoAppear = false;
     private bool shake = false;
+    private bool scale = false;
     [SerializeField] NPCObjectPool _npcObjectPool;
     void Awake()
     {
@@ -70,8 +71,12 @@ public class GameManager : MonoBehaviour
                 Tween.ShakeLocalRotation(_mouse.gameObject.transform, strength: new Vector3(0, 0, 15), duration: 15, frequency: 5);
                 
                 shake = true;
-
-                StartCoroutine(ScaleMouse());
+                if(!scale)
+                {
+                    scale = true;
+                    StartCoroutine(ScaleMouse());
+                }
+                
             }
         }
         else
