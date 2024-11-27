@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
+using UnityEngine.AI;
 using static NewNpcBehavior;
 
 public class NPCObjectPool : MonoBehaviour
@@ -55,6 +56,7 @@ public class NPCObjectPool : MonoBehaviour
             instance = this;
         }
         _textMeshProUGUI.text = "Combo X" + combo;
+        NavMesh.pathfindingIterationsPerFrame = 250;
     }
 
     void Start()
@@ -96,6 +98,7 @@ public class NPCObjectPool : MonoBehaviour
             door.Full += RemoveFromDoorList;
             _emptyBuildings.Add(door.gameObject);
         }
+
     }
 
     private void Update()
@@ -174,20 +177,14 @@ public class NPCObjectPool : MonoBehaviour
     IEnumerator CreatePoint(Vector3 civilianPos, int point)
     {
         GameObject pointPopUp;
-        if (point > 0)
-        {
-            pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
-            combo++;
-            point *= combo;
-        }
-        else
-        {
-            pointPopUp = Instantiate(_negativePopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
-            combo = 0;
-        }
+
+        pointPopUp = Instantiate(_pointPopUp, civilianPos, _pointPopUp.transform.rotation, _canvas.transform);
+        combo++;
+        point *= combo;
+
         PlayerStats.Points += point;
         _textMeshProUGUI.text = "Combo X" + combo;
-        pointPopUp.transform.localScale += new Vector3(combo,combo,combo)/10;
+        pointPopUp.transform.localScale += new Vector3(combo, combo, combo) / 10;
         pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
         Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
         Tween.Position(pointPopUp.transform, _pointLocation.transform.position, duration: 1, ease: Ease.InOutSine);

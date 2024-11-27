@@ -83,6 +83,7 @@ public class BuildingDestruction : MonoBehaviour
             _isDestoyed = true;
             _spawnCount = civilianFill.GetCivilianCount();
             civilianFill.ResetFill();
+            civilianFill.gameObject.SetActive(false);
             StartCoroutine(RespawmPieces());
             SpawnAtPoint();
         }
@@ -109,6 +110,7 @@ public class BuildingDestruction : MonoBehaviour
             _unShattered.SetActive(true);
             _shattered.SetActive(false);
         }
+        civilianFill.gameObject.SetActive(true);
     }
 
     public void SpawnAtPoint()

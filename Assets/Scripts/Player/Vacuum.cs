@@ -86,7 +86,8 @@ public class Vacuum : MonoBehaviour
     {
         if (other.TryGetComponent<NewNpcBehavior>(out NewNpcBehavior civilian))
         {
-            _pulledObjects.Add(other.gameObject);
+            if(civilian.enabled)
+                _pulledObjects.Add(other.gameObject);
         }
     }
 
