@@ -64,13 +64,15 @@ public class BuildingDestruction : MonoBehaviour
     {
         if (other.gameObject.tag == "Mallet" && !_isDestoyed)
         {
+            float pointAdjusted;
             Vector3 pointPos = Camera.main.WorldToScreenPoint(this.gameObject.transform.position);
             pointPos += new Vector3(UnityEngine.Random.Range(0, 300), UnityEngine.Random.Range(0, 300), 0);
             GameObject pointPopUp;
             pointPopUp = Instantiate(_pointPopUp, pointPos, _pointPopUp.transform.rotation, _canvas.transform);
-
-            PlayerStats.Points += point;
-            pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + point;
+            pointAdjusted = point + civilianFill.GetCivilianCount();
+            pointPopUp.transform.localScale += (civilianFill.GetCivilianCount() / civilianFill.GetCivilianMaxCount())*Vector3.one * 5;
+            PlayerStats.Points += pointAdjusted;
+            pointPopUp.GetComponent<TextMeshProUGUI>().text = "" + pointAdjusted;
             Tween.Scale(pointPopUp.transform, Vector3.zero, duration: 1, ease: Ease.InOutSine);
             RuntimeManager.PlayOneShot(DeathSFX, this.gameObject.transform.position);
             this.GetComponent<Rigidbody>().isKinematic = false;

@@ -47,6 +47,10 @@ public class CivilianFill : MonoBehaviour
     {
         return _civilianInside;
     }
+    public int GetCivilianMaxCount()
+    {
+        return _civilianMaxCount;
+    }
     public bool IsFull() {
 
         return _full; }

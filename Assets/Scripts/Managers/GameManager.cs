@@ -1,3 +1,4 @@
+using PrimeTween;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     private float _elapsedTime;
     private float previousValue;
     private bool mouseLogoAppear = false;
-
+    private bool shake = false;
     [SerializeField] NPCObjectPool _npcObjectPool;
     void Awake()
     {
@@ -61,18 +62,31 @@ public class GameManager : MonoBehaviour
         _poinText.text = "Score: " + PlayerStats.Points.ToString();
         //
         _hungerFillBar.fillAmount = PlayerStats.Hunger/ _startHunger;
-        if (!mouseLogoAppear && PlayerStats.Hunger==0)
+        if (PlayerStats.Hunger==0)
         {
-            mouseLogoAppear = true;
-            StartCoroutine(MakeLogoAppear());
+            _mouse.enabled = true;
+            if(!shake)
+            {
+                Tween.ShakeLocalRotation(_mouse.gameObject.transform, strength: new Vector3(0, 0, 15), duration: 15, frequency: 5);
+                
+                shake = true;
+
+                StartCoroutine(ScaleMouse());
+            }
+        }
+        else
+        {
+            shake = false;
+            _mouse.enabled = false;
         }
         PlayerStats.Hunger = Mathf.Clamp(PlayerStats.Hunger,0,_startHunger);
     }
-    IEnumerator MakeLogoAppear()
+    IEnumerator ScaleMouse()
     {
-        _mouse.enabled = true;
-        yield return new WaitForSeconds(5f);
-        _mouse.enabled = false;
+        Tween.Scale(_mouse.gameObject.transform, 1, 2, duration: 1, ease: Ease.Default);
+        yield return new WaitForSeconds(1f);
+        Tween.Scale(_mouse.gameObject.transform, 2, 1, duration: 1, ease: Ease.Default);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(ScaleMouse());
     }
-
 }
